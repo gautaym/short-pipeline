@@ -12,6 +12,8 @@ DEFAULT_CONFIG = REPO_ROOT / "configs" / "default.yaml"
 class RenderSettings:
     output_dir: str = "out"
     workers: int = 1
+    scout: int = 1
+    min_length: float = 20.0
     crf: int = 20
     preset: str = "veryfast"
     audio_bitrate: str = "160k"

@@ -8,7 +8,7 @@ import numpy as np
 
 from ...core.canvas import ARENA_L, ARENA_R, ARENA_T, LOST_Y, W
 from ...core.physics import BALL_R, Ball
-from .. import EndCard, Option, register
+from .. import EndCard, Option, Twist, register
 from .engine import BrickGame
 
 TEAM_COLOURS = [("PINK", (255, 80, 160)), ("CYAN", (40, 200, 255)), ("LIME", (140, 230, 60)),
@@ -21,14 +21,17 @@ class WarsGame(BrickGame):
     order = 40
     options = (Option("--teams", "wars mode team count", {"type": int, "choices": [2, 3, 4], "default": None}),)
     has_paddle = False
-    ball_speed = 900.0
+    ball_speed = 1100.0
     fancy_bricks = False
     default_duration = 30.0
-    MAX_PER_TEAM = 6
+    MAX_PER_TEAM = 12
+    START_BALLS = 2
+    CELL = 40
+    POWER_SHARE = 0.025
 
     def setup(self) -> None:
         self.n = getattr(self.opts, "teams", None) or self.rng.choice([2, 2, 3, 4])
-        self.grid(30, 2, (LOST_Y - ARENA_T) // 30, ARENA_T)
+        self.grid(self.CELL, 3, (LOST_Y - ARENA_T) // self.CELL, ARENA_T)
         self.teams = self.rng.sample(TEAM_COLOURS, self.n)
         rows, cols = self.rows, self.cols
         rr, cc = np.mgrid[0:rows, 0:cols]
@@ -43,15 +46,16 @@ class WarsGame(BrickGame):
             d = np.stack([np.hypot((rr - sr) / rows, (cc - sc) / cols) for sr, sc in seeds])
             self.owner = d.argmin(axis=0).astype(np.int32)
         cells = np.argwhere(np.ones((rows, cols), dtype=bool))
-        n_pow = max(self.n * 3, int(rows * cols * 0.012))
+        n_pow = max(self.n * 3, int(rows * cols * self.POWER_SHARE))
         for r, c in cells[self.nrng.choice(len(cells), n_pow, replace=False)]:
             self.power[r, c] = 1
         self.launched = True          # balls are on the board from the first frame
         for team in range(self.n):
             own = np.argwhere(self.owner == team)
-            r, c = own[len(own) // 2]
-            x, y = self.centre(r, c)
-            self.balls.append(Ball(x, y, self.rng.uniform(-math.pi, math.pi), self.ball_speed, team))
+            for k in range(self.START_BALLS):
+                r, c = own[(2 * k + 1) * len(own) // (2 * self.START_BALLS)]
+                x, y = self.centre(r, c)
+                self.balls.append(Ball(x, y, self.rng.uniform(-math.pi, math.pi), self.ball_speed, team))
         self.counts = np.bincount(self.owner.ravel(), minlength=self.n)
 
     def _build_bg(self) -> None:
@@ -67,6 +71,7 @@ class WarsGame(BrickGame):
             pg.draw.circle(s, (255, 255, 255), (cx, cx), BALL_R + 3)
             pg.draw.circle(s, dark, (cx, cx), BALL_R)
             self.ball_sprites[i] = s
+        self.trail_sprites = {i: self._trail_set(col) for i, (_, col) in enumerate(self.teams)}
 
     def _paint(self, r, c) -> None:
         pg, cell, g = self.pg, self.cell, self.gap
@@ -88,6 +93,42 @@ class WarsGame(BrickGame):
                     "Pick your colour before it ends!"]
         return [f"{self.n} colours, 1 board. Who wins?", "Which colour wins?",
                 "Pick your colour before it ends!"]
+
+    def twists(self) -> list[Twist]:
+        return [Twist("underdog", "the losing colour gets backup", self._underdog, banner="UNDERDOG!")]
+
+    def _underdog(self, t: float) -> str:
+        i = int(self.counts.argmin())
+        own = np.argwhere(self.owner == i)
+        for _ in range(3):
+            r, c = own[self.nrng.integers(len(own))]
+            x, y = self.centre(r, c)
+            self.balls.append(Ball(x, y, self.rng.uniform(-math.pi, math.pi), self.ball_speed, i))
+        return f"{self.teams[i][0]} gets +3 balls"
+
+    def sample(self):
+        return tuple(int(k) for k in self.counts)
+
+    def drama_score(self, trace) -> float:
+        """Reward big swings, real lead changes and comebacks; a static 50/50 board scores low."""
+        if len(trace.samples) < 2:
+            return 0.0
+        shares = np.array(trace.samples, dtype=float)
+        shares /= shares.sum(axis=1, keepdims=True)
+        winner = int(shares[-1].argmax())
+        others = np.delete(shares, winner, axis=1).max(axis=1)
+        deficit = float((others - shares[:, winner]).max())       # how far behind the winner fell
+        swing = float((shares.max(axis=0) - shares.min(axis=0)).max())
+        changes, leader = 0, int(shares[0].argmax())
+        for row in shares:
+            top = int(row.argmax())
+            if top != leader and row[top] - row[leader] >= 0.04:  # ignore flips within noise
+                changes, leader = changes + 1, top
+        final = np.sort(shares[-1])[::-1]
+        score = 4 * min(1.0, swing / 0.3) + 0.8 * min(changes, 4) + 1.5 * (1 - min(1.0, (final[0] - final[1]) / 0.15))
+        if deficit >= 0.08:
+            score += 3.0                                    # comeback from a real deficit
+        return score + (0.5 if trace.twist else 0.0)
 
     def solid(self, r, c, b) -> bool:
         return self.owner[r, c] != b.team

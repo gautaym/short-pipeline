@@ -42,6 +42,12 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--mix", choices=["random", "even"], default="random",
                    help="with --mode random: 'even' rotates through every format in turn")
     r.add_argument("--workers", type=int, default=None, help="reels to render in parallel")
+    r.add_argument("--scout", type=int, default=None,
+                   help="simulate this many seeds per reel and render the most dramatic (1 = exact seed)")
+    r.add_argument("--min-length", type=float, default=None,
+                   help="shortest reel in seconds (default from config: 20); 0 = no minimum")
+    r.add_argument("--twist", default="auto",
+                   help="mid-reel surprise: auto (seeded chance), none, or a twist name for the format")
     r.add_argument("--preview", action="store_true", help="show a live window instead of rendering")
     r.add_argument("--config", default=None, help="YAML settings file (default configs/default.yaml)")
     _add_format_options(r)
@@ -62,7 +68,7 @@ def cmd_render(opts: argparse.Namespace) -> int:
     jobs = plan_jobs(opts, settings)
     if opts.preview:
         for j in jobs:
-            preview(j.mode, j.seed, j.opts)
+            preview(j)
         return 0
     run_jobs(jobs, settings, workers)
     return 0

@@ -5,13 +5,14 @@ BALL_R = 10
 
 
 class Ball:
-    __slots__ = ("x", "y", "vx", "vy", "team", "speed")
+    __slots__ = ("x", "y", "vx", "vy", "team", "speed", "trail")
 
     def __init__(self, x: float, y: float, angle: float, speed: float, team: int = 0):
         self.x, self.y = x, y
         self.speed, self.team = speed, team
         self.vx = speed * math.sin(angle)
         self.vy = -speed * math.cos(angle)
+        self.trail: list[tuple[float, float]] = []     # recent positions, for drawing only
         self.renormalise()
 
     def renormalise(self) -> None:

@@ -3,7 +3,7 @@ import numpy as np
 
 from ...core.canvas import ARENA_T
 from ...core.physics import BALL_R, Ball
-from .. import EndCard, Option, register
+from .. import EndCard, Option, Twist, register
 from .engine import PADDLE_Y, BrickGame
 from .mazes import MAZES
 from .shapes import SHAPES, TEXT_WORDS, shape_mask
@@ -16,6 +16,7 @@ SHAPE_OPTION = Option("--shape", f"classic: {', '.join(SHAPES)} | escape: {', '.
 class ClassicGame(BrickGame):
     name = "classic"
     order = 10
+    default_duration = 25.0
     options = (SHAPE_OPTION,
                Option("--text", "word to build from bricks (classic, --shape text)", {"default": None}))
 
@@ -30,7 +31,18 @@ class ClassicGame(BrickGame):
         self.hp[:] = np.where(mask, self.nrng.choice([1, 2, 3], size=mask.shape, p=[0.8, 0.16, 0.04]), 0)
         self.place_powers(mask, 0.075)
         self.total = self.left = int(mask.sum())
+        self.hp0 = self.hp.copy()
         self.make_palette()
+
+    def twists(self) -> list[Twist]:
+        return [Twist("multiball", "+8 BALLS!", lambda t: f"+{self.multiball(8)} BALLS!",
+                      lambda: len(self.balls) <= 3),
+                Twist("regrow", "the bricks are growing back",
+                      lambda t: f"{self.regrow(0.3)} bricks just grew back", lambda: self.progress() > 0.35)]
+
+    def on_destroy(self, r, c, t: float) -> None:
+        if self.left == 0:
+            self.mark("decisive")
 
     def title_hooks(self) -> list[str]:
         name = self.text if self.shape == "text" else self.shape.upper()
@@ -52,6 +64,7 @@ class ClassicGame(BrickGame):
         if self.left == 0:
             return "clear"
         if not self.balls:
+            self.mark("decisive")
             return "fail"
         if self.play_t >= self.max_play:
             return "time"

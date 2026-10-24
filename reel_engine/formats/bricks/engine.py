@@ -15,7 +15,7 @@ from ...core.physics import BALL_R, Ball, bounce_rect
 from ..base import Format
 from .sounds import PENTA, brick_sounds
 
-SUBSTEPS = 4
+TRAIL_N = 7          # positions kept per ball for its trail
 
 PADDLE_Y = 1700
 PADDLE_W = 230
@@ -118,9 +118,21 @@ class BrickGame(Format):
         pg.draw.circle(s, core, (cx, cx), BALL_R)
         return s
 
+    def _trail_set(self, colour) -> list:
+        """Trail dots from oldest (small, faint) to newest (larger, stronger)."""
+        pg, sprites = self.pg, []
+        for i in range(TRAIL_N - 1):
+            k = (i + 1) / (TRAIL_N - 1)
+            r = max(2, int(BALL_R * (0.3 + 0.6 * k)))
+            s = pg.Surface((2 * r + 2, 2 * r + 2), pg.SRCALPHA)
+            pg.draw.circle(s, tuple(colour) + (int(30 + 110 * k),), (r + 1, r + 1), r)
+            sprites.append(s)
+        return sprites
+
     def _build_sprites(self) -> None:
         pg = self.pg
         self.ball_sprites = {0: self._glow_ball()}
+        self.trail_sprites = {0: self._trail_set((255, 255, 230))}
         bw = self.cell - self.gap
         self.power_sprites = {}
         for val in (3, 10):
@@ -208,6 +220,8 @@ class BrickGame(Format):
             n = self.spawn(cx, cy, val, t)
             if n:
                 self.fx.floater(cx, cy, f"+{n} BALLS")
+                if val >= 10:
+                    self.fx.shake(6, 0.2)
         else:
             self.sfx(t, "break", self.note)
         self.on_destroy(r, c, t)
@@ -274,8 +288,36 @@ class BrickGame(Format):
         if not self.launched:
             self.launched = True
             self.launch(t)
-        for _ in range(SUBSTEPS):
-            self._substep(dt / SUBSTEPS, t)
+        self._substep(dt, t)
+
+    def regrow(self, frac: float) -> int:
+        """Bring back a share of the broken bricks (away from the balls). Returns how many."""
+        cand = np.argwhere((self.hp0 > 0) & (self.hp == 0) & (self.power == 0))
+        if len(cand) == 0:
+            return 0
+        near = np.zeros(len(cand), dtype=bool)
+        for b in self.balls:
+            bx, by = (b.x - self.bx0) / self.cell, (b.y - self.by0) / self.cell
+            near |= np.hypot(cand[:, 1] + 0.5 - bx, cand[:, 0] + 0.5 - by) < 2.5
+        cand = cand[~near]
+        n = int(len(cand) * frac)
+        if n == 0:
+            return 0
+        for r, c in cand[self.nrng.choice(len(cand), n, replace=False)]:
+            self.hp[r, c] = 1
+            self._paint(r, c)
+            cx, cy = self.centre(r, c)
+            self.fx.burst(cx, cy, self.cell_colour(r, c, 1), n=2, power=0.4)
+        self.left += n
+        return n
+
+    def multiball(self, count: int) -> int:
+        """Launch extra balls upwards from the paddle. Returns how many were added."""
+        n = max(0, min(count, MAX_BALLS - len(self.balls)))
+        for _ in range(n):
+            self.balls.append(Ball(self.paddle_x, PADDLE_Y - BALL_R - 1, self.rng.uniform(-0.6, 0.6),
+                                   self.ball_speed))
+        return n
 
     # ---------------------------------------------------------- drawing
     def draw_power(self, screen, t: float) -> None:
@@ -300,6 +342,14 @@ class BrickGame(Format):
             x, y = self.idle_ball()
             spr = self.ball_sprites[0]
             screen.blit(spr, (x - spr.get_width() / 2, y - spr.get_height() / 2))
+        for b in self.balls:
+            b.trail.append((b.x, b.y))
+            del b.trail[:-TRAIL_N]
+            dots = self.trail_sprites.get(b.team, self.trail_sprites[0])
+            offset = TRAIL_N - len(b.trail)
+            for i, (x, y) in enumerate(b.trail[:-1]):
+                spr = dots[i + offset]
+                screen.blit(spr, (x - spr.get_width() / 2, y - spr.get_height() / 2))
         for b in self.balls:
             spr = self.ball_sprites.get(b.team, self.ball_sprites[0])
             screen.blit(spr, (b.x - spr.get_width() / 2, b.y - spr.get_height() / 2))

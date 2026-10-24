@@ -1,7 +1,9 @@
 """The render loop: frames into ffmpeg, sound events into a WAV, then both muxed into one MP4.
 
-A batch is planned up front as a list of jobs (format + seed + output path), so it renders
-the same reels whether it runs sequentially or across worker processes.
+Each reel starts with a fast pre-pass (see drama.py). With scouting it tries several seeds and
+keeps the most dramatic; either way the pre-pass tells the render where the decisive moment
+is, for slow motion. A batch is planned up front as a list of jobs, so it renders the same
+reels whether it runs sequentially or across worker processes.
 """
 import os
 import random
@@ -13,6 +15,7 @@ from typing import Any, Iterator
 from ..config import RenderSettings
 from .audio import mix, write_wav
 from .canvas import FPS, H, W
+from .drama import scout
 from .video import FrameWriter, mux
 
 
@@ -20,8 +23,9 @@ from .video import FrameWriter, mux
 class Job:
     mode: str
     seed: int
-    out: str
+    out: str | None      # None: name it after the seed that scouting picks
     opts: Namespace
+    scout: int = 1
 
 
 def init_pygame(preview: bool = False):
@@ -58,6 +62,9 @@ def plan_jobs(opts: Namespace, settings: RenderSettings) -> list[Job]:
     from .. import formats
     pool = formats.random_pool()
     seed = opts.seed if opts.seed is not None else random.randrange(1_000_000)
+    count = opts.scout if getattr(opts, "scout", None) is not None else settings.scout
+    if getattr(opts, "min_length", None) is None:
+        opts.min_length = settings.min_length
     order = list(pool)
     random.Random(seed).shuffle(order)      # rotation starts with a different format each batch
     jobs = []
@@ -69,22 +76,31 @@ def plan_jobs(opts: Namespace, settings: RenderSettings) -> list[Job]:
             mode = order[i % len(order)]
         else:
             mode = random.Random(s * 7919).choice(pool)
-        if opts.out and opts.batch == 1:
-            out = opts.out
-        else:
-            out = os.path.join(settings.output_dir, f"reel_{mode}_{s}.mp4")
-        jobs.append(Job(mode, s, out, opts))
+        out = opts.out if (opts.out and opts.batch == 1) else None
+        jobs.append(Job(mode, s, out, opts, count))
     return jobs
 
 
+def prepare(pg, job: Job):
+    """Run the pre-pass (scouting if asked) and return a game ready to render, plus its trace."""
+    best, traces = scout(pg, job.mode, job.seed, job.scout, job.opts)
+    if len(traces) > 1:
+        print(f"[{job.mode} {job.seed}] scouted {len(traces)} seeds, picked {best.seed} "
+              f"(score {best.score:.1f}, {best.done} at {best.play_t:.1f}s)", flush=True)
+    game = create(pg, job.mode, best.seed, job.opts)
+    game.plan = best.plan()
+    return game, best
+
+
 def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
-    """Render one reel to job.out and return a summary of it."""
+    """Render one reel and return a summary of it."""
     pg = init_pygame()
-    game = create(pg, job.mode, job.seed, job.opts)
+    game, trace = prepare(pg, job)
+    out = job.out or os.path.join(settings.output_dir, f"reel_{job.mode}_{game.seed}.mp4")
     screen = pg.Surface((W, H))
-    print(f"[{job.mode} {job.seed}] title='{game.title}'", flush=True)
-    os.makedirs(os.path.dirname(os.path.abspath(job.out)), exist_ok=True)
-    tmp_video, wav = job.out + ".video.mp4", job.out + ".wav"
+    print(f"[{job.mode} {game.seed}] title='{game.title}'", flush=True)
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    tmp_video, wav = out + ".video.mp4", out + ".wav"
     writer = FrameWriter(tmp_video, (W, H), FPS, settings.crf, settings.preset)
     n = 0
     try:
@@ -92,15 +108,18 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
             writer.write(pg.image.tobytes(screen, "RGB"))
     finally:
         writer.close()
+    if (game.done, game.play_t) != (trace.done, trace.play_t):
+        print(f"[{job.mode} {game.seed}] WARNING: render diverged from the pre-pass "
+              f"({game.done} vs {trace.done}); the format's gameplay depends on drawing", flush=True)
     duration = n / FPS
-    write_wav(mix(game.events, game.sounds(), duration), wav)
-    mux(tmp_video, wav, job.out, settings.audio_bitrate)
+    write_wav(mix(game.events, game.sound_bank(), duration), wav)
+    mux(tmp_video, wav, out, settings.audio_bitrate)
     os.remove(tmp_video)
     os.remove(wav)
     card = game.end_card()
-    print(f"[{job.mode} {job.seed}] {card.head} {card.sub} -> {job.out} ({duration:.1f}s)", flush=True)
-    return {"mode": job.mode, "seed": job.seed, "out": job.out, "title": game.title,
-            "duration": duration, "outcome": game.outcome()}
+    print(f"[{job.mode} {game.seed}] {card.head} {card.sub} -> {out} ({duration:.1f}s)", flush=True)
+    return {"mode": job.mode, "seed": game.seed, "out": out, "title": game.title,
+            "duration": duration, "score": round(trace.score, 2), "outcome": game.outcome()}
 
 
 def _render_star(args: tuple[Job, RenderSettings]) -> dict[str, Any]:
@@ -115,14 +134,14 @@ def run_jobs(jobs: list[Job], settings: RenderSettings, workers: int = 1) -> lis
         return list(ex.map(_render_star, [(j, settings) for j in jobs]))
 
 
-def preview(mode: str, seed: int, opts: Namespace) -> None:
+def preview(job: Job) -> None:
     """Play a reel live in a window at 45% size, without writing a file."""
     pg = init_pygame(preview=True)
-    game = create(pg, mode, seed, opts)
+    game, _ = prepare(pg, job)
     screen = pg.Surface((W, H))
-    print(f"[{mode} {seed}] title='{game.title}'")
+    print(f"[{job.mode} {game.seed}] title='{game.title}'")
     window = pg.display.set_mode((int(W * 0.45), int(H * 0.45)))
-    pg.display.set_caption(f"reel preview: {mode}")
+    pg.display.set_caption(f"reel preview: {job.mode}")
     clock = pg.time.Clock()
     for _ in frames(game, screen):
         for e in pg.event.get():

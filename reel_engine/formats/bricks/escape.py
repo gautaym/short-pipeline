@@ -8,13 +8,16 @@ import numpy as np
 
 from ...core.canvas import ARENA_T, W
 from ...core.physics import Ball
-from .. import EndCard, register
+from .. import EndCard, Twist, register
 from .classic import SHAPE_OPTION
 from .engine import BrickGame
 from .mazes import MAZES
 
 ESCAPE_FILLS = [(250, 215, 40), (60, 220, 255), (255, 110, 170), (150, 235, 80),
                 (255, 160, 60), (190, 140, 255)]
+POWER_SHARE = 0.03
+AFTERMATH_S = 6.0     # play continues this long after the breakout...
+MIN_PLAY_S = 16.0     # ...and at least until this much play, so the smash-out gets screen time
 
 
 @register
@@ -71,12 +74,51 @@ class EscapeGame(BrickGame):
         self.hp[:] = 1
         self.hp[channel] = 0
         self.hp[band & ~weak] = -1
+        # power bricks out in the field: once the ball is through a wall, the escape can snowball
+        self.place_powers((self.hp > 0) & (dist > hw + 4), POWER_SHARE, big_chance=0.0)
         self.total = self.left = int((self.hp > 0).sum())
         self.fill = self.rng.choice(ESCAPE_FILLS)
         sx, sy = to_cells(start)
         self.start = (self.bx0 + sx * self.cell, self.by0 + sy * self.cell)
         self.escaped_t = None
         self.escape_play = 0.0
+
+    def twists(self) -> list[Twist]:
+        def free() -> bool:
+            return self.escaped_t is None
+        return [Twist("earthquake", "the walls are cracking", self._quake, free),
+                Twist("split", "the ball split into 3!", self._split,
+                      lambda: free() and 1 <= len(self.balls) <= 2)]
+
+    def _quake(self, t: float) -> None:
+        walls = np.argwhere(self.hp[: int(self.rows * 0.7)] < 0)
+        if len(walls) == 0:
+            return None
+        rr, cc = np.mgrid[0:self.rows, 0:self.cols]
+        crack = np.zeros(self.hp.shape, dtype=bool)
+        for r, c in walls[self.nrng.choice(len(walls), min(3, len(walls)), replace=False)]:
+            crack |= np.hypot(rr - r, cc - c) <= 2.2
+        crack &= self.hp < 0
+        self.hp[crack] = 1
+        n = int(crack.sum())
+        self.left += n
+        self.total += n
+        for r, c in np.argwhere(crack):
+            self._paint(r, c)
+        return None
+
+    def _split(self, t: float) -> None:
+        for b in list(self.balls):
+            for _ in range(2):
+                self.balls.append(Ball(b.x, b.y, self.rng.uniform(-math.pi, math.pi), self.ball_speed))
+        return None
+
+    def drama_score(self, trace) -> float:
+        bonus = 0.5 if trace.twist else 0.0
+        if not trace.outcome.get("escaped"):
+            return -2.0 + bonus
+        f = trace.outcome["escape_time"] / self.max_play
+        return 5 - 4 * abs(f - 0.45) + bonus
 
     def _build_bg(self) -> None:
         self._flat_bg((32, 32, 38))
@@ -100,12 +142,15 @@ class EscapeGame(BrickGame):
         if r == 0 and self.escaped_t is None:
             self.escaped_t = t
             self.escape_play = self.play_t
+            self.mark("decisive")
             self.fx.flash = 1.0
+            self.fx.shake(16, 0.6)
             self.fx.floater(W / 2, ARENA_T + 220, "ESCAPED!", (255, 255, 255), self.fonts.big, 1.6)
             self.sfx(t, "clear", force=True)
 
     def check_end(self, t: float):
-        if self.escaped_t is not None and t - self.escaped_t >= 6.0:
+        if (self.escaped_t is not None and self.play_t - self.escape_play >= AFTERMATH_S
+                and self.play_t >= MIN_PLAY_S):
             return "escape"
         if self.left == 0:
             return "clear"

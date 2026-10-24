@@ -7,7 +7,7 @@ core or the CLI needs to change.
 import importlib
 import pkgutil
 
-from .base import EndCard, Format, Option
+from .base import EndCard, Format, Option, Twist
 
 _REGISTRY: dict[str, type[Format]] = {}
 _discovered = False
@@ -54,4 +54,4 @@ def get(name: str) -> type[Format]:
         raise SystemExit(f"unknown format '{name}'. Available: {', '.join(names())}") from None
 
 
-__all__ = ["EndCard", "Format", "Option", "register", "discover", "all_formats", "names", "random_pool", "get"]
+__all__ = ["EndCard", "Format", "Option", "Twist", "register", "discover", "all_formats", "names", "random_pool", "get"]
