@@ -1,0 +1,9 @@
+# Default settings for reel_engine. Copy this file and pass it with --config to override.
+# Canvas size (1080x1920) and frame rate (30 fps) are fixed by the formats' layouts for now.
+
+render:
+  output_dir: out        # where reel_<format>_<seed>.mp4 files go (unless --out is given)
+  workers: 1             # reels rendered in parallel; --workers overrides
+  crf: 20                # x264 quality: lower is better and bigger
+  preset: veryfast       # x264 speed/size trade-off
+  audio_bitrate: 160k

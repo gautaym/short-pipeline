@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reel-engine"
+version = "0.1.0"
+description = "Seeded, auto-playing 9:16 reels (YouTube Shorts / Instagram Reels) rendered to MP4"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.0",
+    "pygame-ce>=2.5",     # drop-in pygame fork; has wheels for current Python versions
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+reel = "reel_engine.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reel_engine*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

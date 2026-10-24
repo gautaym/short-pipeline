@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+venv/
+.venv/
+
+# Rendered output
+out/
+reel_*.mp4
+*.video.mp4
+*.wav
+
+# Credentials (client_secret.json, token.json, ...) never go in the repo
+secrets/
+client_secret*.json
+token*.json
