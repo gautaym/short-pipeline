@@ -19,6 +19,7 @@ Each video format is a plug-in:
 | `diwali` | one spark, a field of crackers, a chain reaction | "1 spark. 206 crackers." |
 | `platformer` | a retro pixel-art runner on a freshly generated level | "Level 17. 3 lives. Go." |
 | `same_point` | balls fired from one point bounce once off a shape: do they all meet? (ellipse foci) | "It works with 2 balls. Will it work with 16?" |
+| `tower3d` | 3D: a wrecking ball vs a tower of blocks, rendered in Blender | "Will the tower survive the wrecking ball?" |
 | `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
@@ -145,6 +146,15 @@ Any number can be a seeded range (`"1.6..2.2"`) or a pick (`{choice: [a, b]}`), 
 a new run and scouting keeps the most dramatic. Conditions: `time`, `swallowed(X|any)`,
 `merged(X|any)`, `landed(X|all)`, `ejected(X|any, R)`, `escaped(X, R, FROM|origin)`. Gravity is
 real Newtonian gravity (Kepler's laws emerge on their own); black-hole visuals are artistic.
+
+## 3D reels with Blender
+
+`reel render --mode tower3d` renders a 3D rigid-body demolition in Blender (Eevee, on the GPU)
+and adds the usual hook card, title, voice, music and end card on top. Blender is found through
+`$BLENDER`, `PATH` or the Microsoft Store install. Scene scripts live in `blender/` and run
+headless; scouting only bakes the physics (a few seconds per seed) and the chosen seed is rendered
+once into `out/blender/`. On an RTX 3060 a 20-second reel takes about 5–7 minutes, so 3D formats
+are kept out of `--mode random`.
 
 ## Titles, descriptions and the ledger
 

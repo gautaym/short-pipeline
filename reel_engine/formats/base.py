@@ -72,6 +72,7 @@ class Format(ABC):
     outro_s: ClassVar[float] = OUTRO_S
     wins: ClassVar[tuple[str, ...]] = ()       # end reasons that count as success
     in_random_pool: ClassVar[bool] = True
+    heavy: ClassVar[bool] = False              # takes minutes per reel (e.g. Blender); skipped by quick tests
     loop_ending: ClassVar[bool] = True         # crossfade the last frames into the first
     cta: ClassVar[str] = "Follow for more"
     music: ClassVar[str] = "upbeat"            # background music style (see core/music.py)

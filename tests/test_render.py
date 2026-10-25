@@ -8,9 +8,11 @@ from reel_engine.cli import main
 from reel_engine.core.video import probe
 from tests.conftest import needs_ffmpeg
 
+LIGHT = [n for n in formats.names() if not formats.get(n).heavy]
+
 
 @needs_ffmpeg
-@pytest.mark.parametrize("mode", formats.names())
+@pytest.mark.parametrize("mode", LIGHT)
 def test_each_format_renders_a_3_second_reel(tmp_path, mode):
     out = tmp_path / f"{mode}.mp4"
     assert main(["render", "--mode", mode, "--seed", "1", "--max-play", "3", "--out", str(out), "--no-ledger", "--no-voice"]) == 0

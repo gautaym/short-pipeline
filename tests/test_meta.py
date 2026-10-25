@@ -29,7 +29,7 @@ def test_every_format_produces_titles_within_youtube_limit(tmp_path, pg):
     from reel_engine.core.drama import simulate
     from tests.test_formats import make_opts
     ledger = Ledger(str(tmp_path / "ledger.sqlite"))
-    for fmt in formats.all_formats():
+    for fmt in [f for f in formats.all_formats() if not f.heavy]:
         trace = simulate(pg, fmt.name, 3, make_opts(max_play=4))
         meta = record(summary(tmp_path, fmt.name, 3, trace.outcome), ledger, CHANNEL)
         assert 0 < len(meta.title) <= 100 and "#shorts" in meta.description

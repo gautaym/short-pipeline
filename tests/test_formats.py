@@ -9,6 +9,8 @@ from reel_engine.core.canvas import H, W
 from reel_engine.core.drama import scout, simulate
 from reel_engine.core.render import frames
 
+LIGHT = [n for n in formats.names() if not formats.get(n).heavy]
+
 BRICK_FORMATS = ["classic", "escape", "boss", "wars"]
 
 
@@ -39,21 +41,21 @@ def test_every_format_declares_the_plugin_interface():
             assert opt.flag.startswith("--") and opt.help
 
 
-@pytest.mark.parametrize("mode", formats.names())
+@pytest.mark.parametrize("mode", LIGHT)
 def test_same_seed_gives_identical_frames(pg, mode):
     a, _ = render_run(pg, mode, 5, max_play=2)
     b, _ = render_run(pg, mode, 5, max_play=2)
     assert a == b
 
 
-@pytest.mark.parametrize("mode", formats.names())
+@pytest.mark.parametrize("mode", LIGHT)
 def test_different_seeds_differ(pg, mode):
     a, _ = render_run(pg, mode, 5, max_play=1)
     b, _ = render_run(pg, mode, 6, max_play=1)
     assert a != b
 
 
-@pytest.mark.parametrize("mode", formats.names())
+@pytest.mark.parametrize("mode", LIGHT)
 @pytest.mark.parametrize("seed", [1, 2])
 def test_simulation_without_drawing_matches_render(pg, mode, seed):
     """Seed scouting relies on this: gameplay must not depend on drawing or effects."""
