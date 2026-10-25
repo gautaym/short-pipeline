@@ -13,7 +13,7 @@ from ..core.canvas import H, W
 from ..core.palette import hsv255
 from . import EndCard, Format, Option, Twist, register
 
-CX, CY = W / 2, 1110
+CX, CY = W / 2, 1000
 OUTER_R = 470
 BALL_R = 12
 RING_W = 16

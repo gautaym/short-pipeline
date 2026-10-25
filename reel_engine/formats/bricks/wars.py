@@ -6,7 +6,7 @@ import math
 
 import numpy as np
 
-from ...core.canvas import ARENA_L, ARENA_R, ARENA_T, LOST_Y, W
+from ...core.canvas import ARENA_L, ARENA_R, ARENA_T, HUD_BAR_Y, HUD_Y, SAFE_BOTTOM, W
 from ...core.physics import BALL_R, Ball
 from ...core.text import fit_width
 from .. import EndCard, Option, Twist, register
@@ -32,7 +32,7 @@ class WarsGame(BrickGame):
 
     def setup(self) -> None:
         self.n = getattr(self.opts, "teams", None) or self.rng.choice([2, 2, 3, 4])
-        self.grid(self.CELL, 3, (LOST_Y - ARENA_T) // self.CELL, ARENA_T)
+        self.grid(self.CELL, 3, (SAFE_BOTTOM - ARENA_T) // self.CELL, ARENA_T)
         self.teams = self.rng.sample(self.team_pool(), self.n)
         rows, cols = self.rows, self.cols
         rr, cc = np.mgrid[0:rows, 0:cols]
@@ -169,17 +169,17 @@ class WarsGame(BrickGame):
         for i, (name, col) in enumerate(self.teams):
             pct = round(100 * self.counts[i] / total)
             s = fit_width(pg, font.render(f"{name} {pct}%", True, col), int(width / self.n) - 12)
-            screen.blit(s, s.get_rect(center=(ARENA_L + width * (i + 0.5) / self.n, 250)))
+            screen.blit(s, s.get_rect(center=(ARENA_L + width * (i + 0.5) / self.n, HUD_Y - 4)))
         x = ARENA_L
         for i, (_, col) in enumerate(self.teams):
             w = int(round(width * self.counts[i] / total))
             if i == self.n - 1:
                 w = ARENA_R - x
-            pg.draw.rect(screen, col, (x, 284, w, 22))
+            pg.draw.rect(screen, col, (x, HUD_BAR_Y - 8, w, 22))
             x += w
         s = int(self.max_play - self.play_t + 0.999)
         ts = self.fonts.small.render(f"{s}s left", True, (200, 200, 210))
-        screen.blit(ts, ts.get_rect(midtop=(W / 2, 312)))
+        screen.blit(ts, ts.get_rect(midtop=(W / 2, HUD_BAR_Y + 18)))
 
     def winner(self) -> int:
         return int(self.counts.argmax())

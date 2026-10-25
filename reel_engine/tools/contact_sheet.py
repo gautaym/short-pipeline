@@ -5,6 +5,7 @@ side-by-side review of a batch quick.
 """
 import os
 
+from ..core.canvas import SAFE_BOTTOM, SAFE_RIGHT, SAFE_RIGHT_FROM, SAFE_TOP, H, W
 from ..core.render import init_pygame
 from ..core.text import font_path
 from ..core.video import grab_frame, probe
@@ -24,7 +25,19 @@ def _frames(pg, path: str, n: int, width: int):
     return imgs, times, height
 
 
-def contact_sheet(videos: list[str], out: str, n: int = 10, cols: int = 5, width: int = 216) -> str:
+def shade_unsafe(pg, img) -> None:
+    """Tint the areas phone apps cover with their own buttons and captions."""
+    k = img.get_width() / W
+    zones = [(0, 0, W, SAFE_TOP), (0, SAFE_BOTTOM, W, H - SAFE_BOTTOM),
+             (SAFE_RIGHT, SAFE_RIGHT_FROM, W - SAFE_RIGHT, SAFE_BOTTOM - SAFE_RIGHT_FROM)]
+    for x, y, w, h in zones:
+        band = pg.Surface((max(1, int(w * k)), max(1, int(h * k))), pg.SRCALPHA)
+        band.fill((255, 40, 40, 90))
+        img.blit(band, (int(x * k), int(y * k)))
+
+
+def contact_sheet(videos: list[str], out: str, n: int = 10, cols: int = 5, width: int = 216,
+                  safe_zones: bool = False) -> str:
     """Write a PNG contact sheet of the videos to `out` and return its path."""
     pg = init_pygame()
     font = pg.font.Font(font_path(), 18)
@@ -33,6 +46,9 @@ def contact_sheet(videos: list[str], out: str, n: int = 10, cols: int = 5, width
     height = 0
     for v in videos:
         imgs, times, height = _frames(pg, v, n, width)
+        if safe_zones:
+            for img in imgs:
+                shade_unsafe(pg, img)
         pairs = list(zip(imgs, times))
         if len(videos) == 1:
             rows += [(None, pairs[i:i + cols]) for i in range(0, len(pairs), cols)]

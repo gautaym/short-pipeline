@@ -16,7 +16,7 @@ class Fonts:
 
     def __init__(self, pg):
         fp = font_path()
-        self.title = pg.font.Font(fp, 66)
+        self.title = pg.font.Font(fp, 60)
         self.stat = pg.font.Font(fp, 40)
         self.mid = pg.font.Font(fp, 32)
         self.small = pg.font.Font(fp, 22)

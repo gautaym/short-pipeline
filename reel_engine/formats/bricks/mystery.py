@@ -18,7 +18,7 @@ PROMPT_AT = 0.2             # progress at which "Comment your guess" pops up
 HINT_AT = 0.45              # progress at which the hint pops up
 REVEAL_S = 0.8              # how long the final reveal takes
 POWER_SHARE = 0.09
-MESSAGE_Y = 1560            # prompts and hints sit in the clear space under the board
+MESSAGE_Y = 402             # prompts and hints sit in the gap between the HUD and the board
 
 
 @register
@@ -31,7 +31,7 @@ class MysteryGame(ClassicGame):
                Option("--answer", "mystery: answer shown at the reveal (default: from the file name)",
                       {"default": None}))
     end_veil = False
-    card_y = H - 300
+    card_y = H - 640
     cta = "Did you guess it?"
 
     def setup(self) -> None:

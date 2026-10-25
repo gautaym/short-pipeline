@@ -15,10 +15,10 @@ from ..core.canvas import ARENA_L, W
 from ..core.text import outlined
 from . import EndCard, Format, Option, Twist, register
 
-NODES_W, NODES_H = 24, 10            # maze nodes; the cell grid is (2n+1) in each direction
-CELL = 20
+NODES_W, NODES_H = 24, 8             # maze nodes; the cell grid is (2n+1) in each direction
+CELL = 18
 LANE_X = (W - (2 * NODES_W + 1) * CELL) // 2
-LANE_Y = [430, 900, 1370]
+LANE_Y = [455, 805, 1155]            # the last lane ends above the caption area
 LANE_H = (2 * NODES_H + 1) * CELL
 WIN_AT = (14.0, 20.0)                # seconds of play when the winner finds the exit
 AFTER_WIN_S = 2.5                    # the others keep searching this long after the winner

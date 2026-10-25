@@ -18,8 +18,8 @@ EMPTY, ANAR, CHAKRI, BOMB, ROCKET, DUD = range(6)
 IDLE, LIT, GONE = range(3)
 
 CELL = 60
-COLS, ROWS = 16, 18
-X0, Y0 = (W - COLS * CELL) // 2, 420
+COLS, ROWS = 16, 17
+X0, Y0 = (W - COLS * CELL) // 2, 480
 FUSE = (0.55, 1.1)                 # seconds between catching fire and exploding
 DUDS = (0.16, 0.3)                 # seeded share of duds
 EMPTY_SHARE = 0.08
@@ -351,5 +351,5 @@ class Diwali(Format):
                 pg.draw.circle(screen, (255, 214, 64), (x, y), 30 + 6 * flicker, 4)
         if self.exploded >= 10 and not self.done:
             lab = outlined(pg, self.fonts.big, f"x{self.exploded}", (255, 214, 64), 5)
-            screen.blit(lab, lab.get_rect(center=(W / 2, Y0 - 50)))
+            screen.blit(lab, lab.get_rect(center=(W / 2, Y0 - 60)))
         self.fx.draw_particles(screen)

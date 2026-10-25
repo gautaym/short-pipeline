@@ -22,8 +22,8 @@ from typing import Any, Callable, ClassVar
 import numpy as np
 
 from ..core.audio import SoundBank, common_sounds
-from ..core.canvas import (ARENA_L, ARENA_R, ARENA_T, FPS, INTRO_S, LOOP_S, MIN_VIDEO_S, OUTRO_S, TICK,
-                           TICK_HZ, TICKS_PER_FRAME, H, W)
+from ..core.canvas import (ARENA_L, ARENA_R, ARENA_T, FPS, HUD_BAR_Y, HUD_Y, INTRO_S, LOOP_S, MIN_VIDEO_S,
+                           OUTRO_S, TICK, TICK_HZ, TICKS_PER_FRAME, TITLE_Y, H, W)
 from ..core.drama import Plan, Trace
 from ..core.effects import Effects
 from ..core.text import Fonts, outlined, text_block, wrap
@@ -343,7 +343,7 @@ class Format(ABC):
         k = max(0.0, min(1.0, (t - (self.intro_s - 0.3)) / 0.3))
         if k <= 0:
             return
-        y = 60
+        y = TITLE_Y
         for s in self.title_surfs:
             s.set_alpha(int(255 * k))
             screen.blit(s, s.get_rect(midtop=(W / 2, y)))
@@ -354,11 +354,11 @@ class Format(ABC):
             s = self.fonts.stat.render(txt, True, (235, 235, 245))
             x = [ARENA_L + 10, W / 2, ARENA_R - 10][i]
             anchor = ["midleft", "center", "midright"][i]
-            screen.blit(s, s.get_rect(**{anchor: (x, 252)}))
+            screen.blit(s, s.get_rect(**{anchor: (x, HUD_Y)}))
         frac = self.progress()
-        self.pg.draw.rect(screen, (70, 70, 85), (ARENA_L, 290, ARENA_R - ARENA_L, 16), border_radius=8)
+        self.pg.draw.rect(screen, (70, 70, 85), (ARENA_L, HUD_BAR_Y, ARENA_R - ARENA_L, 16), border_radius=8)
         if frac > 0:
-            self.pg.draw.rect(screen, self.hud_accent(), (ARENA_L, 290, int((ARENA_R - ARENA_L) * frac), 16),
+            self.pg.draw.rect(screen, self.hud_accent(), (ARENA_L, HUD_BAR_Y, int((ARENA_R - ARENA_L) * frac), 16),
                               border_radius=8)
 
     def draw_twist(self, screen, t: float) -> None:

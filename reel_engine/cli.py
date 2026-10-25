@@ -58,6 +58,8 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--cols", type=int, default=5, help="columns (single video only)")
     c.add_argument("--width", type=int, default=216, help="width of each frame in pixels")
     c.add_argument("-o", "--out", default=None, help="output PNG (default: <first video>_sheet.png)")
+    c.add_argument("--safe-zones", action="store_true",
+                   help="tint the areas Shorts/Reels cover with their own buttons and captions")
     return ap
 
 
@@ -77,7 +79,7 @@ def cmd_render(opts: argparse.Namespace) -> int:
 def cmd_contact_sheet(opts: argparse.Namespace) -> int:
     from .tools.contact_sheet import contact_sheet
     out = opts.out or os.path.splitext(opts.videos[0])[0] + "_sheet.png"
-    print(contact_sheet(opts.videos, out, opts.frames, opts.cols, opts.width))
+    print(contact_sheet(opts.videos, out, opts.frames, opts.cols, opts.width, opts.safe_zones))
     return 0
 
 

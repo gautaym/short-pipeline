@@ -17,7 +17,7 @@ from .sounds import PENTA, brick_sounds
 
 TRAIL_N = 7          # positions kept per ball for its trail
 
-PADDLE_Y = 1700
+PADDLE_Y = 1540                  # just above the caption area
 PADDLE_W = 230
 PADDLE_H = 24
 PADDLE_SPEED = 1700.0
