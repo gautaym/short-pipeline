@@ -26,7 +26,8 @@ def find_blender() -> str:
 
 def run(script: str, params: dict, timeout: float = 3600) -> dict:
     """Run blender/<script>.py with params; returns its result.json."""
-    out = Path(params["out_dir"])
+    out = Path(params["out_dir"]).resolve()
+    params = {**params, "out_dir": str(out)}          # Blender resolves relative paths its own way
     out.mkdir(parents=True, exist_ok=True)
     pfile = out / "params.json"
     pfile.write_text(json.dumps(params), encoding="utf-8")

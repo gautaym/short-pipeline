@@ -20,6 +20,7 @@ Each video format is a plug-in:
 | `platformer` | a retro pixel-art runner on a freshly generated level | "Level 17. 3 lives. Go." |
 | `same_point` | balls fired from one point bounce once off a shape: do they all meet? (ellipse foci) | "It works with 2 balls. Will it work with 16?" |
 | `tower3d` | 3D: a wrecking ball vs a tower of blocks, rendered in Blender | "Will the tower survive the wrecking ball?" |
+| `water3d` | 3D: water pours over planks into three glasses (Blender fluid) | "Which glass fills first?" |
 | `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
@@ -149,12 +150,13 @@ real Newtonian gravity (Kepler's laws emerge on their own); black-hole visuals a
 
 ## 3D reels with Blender
 
-`reel render --mode tower3d` renders a 3D rigid-body demolition in Blender (Eevee, on the GPU)
+`reel render --mode tower3d` (rigid-body demolition) and `--mode water3d` (a liquid race into three
+glasses, Mantaflow) render 3D scenes in Blender (Eevee, on the GPU)
 and adds the usual hook card, title, voice, music and end card on top. Blender is found through
 `$BLENDER`, `PATH` or the Microsoft Store install. Scene scripts live in `blender/` and run
 headless; scouting only bakes the physics (a few seconds per seed) and the chosen seed is rendered
-once into `out/blender/`. On an RTX 3060 a 20-second reel takes about 5–7 minutes, so 3D formats
-are kept out of `--mode random`.
+once into `out/blender/`. On an RTX 3060 a 20-second reel takes about 5–7 minutes (a fluid bake is
+about 40 s per seed, so water3d scouts at most 3 seeds), so 3D formats are kept out of `--mode random`.
 
 ## Titles, descriptions and the ledger
 

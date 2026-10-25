@@ -84,7 +84,8 @@ def plan_jobs(opts: Namespace, settings: RenderSettings) -> list[Job]:
 
 def prepare(pg, job: Job):
     """Run the pre-pass (scouting if asked) and return a game ready to render, plus its trace."""
-    best, traces = scout(pg, job.mode, job.seed, job.scout, job.opts)
+    from .. import formats
+    best, traces = scout(pg, job.mode, job.seed, min(job.scout, formats.get(job.mode).max_scout), job.opts)
     if len(traces) > 1:
         print(f"[{job.mode} {job.seed}] scouted {len(traces)} seeds, picked {best.seed} "
               f"(score {best.score:.1f}, {best.done} at {best.play_t:.1f}s)", flush=True)

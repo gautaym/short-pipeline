@@ -73,6 +73,7 @@ class Format(ABC):
     wins: ClassVar[tuple[str, ...]] = ()       # end reasons that count as success
     in_random_pool: ClassVar[bool] = True
     heavy: ClassVar[bool] = False              # takes minutes per reel (e.g. Blender); skipped by quick tests
+    max_scout: ClassVar[int] = 100             # cap on seeds scouting may try (pre-passes can be costly)
     loop_ending: ClassVar[bool] = True         # crossfade the last frames into the first
     cta: ClassVar[str] = "Follow for more"
     music: ClassVar[str] = "upbeat"            # background music style (see core/music.py)

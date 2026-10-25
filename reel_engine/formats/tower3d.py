@@ -30,6 +30,7 @@ class Tower3D(Format):
     default_duration = 20.0
     in_random_pool = False
     heavy = True                 # minutes per reel: kept out of the quick per-format tests
+    max_scout = 8
     options = (Option("--samples", "tower3d: Eevee render samples (quality vs speed)", {"type": int, "default": None}),)
     music = "tense"
     cta = "Did you think it would fall?"
