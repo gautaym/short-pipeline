@@ -16,3 +16,6 @@ reel_*.mp4
 secrets/
 client_secret*.json
 token*.json
+
+# Downloaded models (text-to-speech voice etc.)
+models/

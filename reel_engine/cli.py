@@ -47,6 +47,7 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--min-length", type=float, default=None,
                    help="shortest reel in seconds (default from config: 20); 0 = no minimum")
     r.add_argument("--no-music", action="store_true", help="leave out the background music")
+    r.add_argument("--no-voice", action="store_true", help="leave out the spoken hook and result")
     r.add_argument("--twist", default="auto",
                    help="mid-reel surprise: auto (seeded chance), none, or a twist name for the format")
     r.add_argument("--preview", action="store_true", help="show a live window instead of rendering")

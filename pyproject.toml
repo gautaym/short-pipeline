@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.0",
     "pygame-ce>=2.5",     # drop-in pygame fork; has wheels for current Python versions
     "PyYAML>=6.0",
+    "kokoro-onnx>=0.4",   # offline text-to-speech for the spoken hook (model files go in models/)
 ]
 
 [project.optional-dependencies]

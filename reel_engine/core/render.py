@@ -116,7 +116,8 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     bed = None
     if settings.music and not getattr(job.opts, "no_music", False):
         bed = compose(duration, game.seed, game.music, game.music_key)
-    write_wav(mix(game.events, game.sound_bank(), duration, bed, settings.music_level), wav)
+    write_wav(mix(game.events, game.sound_bank(), duration, bed, settings.music_level,
+                  spoken_lines(game, settings, job.opts)), wav)
     mux(tmp_video, wav, out, settings.audio_bitrate)
     os.remove(tmp_video)
     os.remove(wav)
@@ -124,6 +125,20 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     print(f"[{job.mode} {game.seed}] {card.head} {card.sub} -> {out} ({duration:.1f}s)", flush=True)
     return {"mode": job.mode, "seed": game.seed, "out": out, "title": game.title,
             "duration": duration, "score": round(trace.score, 2), "outcome": game.outcome()}
+
+
+def spoken_lines(game, settings: RenderSettings, opts: Namespace) -> list:
+    """The hook at the start and the result after the game ends, if a voice is available."""
+    if not settings.voice or getattr(opts, "no_voice", False):
+        return []
+    from . import voice
+    if not voice.available():
+        print("note: voice files not found in models/; rendering without a voice", flush=True)
+        return []
+    lines = [(0.15, game.title)]
+    if game.end_t is not None:
+        lines.append((game.end_t + 0.35, game.end_card().head))
+    return [(t, voice.say(text, settings.voice_name, settings.voice_speed)) for t, text in lines]
 
 
 def _render_star(args: tuple[Job, RenderSettings]) -> dict[str, Any]:

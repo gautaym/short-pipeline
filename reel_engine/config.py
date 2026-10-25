@@ -17,6 +17,9 @@ class RenderSettings:
     music: bool = True
     music_level: float = 0.55
     ledger: str | None = None          # default: <output_dir>/ledger.sqlite
+    voice: bool = True
+    voice_name: str = "am_michael"
+    voice_speed: float = 1.05
 
     def ledger_path(self) -> str:
         import os

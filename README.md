@@ -110,6 +110,10 @@ Settings such as the output folder, x264 quality and default worker count live i
 - **Music**: a copyright-free backing track generated from the seed in a style that suits the
   format (upbeat, chill, tense, festive, chiptune), mixed under the effects. Every reel is
   normalised to -14 LUFS. `--no-music` leaves it out.
+- **Voice**: the hook is spoken at the start and the result at the end, by Kokoro (an open
+  text-to-speech model, Apache 2.0) running offline. Put `kokoro-v1.0.onnx` and `voices-v1.0.bin`
+  from the kokoro-onnx releases in `models/` (git-ignored); without them reels render silently
+  spoken. Pick the voice with `voice_name` in the config; `--no-voice` leaves it out.
 - **Phone safe zones**: titles, scores and the main action stay clear of the areas Shorts and
   Reels cover with their own buttons and captions.
 

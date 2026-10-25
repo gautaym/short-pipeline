@@ -8,6 +8,9 @@ render:
   min_length: 20         # seconds; scouting avoids shorter runs, and any that remain hold their end card
   music: true            # generated background music under the sound effects
   music_level: 0.55      # music loudness as a share of the effects' loudness
+  voice: true            # speak the hook and the result (needs the Kokoro files in models/)
+  voice_name: am_michael # US: am_michael, am_adam, af_heart, af_bella...; UK: bm_george, bf_emma...
+  voice_speed: 1.05
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k
