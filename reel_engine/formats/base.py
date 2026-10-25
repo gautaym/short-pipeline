@@ -75,6 +75,9 @@ class Format(ABC):
     loop_ending: ClassVar[bool] = True         # crossfade the last frames into the first
     cta: ClassVar[str] = "Follow for more"
     music: ClassVar[str] = "upbeat"            # background music style (see core/music.py)
+    series: ClassVar[str] = ""                 # series name for titles, e.g. "Brick Escape"
+    tags: ClassVar[tuple[str, ...]] = ()       # search tags for this format
+    hashtags: ClassVar[tuple[str, ...]] = ()   # hashtags for the description (without #shorts)
     music_key: ClassVar[int] = 60              # MIDI root; C keeps it in tune with pentatonic effects
     end_veil: ClassVar[bool] = True            # darken the arena behind the end card...
     card_y: ClassVar[float] = H * 0.5          # ...or (False) put the card on a band at card_y
@@ -176,6 +179,16 @@ class Format(ABC):
     def outcome(self) -> dict[str, Any]:
         """Facts about how the reel ended, for titles and descriptions."""
         return {"result": self.done, "play_time": round(self.play_t, 1), "twist": self.twist_fired}
+
+    @classmethod
+    def titles(cls, o: dict[str, Any]) -> list[str]:
+        """Title ideas from a finished reel's outcome(); the metadata picks one that is unused."""
+        return ["How did this end?", "Watch till the end"]
+
+    @classmethod
+    def describe(cls, o: dict[str, Any]) -> str:
+        """One sentence saying what happened, for the description."""
+        return ""
 
     def end_sound(self, why: str) -> str:
         return "clear" if why in self.wins else "fail"

@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet")
+COMMANDS = ("render", "contact-sheet", "ledger")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -53,6 +53,12 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--config", default=None, help="YAML settings file (default configs/default.yaml)")
     _add_format_options(r)
 
+    r.add_argument("--no-ledger", action="store_true", help="skip titles/descriptions and the ledger")
+
+    lg = sub.add_parser("ledger", help="list recently rendered reels and their titles")
+    lg.add_argument("-n", "--last", type=int, default=20)
+    lg.add_argument("--config", default=None)
+
     c = sub.add_parser("contact-sheet", help="grab frames from videos into one image")
     c.add_argument("videos", nargs="+")
     c.add_argument("-n", "--frames", type=int, default=10, help="frames per video")
@@ -73,7 +79,31 @@ def cmd_render(opts: argparse.Namespace) -> int:
         for j in jobs:
             preview(j)
         return 0
-    run_jobs(jobs, settings, workers)
+    results = run_jobs(jobs, settings, workers)
+    if not opts.no_ledger:
+        from .config import load_channel
+        from .meta.generate import record
+        from .meta.ledger import Ledger
+        ledger = Ledger(settings.ledger_path())
+        channel = load_channel(opts.config)
+        try:
+            for res in results:
+                meta = record(res, ledger, channel)
+                print(f"  title: {meta.title}")
+        finally:
+            ledger.close()
+        if channel.get("made_for_kids") is None:
+            print("note: channel.made_for_kids is not set in the config; it must be before any upload.")
+    return 0
+
+
+def cmd_ledger(opts: argparse.Namespace) -> int:
+    from .meta.ledger import Ledger
+    ledger = Ledger(load_settings(opts.config).ledger_path())
+    for row in ledger.recent(opts.last):
+        vid, created, fmt, n, title, path, uploaded = row
+        print(f"{vid:>4}  {created[:16]}  {fmt:<12} #{n:<4} {'uploaded' if uploaded else '        '}  {title}")
+    ledger.close()
     return 0
 
 
@@ -91,4 +121,6 @@ def main(argv: list[str] | None = None) -> int:
     opts = build_parser().parse_args(argv)
     if opts.command == "contact-sheet":
         return cmd_contact_sheet(opts)
+    if opts.command == "ledger":
+        return cmd_ledger(opts)
     return cmd_render(opts)

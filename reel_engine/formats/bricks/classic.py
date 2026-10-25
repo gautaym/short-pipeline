@@ -20,6 +20,25 @@ class ClassicGame(BrickGame):
     options = (SHAPE_OPTION,
                Option("--text", "word to build from bricks (classic, --shape text)", {"default": None}))
 
+    series = "1 Ball Challenge"
+    tags = ("brick breaker", "satisfying", "simulation", "1 ball challenge", "oddly satisfying")
+    hashtags = ("satisfying", "brickbreaker", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        s, t, left, total = str(o["shape"]).title(), o["play_time"], o["bricks_left"], o["bricks_total"]
+        if o["result"] == "clear":
+            return [f"1 ball cleared the {s} in {t}s", f"Can 1 ball clear {total} bricks? It took {t}s",
+                    f"The {s} didn't stand a chance", f"{total} bricks gone in {t} seconds"]
+        return [f"{left} bricks survived the {s}", f"So close: {left} bricks left on the {s}",
+                f"1 ball vs {total} bricks: the {s} held on", f"The {s} survived with {left} bricks"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["result"] == "clear":
+            return f"One ball cleared all {o['bricks_total']} bricks of the {str(o['shape']).title()} in {o['play_time']} seconds."
+        return f"{o['bricks_left']} of {o['bricks_total']} bricks survived."
+
     def setup(self) -> None:
         o = self.opts
         self.shape = getattr(o, "shape", None) or self.rng.choice(SHAPES)

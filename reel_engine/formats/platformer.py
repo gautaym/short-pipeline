@@ -66,6 +66,27 @@ class Platformer(Format):
     music = "chiptune"
 
     # ---------------------------------------------------------- level generation
+    series = "Pixel Run"
+    tags = ("pixel art", "retro game", "platformer", "90s game", "8 bit", "level")
+    hashtags = ("pixelart", "retrogaming", "8bit")
+
+    @classmethod
+    def titles(cls, o):
+        lv, lives, t = o["level"], o["lives_left"], o["play_time"]
+        if o["result"] == "flag":
+            extra = "on the last life!" if lives == 1 else f"with {lives} lives left"
+            return [f"Level {lv} cleared {extra}", f"Level {lv} in {t}s", f"He made it {extra}",
+                    f"Level {lv}: {o['coins']} coins and the flag"]
+        pct = round(100 * o["progress"])
+        return [f"Level {lv}: game over at {pct}%", f"So close to the flag on level {lv}",
+                f"Level {lv} wins this time", f"{pct}% of the way... then game over"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["result"] == "flag":
+            return f"Level {o['level']} cleared in {o['play_time']} seconds with {o['coins']} coins."
+        return f"Game over on level {o['level']}, {round(100 * o['progress'])}% of the way to the flag."
+
     def setup(self) -> None:
         rng = self.rng
         self.level_no = rng.randint(7, 99)

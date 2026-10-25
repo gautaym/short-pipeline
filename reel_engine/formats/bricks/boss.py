@@ -17,6 +17,25 @@ class BossGame(ClassicGame):
     default_duration = 40.0
     options = (Option("--boss-hp", "boss mode starting HP", {"type": int, "default": None}),)
 
+    series = "Boss Fight"
+    tags = ("brick breaker", "boss fight", "satisfying", "simulation", "hp challenge")
+    hashtags = ("satisfying", "bossfight", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        hp, left, t = o["boss_hp_start"], o["boss_hp_left"], o["play_time"]
+        if o["result"] == "win":
+            return [f"{hp} HP boss down in {t}s", f"1 ball beat a {hp} HP boss", f"The {hp} HP block fell at {t}s",
+                    f"Can 1 ball break {hp} HP? ({t}s)"]
+        return [f"The boss survived on {left} HP", f"{hp} HP boss: {left} HP left at the buzzer",
+                f"So close: boss lived with {left} HP", f"1 ball vs {hp} HP: the boss held on"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["result"] == "win":
+            return f"One ball took down a {o['boss_hp_start']} HP boss in {o['play_time']} seconds."
+        return f"The {o['boss_hp_start']} HP boss survived with {o['boss_hp_left']} HP left."
+
     def setup(self) -> None:
         self.grid(40, 4, 26, ARENA_T + 50)
         self.boss_hp0 = self.boss_hp = getattr(self.opts, "boss_hp", None) or self.rng.choice([160, 200, 250, 300])

@@ -175,6 +175,26 @@ class AlgoRace(Format):
     cta = "Which one did you pick?"
     music = "tense"
 
+    series = "Algorithm Race"
+    tags = ("algorithm", "maze solver", "pathfinding", "a star", "bfs dfs", "coding", "computer science")
+    hashtags = ("algorithms", "coding", "maze")
+
+    @classmethod
+    def titles(cls, o):
+        names = list(o["steps"])
+        vs = " vs ".join(names)
+        w = o["winner"]
+        if not w:
+            return [f"{vs}: nobody found the exit", "The maze beat every algorithm"]
+        return [f"{vs}: {w} wins!", f"{w} solved the maze first", f"Same maze, 3 algorithms: {w} wins",
+                f"Did you pick {w}?", f"{w} found the exit in {o['steps'][w]} steps"]
+
+    @classmethod
+    def describe(cls, o):
+        parts = ", ".join(f"{n} {s} steps" for n, s in o["steps"].items())
+        w = o["winner"] or "nobody"
+        return f"Same maze, same speed: {w} found the exit first ({parts})."
+
     def setup(self) -> None:
         rng = self.rng
         self.grid = make_maze(rng, loops=rng.randint(12, 40))

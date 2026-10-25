@@ -28,6 +28,26 @@ class EscapeGame(BrickGame):
     ball_speed = 1100.0
     fancy_bricks = False
 
+    series = "Brick Escape"
+    tags = ("brick breaker", "maze escape", "satisfying", "simulation", "can it escape")
+    hashtags = ("satisfying", "maze", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        m = str(o["maze"]).upper()
+        if o["escaped"]:
+            t = o["escape_time"]
+            return [f"Broke out of the {m} in {t}s", f"Trapped in the {m}... for {t} seconds",
+                    f"Escaped the {m} at {t}s", f"Can the ball escape the {m}? ({t}s)"]
+        return [f"Still trapped in the {m}", f"The {m} won this time", f"No way out of the {m}",
+                f"40 seconds in the {m}: no escape"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["escaped"]:
+            return f"The ball broke out of the {str(o['maze']).upper()} maze after {o['escape_time']} seconds."
+        return f"The ball never escaped the {str(o['maze']).upper()} maze."
+
     def setup(self) -> None:
         self.maze = getattr(self.opts, "shape", None) or self.rng.choice(list(MAZES))
         if self.maze not in MAZES:

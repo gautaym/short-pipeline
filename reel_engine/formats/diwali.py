@@ -43,6 +43,25 @@ class Diwali(Format):
     cta = "Happy Diwali! Follow for more"
     music = "festive"
 
+    series = "Diwali Chain"
+    tags = ("diwali", "chain reaction", "crackers", "satisfying", "simulation", "happy diwali")
+    hashtags = ("diwali", "chainreaction", "satisfying")
+
+    @classmethod
+    def titles(cls, o):
+        n, left = o["crackers"], o["crackers"] - o["exploded"]
+        if o["result"] == "full":
+            return [f"1 spark lit all {n} crackers", f"Full chain: {n} crackers from 1 spark",
+                    f"Can 1 spark light {n} crackers? Yes!", "Every single cracker went off"]
+        return [f"{left} cracker{'s' if left != 1 else ''} survived the chain", f"1 spark, {n} crackers, {left} left",
+                f"So close: {o['lit_pct']}% lit", f"The chain broke with {left} to go"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["result"] == "full":
+            return f"One spark set off all {o['crackers']} crackers. Happy Diwali!"
+        return f"The chain lit {o['exploded']} of {o['crackers']} crackers. Happy Diwali!"
+
     def setup(self) -> None:
         rng, nrng = self.rng, self.nrng
         duds = getattr(self.opts, "duds", None)

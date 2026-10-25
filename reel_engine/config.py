@@ -16,9 +16,26 @@ class RenderSettings:
     min_length: float = 20.0
     music: bool = True
     music_level: float = 0.55
+    ledger: str | None = None          # default: <output_dir>/ledger.sqlite
+
+    def ledger_path(self) -> str:
+        import os
+        return self.ledger or os.path.join(self.output_dir, "ledger.sqlite")
     crf: int = 20
     preset: str = "veryfast"
     audio_bitrate: str = "160k"
+
+
+def load_channel(path: str | None = None) -> dict:
+    """The `channel:` section: name, made_for_kids (deliberately no default), tags, hashtags."""
+    cfg = Path(path) if path else DEFAULT_CONFIG
+    if not cfg.exists():
+        return {"made_for_kids": None, "tags": [], "hashtags": []}
+    data = (yaml.safe_load(cfg.read_text(encoding="utf-8")) or {}).get("channel", {}) or {}
+    data.setdefault("made_for_kids", None)
+    data["tags"] = data.get("tags") or []
+    data["hashtags"] = data.get("hashtags") or []
+    return data
 
 
 def load_settings(path: str | None = None) -> RenderSettings:

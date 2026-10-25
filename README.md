@@ -107,15 +107,36 @@ Settings such as the output folder, x264 quality and default worker count live i
   bricks regrowing, walls cracking, boss rage mode, an underdog boost.
 - **Polish**: ball trails, screen shake, a pop-in end card with a call to action, and a
   crossfade back into the first frame so the reel loops.
+- **Music**: a copyright-free backing track generated from the seed in a style that suits the
+  format (upbeat, chill, tense, festive, chiptune), mixed under the effects. Every reel is
+  normalised to -14 LUFS. `--no-music` leaves it out.
+- **Phone safe zones**: titles, scores and the main action stay clear of the areas Shorts and
+  Reels cover with their own buttons and captions.
 
 Twists by format: classic `multiball`, `regrow`; escape `earthquake`, `split`; boss `rage`,
 `storm`; wars `underdog`.
+
+## Titles, descriptions and the ledger
+
+After rendering, every reel gets a title, description and tags built from what actually happened
+in it ("Broke out of the SPIRAL in 22.4s | Brick Escape #14"), written next to the video:
+
+- `reel_<format>_<seed>.txt`: title, description and tags, ready to copy and paste
+- `reel_<format>_<seed>.json`: the same, plus the outcome, for tools
+
+Each reel is also recorded in a ledger (`out/ledger.sqlite`), which numbers each series and
+guarantees no title is ever reused. `reel ledger` lists the latest entries; `--no-ledger` skips
+all of this.
+
+`channel.made_for_kids` in the config deliberately has no default: it is a legal declaration
+only you can make, and it must be set before anything is uploaded.
 
 ## Reviewing output
 
 ```bash
 reel contact-sheet out/reel_escape_42.mp4                 # 10 frames in a 5-column grid
 reel contact-sheet out/*.mp4 -n 6 -o review.png           # one labelled row per video
+reel contact-sheet out/*.mp4 -n 5 --safe-zones           # tint the areas phone UI covers
 ```
 
 ## Project layout

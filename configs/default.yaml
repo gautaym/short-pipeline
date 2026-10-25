@@ -11,3 +11,12 @@ render:
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k
+  # ledger: out/ledger.sqlite   # record of every reel; defaults to <output_dir>/ledger.sqlite
+
+channel:
+  name: ""
+  # Must be set to true or false before anything is uploaded. There is deliberately no default:
+  # it is a legal declaration (YouTube's COPPA setting) that only you can make.
+  made_for_kids:
+  tags: [simulation, satisfying]
+  hashtags: []

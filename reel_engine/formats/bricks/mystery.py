@@ -35,6 +35,21 @@ class MysteryGame(ClassicGame):
     cta = "Did you guess it?"
     music = "chill"
 
+    series = "Guess the Picture"
+    tags = ("guess the picture", "puzzle", "brick breaker", "quiz", "can you guess")
+    hashtags = ("guessthepicture", "puzzle", "quiz")
+
+    @classmethod
+    def titles(cls, o):
+        p = o["revealed_pct"]
+        return ["Guess the picture before it's revealed", "Can you guess it before 50%?",
+                "What's hiding behind the bricks?", f"Only {p}% revealed. Did you get it?",
+                "Guess it before the last brick breaks", "Comment your guess before the reveal"]
+
+    @classmethod
+    def describe(cls, o):
+        return "The answer is revealed at the end. No peeking: comment your guess first!"
+
     def setup(self) -> None:
         path = getattr(self.opts, "picture", None)
         if path:

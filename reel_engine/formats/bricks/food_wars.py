@@ -30,6 +30,22 @@ class FoodWars(WarsGame):
                                          {"choices": list(CATEGORIES), "default": None}),)
     cta = "Comment your favourite!"
 
+    series = "Food Wars"
+    tags = ("food wars", "indian food", "biryani", "street food", "simulation", "which food wins")
+    hashtags = ("foodwars", "indianfood", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        w, share = o["winner"].title(), o["shares"][o["winner"]]
+        vs = " vs ".join(n.title() for n in o["teams"])
+        return [f"{vs}: {w} wins!", f"{w} takes {share}% of the plate", f"Is {w} the best? It just won",
+                f"{vs} - who took the plate?", f"{w} wins the food war"]
+
+    @classmethod
+    def describe(cls, o):
+        parts = ", ".join(f"{n.title()} {p}%" for n, p in o["shares"].items())
+        return f"{o['winner'].title()} won the food war. Final shares: {parts}."
+
     def setup(self) -> None:
         self.category = getattr(self.opts, "category", None) or self.rng.choice(sorted(CATEGORIES))
         super().setup()

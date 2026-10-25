@@ -30,6 +30,22 @@ class WarsGame(BrickGame):
     CELL = 40
     POWER_SHARE = 0.025
 
+    series = "Colour Wars"
+    tags = ("colour wars", "color battle", "satisfying", "simulation", "which colour wins")
+    hashtags = ("colourwars", "satisfying", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        w, share = o["winner"], o["shares"][o["winner"]]
+        vs = " vs ".join(o["teams"])
+        return [f"{w} takes {share}% of the board", f"{vs}: {w} wins", f"Did you pick {w}?",
+                f"{w} wins the {len(o['teams'])}-way war", f"{vs}: who took the board?"]
+
+    @classmethod
+    def describe(cls, o):
+        parts = ", ".join(f"{n} {p}%" for n, p in o["shares"].items())
+        return f"{o['winner']} won the board. Final shares: {parts}."
+
     def setup(self) -> None:
         self.n = getattr(self.opts, "teams", None) or self.rng.choice([2, 2, 3, 4])
         self.grid(self.CELL, 3, (SAFE_BOTTOM - ARENA_T) // self.CELL, ARENA_T)

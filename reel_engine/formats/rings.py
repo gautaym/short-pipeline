@@ -62,6 +62,25 @@ class RingEscape(Format):
     music = "chill"
     music_key = 55                             # G, to match the bounce notes
 
+    series = "Ring Escape"
+    tags = ("ring escape", "satisfying", "bouncing balls", "simulation", "oddly satisfying")
+    hashtags = ("satisfying", "physics", "simulation")
+
+    @classmethod
+    def titles(cls, o):
+        g, b, t = o["goal"], o["balls"], o["play_time"]
+        if o["result"] == "goal":
+            return [f"1 ball became {g} in {t}s", f"Every escape = 2 more balls ({g} reached)",
+                    f"{g} balls in {t} seconds", f"Can 1 ball turn into {g}?"]
+        return [f"Stopped at {b} of {g} balls", f"So close: {b}/{g} balls", f"The rings held: {b} of {g}",
+                f"Every escape = 2 more balls. Not enough?"]
+
+    @classmethod
+    def describe(cls, o):
+        if o["result"] == "goal":
+            return f"Every escape spawned two more balls: {o['goal']} reached in {o['play_time']} seconds."
+        return f"The count stopped at {o['balls']} of {o['goal']} balls."
+
     def setup(self) -> None:
         rng = self.rng
         n = getattr(self.opts, "rings", None) or rng.choice([1, 2, 2])

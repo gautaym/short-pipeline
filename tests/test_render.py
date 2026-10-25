@@ -13,7 +13,7 @@ from tests.conftest import needs_ffmpeg
 @pytest.mark.parametrize("mode", formats.names())
 def test_each_format_renders_a_3_second_reel(tmp_path, mode):
     out = tmp_path / f"{mode}.mp4"
-    assert main(["render", "--mode", mode, "--seed", "1", "--max-play", "3", "--out", str(out)]) == 0
+    assert main(["render", "--mode", mode, "--seed", "1", "--max-play", "3", "--out", str(out), "--no-ledger"]) == 0
     info = probe(str(out))
     assert (info["width"], info["height"]) == (1080, 1920)
     assert info["duration"] > 3
@@ -33,7 +33,7 @@ def test_parallel_batch_with_even_mix_renders_every_format(tmp_path):
 @needs_ffmpeg
 def test_contact_sheet(tmp_path, pg):
     video = tmp_path / "v.mp4"
-    main(["render", "--mode", "wars", "--seed", "2", "--max-play", "1", "--out", str(video)])
+    main(["render", "--mode", "wars", "--seed", "2", "--max-play", "1", "--out", str(video), "--no-ledger"])
     sheet = tmp_path / "sheet.png"
     assert main(["contact-sheet", str(video), "-n", "4", "--cols", "2", "-o", str(sheet)]) == 0
     img = pg.image.load(str(sheet))
