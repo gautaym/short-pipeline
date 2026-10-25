@@ -77,6 +77,11 @@ class Ledger:
         self.db.commit()
         return cur.lastrowid
 
+    def move(self, old: str, new: str) -> None:
+        """Point entries for a video at its new location."""
+        self.db.execute("UPDATE videos SET path = ? WHERE path = ?", (new, old))
+        self.db.commit()
+
     def recent(self, n: int = 20) -> list[tuple]:
         return self.db.execute("SELECT id, created_at, format, series_no, title, path, uploaded_at FROM videos"
                                " ORDER BY id DESC LIMIT ?", (n,)).fetchall()

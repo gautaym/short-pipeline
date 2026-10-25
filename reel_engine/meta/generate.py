@@ -63,18 +63,19 @@ def build(summary: dict[str, Any], ledger: Ledger, channel_tags: list[str], chan
 def record(summary: dict[str, Any], ledger: Ledger, channel: dict[str, Any]) -> Meta:
     """Generate metadata for a rendered reel, add it to the ledger and write sidecar files.
 
-    Next to reel_x.mp4 this writes reel_x.txt (ready to copy and paste) and reel_x.json.
+    In the reel's folder this writes upload.txt (ready to copy and paste) and meta.json.
     """
     meta = build(summary, ledger, channel.get("tags", []), channel.get("hashtags", []))
     ledger.add(Entry(summary["mode"], summary["seed"], meta.series_no, summary["out"], summary["duration"],
                      summary["title"], meta.title, meta.description, meta.tags, summary["outcome"],
                      summary.get("score", 0.0)))
-    stem = os.path.splitext(summary["out"])[0]
+    from ..core.render import sidecars
+    paths = sidecars(summary["out"])
     kids = channel.get("made_for_kids")
-    with open(stem + ".txt", "w", encoding="utf-8") as f:
+    with open(paths["upload"], "w", encoding="utf-8") as f:
         f.write(f"TITLE\n{meta.title}\n\nDESCRIPTION\n{meta.description}\n\nTAGS\n{', '.join(meta.tags)}\n\n"
                 f"MADE FOR KIDS\n{'not set in configs/default.yaml (channel.made_for_kids)' if kids is None else kids}\n")
-    with open(stem + ".json", "w", encoding="utf-8") as f:
+    with open(paths["meta"], "w", encoding="utf-8") as f:
         json.dump({"title": meta.title, "description": meta.description, "tags": meta.tags,
                    "made_for_kids": kids, "format": summary["mode"], "seed": summary["seed"],
                    "series_no": meta.series_no, "outcome": summary["outcome"]}, f, indent=2)

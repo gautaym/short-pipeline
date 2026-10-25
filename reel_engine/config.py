@@ -47,10 +47,16 @@ def load_settings(path: str | None = None) -> RenderSettings:
     if not cfg.exists():
         if path:
             raise SystemExit(f"config file not found: {cfg}")
-        return RenderSettings()
+        return RenderSettings(output_dir=str(REPO_ROOT / "out"))
     data = (yaml.safe_load(cfg.read_text(encoding="utf-8")) or {}).get("render", {}) or {}
     known = {f.name for f in fields(RenderSettings)}
     unknown = set(data) - known
     if unknown:
         raise SystemExit(f"{cfg}: unknown render settings: {', '.join(sorted(unknown))}")
-    return RenderSettings(**data)
+    settings = RenderSettings(**data)
+    # relative paths mean "inside the project", wherever reel is run from
+    if not Path(settings.output_dir).is_absolute():
+        settings.output_dir = str(REPO_ROOT / settings.output_dir)
+    if settings.ledger and not Path(settings.ledger).is_absolute():
+        settings.ledger = str(REPO_ROOT / settings.ledger)
+    return settings

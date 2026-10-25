@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -56,6 +56,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     r.add_argument("--no-ledger", action="store_true", help="skip titles/descriptions and the ledger")
 
+    org = sub.add_parser("organise", help="move older flat out/reel_*.mp4 files into one folder per reel")
+    org.add_argument("--config", default=None)
+
     lg = sub.add_parser("ledger", help="list recently rendered reels and their titles")
     lg.add_argument("-n", "--last", type=int, default=20)
     lg.add_argument("--config", default=None)
@@ -95,6 +98,49 @@ def cmd_render(opts: argparse.Namespace) -> int:
             ledger.close()
         if channel.get("made_for_kids") is None:
             print("note: channel.made_for_kids is not set in the config; it must be before any upload.")
+    for res in results:
+        write_preview(res["out"])
+        print(f"  folder: {os.path.dirname(os.path.abspath(res['out']))}")
+    return 0
+
+
+def write_preview(video: str) -> None:
+    """A 6-frame strip next to the video, to recognise the reel at a glance."""
+    from .core.render import sidecars
+    from .tools.contact_sheet import contact_sheet
+    contact_sheet([video], sidecars(video)["preview"], n=6, cols=6, width=160)
+
+
+def cmd_organise(opts: argparse.Namespace) -> int:
+    """Move flat reel_<slug>_<seed>.mp4 files (and their .txt/.json) into per-reel folders."""
+    import shutil
+    from datetime import datetime
+    from .core.render import reel_path, sidecars
+    from .meta.ledger import Ledger
+    settings = load_settings(opts.config)
+    root = settings.output_dir
+    ledger = Ledger(settings.ledger_path())
+    moved = 0
+    for name in sorted(os.listdir(root)):
+        if not (name.startswith("reel_") and name.endswith(".mp4")):
+            continue
+        old = os.path.join(root, name)
+        stem = name[len("reel_"):-len(".mp4")]
+        slug, _, seed = stem.rpartition("_")
+        day = datetime.fromtimestamp(os.path.getmtime(old)).date().isoformat()
+        new = reel_path(root, slug, int(seed), day)
+        os.makedirs(os.path.dirname(new), exist_ok=True)
+        shutil.move(old, new)
+        side = sidecars(new)
+        for ext, key in ((".txt", "upload"), (".json", "meta")):
+            if os.path.exists(old[:-4] + ext):
+                shutil.move(old[:-4] + ext, side[key])
+        ledger.move(old, new)
+        write_preview(new)
+        moved += 1
+        print(f"{name} -> {os.path.dirname(new)}")
+    ledger.close()
+    print(f"moved {moved} reels")
     return 0
 
 
@@ -124,4 +170,6 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_contact_sheet(opts)
     if opts.command == "ledger":
         return cmd_ledger(opts)
+    if opts.command == "organise":
+        return cmd_organise(opts)
     return cmd_render(opts)

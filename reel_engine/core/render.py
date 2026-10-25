@@ -7,6 +7,7 @@ reels whether it runs sequentially or across worker processes.
 """
 import os
 import random
+from datetime import date
 from argparse import Namespace
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
@@ -27,6 +28,23 @@ class Job:
     out: str | None      # None: name it after the seed that scouting picks
     opts: Namespace
     scout: int = 1
+
+
+def reel_path(output_dir: str, slug: str, seed: int, day: str | None = None) -> str:
+    """Each reel gets its own folder, grouped by day: out/2026-10-25/food_wars_700004/food_wars_700004.mp4"""
+    name = f"{slug}_{seed}"
+    return os.path.join(output_dir, day or date.today().isoformat(), name, f"{name}.mp4")
+
+
+def sidecars(video: str) -> dict[str, str]:
+    """Where a reel's companion files go: plain names inside its own folder, else next to the video."""
+    folder, base = os.path.split(video)
+    stem = os.path.splitext(base)[0]
+    if os.path.basename(folder) == stem:
+        return {k: os.path.join(folder, v) for k, v in
+                (("upload", "upload.txt"), ("meta", "meta.json"), ("preview", "preview.png"))}
+    root = os.path.join(folder, stem)
+    return {"upload": root + ".txt", "meta": root + ".json", "preview": root + ".preview.png"}
 
 
 def init_pygame(preview: bool = False):
@@ -98,7 +116,7 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     """Render one reel and return a summary of it."""
     pg = init_pygame()
     game, trace = prepare(pg, job)
-    out = job.out or os.path.join(settings.output_dir, f"reel_{game.slug()}_{game.seed}.mp4")
+    out = job.out or reel_path(settings.output_dir, game.slug(), game.seed)
     screen = pg.Surface((W, H))
     print(f"[{job.mode} {game.seed}] title='{game.title}'", flush=True)
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)

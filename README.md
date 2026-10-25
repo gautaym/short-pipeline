@@ -68,7 +68,7 @@ versions. Do not install `pygame` alongside it.
 ## Rendering
 
 ```bash
-reel render --mode escape --seed 42             # one reel -> out/reel_escape_42.mp4
+reel render --mode escape --seed 42             # one reel -> out/<date>/escape_42000/escape_42000.mp4
 reel render --mode classic --shape text --text 2026
 reel render --mode wars --teams 4 --max-play 20
 reel render --mode boss --boss-hp 999 --title "Can it break 999?"
@@ -161,13 +161,30 @@ headless; scouting only bakes the physics (a few seconds per seed) and the chose
 once into `out/blender/`. On an RTX 3060 a 20-second reel takes about 5–7 minutes (a fluid bake is
 about 40 s per seed, so water3d scouts at most 3 seeds), so 3D formats are kept out of `--mode random`.
 
+## Where the files go
+
+Every reel gets its own folder, grouped by day:
+
+```
+out/
+  2026-10-25/
+    food_wars_700004/
+      food_wars_700004.mp4   the video
+      upload.txt             title, description, tags: copy and paste when uploading
+      meta.json              the same plus the outcome, for tools
+      preview.png            a 6-frame strip to recognise the reel at a glance
+  ledger.sqlite              every reel ever rendered
+  blender/                   Blender caches and frames for the 3D formats
+```
+
+Relative paths in the config are relative to the project folder, so it does not matter where
+`reel` is run from. `reel organise` moves older flat `out/reel_*.mp4` files into this layout.
+
 ## Titles, descriptions and the ledger
 
 After rendering, every reel gets a title, description and tags built from what actually happened
-in it ("Broke out of the SPIRAL in 22.4s | Brick Escape #14"), written next to the video:
-
-- `reel_<format>_<seed>.txt`: title, description and tags, ready to copy and paste
-- `reel_<format>_<seed>.json`: the same, plus the outcome, for tools
+in it ("Broke out of the SPIRAL in 22.4s | Brick Escape #14"), written into the reel's folder as
+`upload.txt` (ready to copy and paste) and `meta.json`.
 
 Each reel is also recorded in a ledger (`out/ledger.sqlite`), which numbers each series and
 guarantees no title is ever reused. `reel ledger` lists the latest entries; `--no-ledger` skips
