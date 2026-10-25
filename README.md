@@ -21,6 +21,7 @@ Each video format is a plug-in:
 | `same_point` | balls fired from one point bounce once off a shape: do they all meet? (ellipse foci) | "It works with 2 balls. Will it work with 16?" |
 | `tower3d` | 3D: a wrecking ball vs a tower of blocks, rendered in Blender | "Will the tower survive the wrecking ball?" |
 | `water3d` | 3D: water pours over planks into three glasses (Blender fluid) | "Which glass fills first?" |
+| `fire3d` | 3D: a campfire hit by a gusting storm (Blender fire and smoke) | "Will the fire survive the storm?" |
 | `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
@@ -150,8 +151,10 @@ real Newtonian gravity (Kepler's laws emerge on their own); black-hole visuals a
 
 ## 3D reels with Blender
 
-`reel render --mode tower3d` (rigid-body demolition) and `--mode water3d` (a liquid race into three
-glasses, Mantaflow) render 3D scenes in Blender (Eevee, on the GPU)
+`reel render --mode tower3d` (rigid-body demolition), `--mode water3d` (a liquid race into three
+glasses) and `--mode fire3d` (a campfire in a storm) render 3D scenes in Blender (Eevee, on the GPU).
+Fire is rendered from the baked OpenVDB cache as a Volume object, because the fluid domain itself
+renders empty in this Blender version
 and adds the usual hook card, title, voice, music and end card on top. Blender is found through
 `$BLENDER`, `PATH` or the Microsoft Store install. Scene scripts live in `blender/` and run
 headless; scouting only bakes the physics (a few seconds per seed) and the chosen seed is rendered
