@@ -18,10 +18,12 @@ Each video format is a plug-in:
 | `algo_race` | BFS, DFS, A* or greedy search race through the same maze | "Same maze. 3 brains. Which escapes first?" |
 | `diwali` | one spark, a field of crackers, a chain reaction | "1 spark. 206 crackers." |
 | `platformer` | a retro pixel-art runner on a freshly generated level | "Level 17. 3 lives. Go." |
+| `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
 `--boss-hp`, `--teams`, `--picture`/`--answer` (mystery), `--rings`/`--goal` (ring_escape),
-`--category` (food_wars), `--algos` (algo_race), `--duds` (diwali), `--lives` (platformer).
+`--category` (food_wars), `--algos` (algo_race), `--duds` (diwali), `--lives` (platformer),
+`--scene` (physics).
 
 Mystery pictures: eight original pictures are built in (drawn in code). To add your own, put
 images in `assets/pictures/`; the file name becomes the answer (`taj_mahal.jpg` → "TAJ MAHAL").
@@ -112,13 +114,36 @@ Settings such as the output folder, x264 quality and default worker count live i
   normalised to -14 LUFS. `--no-music` leaves it out.
 - **Voice**: the hook is spoken at the start and the result at the end, by Kokoro (an open
   text-to-speech model, Apache 2.0) running offline. Put `kokoro-v1.0.onnx` and `voices-v1.0.bin`
-  from the kokoro-onnx releases in `models/` (git-ignored); without them reels render silently
-  spoken. Pick the voice with `voice_name` in the config; `--no-voice` leaves it out.
+  from the kokoro-onnx releases in `models/` (git-ignored); without them reels simply have no
+  voice. Pick the voice with `voice_name` in the config; `--no-voice` leaves it out.
 - **Phone safe zones**: titles, scores and the main action stay clear of the areas Shorts and
   Reels cover with their own buttons and captions.
 
 Twists by format: classic `multiball`, `regrow`; escape `earthquake`, `split`; boss `rage`,
 `storm`; wars `underdog`.
+
+## Physics lab
+
+`reel render --mode physics --scene black_hole` plays a physics scene described in a YAML file
+in `scenes/` (or any path). Starter scenes: `kepler` (equal areas in equal times), `three_body`,
+`black_hole` (a black hole passing through a solar system, with light bending) and `projectiles`
+(which launch angle goes furthest with air drag).
+
+A scene lists bodies (mass, radius, position, velocity, colour, glow, trail, `kind: black_hole`),
+the world (gravity constant `G`, uniform gravity, air drag, ground, merging, time scale), the
+camera (`view`: fixed, or `follow: true`), on-screen readouts and an equation line, and outcome
+rules checked in order, e.g.
+
+```yaml
+outcomes:
+  - {when: "swallowed(Earth)", result: swallowed, head: "EARTH WAS SWALLOWED!", sub: "after {t:.1f} seconds"}
+  - {when: "time", result: survived, head: "EARTH SURVIVED!"}
+```
+
+Any number can be a seeded range (`"1.6..2.2"`) or a pick (`{choice: [a, b]}`), so every seed is
+a new run and scouting keeps the most dramatic. Conditions: `time`, `swallowed(X|any)`,
+`merged(X|any)`, `landed(X|all)`, `ejected(X|any, R)`, `escaped(X, R, FROM|origin)`. Gravity is
+real Newtonian gravity (Kepler's laws emerge on their own); black-hole visuals are artistic.
 
 ## Titles, descriptions and the ledger
 

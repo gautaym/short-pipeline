@@ -26,7 +26,8 @@ def test_parallel_batch_with_even_mix_renders_every_format(tmp_path):
     n = len(formats.random_pool())
     assert main(["--mode", "random", "--mix", "even", "--batch", str(n), "--seed", "40",
                  "--max-play", "1", "--workers", "2", "--config", str(cfg), "--no-voice"]) == 0
-    made = sorted(re.fullmatch(r"reel_(.+)_\d+\.mp4", p.name).group(1) for p in tmp_path.glob("reel_*.mp4"))
+    tags = [re.fullmatch(r"reel_(.+)_\d+\.mp4", p.name).group(1) for p in tmp_path.glob("reel_*.mp4")]
+    made = sorted(max((n for n in formats.random_pool() if t == n or t.startswith(n + "_")), key=len) for t in tags)
     assert made == sorted(formats.random_pool())
 
 

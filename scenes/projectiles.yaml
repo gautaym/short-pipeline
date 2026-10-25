@@ -1,0 +1,27 @@
+# Which launch angle goes furthest? 45 degrees in a vacuum, but air drag changes the answer.
+name: projectiles
+hooks:
+  - "Which angle goes furthest?"
+  - "Pick an angle before they land!"
+  - "45 degrees always wins... right?"
+music: upbeat
+duration: 25
+background: sky
+world: {uniform: [0, -9.8], drag: "0.0..0.07", ground: 0, substeps: 4, time_scale: 0.3}
+view: {follow: true, min_width: 34, max_width: 110}
+volley:
+  from: [0, 0.6]
+  speed: 31
+  radius: 0.7
+  trail: 900
+  angles: {pick: 5, from: [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70], include: [45]}
+show:
+  equation: "Range = v^2 sin(2a) / g  (no air)"
+  readouts:
+    - {text: "AIR DRAG {drag:.3f}"}
+    - {text: ""}
+    - {label: time, value: "time", digits: 1, unit: "s"}
+outcomes:
+  - {when: "landed(all)", result: landed, rank: x, head: "{winner} GOES FURTHEST!", sub: "{value:.1f} m", linger: 1.5}
+  - {when: "time", result: time, head: "STILL FLYING", sub: ""}
+drama: {prefer: [landed], target: 0.8, close: 3.0}

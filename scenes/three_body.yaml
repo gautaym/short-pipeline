@@ -1,0 +1,23 @@
+# Three equal suns: the three-body problem has no neat solution, so one is usually thrown out.
+name: three_body
+hooks:
+  - "Three suns. Which one gets thrown out?"
+  - "The three-body problem in 30 seconds"
+  - "Pick a sun before it starts!"
+music: tense
+duration: 35
+world: {G: 2000000, softening: 10, substeps: 12}
+view: {follow: true, min_width: 700, max_width: 2600}
+bodies:
+  - {name: RED, mass: 1, radius: 16, pos: ["-8..8", "142..158"], vel: ["-92..-80", "-8..8"], colour: red, glow: 2, trail: 400, label: true}
+  - {name: BLUE, mass: 1, radius: 16, pos: ["-138..-122", "-83..-67"], vel: ["35..48", "-80..-68"], colour: blue, glow: 2, trail: 400, label: true}
+  - {name: GOLD, mass: 1, radius: 16, pos: ["122..138", "-83..-67"], vel: ["35..48", "68..80"], colour: yellow, glow: 2, trail: 400, label: true}
+show:
+  equation: "F = G m1 m2 / r^2"
+  readouts:
+    - {label: time, value: "time", digits: 1, unit: "s"}
+outcomes:
+  - {when: "merged(any)", result: collided, head: "{name} COLLIDED!", sub: "two suns became one", linger: 2}
+  - {when: "ejected(any, 900)", result: ejected, head: "{name} WAS THROWN OUT!", sub: "after {t:.1f} seconds", linger: 1.5}
+  - {when: "time", result: survived, head: "ALL THREE SURVIVED", sub: "for now..."}
+drama: {prefer: [ejected, collided], target: 0.7}

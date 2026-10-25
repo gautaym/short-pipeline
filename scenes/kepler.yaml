@@ -1,0 +1,23 @@
+# Kepler's second law: a planet sweeps out equal areas in equal times.
+name: kepler
+hooks:
+  - "Why do planets speed up near the Sun?"
+  - "Same time, same area. Watch."
+  - "Kepler's second law in 30 seconds"
+music: chill
+duration: 30
+world: {G: 3000000, softening: 2, substeps: 8}
+view: {centre: [-60, 0], width: 900}
+bodies:
+  - {name: Sun, mass: 1, radius: 30, pos: [0, 0], fixed: true, colour: yellow, glow: 2.5}
+  - {name: Planet, mass: 0.000001, radius: 10, pos: [330, 0], vel: [0, "60..74"], colour: cyan, glow: 1, trail: 2000, label: true}
+show:
+  equation: "Equal areas in equal times"
+  readouts:
+    - {label: speed, value: "speed(Planet)"}
+    - {label: distance, value: "distance(Planet, Sun)"}
+    - {label: time, value: "time", digits: 1, unit: "s"}
+  sweep: {body: Planet, around: Sun, every: 2.5}
+outcomes:
+  - {when: "time", result: done, head: "EQUAL AREAS!", sub: "fast when close, slow when far"}
+drama: {prefer: [done], target: 1.0}

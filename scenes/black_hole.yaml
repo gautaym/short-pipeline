@@ -1,0 +1,32 @@
+# A black hole passes through a solar system. Planets get swallowed, flung away, or survive.
+name: black_hole
+hooks:
+  - "A black hole enters the solar system. Will Earth survive?"
+  - "Will Earth survive the black hole?"
+  - "What happens when a black hole passes by?"
+music: tense
+duration: 30
+world: {G: 3000000, softening: 4, substeps: 12}
+view: {centre: [0, 0], width: 1100}
+bodies:
+  - {name: Sun, mass: 1, radius: 26, pos: [0, 0], colour: yellow, glow: 2.5}
+  - {name: Black hole, kind: black_hole, mass: "2..4", radius: 20, horizon: 24, pos: [-900, "-420..420"], vel: ["62..85", "-20..20"], trail: 0}
+orbits:
+  central_mass: 1
+  planets:
+    - {name: Mercury, mass: 0.000001, radius: 6, r: 95, phase: "0..360", colour: grey}
+    - {name: Venus, mass: 0.000001, radius: 8, r: 155, phase: "0..360", colour: orange}
+    - {name: Earth, mass: 0.000001, radius: 9, r: 225, phase: "0..360", colour: blue, label: true, glow: 1.2}
+    - {name: Mars, mass: 0.000001, radius: 7, r: 300, phase: "0..360", colour: red}
+    - {name: Jupiter, mass: 0.000001, radius: 14, r: 420, phase: "0..360", colour: brown}
+show:
+  equation: "Event horizon: nothing comes back"
+  readouts:
+    - {label: speed, value: "speed(Earth)"}
+    - {label: gap, value: "distance(Earth, Black hole)"}
+    - {label: time, value: "time", digits: 1, unit: "s"}
+outcomes:
+  - {when: "swallowed(Earth)", result: swallowed, head: "EARTH WAS SWALLOWED!", sub: "after {t:.1f} seconds", linger: 2}
+  - {when: "escaped(Earth, 1100, origin)", result: flung, head: "EARTH WAS FLUNG AWAY!", sub: "into deep space", linger: 1}
+  - {when: "time", result: survived, head: "EARTH SURVIVED!", sub: "this time"}
+drama: {prefer: [swallowed, flung], target: 0.6}

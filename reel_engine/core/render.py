@@ -97,7 +97,7 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     """Render one reel and return a summary of it."""
     pg = init_pygame()
     game, trace = prepare(pg, job)
-    out = job.out or os.path.join(settings.output_dir, f"reel_{job.mode}_{game.seed}.mp4")
+    out = job.out or os.path.join(settings.output_dir, f"reel_{game.slug()}_{game.seed}.mp4")
     screen = pg.Surface((W, H))
     print(f"[{job.mode} {game.seed}] title='{game.title}'", flush=True)
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)

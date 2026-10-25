@@ -26,7 +26,7 @@ from ..core.canvas import (ARENA_L, ARENA_R, ARENA_T, FPS, HUD_BAR_Y, HUD_Y, INT
                            OUTRO_S, TICK, TICK_HZ, TICKS_PER_FRAME, TITLE_Y, H, W)
 from ..core.drama import Plan, Trace
 from ..core.effects import Effects
-from ..core.text import Fonts, outlined, text_block, wrap
+from ..core.text import Fonts, fit_width, outlined, text_block, wrap
 
 TWIST_CHANCE = 0.6          # with --twist auto, the share of reels that get a twist
 TWIST_WINDOW = (0.45, 0.7)  # when it fires, as a fraction of max play time
@@ -189,6 +189,10 @@ class Format(ABC):
     def describe(cls, o: dict[str, Any]) -> str:
         """One sentence saying what happened, for the description."""
         return ""
+
+    def slug(self) -> str:
+        """File-name tag for this reel (formats with sub-variants, like physics scenes, extend it)."""
+        return self.name
 
     def end_sound(self, why: str) -> str:
         return "clear" if why in self.wins else "fail"
@@ -366,7 +370,7 @@ class Format(ABC):
 
     def draw_hud(self, screen) -> None:
         for i, txt in enumerate(self.stats()):
-            s = self.fonts.stat.render(txt, True, (235, 235, 245))
+            s = fit_width(self.pg, self.fonts.stat.render(txt, True, (235, 235, 245)), (ARENA_R - ARENA_L) // 3 - 12)
             x = [ARENA_L + 10, W / 2, ARENA_R - 10][i]
             anchor = ["midleft", "center", "midright"][i]
             screen.blit(s, s.get_rect(**{anchor: (x, HUD_Y)}))
