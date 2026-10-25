@@ -18,6 +18,7 @@ Each video format is a plug-in:
 | `algo_race` | BFS, DFS, A* or greedy search race through the same maze | "Same maze. 3 brains. Which escapes first?" |
 | `diwali` | one spark, a field of crackers, a chain reaction | "1 spark. 206 crackers." |
 | `platformer` | a retro pixel-art runner on a freshly generated level | "Level 17. 3 lives. Go." |
+| `same_point` | balls fired from one point bounce once off a shape: do they all meet? (ellipse foci) | "It works with 2 balls. Will it work with 16?" |
 | `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
