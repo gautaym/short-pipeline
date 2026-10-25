@@ -74,6 +74,8 @@ class Format(ABC):
     in_random_pool: ClassVar[bool] = True
     loop_ending: ClassVar[bool] = True         # crossfade the last frames into the first
     cta: ClassVar[str] = "Follow for more"
+    music: ClassVar[str] = "upbeat"            # background music style (see core/music.py)
+    music_key: ClassVar[int] = 60              # MIDI root; C keeps it in tune with pentatonic effects
     end_veil: ClassVar[bool] = True            # darken the arena behind the end card...
     card_y: ClassVar[float] = H * 0.5          # ...or (False) put the card on a band at card_y
 

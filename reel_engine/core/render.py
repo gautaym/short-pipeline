@@ -16,6 +16,7 @@ from ..config import RenderSettings
 from .audio import mix, write_wav
 from .canvas import FPS, H, W
 from .drama import scout
+from .music import compose
 from .video import FrameWriter, mux
 
 
@@ -112,7 +113,10 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
         print(f"[{job.mode} {game.seed}] WARNING: render diverged from the pre-pass "
               f"({game.done} vs {trace.done}); the format's gameplay depends on drawing", flush=True)
     duration = n / FPS
-    write_wav(mix(game.events, game.sound_bank(), duration), wav)
+    bed = None
+    if settings.music and not getattr(job.opts, "no_music", False):
+        bed = compose(duration, game.seed, game.music, game.music_key)
+    write_wav(mix(game.events, game.sound_bank(), duration, bed, settings.music_level), wav)
     mux(tmp_video, wav, out, settings.audio_bitrate)
     os.remove(tmp_video)
     os.remove(wav)

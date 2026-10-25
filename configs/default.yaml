@@ -6,6 +6,8 @@ render:
   workers: 1             # reels rendered in parallel; --workers overrides
   scout: 8               # seeds simulated per reel, keeping the most dramatic; 1 = use the seed as given
   min_length: 20         # seconds; scouting avoids shorter runs, and any that remain hold their end card
+  music: true            # generated background music under the sound effects
+  music_level: 0.55      # music loudness as a share of the effects' loudness
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k

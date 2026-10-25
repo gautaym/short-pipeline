@@ -34,10 +34,13 @@ class FrameWriter:
             raise RuntimeError("ffmpeg failed while encoding video")
 
 
+LOUDNESS = "loudnorm=I=-14:TP=-1.5:LRA=11"     # YouTube and Instagram play short videos at about -14 LUFS
+
+
 def mux(video: str, wav: str, out: str, audio_bitrate: str = "160k") -> None:
-    """Combine a silent video and a WAV into a web-ready MP4 (AAC audio, faststart)."""
-    subprocess.run([find_tool(), "-y", "-loglevel", "error", "-i", video, "-i", wav,
-                    "-c:v", "copy", "-c:a", "aac", "-b:a", audio_bitrate, "-shortest",
+    """Combine a silent video and a WAV into a web-ready MP4 (AAC audio at -14 LUFS, faststart)."""
+    subprocess.run([find_tool(), "-y", "-loglevel", "error", "-i", video, "-i", wav, "-af", LOUDNESS,
+                    "-ar", "44100", "-c:v", "copy", "-c:a", "aac", "-b:a", audio_bitrate, "-shortest",
                     "-movflags", "+faststart", out], check=True)
 
 

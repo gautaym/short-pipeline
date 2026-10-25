@@ -57,8 +57,8 @@ def common_sounds() -> SoundBank:
     return _common
 
 
-def mix(events: Sequence[Event], bank: SoundBank, duration: float) -> np.ndarray:
-    """Mix the events into int16 PCM of the given duration, soft-clipped with tanh."""
+def place(events: Sequence[Event], bank: SoundBank, duration: float) -> np.ndarray:
+    """The sound effects alone, as a float32 buffer of the given duration."""
     audio = np.zeros(int(SR * duration) + SR * 2, dtype=np.float32)
     for t, kind, idx in events:
         entry = bank[kind]
@@ -66,8 +66,26 @@ def mix(events: Sequence[Event], bank: SoundBank, duration: float) -> np.ndarray
         a = int(t * SR)
         b = min(len(audio), a + len(s))
         audio[a:b] += s[: b - a]
+    return audio[: int(SR * duration)]
+
+
+def rms(x: np.ndarray) -> float:
+    return float(np.sqrt(np.mean(np.square(x, dtype=np.float64)))) if len(x) else 0.0
+
+
+def mix(events: Sequence[Event], bank: SoundBank, duration: float, bed: np.ndarray | None = None,
+        bed_level: float = 0.55) -> np.ndarray:
+    """Effects over an optional music bed, as int16 PCM soft-clipped with tanh.
+
+    The bed is scaled so its loudness is bed_level times the effects' loudness, so music stays
+    audible under busy formats and never swamps quiet ones.
+    """
+    audio = place(events, bank, duration)
+    if bed is not None and rms(bed) > 0:
+        gain = bed_level * max(rms(audio), 0.04) / rms(bed)
+        audio[: len(bed)] += bed[: len(audio)] * gain
     audio = np.tanh(audio * 1.3) * 0.85
-    return (audio[: int(SR * duration)] * 32767).astype(np.int16)
+    return (audio * 32767).astype(np.int16)
 
 
 def write_wav(pcm: np.ndarray, path: str) -> None:

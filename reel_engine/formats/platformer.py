@@ -63,6 +63,7 @@ class Platformer(Format):
     options = (Option("--lives", "platformer: starting lives", {"type": int, "default": None}),)
     wins = ("flag",)
     cta = "Could you have done it?"
+    music = "chiptune"
 
     # ---------------------------------------------------------- level generation
     def setup(self) -> None:

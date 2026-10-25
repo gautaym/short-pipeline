@@ -59,6 +59,8 @@ class RingEscape(Format):
                Option("--goal", "ring_escape: balls needed to win", {"type": int, "default": None}))
     wins = ("goal",)
     cta = "Comment your prediction!"
+    music = "chill"
+    music_key = 55                             # G, to match the bounce notes
 
     def setup(self) -> None:
         rng = self.rng

@@ -173,6 +173,7 @@ class AlgoRace(Format):
                       {"default": None}),)
     wins = ("found",)
     cta = "Which one did you pick?"
+    music = "tense"
 
     def setup(self) -> None:
         rng = self.rng

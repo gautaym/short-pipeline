@@ -41,6 +41,7 @@ class Diwali(Format):
     options = (Option("--duds", "diwali: share of dud crackers, e.g. 0.15", {"type": float, "default": None}),)
     wins = ("full",)
     cta = "Happy Diwali! Follow for more"
+    music = "festive"
 
     def setup(self) -> None:
         rng, nrng = self.rng, self.nrng

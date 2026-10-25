@@ -14,6 +14,8 @@ class RenderSettings:
     workers: int = 1
     scout: int = 1
     min_length: float = 20.0
+    music: bool = True
+    music_level: float = 0.55
     crf: int = 20
     preset: str = "veryfast"
     audio_bitrate: str = "160k"

@@ -33,6 +33,7 @@ class MysteryGame(ClassicGame):
     end_veil = False
     card_y = H - 640
     cta = "Did you guess it?"
+    music = "chill"
 
     def setup(self) -> None:
         path = getattr(self.opts, "picture", None)
