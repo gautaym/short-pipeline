@@ -20,6 +20,7 @@ class RenderSettings:
     voice: bool = True
     voice_name: str = "am_michael"
     voice_speed: float = 1.05
+    voice_level: float = 1.8           # voice loudness relative to the background (music + effects)
 
     def ledger_path(self) -> str:
         import os

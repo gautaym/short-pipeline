@@ -11,6 +11,7 @@ render:
   voice: true            # speak the hook and the result (needs the Kokoro files in models/)
   voice_name: am_michael # US: am_michael, am_adam, af_heart, af_bella...; UK: bm_george, bf_emma...
   voice_speed: 1.05
+  voice_level: 1.8       # how loud the voice is compared with music and effects (raise for louder speech)
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k

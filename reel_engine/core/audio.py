@@ -74,32 +74,38 @@ def rms(x: np.ndarray) -> float:
 
 
 def mix(events: Sequence[Event], bank: SoundBank, duration: float, bed: np.ndarray | None = None,
-        bed_level: float = 0.55, speech: Sequence[tuple[float, np.ndarray]] = ()) -> np.ndarray:
+        bed_level: float = 0.55, speech: Sequence[tuple[float, np.ndarray]] = (),
+        voice_level: float = 1.8, duck_to: float = 0.35) -> np.ndarray:
     """Effects over an optional music bed, plus spoken lines, as int16 PCM soft-clipped with tanh.
 
     The bed is scaled so its loudness is bed_level times the effects' loudness, so music stays
-    audible under busy formats and never swamps quiet ones. While a line is spoken the music dips
-    and the effects are lowered, so the words stay clear.
+    audible under busy formats and never swamps quiet ones. While a line is spoken the music and
+    effects dip to duck_to, and the voice is set to voice_level times the background's loudness.
+    The voice is added after the soft clipping, so it stays clean however loud it is.
     """
     audio = place(events, bank, duration)
     duck = np.ones(len(audio), dtype=np.float32)
     for t, clip in speech:
         a, b = int(t * SR), min(len(audio), int(t * SR) + len(clip) + SR // 5)
-        duck[a:b] = 0.45
+        duck[a:b] = duck_to
     if len(speech):
         k = SR // 20                                   # smooth the dips over 50 ms
         duck = np.convolve(duck, np.ones(k, dtype=np.float32) / k, mode="same")
     level = max(rms(audio), 0.04)
-    audio *= 0.5 + 0.5 * duck
+    audio *= duck
     if bed is not None and rms(bed) > 0:
         n = min(len(bed), len(audio))
         audio[:n] += bed[:n] * (bed_level * level / rms(bed)) * duck[:n]
+    audio = np.tanh(audio * 1.3) * 0.85
+    background = max(rms(audio), 0.02)
     for t, clip in speech:
         a = int(t * SR)
         b = min(len(audio), a + len(clip))
-        if a < b:
-            audio[a:b] += clip[: b - a] * max(1.0, 2.2 * level / 0.6)
-    audio = np.tanh(audio * 1.3) * 0.85
+        if a < b and rms(clip) > 0:
+            audio[a:b] += clip[: b - a] * (voice_level * background / rms(clip))
+    peak = float(np.abs(audio).max()) if len(audio) else 0.0
+    if peak > 0.98:
+        audio *= 0.98 / peak
     return (audio * 32767).astype(np.int16)
 
 

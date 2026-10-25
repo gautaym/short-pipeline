@@ -136,7 +136,7 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     if settings.music and not getattr(job.opts, "no_music", False):
         bed = compose(duration, game.seed, game.music, game.music_key)
     write_wav(mix(game.events, game.sound_bank(), duration, bed, settings.music_level,
-                  spoken_lines(game, settings, job.opts)), wav)
+                  spoken_lines(game, settings, job.opts), settings.voice_level), wav)
     mux(tmp_video, wav, out, settings.audio_bitrate)
     os.remove(tmp_video)
     os.remove(wav)
