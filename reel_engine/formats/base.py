@@ -74,6 +74,8 @@ class Format(ABC):
     in_random_pool: ClassVar[bool] = True
     loop_ending: ClassVar[bool] = True         # crossfade the last frames into the first
     cta: ClassVar[str] = "Follow for more"
+    end_veil: ClassVar[bool] = True            # darken the arena behind the end card...
+    card_y: ClassVar[float] = H * 0.5          # ...or (False) put the card on a band at card_y
 
     def __init__(self, pg, seed: int, opts: Namespace):
         self.pg, self.seed, self.opts = pg, seed, opts
@@ -105,7 +107,7 @@ class Format(ABC):
         self._in_slowmo = False
         self.init_state()
         self.setup()
-        self.title = getattr(opts, "title", None) or self.rng.choice(self.title_hooks())
+        self.title = getattr(opts, "title", None) or self.rng.choice(self._fitting_hooks())
         self.build()
         self._plan_twist()
         self.title_surfs = [self.fonts.title.render(line, True, (255, 255, 255))
@@ -199,6 +201,12 @@ class Format(ABC):
         return s
 
     # ---------------------------------------------------------- shared behaviour
+    def _fitting_hooks(self) -> list[str]:
+        """Hook lines that fit the two-line title area (all of them if none do)."""
+        hooks = self.title_hooks()
+        fit = [h for h in hooks if len(wrap(self.fonts.title, h, W - 80)) <= 2]
+        return fit or hooks
+
     def sound_bank(self) -> SoundBank:
         return {**common_sounds(), **self.sounds()}
 
@@ -368,8 +376,13 @@ class Format(ABC):
         pg = self.pg
         u = t - self.end_t
         k = min(1.0, u / 0.4)
-        self.veil.set_alpha(int(150 * k))
-        screen.blit(self.veil, (0, ARENA_T), (0, 0, W, H - ARENA_T))
+        cy = self.card_y
+        if self.end_veil:
+            self.veil.set_alpha(int(150 * k))
+            screen.blit(self.veil, (0, ARENA_T), (0, 0, W, H - ARENA_T))
+        else:
+            self.veil.set_alpha(int(190 * k))
+            screen.blit(self.veil, (0, cy - 120), (0, 0, W, 360))
         card = self.end_card()
         if self._end_cache is None or self._end_cache[0] != card:
             head = outlined(pg, self.fonts.big, card.head, (255, 255, 255), 6)
@@ -383,13 +396,13 @@ class Format(ABC):
         if pop > 0.01:
             w, h = head.get_size()
             hs = pg.transform.smoothscale(head, (max(1, int(w * pop)), max(1, int(h * pop))))
-            screen.blit(hs, hs.get_rect(center=(W / 2, H * 0.5)))
+            screen.blit(hs, hs.get_rect(center=(W / 2, cy)))
         sub.set_alpha(int(255 * k))
-        screen.blit(sub, sub.get_rect(center=(W / 2, H * 0.5 + 100)))
+        screen.blit(sub, sub.get_rect(center=(W / 2, cy + 100)))
         kc = max(0.0, min(1.0, (u - 0.6) / 0.3))
         if kc > 0:
             cta.set_alpha(int(255 * kc))
-            screen.blit(cta, cta.get_rect(center=(W / 2, H * 0.5 + 190)))
+            screen.blit(cta, cta.get_rect(center=(W / 2, cy + 190)))
 
     def draw_loop(self, screen, t: float) -> None:
         """Crossfade into the first frame so the reel loops seamlessly."""

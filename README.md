@@ -4,14 +4,28 @@ Seeded, auto-playing videos for YouTube Shorts and Instagram Reels, rendered as 
 9:16 MP4s (1080×1920, 30 fps) with generated sound. The same seed and options always produce
 the same video.
 
-Each video format is a plug-in. The engine currently ships the brick-breaker family:
+Each video format is a plug-in:
 
-| Format    | What happens | Hook |
-|-----------|--------------|------|
+| Format | What happens | Hook |
+|--------|--------------|------|
 | `classic` | 1 ball vs a brick shape (heart, star, a word…); power-up bricks spawn more balls | "Can 1 ball clear the HEART?" |
-| `escape`  | the ball starts trapped in a maze of unbreakable grey bricks | "Where will it break out?" |
-| `boss`    | a giant block with a big HP counter, ringed by power-up bricks | "1 ball vs a 999 HP block" |
-| `wars`    | colour territories; each team's ball converts the others' bricks | "Which colour wins?" |
+| `escape` | the ball starts trapped in a maze of unbreakable grey bricks | "Where will it break out?" |
+| `boss` | a big block with an HP counter, ringed by power-up bricks | "Can it break the 200 HP boss?" |
+| `wars` | colour territories; each team's ball converts the others' squares | "Which colour wins?" |
+| `mystery` | a picture hidden under the bricks, revealed as they break, with a hint | "Guess the picture before it's revealed" |
+| `ring_escape` | balls bounce inside spinning rings; every escape spawns 2 more | "Every escape = 2 more balls" |
+| `food_wars` | colour wars with Indian foods as teams (mains, street food, sweets, drinks) | "BIRYANI vs DOSA vs PAV BHAJI" |
+| `algo_race` | BFS, DFS, A* or greedy search race through the same maze | "Same maze. 3 brains. Which escapes first?" |
+| `diwali` | one spark, a field of crackers, a chain reaction | "1 spark. 206 crackers." |
+| `platformer` | a retro pixel-art runner on a freshly generated level | "Level 17. 3 lives. Go." |
+
+Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
+`--boss-hp`, `--teams`, `--picture`/`--answer` (mystery), `--rings`/`--goal` (ring_escape),
+`--category` (food_wars), `--algos` (algo_race), `--duds` (diwali), `--lives` (platformer).
+
+Mystery pictures: eight original pictures are built in (drawn in code). To add your own, put
+images in `assets/pictures/`; the file name becomes the answer (`taj_mahal.jpg` → "TAJ MAHAL").
+Only use images you own or that are in the public domain.
 
 ## Setup
 

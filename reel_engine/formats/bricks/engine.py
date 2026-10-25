@@ -149,10 +149,14 @@ class BrickGame(Format):
             for c in range(self.cols):
                 self._paint(r, c)
 
+    def backdrop(self, r, c, x, y) -> None:
+        """What a cell shows behind (or instead of) its brick: the background by default."""
+        self.field.blit(self.bg, (x, y), (x, y, self.cell, self.cell))
+
     def _paint(self, r, c) -> None:
         pg, cell, g = self.pg, self.cell, self.gap
         x, y = self.bx0 + c * cell, self.by0 + r * cell
-        self.field.blit(self.bg, (x, y), (x, y, cell, cell))
+        self.backdrop(r, c, x, y)
         hp = int(self.hp[r, c])
         if hp == 0 or self.power[r, c]:
             return

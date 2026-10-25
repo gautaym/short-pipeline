@@ -8,6 +8,7 @@ import numpy as np
 
 from ...core.canvas import ARENA_L, ARENA_R, ARENA_T, LOST_Y, W
 from ...core.physics import BALL_R, Ball
+from ...core.text import fit_width
 from .. import EndCard, Option, Twist, register
 from .engine import BrickGame
 
@@ -32,7 +33,7 @@ class WarsGame(BrickGame):
     def setup(self) -> None:
         self.n = getattr(self.opts, "teams", None) or self.rng.choice([2, 2, 3, 4])
         self.grid(self.CELL, 3, (LOST_Y - ARENA_T) // self.CELL, ARENA_T)
-        self.teams = self.rng.sample(TEAM_COLOURS, self.n)
+        self.teams = self.rng.sample(self.team_pool(), self.n)
         rows, cols = self.rows, self.cols
         rr, cc = np.mgrid[0:rows, 0:cols]
         if self.n == 2 and self.rng.random() < 0.5:
@@ -57,6 +58,10 @@ class WarsGame(BrickGame):
                 x, y = self.centre(r, c)
                 self.balls.append(Ball(x, y, self.rng.uniform(-math.pi, math.pi), self.ball_speed, team))
         self.counts = np.bincount(self.owner.ravel(), minlength=self.n)
+
+    def team_pool(self) -> list[tuple[str, tuple[int, int, int]]]:
+        """Candidate (name, colour) teams; a seeded sample of them plays."""
+        return TEAM_COLOURS
 
     def _build_bg(self) -> None:
         self._flat_bg((22, 22, 28))
@@ -163,7 +168,7 @@ class WarsGame(BrickGame):
         font = self.fonts.stat if self.n <= 2 else self.fonts.mid
         for i, (name, col) in enumerate(self.teams):
             pct = round(100 * self.counts[i] / total)
-            s = font.render(f"{name} {pct}%", True, col)
+            s = fit_width(pg, font.render(f"{name} {pct}%", True, col), int(width / self.n) - 12)
             screen.blit(s, s.get_rect(center=(ARENA_L + width * (i + 0.5) / self.n, 250)))
         x = ARENA_L
         for i, (_, col) in enumerate(self.teams):
