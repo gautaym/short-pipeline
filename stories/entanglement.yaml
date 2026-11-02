@@ -1,0 +1,129 @@
+# Quantum entanglement, explained without the usual myths.
+# Review notes, physics: entangled particles share one quantum state; measured along the same axis
+# (e.g. a spin singlet) their results always come out opposite, each result on its own is random.
+# Bell (1964) showed "decided in advance" (local hidden variables) makes testably different
+# predictions; experiments (Clauser, Aspect, Zeilinger: 2022 Nobel Prize in Physics, "for
+# experiments with entangled photons, establishing the violation of Bell inequalities") showed the
+# results are not decided in advance. Because each result is random, entanglement cannot send a
+# message faster than light (no-signalling). Einstein's "spooky action at a distance" is from his
+# 1947 letter to Max Born. The coins are an analogy and the script says so.
+id: entanglement
+topic: science
+title:
+  en: "What is quantum entanglement?"
+  hi: "क्वांटम एंटैंगलमेंट क्या है?"
+series:
+  en: "Science Stories"
+  hi: "विज्ञान की कहानियाँ"
+summary:
+  en: "Two entangled particles share one quantum state: measure one, and you instantly know the other, however far apart they are. Einstein called it spooky, experiments proved it real, and it still cannot send messages faster than light."
+  hi: "दो एंटैंगल्ड कण एक ही क्वांटम अवस्था साझा करते हैं: एक को मापिए, और दूसरे का नतीजा तुरंत पता चल जाता है, चाहे वे कितनी भी दूर हों। आइंस्टीन ने इसे भुतहा कहा, प्रयोगों ने इसे सच साबित किया, और फिर भी इससे प्रकाश से तेज़ संदेश नहीं भेजा जा सकता।"
+music: chill
+cast: {}
+# Paper-cut version, drawn locally by `reel story-art entanglement`.
+art:
+  prop_style: >-
+    A single cut-out made of layered coloured paper, flat paper-craft illustration with clean cut edges,
+    subtle paper texture and soft layered depth, bright colours, studio photo against a plain pure black
+    backdrop, nothing else in the frame, no text, no letters, no numbers.
+  backdrop_style: >-
+    Paper-cut scenery made of layered coloured card, flat paper-craft art with soft depth and gentle
+    shadows between the layers. A close view from inside the scene: the scenery fills the whole picture
+    edge to edge, with no frame, no box, no border and no wall around it. Scenery only: no people,
+    no animals, no text. Vertical composition.
+  backdrop_crop: 0.14
+  cast: {}
+  props:
+    particle: "The cut-out is a small round glowing particle: a sphere of layered cyan and white paper rings with a soft halo, like a tiny star."
+    coin_sun: "The cut-out is a single round gold coin seen straight on, with a simple sun with rays embossed in the middle, no writing."
+    coin_moon: "The cut-out is a single round silver coin seen straight on, with a simple crescent moon embossed in the middle, no writing."
+    ghost: "The cut-out is a friendly cartoon ghost floating, white and pale lavender paper, round dark eyes and a small open mouth, wavy tail at the bottom."
+    medal: "The cut-out is a round gold medal with a laurel wreath around the edge and a plain centre, hanging from a short blue ribbon, no writing."
+    envelope: "The cut-out is a closed paper envelope, cream coloured, with a bold red cross drawn over it."
+    qcomputer: "The cut-out is a quantum computer: a tall golden chandelier of stacked round gold plates getting smaller towards the bottom, joined by many thin coiled copper wires."
+  backdrops:
+    space: "Deep space at night: dark navy sky full of tiny stars, a soft purple and teal nebula drifting across it."
+    void: "An abstract dark blue space with faint glowing grid lines curving into the distance and a few soft floating dots of light."
+    lab: "A dark physics laboratory: a long table with lasers, small mirrors and lenses, thin beams of red and green light, shelves of equipment behind."
+  anchors: {}
+beats:
+  - en: "Two particles. Light years apart. Yet somehow, they behave as one. This is quantum entanglement."
+    hi: "दो कण। प्रकाश-वर्षों की दूरी पर। फिर भी, वे एक की तरह व्यवहार करते हैं। इसे कहते हैं क्वांटम एंटैंगलमेंट।"
+    caption: "TWO PARTICLES, *ONE* STORY."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{link: {a: p1, b: p2}}, {glow: [{actor: p1, colour: [90, 200, 255]}, {actor: p2, colour: [90, 200, 255]}]}]
+      actors:
+        p1: {puppet: particle, x: 230, y: 1120, h: 300, motion: float, enter: left}
+        p2: {puppet: particle, x: 850, y: 880, h: 300, motion: float, enter: right}
+  - en: "When two particles are entangled, they share a single quantum state. Neither one has its own answer yet."
+    hi: "जब दो कण एंटैंगल होते हैं, तो वे एक ही क्वांटम अवस्था साझा करते हैं। अभी तक किसी का भी अपना कोई तय जवाब नहीं होता।"
+    caption: "ONE SHARED *STATE*."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{link: {a: p1, b: p2}}, {glow: [{actor: p1, colour: [90, 200, 255]}, {actor: p2, colour: [90, 200, 255]}]}]
+      actors:
+        p1: {puppet: particle, x: 280, y: 1060, h: 320, motion: float}
+        p2: {puppet: particle, x: 800, y: 1060, h: 320, motion: float}
+  - en: "Think of them like two magic coins, still spinning. Each could land heads or tails."
+    hi: "इन्हें ऐसे समझिए, जैसे दो जादुई सिक्के, जो अभी घूम रहे हैं। हर एक चित या पट, कुछ भी गिर सकता है।"
+    caption: "LIKE TWO SPINNING *COINS*."
+    scene: cosmos
+    stage:
+      backdrop: void
+      fx: [{link: {a: c1, b: c2}}]
+      actors:
+        c1: {puppet: coin_sun, x: 300, y: 1180, h: 380, motion: flip, enter: {from: [280, 1060]}}
+        c2: {puppet: coin_sun, x: 780, y: 1180, h: 380, motion: flip, enter: {from: [800, 1060]}}
+  - en: "Look at one, and it lands at random. In that instant you know the other landed the opposite way, however far apart they are."
+    hi: "एक को देखिए, और वह किसी भी तरफ़ गिरता है। उसी पल आप जान जाते हैं कि दूसरा उल्टी तरफ़ गिरा है, चाहे वह कितनी भी दूर हो।"
+    caption: "LOOK AT ONE, *KNOW* THE OTHER."
+    scene: cosmos
+    stage:
+      backdrop: void
+      fx: [{link: {a: c1, b: c2}}, {glow: [{actor: c1, colour: [255, 210, 120]}, {actor: c2, colour: [200, 220, 255]}]}]
+      actors:
+        c1: {puppet: coin_sun, x: 260, y: 1180, h: 380, motion: breathe}
+        c2: {puppet: coin_moon, x: 820, y: 1180, h: 380, motion: breathe}
+  - en: "Einstein disliked this. He called it spooky action at a distance, and suspected the coins had secretly decided all along."
+    hi: "आइंस्टीन को यह पसंद नहीं था। उन्होंने इसे दूर से होने वाला भुतहा असर कहा, और माना कि सिक्कों ने पहले से ही सब तय कर रखा था।"
+    caption: "EINSTEIN: *SPOOKY*!"
+    scene: cosmos
+    stage:
+      backdrop: void
+      actors:
+        ghost: {puppet: ghost, x: 540, y: 1420, h: 900, motion: float, enter: bottom}
+  - en: "In 1964, John Bell found a way to test it. Experiments showed the results were not decided in advance, and won the 2022 Nobel Prize in Physics."
+    hi: "1964 में, जॉन बेल ने इसे परखने का तरीका खोजा। प्रयोगों ने दिखाया कि नतीजे पहले से तय नहीं थे, और इसे 2022 का भौतिकी नोबेल पुरस्कार मिला।"
+    caption: "PROVED REAL: A *NOBEL* PRIZE."
+    scene: cosmos
+    stage:
+      backdrop: lab
+      fx: [rays, {glow: {actor: medal, colour: [255, 214, 120]}}]
+      actors:
+        medal: {puppet: medal, x: 540, y: 1300, h: 760, motion: breathe, enter: bottom}
+  - en: "But no message travels between them. Each result is random, so entanglement cannot send information faster than light."
+    hi: "लेकिन उनके बीच कोई संदेश नहीं जाता। हर नतीजा बेतरतीब होता है, इसलिए एंटैंगलमेंट से प्रकाश से तेज़ कोई संदेश नहीं भेजा जा सकता।"
+    caption: "NO FASTER-THAN-LIGHT *MESSAGES*."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{link: {a: p1, b: p2}}]
+      actors:
+        p1: {puppet: particle, x: 150, y: 820, h: 240, motion: float, enter: left}
+        p2: {puppet: particle, x: 930, y: 820, h: 240, motion: float, enter: right}
+        letter: {puppet: envelope, x: 540, y: 1260, h: 420, motion: tremble, enter: fade, exit: fade}
+  - en: "Today, entanglement is at the heart of quantum computers and ultra-secure quantum encryption. Spooky, but real."
+    hi: "आज, एंटैंगलमेंट क्वांटम कंप्यूटर और बेहद सुरक्षित क्वांटम एन्क्रिप्शन की नींव है। भुतहा, लेकिन सच।"
+    caption: "SPOOKY, BUT *REAL*."
+    scene: cosmos
+    stage:
+      backdrop: lab
+      fx: [{glow: {actor: qc, colour: [255, 200, 120]}}]
+      actors:
+        qc: {puppet: qcomputer, x: 540, y: 1560, h: 1250, motion: breathe, enter: bottom}
+end:
+  head: "ENTANGLEMENT"
+  sub: "spooky, but real"

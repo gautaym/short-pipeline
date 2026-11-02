@@ -14,12 +14,13 @@ being flipped, when its facing changes); a new one enters (left, right, bottom, 
 {from: [x, y]} to slide out of a point, as a copy splitting off); one that is gone fades away,
 unless it was given `exit: left|right|fade`, in which case it leaves during its own beat. Motions
 are what the puppeteer's hand does: sway, pull, churn, tremble, run, walk_in, drink, breathe,
-float, spin. Everything is a function of time, so any frame can be drawn on its own.
+float, spin, flip (a tossed coin turning over and over). Everything is a function of time, so any frame can be drawn on its own.
 
 Effects are names, or a name with settings: [waves, spray, smoke, smoke_far, smoke_in, rays, shake,
 lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
-{glow: {actor: cell, at: spark, colour: [255, 240, 170]}}] (glow's `at` is an anchor; without it,
-the middle of the puppet).
+{glow: {actor: cell, at: spark, colour: [255, 240, 170]}}, {link: {a: p1, b: p2}}] (glow's `at` is
+an anchor, without it the middle of the puppet, and glow takes a list to light several actors;
+link draws a shimmering thread between two actors).
 
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
@@ -247,6 +248,9 @@ class Theatre:
             rot += 5 * math.sin(t * 0.5 + ph)
         elif m == "spin":
             rot += (t * 25 + ph * 57) % 360
+        elif m == "flip":                                        # edge-on and back, over and over
+            s["sx"] *= math.cos(t * 7 + ph)
+            dy -= 30 * abs(math.sin(t * 3.5 + ph))
         return dx, dy, rot, scale
 
     def anchor(self, s: dict, puppet: str, point: str, t: float, since: float, length: float, name: str):
@@ -307,7 +311,7 @@ class Theatre:
         out = {}
         for item in self.beats[beat].get("fx", []):
             if isinstance(item, dict):
-                out.update({k: dict(v or {}) for k, v in item.items()})
+                out.update({k: (v if isinstance(v, list) else dict(v or {})) for k, v in item.items()})
             else:
                 out[item] = {}
         return out
@@ -359,8 +363,11 @@ class Theatre:
             if at:
                 g = dimmed(pg, self.glow_blue, 0.65 + 0.35 * math.sin(t * 2.4))
                 screen.blit(g, g.get_rect(center=at), special_flags=pg.BLEND_RGB_ADD)
+        if "link" in fx:
+            self.draw_link(screen, fx["link"], states, t, since, length)
         if "glow" in fx:
-            self.draw_glow(screen, fx["glow"], states, t, since, length)
+            for g in fx["glow"] if isinstance(fx["glow"], list) else [fx["glow"]]:
+                self.draw_glow(screen, g, states, t, since, length)
         if "bubbles" in fx:
             self.draw_bubbles(screen, t)
         if "waves" in fx:
@@ -482,3 +489,34 @@ class Theatre:
         self.pg.draw.lines(bolt, (int(255 * fade), int(250 * fade), int(255 * fade)), False, pts, 7)
         bolt.fill((int(70 * fade), int(66 * fade), int(90 * fade)), special_flags=self.pg.BLEND_RGB_ADD)
         screen.blit(bolt, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)
+
+    def draw_link(self, screen, g: dict, states: dict, t: float, since: float, length: float) -> None:
+        """A shimmering thread between two actors, with a pulse of light running along it."""
+        a, b = states.get(g.get("a")), states.get(g.get("b"))
+        if a is None or b is None:
+            return
+        (x1, y1), (x2, y2) = (self.centre(a, g["a"], t, since, length), self.centre(b, g["b"], t, since, length))
+        strength = min(a["alpha"], b["alpha"])
+        dx, dy = x2 - x1, y2 - y1
+        dist = math.hypot(dx, dy) or 1.0
+        nx, ny = -dy / dist, dx / dist
+        colour = g.get("colour", (110, 210, 255))
+        layer = self.pg.Surface((W, H))
+        for strand in range(3):                                   # three threads twisting round each other
+            pts = []
+            for k in range(41):
+                u = k / 40
+                wave = 22 * math.sin(u * 9.4 + t * 3 + strand * 2.1) * math.sin(math.pi * u)
+                pts.append((x1 + dx * u + nx * wave, y1 + dy * u + ny * wave))
+            level = 0.55 * strength
+            self.pg.draw.lines(layer, tuple(int(c * level) for c in colour), False, pts, 5)
+        u = (t * 0.7) % 1.0                                       # the travelling pulse
+        pulse = dimmed(self.pg, self.mote_light(), strength)
+        layer.blit(pulse, pulse.get_rect(center=(x1 + dx * u, y1 + dy * u)), special_flags=self.pg.BLEND_RGB_ADD)
+        layer.blit(pulse, pulse.get_rect(center=(x2 - dx * u, y2 - dy * u)), special_flags=self.pg.BLEND_RGB_ADD)
+        screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)
+
+    def mote_light(self):
+        if not hasattr(self, "_pulse"):
+            self._pulse = light(self.pg, 46, (200, 240, 255), 1.4)
+        return self._pulse
