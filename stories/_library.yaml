@@ -1,0 +1,15 @@
+# Shared characters: drawn once with `reel story-art _library`, approved once, used by any story
+# whose stage names them. Not a story itself (files starting with _ are skipped).
+id: _library
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  cast:
+    sutradhar: >-
+      the sutradhar, the cheerful old storyteller of the puppet show, with warm brown skin, a white beard and
+      moustache, a big red and yellow turban, gold earrings, a white kurta with a red and gold sash and a
+      white dhoti, exactly two arms
+  puppets:
+    sutradhar: "The puppet is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip, side view facing right."

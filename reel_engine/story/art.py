@@ -13,6 +13,10 @@ puppets and backdrops the story needs, with characters named as {shiva}, {deva},
       props: {mandara: "The prop is a tall rocky mountain ..."}    (prop_style; moved like puppets)
       backdrops: {ocean: "A vast white ocean of milk ...", ...}
 
+Characters used across stories (the Sutradhar host, gods drawn once and approved once) live in
+the shared library, stories/_library.yaml, drawn with `reel story-art _library`; a story's stage can
+use any library puppet it does not draw itself.
+
 Files go in stories/art/<id>/ (git-ignored): puppet_<name>.png and backdrop_<name>.png, extra
 takes as puppet_<name>_<take>.png. Copy the best take over puppet_<name>.png to choose it. Puppets
 face right; the reel mirrors them. Each puppet is cut out of its black background into
@@ -28,6 +32,7 @@ import numpy as np
 from ..config import REPO_ROOT
 
 ART = REPO_ROOT / "stories" / "art"
+LIBRARY = "_library"                         # stories/_library.yaml: characters shared by every story
 PYTHON = REPO_ROOT / "aienv" / "Scripts" / "python.exe"
 SCRIPT = REPO_ROOT / "ai" / "imagegen.py"
 MODEL = "Tongyi-MAI/Z-Image-Turbo"           # Apache 2.0; weights held in 8-bit to fit a 12 GB card
@@ -41,11 +46,15 @@ def folder(story_id: str) -> Path:
 
 
 def puppet_file(story_id: str, name: str) -> Path:
-    return folder(story_id) / f"puppet_{name}.png"
+    """The story's own picture of a puppet, or the shared library's if the story has none."""
+    own = folder(story_id) / f"puppet_{name}.png"
+    shared = folder(LIBRARY) / f"puppet_{name}.png"
+    return shared if not own.exists() and shared.exists() else own
 
 
 def cut_file(story_id: str, name: str) -> Path:
-    return folder(story_id) / f"puppet_{name}_cut.png"
+    src = puppet_file(story_id, name)
+    return src.with_name(f"{src.stem}_cut.png")
 
 
 def backdrop_file(story_id: str, name: str) -> Path:

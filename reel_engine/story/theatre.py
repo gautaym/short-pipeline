@@ -22,6 +22,9 @@ lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
 an anchor, without it the middle of the puppet, and glow takes a list to light several actors;
 link draws a shimmering thread between two actors).
 
+A story's `opening` adds actors (the Sutradhar host) to a beat's frame for the cold open:
+draw(..., extras={name: spec}, extras_since=t) slides them on while the rest stays settled.
+
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
 bowl use them.
@@ -85,6 +88,7 @@ class Theatre:
             return None
         sid = sc["id"]
         puppets = {a["puppet"] for b in sc["beats"] for a in b["stage"].get("actors", {}).values()}
+        puppets |= {a["puppet"] for a in (sc.get("opening") or {}).get("actors", {}).values()}
         backdrops = {b["stage"]["backdrop"] for b in sc["beats"]}
         if not all(art.puppet_file(sid, p).exists() for p in puppets):
             return None
@@ -159,6 +163,10 @@ class Theatre:
     # ---------------------------------------------------------- where each puppet is
     def mark(self, beat: int, name: str) -> dict | None:
         spec = self.beats[beat].get("actors", {}).get(name) if 0 <= beat < len(self.beats) else None
+        return self.mark_from(spec)
+
+    @staticmethod
+    def mark_from(spec: dict | None) -> dict | None:
         if spec is None:
             return None
         return {"puppet": spec["puppet"], "x": float(spec.get("x", W / 2)), "y": float(spec.get("y", 1560)),
@@ -167,9 +175,14 @@ class Theatre:
                 "from": spec["enter"].get("from") if isinstance(spec.get("enter"), dict) else None,
                 "exit": spec.get("exit")}
 
-    def actor_state(self, beat: int, name: str, since: float, length: float) -> dict | None:
-        """Where the actor is `since` seconds into the beat: position, size, facing, opacity."""
-        now, before = self.mark(beat, name), self.mark(beat - 1, name)
+    def actor_state(self, beat: int, name: str, since: float, length: float, spec: dict | None = None) -> dict | None:
+        """Where the actor is `since` seconds into the beat: position, size, facing, opacity.
+
+        With `spec`, the actor is one added just for this moment (the cold open's host): it enters fresh."""
+        if spec is not None:
+            now, before = self.mark_from(spec), None
+        else:
+            now, before = self.mark(beat, name), self.mark(beat - 1, name)
         if now is None:                                          # gone: fade out where it was
             if before is None or before["exit"] or since > FADE_S:
                 return None
@@ -248,6 +261,9 @@ class Theatre:
             rot += 5 * math.sin(t * 0.5 + ph)
         elif m == "spin":
             rot += (t * 25 + ph * 57) % 360
+        elif m == "talk":                                        # the storyteller nods along as he speaks
+            dy -= abs(math.sin(t * 6.5 + ph)) * 12
+            rot += 2.5 * math.sin(t * 3.2 + ph)
         elif m == "flip":                                        # edge-on and back, over and over
             s["sx"] *= math.cos(t * 7 + ph)
             dy -= 30 * abs(math.sin(t * 3.5 + ph))
@@ -316,7 +332,8 @@ class Theatre:
                 out[item] = {}
         return out
 
-    def draw(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False) -> None:
+    def draw(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False,
+             extras: dict | None = None, extras_since: float = 0.0) -> None:
         pg = self.pg
         fx = self.fx(beat)
         shake = (0.0, 0.0)
@@ -333,6 +350,8 @@ class Theatre:
         if "smoke" in fx:
             self.draw_smoke(screen, t, base=1380, spread=380, rise=1100, n=26, strength=1.0,
                             grow=ease(since / 2.5) if beat == 0 or "smoke" not in self.fx(beat - 1) else 1.0)
+        if "star_trails" in fx:
+            self.draw_star_trails(screen, fx["star_trails"], t)
         if "vent_smoke" in fx:
             v = fx["vent_smoke"]
             self.draw_smoke(screen, t, base=float(v.get("y", 640)), spread=160, rise=760, n=22, strength=1.0,
@@ -347,6 +366,10 @@ class Theatre:
                 s = self.actor_state(beat, name, since, length)
                 if s is not None:
                     states[name] = s
+        for name, spec in (extras or {}).items():
+            s = self.actor_state(beat, name, extras_since, length, spec)
+            if s is not None:
+                states[name] = s
         for name in sorted(states, key=lambda n: states[n]["h"]):    # bigger puppets nearer the screen
             s = states[name]
             dx, dy, rot, scale = self.motion(s, name, since, length, t)
@@ -520,3 +543,24 @@ class Theatre:
         if not hasattr(self, "_pulse"):
             self._pulse = light(self.pg, 46, (200, 240, 255), 1.4)
         return self._pulse
+
+    def draw_star_trails(self, screen, g: dict, t: float) -> None:
+        """Stars wheeling round the pole, each dragging a fading arc behind it, as in a long exposure."""
+        cx, cy = float(g.get("x", W / 2)), float(g.get("y", H / 3))
+        r = random.Random(f"trails:{self.seed}")
+        layer = self.pg.Surface((W, H))
+        for _ in range(90):
+            radius = r.uniform(70, 1300)
+            a0 = r.uniform(0, 6.283)
+            bright = r.uniform(0.35, 1.0)
+            a = a0 + t * 0.22
+            trail = min(1.1, 0.25 + t * 0.12)                  # trails grow as the reel goes on
+            last = None
+            for k in range(13):
+                ang = a - trail * k / 12
+                pt = (cx + radius * math.cos(ang), cy + radius * math.sin(ang))
+                if last is not None:
+                    level = bright * (1 - k / 13)
+                    self.pg.draw.line(layer, (int(200 * level), int(215 * level), int(255 * level)), last, pt, 3)
+                last = pt
+        screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)

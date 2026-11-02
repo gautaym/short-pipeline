@@ -52,7 +52,7 @@ ART_CAPTION_Y = 1330            # lower third, above what the Shorts buttons cov
 
 
 def story_ids() -> list[str]:
-    return sorted(p.stem for p in STORIES.glob("*.yaml")) if STORIES.is_dir() else []
+    return sorted(p.stem for p in STORIES.glob("*.yaml") if not p.stem.startswith("_")) if STORIES.is_dir() else []
 
 
 def load_story(name: str) -> dict:
@@ -190,12 +190,22 @@ class Story(Format):
 
     def draw_staged(self, screen, t: float) -> None:
         opening = self.play_t < self.starts[0]
+        cold = self.sc.get("opening")
+        if opening and cold:                                     # cold open: the best frame, the question, the host
+            b = int(cold.get("beat", 1)) - 1
+            self.theatre.draw(screen, b, 4.0, self.beat_len(b), t, extras=cold.get("actors", {}),
+                              extras_since=self.play_t)
+            self.draw_hook(screen)
+            self.dip(screen, (self.starts[0] - self.play_t) / 0.3)
+            return
         i = 0 if opening else self.current_beat()
         since = 0.0 if opening else self.play_t - self.starts[i]
         self.theatre.draw(screen, i, since, self.beat_len(i), t, opening)
         if opening:
             self.draw_opening(screen, t)
             return
+        if cold and i == 0:
+            self.dip(screen, since / 0.3)
         cap = self.caption(i)
         if cap is not None:
             end = self.starts[i] + self.beat_len(i)
@@ -204,6 +214,33 @@ class Story(Format):
             screen.blit(self.shade, (0, ART_CAPTION_Y - 260))
             cap.set_alpha(int(255 * a))
             screen.blit(cap, cap.get_rect(center=(W / 2, ART_CAPTION_Y)))
+
+    def dip(self, screen, k: float) -> None:
+        """Black over the frame, fully at k = 0 and gone by k = 1: a quick dip between cold open and story."""
+        if k < 1:
+            veil = self.pg.Surface((W, H))
+            veil.set_alpha(int(255 * (1 - max(0.0, k))))
+            screen.blit(veil, (0, 0))
+
+    def draw_hook(self, screen) -> None:
+        """The question in big type at the top, with the series and part above it."""
+        if not hasattr(self, "hook_card"):
+            from ..core.text import outlined, serif_path, text_block
+            big = self.pg.font.Font(serif_path("Bold"), 104)
+            self.hook_card = text_block(self.pg, big, self.sc["title"]["en"].upper(), (250, 244, 228), W - 120, outline=7)
+            part = self.sc.get("series_part")
+            words = ("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN")
+            part = words[part] if isinstance(part, int) and part < len(words) else part   # the serif's digits are small
+            label = self.sc.get("series", {}).get("en", "") + (f"  ·  PART {part}" if part else "")
+            small = self.pg.font.Font(serif_path("Bold"), 58)
+            self.series_tag = outlined(self.pg, small, label.upper(), ART_HIGHLIGHT, 4) if label else None
+        k = min(1.0, self.play_t / 0.35)
+        self.hook_card.set_alpha(int(255 * k))
+        top = 250
+        if self.series_tag is not None:
+            self.series_tag.set_alpha(int(255 * k))
+            screen.blit(self.series_tag, self.series_tag.get_rect(center=(W / 2, top)))
+        screen.blit(self.hook_card, self.hook_card.get_rect(midtop=(W / 2, top + 50)))
 
     def target(self, name: str, spec: dict) -> dict:
         pose = dict(POSES[spec.get("pose", "stand")])

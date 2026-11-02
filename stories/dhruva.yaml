@@ -1,0 +1,123 @@
+# Sky Stories, part 1: Dhruva and the Pole Star.
+# Review notes. Myth (Bhagavata Purana, Vishnu Purana): Dhruva, five-year-old son of King Uttanapada
+# and Queen Suniti, is denied his father's lap and sent away by his stepmother Queen Suruchi; on
+# Narada's advice he does penance to Vishnu in the forest (Madhuvana), standing motionless; Vishnu
+# appears and grants him an eternal, unmoving place: Dhruvaloka, the Pole Star (Dhruva Tara).
+# Science: Polaris lies within about a degree of the north celestial pole, so it barely moves while
+# the other stars circle it as Earth turns. The script says "almost" because Polaris does trace a
+# tiny circle; it skips precession (Vega in ~12,000 years) to stay under 45 seconds.
+id: dhruva
+topic: mythology
+series_part: 1
+title:
+  en: "Why does one star never move?"
+  hi: "एक तारा कभी क्यों नहीं हिलता?"
+series:
+  en: "Sky Stories"
+  hi: "आकाश की कहानियाँ"
+summary:
+  en: "Little Dhruva's devotion won him a place no one could take: the Pole Star. And science agrees, almost: it sits nearly above Earth's North Pole, so every other star circles it."
+  hi: "नन्हे ध्रुव की भक्ति ने उन्हें ऐसा स्थान दिलाया जिसे कोई छीन नहीं सकता: ध्रुव तारा। और विज्ञान भी, लगभग, यही कहता है: यह धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए बाकी सारे तारे इसके चारों ओर घूमते हैं।"
+music: chill
+cast: {}
+# Opens on beat 5's frame (the star trails) with the question and the Sutradhar, then tells the story.
+opening:
+  beat: 5
+  actors:
+    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather shadow puppet scenery piece, a cut-out prop rather than a character,
+    traditional Andhra Tholu Bommalata style, bright flat colours with dark outlines and a pale cut edge,
+    studio photo against a plain pure black backdrop, nothing else in the frame.
+  backdrop_style: >-
+    An empty landscape painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    dhruva: >-
+      the young prince Dhruva, a small five-year-old boy with warm brown skin, a small gold crown, a yellow
+      dhoti and gold jewellery, exactly two arms
+    suruchi: >-
+      Queen Suruchi, a proud queen with warm golden skin, a green silk saree with a gold border, a tall gold
+      crown and heavy gold jewellery, exactly two arms
+    vishnu: >-
+      Lord Vishnu with blue skin and exactly four arms, the upper hands holding a white conch shell and a
+      golden spinning discus, the lower hands holding a golden mace and a pink lotus, a tall gold crown,
+      a yellow silk dhoti and a garland of flowers
+  puppets:
+    dhruva_sad: "The puppet is {dhruva}, standing with his head bowed, one hand wiping his eyes, crying, side view facing right."
+    dhruva_pray: "The puppet is {dhruva}, standing perfectly still on one leg in deep meditation, palms joined in prayer above his head, eyes closed, side view facing right."
+    queen: "The puppet is {suruchi}, standing tall and pointing away angrily with one arm stretched out, side view facing right."
+    vishnu: "The puppet is {vishnu}, standing and smiling, front view."
+  props:
+    pole_star: "The prop is a single large golden eight-pointed star with long glowing rays and a bright white centre."
+  backdrops:
+    palace: "A royal palace hall with carved pillars, red and gold curtains and a golden throne in the distance."
+    forest: "A dense forest at dusk with tall trees, hanging vines and a stormy sky with rain clouds."
+    night_sky: "A clear night sky full of stars above dark rolling hills, a deep blue and violet sky."
+  anchors: {}
+beats:
+  - en: "Little prince Dhruva wanted to sit on his father's lap. But his stepmother, Queen Suruchi, sent him away."
+    hi: "नन्हे राजकुमार ध्रुव अपने पिता की गोद में बैठना चाहते थे। लेकिन उनकी सौतेली माँ, रानी सुरुचि ने उन्हें दूर भेज दिया।"
+    caption: "DHRUVA WAS *SENT AWAY*."
+    scene: palace
+    stage:
+      backdrop: palace
+      actors:
+        queen: {puppet: queen, x: 770, y: 1600, h: 1100, face: left, motion: sway, enter: right}
+        dhruva: {puppet: dhruva_sad, x: 300, y: 1600, h: 700, face: right, motion: tremble, enter: fade}
+  - en: "Only five years old, he went into the forest and prayed to Lord Vishnu, without moving, through sun, rain and storm."
+    hi: "सिर्फ़ पाँच साल की उम्र में, वह वन में गए और भगवान विष्णु की तपस्या की, बिना हिले, धूप, बारिश और तूफ़ान में।"
+    caption: "HE PRAYED, *UNMOVING*."
+    scene: forest
+    stage:
+      backdrop: forest
+      fx: [lightning]
+      actors:
+        dhruva: {puppet: dhruva_pray, x: 540, y: 1600, h: 900, face: right, motion: breathe}
+  - en: "Moved by his devotion, Vishnu appeared, and blessed him with a place no one could ever take."
+    hi: "उनकी भक्ति से प्रसन्न होकर, विष्णु प्रकट हुए, और उन्हें ऐसा स्थान दिया, जिसे कोई कभी छीन नहीं सकता।"
+    caption: "*VISHNU* APPEARED."
+    scene: forest
+    stage:
+      backdrop: forest
+      fx: [rays, {glow: {actor: vishnu, colour: [255, 220, 150]}}]
+      actors:
+        dhruva: {puppet: dhruva_pray, x: 280, y: 1600, h: 760, face: right, motion: breathe}
+        vishnu: {puppet: vishnu, x: 720, y: 1620, h: 1250, motion: breathe, enter: fade}
+  - en: "Dhruva became the unmoving star of the north. Dhruva Tara, the Pole Star."
+    hi: "ध्रुव बन गए उत्तर दिशा का अटल तारा। ध्रुव तारा।"
+    caption: "THE *POLE STAR*."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{glow: {actor: dhruva, colour: [255, 230, 160]}}]
+      actors:
+        dhruva: {puppet: pole_star, x: 540, y: 820, h: 380, motion: breathe}
+  - en: "And science agrees, almost. The Pole Star sits nearly above Earth's North Pole, so as Earth spins, every other star circles around it."
+    hi: "और विज्ञान भी, लगभग, यही कहता है। ध्रुव तारा धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए धरती के घूमने पर बाकी सारे तारे उसके चारों ओर घूमते हैं।"
+    caption: "*EVERY* STAR CIRCLES IT."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{star_trails: {x: 540, y: 900}}, {glow: {actor: dhruva, colour: [255, 230, 160]}}]
+      actors:
+        dhruva: {puppet: pole_star, x: 540, y: 1020, h: 240, motion: breathe}
+  - en: "So look north tonight, and find the one star that stays. Now you know why it never moves."
+    hi: "तो आज रात उत्तर की ओर देखिए, और वह एक तारा ढूँढिए जो नहीं हिलता। अब आप जानते हैं, क्यों।"
+    caption: "LOOK *NORTH* TONIGHT."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{star_trails: {x: 540, y: 900}}, {glow: {actor: dhruva, colour: [255, 230, 160]}}]
+      actors:
+        dhruva: {puppet: pole_star, x: 540, y: 1020, h: 240, motion: breathe}
+        host: {puppet: sutradhar, x: 840, y: 1980, h: 980, face: left, motion: talk, enter: right}
+end:
+  head: "DHRUVA TARA"
+  sub: "the Pole Star"

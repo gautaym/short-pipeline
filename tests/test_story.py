@@ -41,12 +41,14 @@ def test_stages_use_defined_art(sid):
     from reel_engine.story.art import prompts
     sc = load_story(sid)
     made = prompts(sc)                                   # fails if a prompt names someone not in art.cast
+    shared = {k for k in prompts(load_story("_library")) if k.startswith("puppet_")}
     assert all("{" not in text for text, _ in made.values())
     for i, b in enumerate(sc["beats"]):
         stage = b["stage"]
         assert f"backdrop_{stage['backdrop']}" in made, f"{sid}: beat {i + 1} uses an undefined backdrop"
         for name, actor in stage.get("actors", {}).items():
-            assert f"puppet_{actor['puppet']}" in made, f"{sid}: beat {i + 1}: {name} uses an undefined puppet"
+            key = f"puppet_{actor['puppet']}"
+            assert key in made or key in shared, f"{sid}: beat {i + 1}: {name} uses an undefined puppet"
 
 
 def test_art_prompts_fill_in_the_cast():
