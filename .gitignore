@@ -31,3 +31,4 @@ assets/music/**/*.m4a
 assets/music/**/*.flac
 assets/music/**/*.txt
 !assets/music/README.txt
+ttsenv/
