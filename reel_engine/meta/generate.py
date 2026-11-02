@@ -46,14 +46,16 @@ def build(summary: dict[str, Any], ledger: Ledger, channel_tags: list[str], chan
     o = summary["outcome"]
     n = ledger.next_series_no(fmt.name)
     title = pick_title(fmt, o, n, ledger)
-    lines = [summary["title"], ""]
+    lines = [o.get("title") or summary["title"], ""]
     what = fmt.describe(o)
     if what:
         lines.append(what)
     if o.get("twist"):
         lines.append(f"Plot twist along the way: {TWISTS.get(o['twist'], o['twist'])}.")
-    lines += [fmt.cta, "", f"{fmt.series or fmt.name} #{n}. Every video is simulated from a random seed "
-                           f"(this one: {summary['seed']}), so no two are the same."]
+    lines += [fmt.cta, ""]
+    if fmt.seed_note:
+        lines.append(f"{fmt.series or fmt.name} #{n}. Every video is simulated from a random seed "
+                     f"(this one: {summary['seed']}), so no two are the same.")
     tags_line = " ".join("#" + h for h in ["shorts", *fmt.hashtags, *channel_hashtags])
     lines += ["", tags_line]
     tags = list(dict.fromkeys([*fmt.tags, *channel_tags]))

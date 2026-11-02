@@ -22,6 +22,7 @@ Each video format is a plug-in:
 | `tower3d` | 3D: a wrecking ball vs a tower of blocks, rendered in Blender | "Will the tower survive the wrecking ball?" |
 | `water3d` | 3D: water pours over planks into three glasses (Blender fluid) | "Which glass fills first?" |
 | `fire3d` | 3D: a campfire hit by a gusting storm (Blender fire and smoke) | "Will the fire survive the storm?" |
+| `story` | a narrated puppet story from `stories/`, in Hindi or English | "Why is Shiva's throat blue?" |
 | `physics` | any physics scene file: orbits, three suns, black holes, projectiles… | "Will Earth survive?" |
 
 Format-specific options (see `reel render --help`): `--shape`, `--text` (classic/escape),
@@ -125,6 +126,22 @@ Settings such as the output folder, x264 quality and default worker count live i
 
 Twists by format: classic `multiball`, `regrow`; escape `earthquake`, `split`; boss `rage`,
 `storm`; wars `underdog`.
+
+## Story reels (Hindi and English)
+
+`reel render --mode story --story neelkanth --lang hi` tells a narrated story with paper-cut
+puppets: jointed characters on strings (Shiva, Parvati, Vishnu, a king, a sage, a villager, and
+shadow-puppet gods and demons), painted backdrops (cosmos, ocean, churning, poison, Kailash,
+forest, palace, space), captions with highlighted words, camera moves, music and narration.
+
+Scripts are YAML files in `stories/`: a title and summary in both languages, the cast, and beats,
+each with English and Hindi narration, an English caption, a scene, where each puppet stands and
+its pose, and an optional camera move. Each beat lasts as long as its narration, so one script
+makes both a Hindi and an English reel. Hindi narration uses Kokoro's Hindi voices
+(`voice_name_hi`); captions are English. Upload titles and descriptions follow the language.
+
+Mythology scripts must be checked against the sources before posting; each script notes where
+tellings differ.
 
 ## Physics lab
 

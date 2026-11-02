@@ -14,6 +14,7 @@ MODEL = REPO_ROOT / "models" / "kokoro-v1.0.onnx"
 VOICES = REPO_ROOT / "models" / "voices-v1.0.bin"
 KEEP_CAPS = {"BFS", "DFS", "HP"}          # read letter by letter
 _engine = None
+_cache: dict[tuple, np.ndarray] = {}
 
 
 def available() -> bool:
@@ -38,17 +39,31 @@ def speakable(text: str) -> str:
     return out[:1].upper() + out[1:]
 
 
+def language(voice: str) -> str:
+    """Kokoro voice names start with a language letter: a = US, b = UK English, h = Hindi."""
+    return {"b": "en-gb", "h": "hi"}.get(voice[:1], "en-us")
+
+
 def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
-    """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6."""
+    """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
+
+    Results are cached for the life of the process, so a story's narration is synthesised once
+    for timing and reused for the final mix.
+    """
     global _engine
+    key = (text, voice, speed)
+    if key in _cache:
+        return _cache[key]
     if _engine is None:
         from kokoro_onnx import Kokoro
         _engine = Kokoro(str(MODEL), str(VOICES))
-    lang = "en-gb" if voice.startswith("b") else "en-us"
-    samples, rate = _engine.create(speakable(text), voice=voice, speed=speed, lang=lang)
+    lang = language(voice)
+    spoken = text if lang == "hi" else speakable(text)
+    samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
     samples = np.asarray(samples, dtype=np.float32)
     if rate != SR:
         t_out = np.arange(int(len(samples) * SR / rate)) / SR
         samples = np.interp(t_out, np.arange(len(samples)) / rate, samples).astype(np.float32)
     peak = float(np.abs(samples).max()) or 1.0
-    return samples * (0.6 / peak)
+    _cache[key] = samples * (0.6 / peak)
+    return _cache[key]
