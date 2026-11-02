@@ -20,6 +20,11 @@ Scripts live in stories/<id>.yaml:
 
 Each beat lasts as long as its narration (in the chosen language) plus a short pause; puppets
 glide between their positions and poses from one beat to the next. Captions are English.
+
+Puppet-theatre stories add an `art` block and a `stage` per beat (see reel_engine/story/art.py
+and theatre.py); `reel story-art <id>` draws their puppets and backdrops. Once all are drawn, the
+reel moves cut-out puppets on painted backdrops instead of the code-drawn puppets, with serif
+captions in the lower third.
 """
 import math
 import random
@@ -42,6 +47,8 @@ MOVE_S = 0.9                    # puppets glide to their new marks over this lon
 WORDS_PER_S = 2.4               # used to time lines when no voice model is installed
 CAPTION_Y = 470
 HIGHLIGHT = (120, 220, 230)
+ART_HIGHLIGHT = (255, 196, 90)
+ART_CAPTION_Y = 1330            # lower third, above what the Shorts buttons cover: faces stay clear
 
 
 def story_ids() -> list[str]:
@@ -164,6 +171,39 @@ class Story(Format):
         self.actors: dict[str, Actor] = {}
         self.marks: dict[str, tuple[dict, dict]] = {}                 # name -> (from, to)
         self.mark_beat = -1
+        from ..story.theatre import Theatre
+        self.theatre = Theatre.load(self.pg, self.sc, self.seed)
+        if self.theatre:
+            from ..core.text import serif_path
+            self.caption_font = self.pg.font.Font(serif_path("Bold"), 84)
+            self.shade = self.caption_shade()
+
+    def caption_shade(self):
+        """A soft dark band behind the captions so they read over any picture."""
+        import numpy as np
+        band = self.pg.Surface((W, 520), self.pg.SRCALPHA)
+        band.fill((8, 4, 2, 255))
+        y = np.arange(520) / 519
+        alpha = (np.minimum(1.0, np.minimum(y, 1 - y) * 3.2) * 150).astype(np.uint8)
+        self.pg.surfarray.pixels_alpha(band)[:] = np.broadcast_to(alpha, (W, 520))
+        return band
+
+    def draw_staged(self, screen, t: float) -> None:
+        opening = self.play_t < self.starts[0]
+        i = 0 if opening else self.current_beat()
+        since = 0.0 if opening else self.play_t - self.starts[i]
+        self.theatre.draw(screen, i, since, self.beat_len(i), t, opening)
+        if opening:
+            self.draw_opening(screen, t)
+            return
+        cap = self.caption(i)
+        if cap is not None:
+            end = self.starts[i] + self.beat_len(i)
+            a = max(0.0, min(1.0, since / 0.35, (end - self.play_t) / 0.35))
+            self.shade.set_alpha(int(255 * a))
+            screen.blit(self.shade, (0, ART_CAPTION_Y - 260))
+            cap.set_alpha(int(255 * a))
+            screen.blit(cap, cap.get_rect(center=(W / 2, ART_CAPTION_Y)))
 
     def target(self, name: str, spec: dict) -> dict:
         pose = dict(POSES[spec.get("pose", "stand")])
@@ -219,7 +259,8 @@ class Story(Format):
             for w in text.split():
                 hot = w.startswith("*") or w.rstrip(".,!?").endswith("*")
                 words.append((w.replace("*", ""), hot))
-            pieces = [outlined(self.pg, self.caption_font, w, HIGHLIGHT if hot else (250, 244, 228), 5)
+            hi = ART_HIGHLIGHT if self.theatre else HIGHLIGHT
+            pieces = [outlined(self.pg, self.caption_font, w, hi if hot else (250, 244, 228), 5)
                       for w, hot in words]
             if not pieces:
                 self.caption_cache[i] = None
@@ -250,6 +291,8 @@ class Story(Format):
         pass
 
     def draw_world(self, screen, t: float) -> None:
+        if self.theatre:
+            return self.draw_staged(screen, t)
         pg = self.pg
         i = self.current_beat()
         if i != self.mark_beat:

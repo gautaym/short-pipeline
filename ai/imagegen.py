@@ -26,8 +26,11 @@ DEFAULT_NEGATIVE = ("photo, photorealistic, 3d render, blurry, low quality, wate
 
 def load(model: str):
     if "stable-diffusion-xl" not in model:
-        # newer models (Z-Image, FLUX.2 klein) are too big for 12 GB at once: parts move to the GPU in turn
+        # newer models (Z-Image, FLUX.2 klein) are too big for 12 GB at once: the image model's weights are
+        # stored in 8-bit float (Z-Image: 12.3 GB -> ~6 GB) but computed in bf16, and the parts take turns
+        # on the GPU
         pipe = DiffusionPipeline.from_pretrained(model, torch_dtype=torch.bfloat16)
+        pipe.transformer.enable_layerwise_casting(storage_dtype=torch.float8_e4m3fn, compute_dtype=torch.bfloat16)
         pipe.enable_model_cpu_offload()
         pipe.set_progress_bar_config(disable=True)
         return pipe

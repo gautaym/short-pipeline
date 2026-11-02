@@ -33,3 +33,6 @@ assets/music/**/*.txt
 !assets/music/README.txt
 ttsenv/
 cbenv/
+
+# Pictures drawn for illustrated stories (reel story-art)
+stories/art/

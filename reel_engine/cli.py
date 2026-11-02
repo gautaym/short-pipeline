@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger", "organise")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -62,6 +62,12 @@ def build_parser() -> argparse.ArgumentParser:
     lg = sub.add_parser("ledger", help="list recently rendered reels and their titles")
     lg.add_argument("-n", "--last", type=int, default=20)
     lg.add_argument("--config", default=None)
+
+    a = sub.add_parser("story-art", help="draw the pictures for an illustrated story (local image model)")
+    a.add_argument("story", help="story id from stories/")
+    a.add_argument("--takes", type=int, default=2, help="versions of each puppet, to choose from")
+    a.add_argument("--only", default=None, help="only these puppets or backdrops, e.g. shiva,ocean")
+    a.add_argument("--redo", action="store_true", help="draw again even if a picture exists")
 
     c = sub.add_parser("contact-sheet", help="grab frames from videos into one image")
     c.add_argument("videos", nargs="+")
@@ -154,6 +160,15 @@ def cmd_ledger(opts: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_story_art(opts: argparse.Namespace) -> int:
+    from .formats.story import load_story
+    from .story.art import generate
+    only = opts.only.split(",") if opts.only else None
+    for path in generate(load_story(opts.story), opts.takes, only, opts.redo):
+        print(path)
+    return 0
+
+
 def cmd_contact_sheet(opts: argparse.Namespace) -> int:
     from .tools.contact_sheet import contact_sheet
     out = opts.out or os.path.splitext(opts.videos[0])[0] + "_sheet.png"
@@ -175,6 +190,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_contact_sheet(opts)
     if opts.command == "ledger":
         return cmd_ledger(opts)
+    if opts.command == "story-art":
+        return cmd_story_art(opts)
     if opts.command == "organise":
         return cmd_organise(opts)
     return cmd_render(opts)

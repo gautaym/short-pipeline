@@ -18,6 +18,55 @@ cast:
   parvati: {preset: parvati}
   deva: {preset: deva}
   asura: {preset: asura}
+# Puppet-theatre version, drawn locally by `reel story-art neelkanth`: each character is a separate
+# cut-out puppet (drawn alone on black, then cut out), each scene a painted backdrop with no figures.
+# The reel moves the puppets on stage (see `stage` in each beat). Character descriptions are fixed
+# here and filled in as {shiva}, {parvati}, ... so every picture of a character matches.
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather shadow puppet scenery piece, a cut-out prop rather than a character,
+    traditional Andhra Tholu Bommalata style, mounted on a thin bamboo stick, bright flat colours with dark
+    outlines and a pale cut edge, studio photo against a plain pure black backdrop, nothing else in the frame.
+  backdrop_style: >-
+    An empty landscape painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    shiva: >-
+      Lord Shiva with blue skin and exactly two arms, a crescent moon in his tall matted hair bun, a thin green
+      snake draped around his neck like a necklace with its small hood resting on his chest, rudraksha beads,
+      a saffron orange dhoti with thin black stripes, neatly tucked at the waist
+    parvati: >-
+      Goddess Parvati with warm golden skin, a red silk saree with a gold border, gold jewellery and a small crown
+    deva: >-
+      a deva god with golden skin, a tall gold crown and jewelled necklaces
+    asura: >-
+      an asura demon with dark green skin, a curled moustache, small fangs and a spiked crown
+    vasuki: >-
+      the giant serpent king Vasuki, a many-hooded green and gold cobra
+  puppets:
+    shiva: "The puppet is {shiva}, holding a trishula, standing calmly, side view facing right."
+    shiva_drink: "The puppet is {shiva}, raising a small bowl of glowing purple poison to his lips with both hands, side view facing right."
+    shiva_blue: "The puppet is {shiva}, his throat painted a deep glowing blue, holding a trishula, standing calmly, side view facing right."
+    parvati: "The puppet is {parvati}, standing gracefully with one hand raised in blessing, side view facing right."
+    deva_pull: "The puppet is {deva}, leaning back and pulling hard on a thick rope with both hands, side view facing right."
+    asura_pull: "The puppet is {asura}, leaning back and pulling hard on a thick rope with both hands, side view facing right."
+    deva_afraid: "The puppet is {deva}, running away in fear with both arms raised, side view facing right."
+    asura_afraid: "The puppet is {asura}, running away in fear with both arms raised, side view facing right."
+  anchors:                     # points on the chosen pictures, as fractions of width and height
+    shiva_drink: {bowl: [0.80, 0.17]}
+    shiva_blue: {throat: [0.48, 0.22]}
+  props:
+    vasuki: "The prop is a tall narrow brown rocky mountain peak, Mount Mandara, with no arms or legs, and {vasuki} wound around it in a long spiral. The serpent has only one head, a single large raised hood at the very top of the peak; its body spirals down the mountain and ends in a thin pointed tail at the base."
+  backdrops:
+    ocean: "A vast white ocean of milk with rolling waves under a deep blue starry night sky, low horizon."
+    poison: "A dark churning ocean under a stormy purple and black sky, a sickly violet glow on the horizon."
+    shore: "A dark rocky shore at night, a stormy violet sky with thin clouds, a flat rock in the foreground."
+    kailash: "The snowy peaks of Mount Kailash at dawn, a soft golden and pink sky, pine trees below."
 beats:
   - en: "Long ago, the gods and the demons churned the cosmic ocean, in search of the nectar of immortality."
     hi: "बहुत समय पहले, देवताओं और असुरों ने अमृत की खोज में क्षीर सागर का मंथन किया।"
@@ -26,6 +75,13 @@ beats:
     actors:
       deva: {x: 170, y: 1460, pose: pull, face: -1, scale: 0.7}
       asura: {x: 910, y: 1460, pose: pull, face: 1, scale: 0.7}
+    stage:
+      backdrop: ocean
+      fx: [waves]
+      actors:
+        vasuki: {puppet: vasuki, x: 540, y: 1430, h: 1150, motion: churn, enter: fade}
+        deva: {puppet: deva_pull, x: 200, y: 1560, h: 700, face: right, motion: pull, enter: left}
+        asura: {puppet: asura_pull, x: 880, y: 1560, h: 700, face: left, motion: pull, enter: right}
   - en: "Mount Mandara became the churning rod, and Vasuki, king of serpents, the rope."
     hi: "मंदार पर्वत मथानी बना, और नागराज वासुकि बने रस्सी।"
     caption: "*MANDARA* SPUN. *VASUKI* PULLED."
@@ -34,6 +90,13 @@ beats:
       deva: {x: 170, y: 1460, pose: pull, face: -1, scale: 0.7}
       asura: {x: 910, y: 1460, pose: pull, face: 1, scale: 0.7}
     camera: {zoom: 1.18, focus: [540, 930]}
+    stage:
+      backdrop: ocean
+      fx: [waves, spray]
+      actors:
+        vasuki: {puppet: vasuki, x: 540, y: 1600, h: 1500, motion: churn}
+        deva: {puppet: deva_pull, x: 120, y: 1600, h: 760, face: right, motion: pull}
+        asura: {puppet: asura_pull, x: 960, y: 1600, h: 760, face: left, motion: pull}
   - en: "But before any nectar, the ocean gave up something else. Halahala. A poison so deadly, it could end all creation."
     hi: "लेकिन अमृत से पहले सागर से कुछ और निकला। हलाहल। ऐसा विष, जो पूरी सृष्टि को नष्ट कर सकता था।"
     caption: "THEN CAME *HALAHALA*."
@@ -41,6 +104,13 @@ beats:
     actors:
       deva: {x: 230, y: 1460, pose: afraid, face: 1, scale: 0.7}
       asura: {x: 850, y: 1460, pose: afraid, face: -1, scale: 0.7}
+    stage:
+      backdrop: poison
+      fx: [waves, smoke, shake]
+      actors:
+        vasuki: {puppet: vasuki, x: 540, y: 1520, h: 1150, motion: churn, exit: fade}
+        deva: {puppet: deva_pull, x: 200, y: 1560, h: 700, face: right, motion: tremble}
+        asura: {puppet: asura_pull, x: 880, y: 1560, h: 700, face: left, motion: tremble}
   - en: "The skies turned dark. Gods and demons alike ran in fear."
     hi: "आसमान काला पड़ गया। देवता और असुर, सब डरकर भागने लगे।"
     caption: "EVERYONE *RAN*."
@@ -49,12 +119,23 @@ beats:
       deva: {x: 40, y: 1460, pose: hands_up, face: -1, scale: 0.7}
       asura: {x: 1040, y: 1460, pose: hands_up, face: 1, scale: 0.7}
     camera: {zoom: 1.1, focus: [540, 800]}
+    stage:
+      backdrop: poison
+      fx: [smoke, shake]
+      actors:
+        deva: {puppet: deva_afraid, x: 330, y: 1560, h: 720, face: left, motion: run, exit: left}
+        asura: {puppet: asura_afraid, x: 750, y: 1560, h: 720, face: right, motion: run, exit: right}
   - en: "Only one did not run. Shiva."
     hi: "बस एक नहीं भागे। भगवान शिव।"
     caption: "ONLY *SHIVA* STAYED."
     scene: cosmos
     actors:
       shiva: {x: 540, y: 1450, pose: stand, face: 1, scale: 1.15, glow: true}
+    stage:
+      backdrop: shore
+      fx: [smoke_far, rays]
+      actors:
+        shiva: {puppet: shiva, x: 560, y: 1580, h: 1150, face: left, motion: walk_in, enter: right}
   - en: "He took the poison in his hands, and drank it."
     hi: "उन्होंने वह विष अपने हाथों में लिया, और पी गए।"
     caption: "HE *DRANK* IT."
@@ -62,6 +143,11 @@ beats:
     actors:
       shiva: {x: 540, y: 1450, pose: drink, face: 1, scale: 1.15, prop: bowl, glow: true}
     camera: {zoom: 1.2, focus: [560, 820]}
+    stage:
+      backdrop: shore
+      fx: [smoke_in, rays]
+      actors:
+        shiva: {puppet: shiva_drink, x: 560, y: 1600, h: 1250, face: right, motion: drink}
   - en: "Parvati held his throat, so the poison would go no further."
     hi: "माता पार्वती ने उनका कंठ थाम लिया, ताकि विष आगे न बढ़े।"
     caption: "*PARVATI* HELD ON."
@@ -69,6 +155,12 @@ beats:
     actors:
       shiva: {x: 660, y: 1450, pose: stand, face: -1, scale: 1.1, glow: true, flags: [blue_throat]}
       parvati: {x: 400, y: 1450, pose: throat, face: 1, scale: 1.05}
+    stage:
+      backdrop: shore
+      fx: [throat_glow]
+      actors:
+        shiva: {puppet: shiva_blue, x: 650, y: 1580, h: 1150, face: left, motion: breathe}
+        parvati: {puppet: parvati, x: 330, y: 1580, h: 1020, face: right, motion: walk_in, enter: left}
   - en: "The poison stayed there, and his throat turned blue."
     hi: "विष वहीं रुक गया, और उनका कंठ नीला पड़ गया।"
     caption: "HIS THROAT TURNED *BLUE*."
@@ -76,6 +168,11 @@ beats:
     actors:
       shiva: {x: 560, y: 1450, pose: raise, face: 1, scale: 1.15, glow: true, flags: [blue_throat]}
     camera: {zoom: 1.25, focus: [560, 760]}
+    stage:
+      backdrop: kailash
+      fx: [throat_glow, rays]
+      actors:
+        shiva: {puppet: shiva_blue, x: 540, y: 1720, h: 1500, face: right, motion: breathe, enter: fade}
   - en: "That is why he is called Neelkanth. The blue-throated one."
     hi: "इसीलिए उन्हें कहते हैं नीलकंठ। नीले कंठ वाले।"
     caption: "*NEELKANTH*."
@@ -83,6 +180,12 @@ beats:
     actors:
       shiva: {x: 640, y: 1450, pose: stand, face: -1, scale: 1.1, glow: true, flags: [blue_throat]}
       parvati: {x: 400, y: 1450, pose: namaste, face: 1, scale: 1.05}
+    stage:
+      backdrop: kailash
+      fx: [throat_glow, motes]
+      actors:
+        shiva: {puppet: shiva_blue, x: 650, y: 1580, h: 1150, face: left, motion: breathe}
+        parvati: {puppet: parvati, x: 360, y: 1580, h: 1020, face: right, motion: breathe}
 end:
   head: "NEELKANTH"
   sub: "the blue-throated one"
