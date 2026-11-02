@@ -19,3 +19,15 @@ token*.json
 
 # Downloaded models (text-to-speech voice etc.)
 models/
+
+# Separate Python environment for AI models (torch, TTS, image generation)
+aienv/
+
+# Downloaded music tracks (licensed files, not code)
+assets/music/**/*.mp3
+assets/music/**/*.wav
+assets/music/**/*.ogg
+assets/music/**/*.m4a
+assets/music/**/*.flac
+assets/music/**/*.txt
+!assets/music/README.txt

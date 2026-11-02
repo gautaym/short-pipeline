@@ -17,6 +17,7 @@ from ..config import RenderSettings
 from .audio import mix, write_wav
 from .canvas import FPS, H, W
 from .drama import scout
+from . import tracks
 from .music import compose
 from .video import FrameWriter, mux
 
@@ -132,9 +133,14 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
         print(f"[{job.mode} {game.seed}] WARNING: render diverged from the pre-pass "
               f"({game.done} vs {trace.done}); the format's gameplay depends on drawing", flush=True)
     duration = n / FPS
-    bed = None
+    bed, music_credit = None, None
     if settings.music and not getattr(job.opts, "no_music", False):
-        bed = compose(duration, game.seed, game.music, game.music_key)
+        track = tracks.pick(game.music, game.seed)            # a downloaded track if there is one
+        if track:
+            bed, music_credit = tracks.load(track, duration), tracks.credit(track)
+            print(f"[{job.mode} {game.seed}] music: {track.name}", flush=True)
+        else:
+            bed = compose(duration, game.seed, game.music, game.music_key)
     write_wav(mix(game.events, game.sound_bank(), duration, bed, settings.music_level,
                   spoken_lines(game, settings, job.opts), settings.voice_level), wav)
     mux(tmp_video, wav, out, settings.audio_bitrate)
@@ -143,7 +149,8 @@ def render(job: Job, settings: RenderSettings) -> dict[str, Any]:
     card = game.end_card()
     print(f"[{job.mode} {game.seed}] {card.head} {card.sub} -> {out} ({duration:.1f}s)", flush=True)
     return {"mode": job.mode, "seed": game.seed, "out": out, "title": game.title,
-            "duration": duration, "score": round(trace.score, 2), "outcome": game.outcome()}
+            "duration": duration, "score": round(trace.score, 2), "outcome": game.outcome(),
+            "music_credit": music_credit}
 
 
 def spoken_lines(game, settings: RenderSettings, opts: Namespace) -> list:

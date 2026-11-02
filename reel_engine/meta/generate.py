@@ -56,6 +56,8 @@ def build(summary: dict[str, Any], ledger: Ledger, channel_tags: list[str], chan
     if fmt.seed_note:
         lines.append(f"{fmt.series or fmt.name} #{n}. Every video is simulated from a random seed "
                      f"(this one: {summary['seed']}), so no two are the same.")
+    if summary.get("music_credit"):
+        lines.append(f"Music: {summary['music_credit']}")
     tags_line = " ".join("#" + h for h in ["shorts", *fmt.hashtags, *channel_hashtags])
     lines += ["", tags_line]
     tags = list(dict.fromkeys([*fmt.tags, *channel_tags]))

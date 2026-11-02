@@ -11,6 +11,13 @@ def font_path() -> str:
     return os.path.join(os.path.dirname(pygame.__file__), "freesansbold.ttf")
 
 
+def serif_path(weight: str = "SemiBold") -> str:
+    """Cormorant Garamond (SIL Open Font Licence) from assets/fonts, falling back to the default font."""
+    from ..config import REPO_ROOT
+    p = REPO_ROOT / "assets" / "fonts" / f"CormorantGaramond-{weight}.ttf"
+    return str(p) if p.exists() else font_path()
+
+
 class Fonts:
     """The standard set of font sizes used by titles, HUDs, floaters, banners and end cards."""
 
