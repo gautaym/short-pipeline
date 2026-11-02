@@ -94,6 +94,8 @@ class Story(Format):
         self.beats = self.sc["beats"]
         self.title_text = self.sc["title"][self.lang]
         self.lines = [self.sc["title"][self.lang]] + [b[self.lang] for b in self.beats]
+        if self.settings.voice and tts.available(self.narrator(self.settings)):
+            tts.prepare(self.lines, self.narrator(self.settings))
         lengths = [self.spoken_length(text) for text in self.lines]
         self.starts, t = [], lengths[0] + GAP_S + 0.2
         for n in lengths[1:]:
@@ -109,7 +111,7 @@ class Story(Format):
         return settings.voice_name_hi if self.lang == "hi" else settings.voice_name
 
     def spoken_length(self, text: str) -> float:
-        if self.settings.voice and tts.available():
+        if self.settings.voice and tts.available(self.narrator(self.settings)):
             return len(tts.say(text, self.narrator(self.settings), self.settings.voice_speed)) / SR
         return max(1.2, len(text.split()) / WORDS_PER_S)
 

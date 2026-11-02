@@ -2,8 +2,18 @@
 
 The model files live in models/ (git-ignored): kokoro-v1.0.onnx and voices-v1.0.bin from the
 kokoro-onnx releases. If they are missing, reels render without a voice.
+
+Voices named "indic:<Speaker>[:<style>]" (e.g. "indic:Aman:deep") use AI4Bharat's Indic Parler-TTS
+instead, run by ai/tts_indic.py in the separate ttsenv environment. Its lines are made in one batch
+(prepare) and cached on disk in models/voice_cache, so a story is only ever voiced once.
 """
+import hashlib
+import json
 import re
+import subprocess
+import tempfile
+import wave
+from pathlib import Path
 
 import numpy as np
 
@@ -13,11 +23,26 @@ from .audio import SR
 MODEL = REPO_ROOT / "models" / "kokoro-v1.0.onnx"
 VOICES = REPO_ROOT / "models" / "voices-v1.0.bin"
 KEEP_CAPS = {"BFS", "DFS", "HP"}          # read letter by letter
+INDIC_PY = REPO_ROOT / "ttsenv" / "Scripts" / "python.exe"
+INDIC_SCRIPT = REPO_ROOT / "ai" / "tts_indic.py"
+INDIC_CACHE = REPO_ROOT / "models" / "voice_cache"
+INDIC_STYLES = {
+    "warm": ("{speaker} speaks in a calm, warm storytelling voice with a slightly expressive tone, at a moderate pace. "
+             "The recording is very clear and close up, with no background noise."),
+    "deep": ("{speaker} speaks in a deep, slow, dramatic storytelling voice with an expressive tone, like narrating "
+             "an epic. The recording is very clear and close up, with no background noise."),
+}
 _engine = None
 _cache: dict[tuple, np.ndarray] = {}
 
 
-def available() -> bool:
+def is_indic(voice: str) -> bool:
+    return voice.startswith("indic:")
+
+
+def available(voice: str = "") -> bool:
+    if is_indic(voice):
+        return INDIC_PY.exists() and INDIC_SCRIPT.exists()
     if not (MODEL.exists() and VOICES.exists()):
         return False
     try:
@@ -44,26 +69,107 @@ def language(voice: str) -> str:
     return {"b": "en-gb", "h": "hi"}.get(voice[:1], "en-us")
 
 
-def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
-    """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
+def _indic_file(text: str, voice: str) -> Path:
+    return INDIC_CACHE / (hashlib.sha1(f"{voice}|{text}".encode("utf-8")).hexdigest()[:16] + ".wav")
 
-    Results are cached for the life of the process, so a story's narration is synthesised once
-    for timing and reused for the final mix.
-    """
+
+def segments(text: str) -> list[tuple[str, bool]]:
+    """Split a line at its *emphasised* words: [("plain part", False), ("word", True), ...]."""
+    parts = re.split(r"\*([^*]+)\*", text)
+    return [(p.strip(), i % 2 == 1) for i, p in enumerate(parts) if any(ch.isalnum() for ch in p)]
+
+
+def prepare(texts: list[str], voice: str) -> None:
+    """Make every missing line for an Indic voice in one batch (the model loads once, ~10 s)."""
+    if not is_indic(voice):
+        return
+    chunks = [c for t in texts for c, _ in segments(t)]
+    missing = [t for t in dict.fromkeys(chunks) if not _indic_file(t, voice).exists()]
+    if not missing:
+        return
+    _, speaker, *rest = voice.split(":")
+    style = INDIC_STYLES[rest[0] if rest else "warm"]
+    lines = [{"text": t, "seed": int(hashlib.sha1(t.encode("utf-8")).hexdigest()[:6], 16),
+              "out": str(_indic_file(t, voice))} for t in missing]
+    INDIC_CACHE.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        jobs = Path(tmp) / "lines.json"
+        jobs.write_text(json.dumps({"speaker": speaker, "style": style, "lines": lines}, ensure_ascii=False),
+                        encoding="utf-8")
+        print(f"voicing {len(missing)} line(s) with {voice} ...", flush=True)
+        subprocess.run([str(INDIC_PY), str(INDIC_SCRIPT), str(jobs)], check=True, cwd=REPO_ROOT,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+def _load_wav(path: Path) -> tuple[np.ndarray, int]:
+    with wave.open(str(path), "rb") as w:
+        rate, width, n = w.getframerate(), w.getsampwidth(), w.getnframes()
+        raw = w.readframes(n)
+    if width == 2:
+        return np.frombuffer(raw, dtype="<i2").astype(np.float32) / 32768.0, rate
+    return np.frombuffer(raw, dtype="<i4").astype(np.float32) / 2147483648.0, rate
+
+
+EMPHASIS_GAIN = 1.35       # about +2.6 dB on an *emphasised* word
+EMPHASIS_PAUSE_S = 0.2     # extra breath either side of it
+EMPHASIS_SPEED = 0.9       # and said a touch slower (Kokoro voices only)
+
+
+def _trim(samples: np.ndarray, floor: float = 0.02) -> np.ndarray:
+    """Cut the silence the model leaves at either end, keeping a few milliseconds."""
+    loud = np.flatnonzero(np.abs(samples) > floor * (float(np.abs(samples).max()) or 1.0))
+    if len(loud) == 0:
+        return samples
+    pad = int(0.03 * SR)
+    return samples[max(0, loud[0] - pad):loud[-1] + pad]
+
+
+def _synth(text: str, voice: str, speed: float) -> np.ndarray:
+    """One stretch of speech at the engine's sample rate, scaled to a common loudness."""
     global _engine
-    key = (text, voice, speed)
-    if key in _cache:
-        return _cache[key]
-    if _engine is None:
-        from kokoro_onnx import Kokoro
-        _engine = Kokoro(str(MODEL), str(VOICES))
-    lang = language(voice)
-    spoken = text if lang == "hi" else speakable(text)
-    samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
+    if is_indic(voice):
+        prepare([text], voice)
+        samples, rate = _load_wav(_indic_file(text, voice))
+    else:
+        if _engine is None:
+            from kokoro_onnx import Kokoro
+            _engine = Kokoro(str(MODEL), str(VOICES))
+        lang = language(voice)
+        spoken = text if lang == "hi" else speakable(text)
+        samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
     samples = np.asarray(samples, dtype=np.float32)
     if rate != SR:
         t_out = np.arange(int(len(samples) * SR / rate)) / SR
         samples = np.interp(t_out, np.arange(len(samples)) / rate, samples).astype(np.float32)
+    level = float(np.sqrt(np.mean(samples ** 2))) or 1.0
+    return samples * (0.1 / level)
+
+
+def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
+    """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
+
+    Words marked *like this* are voiced on their own, a little louder and slower, with a short
+    pause either side; the rest is voiced in natural stretches between them.
+
+    Results are cached for the life of the process, so a story's narration is synthesised once
+    for timing and reused for the final mix.
+    """
+    key = (text, voice, speed)
+    if key in _cache:
+        return _cache[key]
+    parts = segments(text)
+    if len(parts) == 1 and not parts[0][1]:
+        samples = _synth(parts[0][0], voice, speed)
+    else:
+        gap = np.zeros(int(EMPHASIS_PAUSE_S * SR), dtype=np.float32)
+        pieces = []
+        for i, (chunk, emph) in enumerate(parts):
+            if emph:
+                said = _trim(_synth(chunk, voice, speed * EMPHASIS_SPEED)) * EMPHASIS_GAIN
+                pieces += ([gap] if i else []) + [said] + ([gap] if i < len(parts) - 1 else [])
+            else:
+                pieces.append(_trim(_synth(chunk, voice, speed)))
+        samples = np.concatenate(pieces)
     peak = float(np.abs(samples).max()) or 1.0
     _cache[key] = samples * (0.6 / peak)
     return _cache[key]

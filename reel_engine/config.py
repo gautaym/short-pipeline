@@ -21,7 +21,7 @@ class RenderSettings:
     voice_name: str = "am_michael"
     voice_speed: float = 1.05
     voice_level: float = 1.8           # voice loudness relative to the background (music + effects)
-    voice_name_hi: str = "hm_omega"    # Hindi narrator for story reels
+    voice_name_hi: str = "indic:Aman:deep"  # Hindi narrator for story reels
 
     def ledger_path(self) -> str:
         import os

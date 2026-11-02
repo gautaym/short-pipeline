@@ -6,6 +6,7 @@ in one batch so the model loads once:
     ttsenv/Scripts/python.exe ai/tts_indic.py lines.json
 
 lines.json: {"speaker": "Rohit", "style": "...", "lines": [{"text": "...", "seed": 1, "out": "x.wav"}, ...]}
+A line may set its own "speaker" and "style" to override the batch's.
 
 The model is gated on Hugging Face: the token is read from secrets/hf_token.txt (never printed).
 Generation samples randomly, so each line is seeded for repeatable output.
@@ -40,10 +41,11 @@ def main() -> None:
     tok = AutoTokenizer.from_pretrained(MODEL)
     desc_tok = AutoTokenizer.from_pretrained(model.config.text_encoder._name_or_path)
     print(f"loaded in {time.time() - t0:.1f}s", flush=True)
-    desc = (spec.get("style") or STYLE).format(speaker=spec.get("speaker", "Rohit"))
-    d = desc_tok(desc, return_tensors="pt").to(device)
     for line in spec["lines"]:
         t = time.time()
+        style = line.get("style") or spec.get("style") or STYLE
+        desc = style.format(speaker=line.get("speaker") or spec.get("speaker", "Rohit"))
+        d = desc_tok(desc, return_tensors="pt").to(device)
         torch.manual_seed(int(line.get("seed", 0)))
         p = tok(line["text"], return_tensors="pt").to(device)
         audio = model.generate(input_ids=d.input_ids, attention_mask=d.attention_mask,
