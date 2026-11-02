@@ -10,12 +10,18 @@ Each beat's `stage` names a backdrop, the puppets on stage and the effects:
 
 x is the puppet's centre, y the bottom of its stick, h its height in pixels. An actor that was on
 stage in the last beat glides to its new mark (and turns, squashing through edge-on like a puppet
-being flipped, when its facing changes); a new one enters (left, right, bottom or fade); one that is
-gone fades away, unless it was given `exit: left|right|fade`, in which case it leaves during its
-own beat. Motions are what the puppeteer's hand does: sway, pull, churn, tremble, run, walk_in,
-drink, breathe. Everything is a function of time, so any frame can be drawn on its own.
+being flipped, when its facing changes); a new one enters (left, right, bottom, fade, or
+{from: [x, y]} to slide out of a point, as a copy splitting off); one that is gone fades away,
+unless it was given `exit: left|right|fade`, in which case it leaves during its own beat. Motions
+are what the puppeteer's hand does: sway, pull, churn, tremble, run, walk_in, drink, breathe,
+float, spin. Everything is a function of time, so any frame can be drawn on its own.
 
-Story-level `art.anchors` mark points on a puppet picture as fractions of its width and height,
+Effects are names, or a name with settings: [waves, spray, smoke, smoke_far, smoke_in, rays, shake,
+lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
+{glow: {actor: cell, at: spark, colour: [255, 240, 170]}}] (glow's `at` is an anchor; without it,
+the middle of the puppet).
+
+Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
 bowl use them.
 """
@@ -91,12 +97,20 @@ class Theatre:
         self.anchors = sc["art"].get("anchors", {})
         self.puppets = {p: art.cut(pg, sc["id"], p) for p in puppets}
         size = (int(W * BACKDROP_ROOM), int(H * BACKDROP_ROOM))
-        self.backdrops = {b: pg.transform.smoothscale(pg.image.load(str(art.backdrop_file(sc["id"], b))), size)
-                          for b in backdrops}
+        crop = float(sc["art"].get("backdrop_crop", 0.0))          # trims a border the model drew round the scene
+        self.backdrops = {}
+        for b in backdrops:
+            img = pg.image.load(str(art.backdrop_file(sc["id"], b)))
+            w, h = img.get_size()
+            img = img.subsurface((w * crop, h * crop, w * (1 - 2 * crop), h * (1 - 2 * crop)))
+            self.backdrops[b] = pg.transform.smoothscale(img, size)
         self.sized: dict[tuple, tuple] = {}
         r = random.Random(f"theatre:{seed}")
         self.phase = {name: r.uniform(0, 6.3) for b in self.beats for name in b.get("actors", {})}
         self.smoke = [soft_blob(pg, 120, c) for c in ((90, 40, 130, 150), (40, 16, 60, 170), (150, 80, 200, 110))]
+        self.soot = [soft_blob(pg, 120, c) for c in ((30, 28, 30, 170), (60, 54, 50, 150), (14, 12, 14, 190))]
+        self.bubble = self.make_bubble()
+        self.lights: dict[tuple, object] = {}
         self.foam = soft_blob(pg, 26, (250, 248, 236, 200))
         self.glow_blue = light(pg, 120, (90, 200, 255), 1.5)       # cyan: plain blue would vanish on blue skin
         self.mote = soft_blob(pg, 6, (255, 220, 160, 200))
@@ -122,6 +136,13 @@ class Theatre:
             self.sized.pop(next(iter(self.sized)))
         return self.sized[key]
 
+    def make_bubble(self):
+        size = 64
+        surf = self.pg.Surface((size, size), self.pg.SRCALPHA)
+        self.pg.draw.circle(surf, (200, 240, 255, 150), (size // 2, size // 2), size // 2 - 2, 3)
+        self.pg.draw.circle(surf, (255, 255, 255, 200), (size // 2 - 10, size // 2 - 10), 6)
+        return surf
+
     def make_rays(self):
         surf = self.pg.Surface((W, H))                                    # black: drawn additively
         for k in range(7):
@@ -142,6 +163,7 @@ class Theatre:
         return {"puppet": spec["puppet"], "x": float(spec.get("x", W / 2)), "y": float(spec.get("y", 1560)),
                 "h": float(spec.get("h", 900)), "face": 1 if spec.get("face", "right") == "right" else -1,
                 "motion": spec.get("motion", "sway"), "enter": spec.get("enter", "fade"),
+                "from": spec["enter"].get("from") if isinstance(spec.get("enter"), dict) else None,
                 "exit": spec.get("exit")}
 
     def actor_state(self, beat: int, name: str, since: float, length: float) -> dict | None:
@@ -162,8 +184,12 @@ class Theatre:
             s["sx"] = before["face"] + (now["face"] - before["face"]) * turn
         else:                                                    # enter
             s["sx"] = float(now["face"])
-            k = ease(since / (ENTER_S if now["enter"] in ("left", "right", "bottom") else FADE_S))
-            if now["enter"] == "left":
+            k = ease(since / (ENTER_S if now["enter"] in ("left", "right", "bottom") or now["from"] else FADE_S))
+            if now["from"]:                                      # slide out of a point, like a copy splitting off
+                s["x"] = now["from"][0] + (now["x"] - now["from"][0]) * k
+                s["y"] = now["from"][1] + (now["y"] - now["from"][1]) * k
+                s["alpha"] = min(1.0, since / 0.3)
+            elif now["enter"] == "left":
                 s["x"] = -now["h"] * 0.4 + (now["x"] + now["h"] * 0.4) * k
             elif now["enter"] == "right":
                 s["x"] = W + now["h"] * 0.4 + (now["x"] - W - now["h"] * 0.4) * k
@@ -184,7 +210,7 @@ class Theatre:
         return s
 
     def motion(self, s: dict, name: str, since: float, length: float, t: float) -> tuple[float, float, float, float]:
-        """The puppeteer's hand: (dx, dy, degrees of tilt, extra scale)."""
+        """The puppeteer's hand: (dx, dy, degrees of tilt (anticlockwise), extra scale)."""
         ph = self.phase.get(name, 0.0)
         face = 1 if s["sx"] >= 0 else -1
         dx, dy = 0.0, 3 * math.sin(t * 1.9 + ph)
@@ -215,6 +241,12 @@ class Theatre:
             dy -= 18 * k
         elif m == "breathe":
             scale += 0.014 * math.sin(t * 1.4 + ph)
+        elif m == "float":                                       # weightless drift
+            dx += 22 * math.sin(t * 0.7 + ph)
+            dy += 26 * math.sin(t * 0.9 + ph * 1.7)
+            rot += 5 * math.sin(t * 0.5 + ph)
+        elif m == "spin":
+            rot += (t * 25 + ph * 57) % 360
         return dx, dy, rot, scale
 
     def anchor(self, s: dict, puppet: str, point: str, t: float, since: float, length: float, name: str):
@@ -244,7 +276,7 @@ class Theatre:
         if sx < 0:
             img, shadow = pg.transform.flip(img, True, False), pg.transform.flip(shadow, True, False)
         if abs(rot) > 0.05:
-            img, shadow = pg.transform.rotozoom(img, -rot, 1.0), pg.transform.rotozoom(shadow, -rot, 1.0)
+            img, shadow = pg.transform.rotozoom(img, rot, 1.0), pg.transform.rotozoom(shadow, rot, 1.0)
         px, py = s["x"] + dx, s["y"] + dy - h * (1 - PIVOT)      # rotate about the hand holding the stick
         off = h * PIVOT - h / 2
         a = math.radians(rot)
@@ -270,8 +302,15 @@ class Theatre:
         if beat > 0 and self.beats[beat - 1]["backdrop"] != now and since < 0.9:
             place(self.beats[beat - 1]["backdrop"], 1 - ease(since / 0.9))
 
-    def fx(self, beat: int) -> list[str]:
-        return list(self.beats[beat].get("fx", []))
+    def fx(self, beat: int) -> dict[str, dict]:
+        """The beat's effects as {name: settings}."""
+        out = {}
+        for item in self.beats[beat].get("fx", []):
+            if isinstance(item, dict):
+                out.update({k: dict(v or {}) for k, v in item.items()})
+            else:
+                out[item] = {}
+        return out
 
     def draw(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False) -> None:
         pg = self.pg
@@ -290,6 +329,10 @@ class Theatre:
         if "smoke" in fx:
             self.draw_smoke(screen, t, base=1380, spread=380, rise=1100, n=26, strength=1.0,
                             grow=ease(since / 2.5) if beat == 0 or "smoke" not in self.fx(beat - 1) else 1.0)
+        if "vent_smoke" in fx:
+            v = fx["vent_smoke"]
+            self.draw_smoke(screen, t, base=float(v.get("y", 640)), spread=160, rise=760, n=22, strength=1.0,
+                            cx=float(v.get("x", W / 2)), sprites=self.soot, period=4.5)
         if "waves" in fx:
             self.draw_waves(screen, t, back=True)
         names = list(dict.fromkeys(list(self.beats[beat].get("actors", {}))
@@ -316,6 +359,10 @@ class Theatre:
             if at:
                 g = dimmed(pg, self.glow_blue, 0.65 + 0.35 * math.sin(t * 2.4))
                 screen.blit(g, g.get_rect(center=at), special_flags=pg.BLEND_RGB_ADD)
+        if "glow" in fx:
+            self.draw_glow(screen, fx["glow"], states, t, since, length)
+        if "bubbles" in fx:
+            self.draw_bubbles(screen, t)
         if "waves" in fx:
             self.draw_waves(screen, t, back=False)
         if "spray" in fx:
@@ -324,6 +371,8 @@ class Theatre:
             m = self.mote.copy()
             m.set_alpha(int(90 + 80 * math.sin(t * 1.7 + ph)))
             screen.blit(m, (x + 14 * math.sin(t * 0.6 + ph), (y - speed * t) % H))
+        if "lightning" in fx and not opening:
+            self.draw_lightning(screen, t)
         dim = pg.Surface((W, H))
         lamp = 0.5 + 0.5 * math.sin(t * 2.3) * math.sin(t * 0.7 + 1.3)  # an oil lamp's slow flicker
         dim.set_alpha(int(8 + 20 * lamp + (110 if opening else 0)))
@@ -331,14 +380,15 @@ class Theatre:
 
     # ---------------------------------------------------------- effects
     def draw_smoke(self, screen, t: float, base: float, spread: float, rise: float, n: int, strength: float,
-                   grow: float = 1.0) -> None:
-        """Poison billowing up from the water: n puffs, each rising, swelling and thinning in turn."""
+                   grow: float = 1.0, cx: float = W / 2, sprites=None, period: float = 7.0) -> None:
+        """Smoke billowing up from a point: n puffs, each rising, swelling and thinning in turn."""
+        sprites = sprites or self.smoke
         for k in range(n):
-            p = (t / 7.0 + k / n) % 1.0
-            x = W / 2 + spread * math.sin(k * 12.9898) * (0.4 + 0.6 * p) + 40 * math.sin(t * 0.5 + k)
+            p = (t / period + k / n) % 1.0
+            x = cx + spread * math.sin(k * 12.9898) * (0.4 + 0.6 * p) + 40 * math.sin(t * 0.5 + k)
             y = base - rise * p * grow
             size = int(140 + 330 * p)
-            puff = self.pg.transform.smoothscale(self.smoke[k % 3], (size, size))
+            puff = self.pg.transform.smoothscale(sprites[k % len(sprites)], (size, size))
             puff.set_alpha(int(255 * strength * grow * math.sin(math.pi * p) ** 0.8))
             screen.blit(puff, puff.get_rect(center=(x, y)))
 
@@ -378,3 +428,57 @@ class Theatre:
             f = self.foam.copy()
             f.set_alpha(int(230 * (1 - p)))
             screen.blit(f, f.get_rect(center=(x, y)))
+
+    def centre(self, s: dict, name: str, t: float, since: float, length: float) -> tuple[float, float]:
+        """The middle of an actor's puppet on screen."""
+        dx, dy, _, scale = self.motion(dict(s), name, since, length, t)
+        return s["x"] + dx, s["y"] + dy - s["h"] * scale / 2
+
+    def draw_glow(self, screen, g: dict, states: dict, t: float, since: float, length: float) -> None:
+        """A pulsing light on an actor: at one of its anchors, or its middle."""
+        name = g.get("actor")
+        if name not in states:
+            return
+        s = states[name]
+        at = (self.anchor(s, s["puppet"], g["at"], t, since, length, name) if g.get("at")
+              else self.centre(s, name, t, since, length))
+        if at is None:
+            return
+        colour = tuple(g.get("colour", (255, 220, 160)))
+        key = (colour, int(s["h"] * 0.32))
+        if key not in self.lights:
+            self.lights[key] = light(self.pg, key[1], colour, 1.2)
+        lit = dimmed(self.pg, self.lights[key], (0.6 + 0.4 * math.sin(t * 2.2)) * s["alpha"])
+        screen.blit(lit, lit.get_rect(center=at), special_flags=self.pg.BLEND_RGB_ADD)
+
+    def draw_bubbles(self, screen, t: float) -> None:
+        """Bubbles rising through water, wobbling as they go."""
+        for k in range(30):
+            size = 16 + (k * 37) % 40
+            speed = 60 + (k * 53) % 90
+            x = (k * 0.618 % 1.0) * W + 18 * math.sin(t * 1.3 + k)
+            y = H + 60 - (t * speed + k * 137) % (H + 160)
+            b = self.pg.transform.smoothscale(self.bubble, (size, size))
+            screen.blit(b, b.get_rect(center=(x, y)))
+
+    def draw_lightning(self, screen, t: float) -> None:
+        """Now and then a bolt forks down the sky and the whole stage flashes."""
+        slot = int(t / 1.7)
+        r = random.Random(slot * 7919 + self.seed)
+        if r.random() > 0.65:
+            return
+        age = t - (slot * 1.7 + r.uniform(0.0, 1.1))
+        if not 0 <= age < 0.32:
+            return
+        fade = 1 - age / 0.32
+        x, y = r.uniform(180, W - 180), -20.0
+        pts = [(x, y)]
+        while y < r.uniform(700, 1050):
+            x += r.uniform(-70, 70)
+            y += r.uniform(50, 110)
+            pts.append((x, y))
+        bolt = self.pg.Surface((W, H))
+        self.pg.draw.lines(bolt, (int(120 * fade), int(110 * fade), int(160 * fade)), False, pts, 26)
+        self.pg.draw.lines(bolt, (int(255 * fade), int(250 * fade), int(255 * fade)), False, pts, 7)
+        bolt.fill((int(70 * fade), int(66 * fade), int(90 * fade)), special_flags=self.pg.BLEND_RGB_ADD)
+        screen.blit(bolt, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)

@@ -1,0 +1,125 @@
+# Abiogenesis: how the first cell may have formed, 3.5 to 4 billion years ago.
+# Review note: this is the leading scientific hypothesis, not settled fact, and the script says so.
+# Facts used: Earth formed ~4.5 billion years ago; the oldest signs of life are ~3.5-3.7 billion years
+# old; the Miller-Urey experiment (1953, Stanley Miller and Harold Urey) made amino acids from simple
+# gases and electric sparks within about a week; hydrothermal vents and the "RNA world" (RNA both
+# stores information and can speed up its own copying) are leading ideas; fatty acids form membrane
+# bubbles (vesicles) on their own in water.
+id: abiogenesis
+topic: science
+title:
+  en: "How did the first cell form?"
+  hi: "पहली कोशिका कैसे बनी?"
+series:
+  en: "Science Stories"
+  hi: "विज्ञान की कहानियाँ"
+summary:
+  en: "Around 4 billion years ago, lightning, heat and chemistry turned simple molecules into the first protocells. This is abiogenesis, the leading scientific idea for how life began."
+  hi: "लगभग चार अरब साल पहले, बिजली, गर्मी और रसायन ने सरल अणुओं से पहली आदि-कोशिकाएँ बनाईं। इसे अजीवात् जीवोत्पत्ति कहते हैं, जीवन की शुरुआत का सबसे प्रमुख वैज्ञानिक विचार।"
+music: chill
+cast: {}
+# Paper-cut version, drawn locally by `reel story-art abiogenesis`: every object is a separate
+# paper cut-out (drawn alone on black, then cut out) moved over paper-cut scenery.
+art:
+  prop_style: >-
+    A single cut-out made of layered coloured paper, flat paper-craft illustration with clean cut edges,
+    subtle paper texture and soft layered depth, bright colours, studio photo against a plain pure black
+    backdrop, nothing else in the frame, no text.
+  backdrop_style: >-
+    Paper-cut scenery made of layered coloured card, flat paper-craft art with soft depth and gentle
+    shadows between the layers. A close view from inside the scene: the scenery fills the whole picture
+    edge to edge, with no frame, no box, no border and no wall around it. Scenery only: no people,
+    no animals, no text. Vertical composition.
+  cast: {}
+  props:
+    molecules: "The cut-out is a small cluster of simple molecules shown as coloured balls joined by short sticks, like a school model of an amino acid."
+    flask: "The cut-out is a round glass laboratory flask with a long neck, half filled with pale orange liquid, two metal wires reaching inside with a bright electric spark between their tips."
+    vent: "The cut-out is a deep-sea black smoker: a tall narrow chimney of dark grey rough stone rising from the sea floor, with a few orange mineral crusts. It is under water: no fire, no lava, no flames."
+    rna: "The cut-out is one long gently wavy paper ribbon, standing upright, with short coloured pegs sticking out along its right edge only, like the teeth of a hair comb."
+    bubble: "The cut-out is a round see-through bubble with a thick double wall made of tiny lined-up beads, like a cell membrane, pale blue and empty inside."
+    protocell: "The cut-out is a round see-through cell-like bubble with a double wall made of tiny lined-up beads, and inside it one loose wavy ribbon with short coloured pegs on one side, like a comb: a single strand, not a ladder and not a double helix. Pale blue and green."
+  backdrops:
+    early_earth: "The young Earth four billion years ago: erupting volcanoes, a dark red sky full of storm clouds, a steaming hot ocean below."
+    lab: "A 1950s science laboratory: a long wooden bench, shelves of glassware and bottles behind it, warm lamp light."
+    deep_sea: "The deep dark ocean floor: rocky ground, dark blue water, faint light filtering from far above."
+    micro: "A microscopic world inside warm water, soft blue and green tones, tiny floating specks, gentle light."
+  backdrop_crop: 0.08         # trim the paper border the model leaves around scenery
+  anchors:
+    flask: {spark: [0.48, 0.40]}
+beats:
+  - en: "Four billion years ago, Earth had no life at all. Just volcanoes, lightning, and a hot, restless ocean."
+    hi: "चार अरब साल पहले, धरती पर कोई जीवन नहीं था। बस ज्वालामुखी, बिजली, और एक गर्म, उफनता हुआ समुद्र।"
+    caption: "EARTH, *4 BILLION* YEARS AGO."
+    scene: cosmos
+    stage:
+      backdrop: early_earth
+      fx: [lightning]
+  - en: "Lightning and heat broke simple gases apart, and the pieces joined into the building blocks of life."
+    hi: "बिजली और गर्मी ने सरल गैसों को तोड़ा, और उनके टुकड़े जुड़कर जीवन की ईंटें बन गए।"
+    caption: "LIGHTNING MADE *BUILDING BLOCKS*."
+    scene: cosmos
+    stage:
+      backdrop: early_earth
+      fx: [lightning]
+      actors:
+        mol1: {puppet: molecules, x: 330, y: 1250, h: 420, motion: float, enter: fade}
+        mol2: {puppet: molecules, x: 770, y: 1000, h: 340, face: left, motion: float, enter: fade}
+  - en: "In 1953, two scientists recreated this in a flask, and within a week, amino acids appeared."
+    hi: "1953 में, दो वैज्ञानिकों ने एक फ्लास्क में यही दोहराया, और एक हफ़्ते में अमीनो एसिड बन गए।"
+    caption: "*1953*: LIFE'S PARTS IN A FLASK."
+    scene: cosmos
+    stage:
+      backdrop: lab
+      fx: [{glow: {actor: flask, at: spark, colour: [255, 240, 170]}}]
+      actors:
+        flask: {puppet: flask, x: 540, y: 1520, h: 1000, motion: breathe, enter: bottom}
+  - en: "Deep in the ocean, hot vents poured out minerals and energy. A perfect kitchen for chemistry."
+    hi: "समुद्र की गहराई में, गर्म झरोखे खनिज और ऊर्जा उगल रहे थे। रसायन के लिए एकदम सही रसोई।"
+    caption: "HOT *VENTS* COOKED CHEMISTRY."
+    scene: cosmos
+    stage:
+      backdrop: deep_sea
+      fx: [{vent_smoke: {x: 540, y: 560}}, bubbles]
+      actors:
+        vent: {puppet: vent, x: 540, y: 1700, h: 1150, motion: sway, enter: bottom}
+  - en: "Scientists think some molecules, like RNA, could make copies of themselves."
+    hi: "वैज्ञानिक मानते हैं कि आर एन ए जैसे कुछ अणु अपनी नकल खुद बना सकते थे।"
+    caption: "*RNA* COPIED ITSELF."
+    scene: cosmos
+    stage:
+      backdrop: micro
+      fx: [motes]
+      actors:
+        rna1: {puppet: rna, x: 330, y: 1350, h: 900, motion: float, enter: fade}
+        rna2: {puppet: rna, x: 760, y: 1350, h: 900, motion: float, enter: {from: [330, 1350]}}
+  - en: "Fatty molecules folded into tiny bubbles. Natural walls that kept everything inside."
+    hi: "वसा के अणु मुड़कर छोटे-छोटे बुलबुले बन गए। ऐसी प्राकृतिक दीवारें, जो अंदर की हर चीज़ को थाम लेती थीं।"
+    caption: "FATS MADE *BUBBLES*."
+    scene: cosmos
+    stage:
+      backdrop: micro
+      fx: [bubbles]
+      actors:
+        cell: {puppet: bubble, x: 540, y: 1420, h: 820, motion: breathe, enter: fade}
+  - en: "When RNA was trapped inside a bubble, something new appeared. A protocell."
+    hi: "जब आर एन ए किसी बुलबुले के अंदर फँस गया, तो कुछ नया बना। एक आदि-कोशिका।"
+    caption: "THE FIRST *PROTOCELL*."
+    scene: cosmos
+    stage:
+      backdrop: micro
+      fx: [{glow: {actor: cell, colour: [120, 220, 255]}}, motes]
+      actors:
+        cell: {puppet: protocell, x: 540, y: 1460, h: 900, motion: breathe}
+  - en: "It grew, split in two, and copied itself. Life had begun. Scientists are still piecing together how."
+    hi: "वह बढ़ी, दो में बँटी, और अपनी नकल बनाती गई। जीवन शुरू हो चुका था। वैज्ञानिक आज भी इसकी कड़ियाँ जोड़ रहे हैं।"
+    caption: "AND LIFE *BEGAN*."
+    scene: cosmos
+    stage:
+      backdrop: micro
+      fx: [bubbles, motes]
+      actors:
+        cell: {puppet: protocell, x: 285, y: 1330, h: 500, motion: breathe}
+        cell2: {puppet: protocell, x: 795, y: 1330, h: 500, face: left, motion: breathe, enter: {from: [540, 1460]}}
+end:
+  head: "ABIOGENESIS"
+  sub: "life from non-life"

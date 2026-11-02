@@ -99,7 +99,10 @@ def generate(sc: dict, takes: int = 2, only: list[str] | None = None, redo: bool
 def cut_out(rgb: np.ndarray) -> np.ndarray:
     """Alpha (0-255) for a puppet photographed on black: the background is the near-black region
     reachable from the picture's edges, so dark paint inside the puppet stays solid."""
-    dark = rgb.max(axis=2) < BLACK
+    level = rgb.max(axis=2)
+    border = np.concatenate([level[:6].ravel(), level[-6:].ravel(), level[:, :6].ravel(), level[:, -6:].ravel()])
+    dark = level < max(BLACK, float(np.percentile(border, 80)) + 14)    # some "black" backdrops are textured grey;
+                                                                        # a stick touching the edge is a few percent
     bg = np.zeros_like(dark)
     bg[0, :], bg[-1, :], bg[:, 0], bg[:, -1] = dark[0, :], dark[-1, :], dark[:, 0], dark[:, -1]
     while True:                                                  # grow from the edges through dark pixels

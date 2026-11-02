@@ -59,7 +59,7 @@ art:
     asura_afraid: "The puppet is {asura}, running away in fear with both arms raised, side view facing right."
   anchors:                     # points on the chosen pictures, as fractions of width and height
     shiva_drink: {bowl: [0.80, 0.17]}
-    shiva_blue: {throat: [0.48, 0.22]}
+    shiva_blue: {throat: [0.50, 0.22]}
   props:
     vasuki: "The prop is a tall narrow brown rocky mountain peak, Mount Mandara, with no arms or legs, and {vasuki} wound around it in a long spiral. The serpent has only one head, a single large raised hood at the very top of the peak; its body spirals down the mountain and ends in a thin pointed tail at the base."
   backdrops:
