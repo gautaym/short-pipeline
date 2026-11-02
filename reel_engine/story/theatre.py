@@ -20,7 +20,10 @@ Effects are names, or a name with settings: [waves, spray, smoke, smoke_far, smo
 lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
 {glow: {actor: cell, at: spark, colour: [255, 240, 170]}}, {link: {a: p1, b: p2}}] (glow's `at` is
 an anchor, without it the middle of the puppet, and glow takes a list to light several actors;
-link draws a shimmering thread between two actors).
+link draws a shimmering thread between two actors). Sky effects: {star_trails: {x, y}};
+{constellation: {stars: [[x, y, size], ...], lines: [[i, j], ...], grow: seconds, highlight: [i, ...]}}
+draws glowing stars joined by lines, drawn in one by one over `grow` seconds, with highlighted
+stars pulsing; {pointer: {from: [x, y], to: [x, y], grow: seconds}} shoots a dashed guide line.
 
 A story's `opening` adds actors (the Sutradhar host) to a beat's frame for the cold open:
 draw(..., extras={name: spec}, extras_since=t) slides them on while the rest stays settled.
@@ -352,6 +355,10 @@ class Theatre:
                             grow=ease(since / 2.5) if beat == 0 or "smoke" not in self.fx(beat - 1) else 1.0)
         if "star_trails" in fx:
             self.draw_star_trails(screen, fx["star_trails"], t)
+        if "constellation" in fx:
+            self.draw_constellation(screen, fx["constellation"], since if not opening else 99.0, t)
+        if "pointer" in fx:
+            self.draw_pointer(screen, fx["pointer"], since if not opening else 99.0, t)
         if "vent_smoke" in fx:
             v = fx["vent_smoke"]
             self.draw_smoke(screen, t, base=float(v.get("y", 640)), spread=160, rise=760, n=22, strength=1.0,
@@ -563,4 +570,51 @@ class Theatre:
                     level = bright * (1 - k / 13)
                     self.pg.draw.line(layer, (int(200 * level), int(215 * level), int(255 * level)), last, pt, 3)
                 last = pt
+        screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)
+
+    def star_light(self, size: float):
+        key = ("star", round(size, 2))
+        if key not in self.lights:
+            self.lights[key] = light(self.pg, int(46 * size), (255, 240, 210), 1.6)
+        return self.lights[key]
+
+    def draw_constellation(self, screen, g: dict, since: float, t: float) -> None:
+        """Stars joined by lines; with `grow`, the lines are drawn in one after another."""
+        stars = [tuple(st) for st in g.get("stars", [])]
+        lines = g.get("lines", [])
+        grow = float(g.get("grow", 0.0))
+        highlight = set(g.get("highlight", []))
+        layer = self.pg.Surface((W, H))
+        for n, (i, j) in enumerate(lines):
+            k = 1.0 if grow <= 0 else max(0.0, min(1.0, (since / grow) * len(lines) - n))
+            if k <= 0:
+                continue
+            (x1, y1), (x2, y2) = stars[i][:2], stars[j][:2]
+            end = (x1 + (x2 - x1) * k, y1 + (y2 - y1) * k)
+            self.pg.draw.line(layer, (70, 80, 110), (x1, y1), end, 4)
+        screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)
+        for n, st in enumerate(stars):
+            x, y, size = st[0], st[1], (st[2] if len(st) > 2 else 1.0)
+            appear = 1.0 if grow <= 0 else max(0.0, min(1.0, since / grow * len(stars) - n * 0.6))
+            if appear <= 0:
+                continue
+            pulse = 1.0 + (0.45 * (0.5 + 0.5 * math.sin(t * 3.0)) if n in highlight else 0.0)
+            glow = dimmed(self.pg, self.star_light(size * pulse), appear * (0.85 + 0.15 * math.sin(t * 2.1 + n)))
+            screen.blit(glow, glow.get_rect(center=(x, y)), special_flags=self.pg.BLEND_RGB_ADD)
+            if n in highlight:                                     # a ring round the stars we are talking about
+                r = int(46 * size * pulse)
+                self.pg.draw.circle(screen, (255, 214, 120), (int(x), int(y)), r, 3)
+
+    def draw_pointer(self, screen, g: dict, since: float, t: float) -> None:
+        """A dashed guide line shooting from one point of the sky to another."""
+        (x1, y1), (x2, y2) = g["from"], g["to"]
+        k = ease(since / float(g.get("grow", 1.5)))
+        length = math.hypot(x2 - x1, y2 - y1) or 1.0
+        ux, uy = (x2 - x1) / length, (y2 - y1) / length
+        layer = self.pg.Surface((W, H))
+        d, dash, gap = 0.0, 26.0, 16.0
+        while d < length * k:
+            e = min(d + dash, length * k)
+            self.pg.draw.line(layer, (150, 130, 80), (x1 + ux * d, y1 + uy * d), (x1 + ux * e, y1 + uy * e), 5)
+            d = e + gap
         screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)

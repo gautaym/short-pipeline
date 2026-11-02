@@ -1,0 +1,126 @@
+# Sky Stories, part 2: Arundhati, the faithful star.
+# Review notes. Tradition: the Saptarishi (seven sages) are the seven bright stars of the Big
+# Dipper; Vasishtha is Mizar, the middle star of the handle, and his wife Arundhati is faint Alcor
+# beside it. In many Hindu weddings the couple is shown Arundhati (Arundhati darshan) as a symbol of
+# devotion; the sages are said to circle Dhruva, the Pole Star.
+# Science: Mizar and Alcor lie about 80-83 light-years away and are most likely gravitationally
+# bound (Mamajek et al. 2010), hence "most likely"; the two end stars of the Dipper's bowl, Dubhe
+# and Merak, point to Polaris. The sky positions below are a simplified drawing of the Dipper.
+id: arundhati
+topic: mythology
+series_part: 2
+title:
+  en: "Why do newlyweds look for a tiny star?"
+  hi: "नवविवाहित जोड़े एक छोटा-सा तारा क्यों ढूँढते हैं?"
+series:
+  en: "Sky Stories"
+  hi: "आकाश की कहानियाँ"
+summary:
+  en: "The seven sages of the Big Dipper, and the faint star Arundhati beside the sage Vasishtha: the star newlyweds are shown as a promise to stay together. Science says the pair, Mizar and Alcor, are most likely bound by gravity."
+  hi: "बिग डिपर के सात ऋषि, और ऋषि वशिष्ठ के पास धुँधला तारा अरुंधती: वह तारा जो नवविवाहितों को साथ निभाने के वचन के रूप में दिखाया जाता है। विज्ञान कहता है कि यह जोड़ी, मिज़ार और अल्कोर, शायद गुरुत्वाकर्षण से बँधी है।"
+music: chill
+cast: {}
+opening:
+  beat: 4
+  actors:
+    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
+# The Big Dipper, drawn as glowing stars joined by lines: the handle Alkaid, Mizar (Vasishtha) and
+# Alioth, then the bowl Megrez, Phecda, Merak and Dubhe; Alcor (Arundhati) sits just beside Mizar.
+dipper: &dipper
+  stars: [[170, 780, 1.0], [300, 690, 1.1], [420, 650, 1.0], [530, 630, 0.9], [560, 780, 1.0], [790, 800, 1.1], [800, 620, 1.2], [330, 652, 0.45]]
+  lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3]]
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  backdrop_style: >-
+    An empty landscape painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    vasishtha: >-
+      the sage Vasishtha, a calm old rishi with warm brown skin, a long white beard, white hair tied in a
+      tall bun, a saffron robe over one shoulder, rudraksha beads, exactly two arms, holding a small brass water pot
+    arundhati: >-
+      Arundhati, the devoted wife of the sage, a serene older woman with warm golden skin, a simple white
+      and saffron saree, her hair in a bun, exactly two arms
+    bride: >-
+      a young Indian bride with warm golden skin in a red silk wedding saree with gold border, gold jewellery,
+      a red veil over her hair, exactly two arms
+    groom: >-
+      a young Indian groom with warm brown skin in a cream silk sherwani, a red and gold turban and a flower
+      garland, exactly two arms
+  puppets:
+    vasishtha: "The puppet is {vasishtha}, standing peacefully, one hand raised in blessing, side view facing right."
+    arundhati: "The puppet is {arundhati}, standing with her palms joined in namaste, side view facing right."
+    bride: "The puppet is {bride}, standing and looking up at the sky with one hand raised and pointing up, side view facing right."
+    groom: "The puppet is {groom}, standing and looking up at the sky, one hand raised and pointing up, side view facing right."
+  backdrops:
+    night_sky: "A clear night sky full of small stars above dark rolling hills, a deep blue and violet sky."
+    wedding: "A wedding mandap at night under the open sky: four carved pillars draped with marigold garlands, a small sacred fire in a brass pot in the middle, stars above."
+  anchors: {}
+beats:
+  - en: "Seven great sages shine in the northern sky: the Saptarishi. You may know them as the Big Dipper."
+    hi: "उत्तर के आकाश में सात महान ऋषि चमकते हैं: सप्तऋषि। आप इन्हें बिग डिपर के नाम से भी जानते हैं।"
+    caption: "THE SEVEN *SAGES*."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{constellation: {<<: *dipper, grow: 2.8}}]
+  - en: "Right beside the sage Vasishtha glows a faint star: his wife, Arundhati, famous for her devotion."
+    hi: "ऋषि वशिष्ठ के ठीक पास एक धुँधला तारा है: उनकी पत्नी, अरुंधती, जो अपनी निष्ठा के लिए जानी जाती हैं।"
+    caption: "*ARUNDHATI*, BY HIS SIDE."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{constellation: {<<: *dipper, highlight: [1, 7]}}]
+      actors:
+        vasishtha: {puppet: vasishtha, x: 700, y: 1880, h: 900, face: left, motion: breathe, enter: right}
+        arundhati: {puppet: arundhati, x: 360, y: 1880, h: 820, face: right, motion: breathe, enter: left}
+  - en: "In many Hindu weddings, the couple is shown this pair of stars: a promise to stay together, just like them."
+    hi: "कई हिंदू विवाहों में, नवविवाहित जोड़े को यह तारों की जोड़ी दिखाई जाती है: उनकी तरह साथ निभाने का वचन।"
+    caption: "A WEDDING *PROMISE*."
+    scene: cosmos
+    stage:
+      backdrop: wedding
+      fx: [{glow: [{actor: vasishtha_star, colour: [255, 230, 170]}, {actor: arundhati_star, colour: [200, 220, 255]}]}]
+      actors:
+        groom: {puppet: groom, x: 690, y: 1880, h: 980, face: left, motion: breathe, enter: right}
+        bride: {puppet: bride, x: 380, y: 1880, h: 900, face: right, motion: breathe, enter: left}
+        vasishtha_star: {puppet: pole_star, x: 560, y: 520, h: 130, motion: breathe}
+        arundhati_star: {puppet: pole_star, x: 640, y: 470, h: 70, motion: breathe}
+  - en: "And science found something beautiful. Vasishtha and Arundhati, the stars Mizar and Alcor, are most likely bound together by gravity, about 80 light-years away."
+    hi: "और विज्ञान ने कुछ सुंदर पाया। वशिष्ठ और अरुंधती, यानी मिज़ार और अल्कोर, शायद सच में गुरुत्वाकर्षण से बँधे हैं, हमसे लगभग अस्सी प्रकाश-वर्ष दूर।"
+    caption: "BOUND BY *GRAVITY*."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{link: {a: vasishtha_star, b: arundhati_star, colour: [255, 220, 170]}},
+           {glow: [{actor: vasishtha_star, colour: [255, 230, 170]}, {actor: arundhati_star, colour: [200, 220, 255]}]}]
+      actors:
+        vasishtha_star: {puppet: pole_star, x: 400, y: 1080, h: 330, motion: float}
+        arundhati_star: {puppet: pole_star, x: 720, y: 880, h: 190, motion: float}
+  - en: "And the last two stars of the Dipper point straight to Dhruva, the Pole Star, whom the sages circle every night."
+    hi: "और सप्तऋषि के आख़िरी दो तारे सीधे ध्रुव तारे की ओर इशारा करते हैं, जिसकी हर रात ये ऋषि परिक्रमा करते हैं।"
+    caption: "THEY *POINT* TO DHRUVA."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{constellation: *dipper}, {pointer: {from: [790, 800], to: [808, 270], grow: 2.0}},
+           {glow: {actor: dhruva, colour: [255, 230, 160]}}]
+      actors:
+        dhruva: {puppet: pole_star, x: 808, y: 340, h: 170, motion: breathe, enter: fade}
+  - en: "So find the seven sages tonight, and the tiny star by the bend. Now you know why couples look for it."
+    hi: "तो आज रात सप्तऋषि को ढूँढिए, और मोड़ के पास वह नन्हा तारा। अब आप जानते हैं, जोड़े उसे क्यों ढूँढते हैं।"
+    caption: "FIND THEM *TONIGHT*."
+    scene: cosmos
+    stage:
+      backdrop: night_sky
+      fx: [{constellation: {<<: *dipper, highlight: [1, 7]}}, {glow: {actor: dhruva, colour: [255, 230, 160]}}]
+      actors:
+        dhruva: {puppet: pole_star, x: 808, y: 340, h: 170, motion: breathe}
+        host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
+end:
+  head: "ARUNDHATI"
+  sub: "the faithful star"

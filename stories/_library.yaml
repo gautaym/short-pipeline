@@ -6,6 +6,10 @@ art:
     A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
     thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
     full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather shadow puppet scenery piece, a cut-out prop rather than a character,
+    traditional Andhra Tholu Bommalata style, bright flat colours with dark outlines and a pale cut edge,
+    studio photo against a plain pure black backdrop, nothing else in the frame.
   cast:
     sutradhar: >-
       the sutradhar, the cheerful old storyteller of the puppet show, with warm brown skin, a white beard and
@@ -13,3 +17,5 @@ art:
       white dhoti, exactly two arms
   puppets:
     sutradhar: "The puppet is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip, side view facing right."
+  props:
+    pole_star: "The prop is a single large golden eight-pointed star with long glowing rays and a bright white centre."
