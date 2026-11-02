@@ -32,3 +32,4 @@ assets/music/**/*.flac
 assets/music/**/*.txt
 !assets/music/README.txt
 ttsenv/
+cbenv/

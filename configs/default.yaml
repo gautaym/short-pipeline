@@ -12,7 +12,7 @@ render:
   voice_name: am_michael # US: am_michael, am_adam, af_heart, af_bella...; UK: bm_george, bf_emma...
   voice_speed: 1.05
   voice_level: 1.8       # how loud the voice is compared with music and effects (raise for louder speech)
-  voice_name_hi: "indic:Aman:deep" # Hindi narrator: indic:<Speaker>[:warm|deep] (Indic Parler-TTS, needs ttsenv) or a Kokoro voice such as hm_omega
+  voice_name_hi: "chatterbox:hi:aman" # Hindi narrator: chatterbox:hi[:<clip in models/voice_refs>] (needs cbenv), indic:<Speaker>[:warm|deep] (needs ttsenv), or a Kokoro voice such as hm_omega
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k

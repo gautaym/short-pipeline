@@ -19,65 +19,65 @@ cast:
   deva: {preset: deva}
   asura: {preset: asura}
 beats:
-  - en: "Long ago, the gods and the demons *churned* the cosmic ocean, in search of the nectar of *immortality*."
-    hi: "बहुत समय पहले, देवताओं और असुरों ने *अमृत* की खोज में क्षीर सागर का *मंथन* किया।"
+  - en: "Long ago, the gods and the demons churned the cosmic ocean, in search of the nectar of immortality."
+    hi: "बहुत समय पहले, देवताओं और असुरों ने अमृत की खोज में क्षीर सागर का मंथन किया।"
     caption: "THE OCEAN WAS *CHURNED*."
     scene: churning
     actors:
       deva: {x: 170, y: 1460, pose: pull, face: -1, scale: 0.7}
       asura: {x: 910, y: 1460, pose: pull, face: 1, scale: 0.7}
-  - en: "Mount Mandara became the churning rod, and *Vasuki*, king of serpents, the rope."
-    hi: "मंदार पर्वत मथानी बना, और नागराज *वासुकि* बने रस्सी।"
+  - en: "Mount Mandara became the churning rod, and Vasuki, king of serpents, the rope."
+    hi: "मंदार पर्वत मथानी बना, और नागराज वासुकि बने रस्सी।"
     caption: "*MANDARA* SPUN. *VASUKI* PULLED."
     scene: churning
     actors:
       deva: {x: 170, y: 1460, pose: pull, face: -1, scale: 0.7}
       asura: {x: 910, y: 1460, pose: pull, face: 1, scale: 0.7}
     camera: {zoom: 1.18, focus: [540, 930]}
-  - en: "But before any nectar, the ocean gave up something else. *Halahala*. A poison so *deadly*, it could end all creation."
-    hi: "लेकिन अमृत से पहले सागर से कुछ और निकला। *हलाहल*। ऐसा विष, जो पूरी *सृष्टि* को नष्ट कर सकता था।"
+  - en: "But before any nectar, the ocean gave up something else. Halahala. A poison so deadly, it could end all creation."
+    hi: "लेकिन अमृत से पहले सागर से कुछ और निकला। हलाहल। ऐसा विष, जो पूरी सृष्टि को नष्ट कर सकता था।"
     caption: "THEN CAME *HALAHALA*."
     scene: poison
     actors:
       deva: {x: 230, y: 1460, pose: afraid, face: 1, scale: 0.7}
       asura: {x: 850, y: 1460, pose: afraid, face: -1, scale: 0.7}
-  - en: "The skies turned *dark*. Gods and demons alike ran in fear."
-    hi: "आसमान *काला* पड़ गया। देवता और असुर, सब डरकर भागने लगे।"
+  - en: "The skies turned dark. Gods and demons alike ran in fear."
+    hi: "आसमान काला पड़ गया। देवता और असुर, सब डरकर भागने लगे।"
     caption: "EVERYONE *RAN*."
     scene: poison
     actors:
       deva: {x: 40, y: 1460, pose: hands_up, face: -1, scale: 0.7}
       asura: {x: 1040, y: 1460, pose: hands_up, face: 1, scale: 0.7}
     camera: {zoom: 1.1, focus: [540, 800]}
-  - en: "Only *one* did not run. *Shiva*."
-    hi: "बस *एक* नहीं भागे। भगवान *शिव*।"
+  - en: "Only one did not run. Shiva."
+    hi: "बस एक नहीं भागे। भगवान शिव।"
     caption: "ONLY *SHIVA* STAYED."
     scene: cosmos
     actors:
       shiva: {x: 540, y: 1450, pose: stand, face: 1, scale: 1.15, glow: true}
-  - en: "He took the poison in his hands, and *drank* it."
-    hi: "उन्होंने वह विष अपने हाथों में लिया, और *पी* गए।"
+  - en: "He took the poison in his hands, and drank it."
+    hi: "उन्होंने वह विष अपने हाथों में लिया, और पी गए।"
     caption: "HE *DRANK* IT."
     scene: poison
     actors:
       shiva: {x: 540, y: 1450, pose: drink, face: 1, scale: 1.15, prop: bowl, glow: true}
     camera: {zoom: 1.2, focus: [560, 820]}
-  - en: "*Parvati* held his throat, so the poison would go no further."
-    hi: "माता *पार्वती* ने उनका कंठ थाम लिया, ताकि विष आगे न बढ़े।"
+  - en: "Parvati held his throat, so the poison would go no further."
+    hi: "माता पार्वती ने उनका कंठ थाम लिया, ताकि विष आगे न बढ़े।"
     caption: "*PARVATI* HELD ON."
     scene: cosmos
     actors:
       shiva: {x: 660, y: 1450, pose: stand, face: -1, scale: 1.1, glow: true, flags: [blue_throat]}
       parvati: {x: 400, y: 1450, pose: throat, face: 1, scale: 1.05}
-  - en: "The poison stayed there, and his throat turned *blue*."
-    hi: "विष वहीं रुक गया, और उनका कंठ *नीला* पड़ गया।"
+  - en: "The poison stayed there, and his throat turned blue."
+    hi: "विष वहीं रुक गया, और उनका कंठ नीला पड़ गया।"
     caption: "HIS THROAT TURNED *BLUE*."
     scene: kailash
     actors:
       shiva: {x: 560, y: 1450, pose: raise, face: 1, scale: 1.15, glow: true, flags: [blue_throat]}
     camera: {zoom: 1.25, focus: [560, 760]}
-  - en: "That is why he is called *Neelkanth*. The blue-throated one."
-    hi: "इसीलिए उन्हें कहते हैं *नीलकंठ*। नीले कंठ वाले।"
+  - en: "That is why he is called Neelkanth. The blue-throated one."
+    hi: "इसीलिए उन्हें कहते हैं नीलकंठ। नीले कंठ वाले।"
     caption: "*NEELKANTH*."
     scene: kailash
     actors:
