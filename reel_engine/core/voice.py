@@ -33,7 +33,9 @@ REFS = REPO_ROOT / "models" / "voice_refs"
 BACKENDS = {                              # voice prefix -> (environment's python, batch script)
     "indic": (REPO_ROOT / "ttsenv" / "Scripts" / "python.exe", REPO_ROOT / "ai" / "tts_indic.py"),
     "chatterbox": (REPO_ROOT / "cbenv" / "Scripts" / "python.exe", REPO_ROOT / "ai" / "tts_chatterbox.py"),
+    "maya": (None, REPO_ROOT / "ai" / "tts_maya.py"),   # runs in the maya-tts Docker container
 }
+MAYA_CONTAINER = "maya-tts"
 INDIC_STYLES = {
     "warm": ("{speaker} speaks in a calm, warm storytelling voice with a slightly expressive tone, at a moderate pace. "
              "The recording is very clear and close up, with no background noise."),
@@ -52,6 +54,9 @@ def backend(voice: str) -> str | None:
 
 def available(voice: str = "") -> bool:
     voice = voice.partition("@")[0]
+    if backend(voice) == "maya":
+        found = subprocess.run(["docker", "ps", "-q", "-f", f"name={MAYA_CONTAINER}"], capture_output=True, text=True)
+        return bool(found.stdout.strip())
     if backend(voice):
         return all(p.exists() for p in BACKENDS[backend(voice)])
     if not (MODEL.exists() and VOICES.exists()):
@@ -88,10 +93,23 @@ def _batch_spec(voice: str) -> dict:
     kind, *args = voice.split(":")
     if kind == "indic":
         return {"speaker": args[0], "style": INDIC_STYLES[args[1] if len(args) > 1 else "warm"]}
+    if kind == "maya":                        # maya:<lang>:<clip in voice_refs, cloned> or a built-in voice name
+        spec = {"language": args[0], "voice": args[1]}
+        ref, text = REFS / f"{args[1]}.wav", REFS / f"{args[1]}.txt"
+        if ref.exists() and text.exists():
+            spec.update(ref=_in_container(ref), ref_text=text.read_text(encoding="utf-8").strip(),
+                        ref_lang=(REFS / f"{args[1]}.lang").read_text().strip()
+                        if (REFS / f"{args[1]}.lang").exists() else "hi")
+        return spec
     spec = {"language": args[0], "check": True}
     if len(args) > 1:
         spec["voice"] = str(REFS / f"{args[1]}.wav")
     return spec
+
+
+def _in_container(path: Path) -> str:
+    """A repo path as the maya-tts container sees it (the repo is mounted at /work)."""
+    return "/work/" + Path(path).resolve().relative_to(REPO_ROOT.resolve()).as_posix()
 
 
 def prepare(texts: list[str], voice: str) -> None:
@@ -106,6 +124,15 @@ def prepare(texts: list[str], voice: str) -> None:
               "out": str(_cached(t, voice))} for t in missing]
     python, script = BACKENDS[backend(voice)]
     CACHE.mkdir(parents=True, exist_ok=True)
+    if backend(voice) == "maya":                           # the jobs file must be inside the mounted repo
+        for line in lines:
+            line["out"] = _in_container(Path(line["out"]))
+        jobs = CACHE / "_maya_jobs.json"
+        jobs.write_text(json.dumps({**_batch_spec(voice), "lines": lines}, ensure_ascii=False), encoding="utf-8")
+        print(f"voicing {len(missing)} line(s) with {voice} ...", flush=True)
+        subprocess.run(["docker", "exec", MAYA_CONTAINER, "python", _in_container(script), _in_container(jobs)],
+                       check=True, cwd=REPO_ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return
     with tempfile.TemporaryDirectory() as tmp:
         jobs = Path(tmp) / "lines.json"
         jobs.write_text(json.dumps({**_batch_spec(voice), "lines": lines}, ensure_ascii=False), encoding="utf-8")
