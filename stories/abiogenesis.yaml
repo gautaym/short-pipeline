@@ -67,8 +67,8 @@ beats:
       actors:
         mol1: {puppet: molecules, x: 330, y: 1250, h: 420, motion: float, enter: fade}
         mol2: {puppet: molecules, x: 770, y: 1000, h: 340, face: left, motion: float, enter: fade}
-  - en: "In 1953, two scientists recreated this in a flask, and within a week, amino acids appeared."
-    hi: "उन्नीस सौ तिरेपन में, दो वैज्ञानिकों ने यही सब एक फ्लास्क में करके देखा, और एक हफ़्ते के अंदर अमीनो एसिड बन गए।"
+  - en: "[excited] In 1953, two scientists recreated this in a flask, and within a week, amino acids appeared."
+    hi: "[excited] उन्नीस सौ तिरेपन में, दो वैज्ञानिकों ने यही सब एक फ्लास्क में करके देखा, और एक हफ़्ते के अंदर अमीनो एसिड बन गए।"
     caption: "*1953*: LIFE'S PARTS IN A FLASK."
     scene: cosmos
     stage:

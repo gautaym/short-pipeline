@@ -153,8 +153,8 @@ beats:
       actors:
         sun: {puppet: sun, x: 160, y: 760, h: 380, motion: breathe, enter: fade}
         earth: {puppet: earth, x: 600, y: 1420, h: 640, motion: spin, enter: fade}
-  - en: "But Apep is coming back. On the thirteenth of April, 2029, an asteroid named Apophis will fly past Earth, closer than some of our satellites, bright enough to see without a telescope. And this time, nobody has to fight. It will slip safely by, back into the dark."
-    hi: "लेकिन अपेप लौट रहा है। तेरह अप्रैल, दो हज़ार उनतीस को, एपोफ़िस नाम का एक क्षुद्रग्रह धरती के बेहद पास से गुज़रेगा, हमारे कुछ उपग्रहों से भी ज़्यादा पास। इतना चमकीला, कि बिना दूरबीन के दिख जाएगा। और इस बार किसी को लड़ना नहीं पड़ेगा। वह चुपचाप पास से निकलकर, वापस अंधेरे में खो जाएगा।"
+  - en: "[excited] But Apep is coming back. On the thirteenth of April, 2029, an asteroid named Apophis will fly past Earth, closer than some of our satellites, bright enough to see without a telescope. And this time, nobody has to fight. It will slip safely by, back into the dark."
+    hi: "[excited] लेकिन अपेप लौट रहा है। तेरह अप्रैल, दो हज़ार उनतीस को, एपोफ़िस नाम का एक क्षुद्रग्रह धरती के बेहद पास से गुज़रेगा, हमारे कुछ उपग्रहों से भी ज़्यादा पास। इतना चमकीला, कि बिना दूरबीन के दिख जाएगा। और इस बार किसी को लड़ना नहीं पड़ेगा। वह चुपचाप पास से निकलकर, वापस अंधेरे में खो जाएगा।"
     caption: "*APOPHIS* RETURNS."
     scene: cosmos
     stage:

@@ -98,8 +98,8 @@ beats:
       fx: [{glow: {actor: dhruva, colour: [255, 230, 160]}}]
       actors:
         dhruva: {puppet: pole_star, x: 540, y: 820, h: 380, motion: breathe}
-  - en: "And science agrees, almost. The Pole Star sits nearly above Earth's North Pole, so as Earth spins, every other star circles around it."
-    hi: "और विज्ञान भी करीब-करीब यही कहता है। ध्रुव तारा धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए जब धरती घूमती है, तो बाकी सारे तारे उसके चारों ओर घूमते दिखते हैं।"
+  - en: "[excited] And science agrees, almost. The Pole Star sits nearly above Earth's North Pole, so as Earth spins, every other star circles around it."
+    hi: "[excited] और विज्ञान भी करीब-करीब यही कहता है। ध्रुव तारा धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए जब धरती घूमती है, तो बाकी सारे तारे उसके चारों ओर घूमते दिखते हैं।"
     caption: "*EVERY* STAR CIRCLES IT."
     scene: cosmos
     stage:

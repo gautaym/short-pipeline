@@ -221,6 +221,8 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
     if key in _cache:
         return _cache[key]
     voice, semis, pace = split_pitch(voice)
+    if backend(voice) != "maya":                         # only Maya acts on emotion tags like [excited];
+        text = re.sub(r"\[[a-z ]+\]\s*", "", text)        # any other voice would read them out
     if backend(voice):
         prepare([text], voice)
         samples, rate = _load_wav(_cached(text, voice))

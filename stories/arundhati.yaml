@@ -89,8 +89,8 @@ beats:
         bride: {puppet: bride, x: 380, y: 1880, h: 900, face: right, motion: breathe, enter: left}
         vasishtha_star: {puppet: pole_star, x: 560, y: 520, h: 130, motion: breathe}
         arundhati_star: {puppet: pole_star, x: 640, y: 470, h: 70, motion: breathe}
-  - en: "And science found something beautiful. Vasishtha and Arundhati, the stars Mizar and Alcor, are most likely bound together by gravity, about 80 light-years away."
-    hi: "और विज्ञान ने भी कुछ खूबसूरत खोजा। वशिष्ठ और अरुंधती, यानी मिज़ार और अल्कोर, शायद सच में गुरुत्वाकर्षण से एक-दूसरे से बँधे हैं, हमसे करीब अस्सी प्रकाश-वर्ष दूर।"
+  - en: "[excited] And science found something beautiful. Vasishtha and Arundhati, the stars Mizar and Alcor, are most likely bound together by gravity, about 80 light-years away."
+    hi: "[excited] और विज्ञान ने भी कुछ खूबसूरत खोजा। वशिष्ठ और अरुंधती, यानी मिज़ार और अल्कोर, शायद सच में गुरुत्वाकर्षण से एक-दूसरे से बँधे हैं, हमसे करीब अस्सी प्रकाश-वर्ष दूर।"
     caption: "BOUND BY *GRAVITY*."
     scene: cosmos
     stage:

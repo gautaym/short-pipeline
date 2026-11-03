@@ -12,11 +12,11 @@ segments:
   science: {narrator: professor, asker: kabir}                # science, maths, facts, sports, the news
 # Each character speaks with one voice in both languages: "maya:<lang>:<name>" is one of Maya 2's
 # built-in voices (run in the maya-tts container), fluent in Hindi and English. Picked by ear
-# 2026-11-03: narrators Akshat, Nakul (male) and Charvi, Kayal, Nivedita, Vaidehi (female);
-# askers Shaunak (male), Nivedita and Vaidehi (female). Kayal is spare; Sreekar was dropped after a listen.
+# 2026-11-03: narrators Akshat, Anirban (male) and Charvi, Kayal, Nivedita, Vaidehi (female);
+# askers Shaunak (male), Nivedita and Vaidehi (female). Sreekar and Nakul dropped after a listen; Kayal speaks no Hindi.
 voices:
   sutradhar: {en: "maya:en:Akshat", hi: "maya:hi:Akshat"}
-  storyteller: {en: "maya:en:Nakul", hi: "maya:hi:Nakul"}
+  storyteller: {en: "maya:en:Anirban", hi: "maya:hi:Anirban"}
   professor: {en: "maya:en:Charvi", hi: "maya:hi:Charvi"}
   meera: {en: "maya:en:Vaidehi", hi: "maya:hi:Vaidehi"}
   lila: {en: "maya:en:Nivedita", hi: "maya:hi:Nivedita"}
