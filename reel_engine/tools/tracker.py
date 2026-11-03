@@ -58,7 +58,8 @@ def art_missing(sc: dict) -> int:
     if seg:
         needed |= {seg["narrator"]} | ({seg["asker"]} if sc.get("ask", True) is not False else set())
     missing = sum(not art.puppet_file(sc["id"], p).exists() for p in needed)
-    return missing + sum(not art.backdrop_file(sc["id"], b["stage"]["backdrop"]).exists() for b in sc["beats"])
+    backdrops = {b["stage"]["backdrop"] for b in sc["beats"]}
+    return missing + sum(not art.backdrop_file(sc["id"], b).exists() for b in backdrops)
 
 
 def newest(pattern: str) -> Path | None:
@@ -97,7 +98,7 @@ def status(queue: list[str], since: float) -> dict:
     finished = sum(r["tasks"][l]["preview"] for r in rows for l in LANGS)
     current = next((r["id"] for r in rows if not all(r["tasks"][l]["preview"] for l in LANGS)), None)
     for r in rows:
-        r["now"] = ("voicing" if now_busy else "rendering") if r["id"] == current else (
+        r["now"] = ("drawing" if r["art"] else "voicing" if now_busy else "rendering") if r["id"] == current else (
             "done" if all(r["tasks"][l]["preview"] for l in LANGS) else "waiting")
     return {"updated": datetime.now().strftime("%H:%M:%S"), "since": datetime.fromtimestamp(since).strftime("%H:%M"),
             "finished": finished, "total": total, "current": current, "rows": rows}
