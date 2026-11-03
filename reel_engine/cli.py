@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -68,6 +68,18 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--takes", type=int, default=2, help="versions of each puppet, to choose from")
     a.add_argument("--only", default=None, help="only these puppets or backdrops, e.g. shiva,ocean")
     a.add_argument("--redo", action="store_true", help="draw again even if a picture exists")
+
+    rv = sub.add_parser("review", help="contact sheets of a story's drawn takes and chosen cut-outs")
+    rv.add_argument("story")
+    pk = sub.add_parser("pick", help="choose takes for a story, e.g. reel pick ra apep=1 khepri=3")
+    pk.add_argument("story")
+    pk.add_argument("choices", nargs="+", help="name=take")
+    mk = sub.add_parser("make", help="render a story in English and Hindi, with frame sheets and phone previews")
+    mk.add_argument("story")
+    mk.add_argument("--langs", default="en,hi")
+    ns = sub.add_parser("new-story", help="start a story script from the template")
+    ns.add_argument("story")
+    ns.add_argument("--segment", required=True, choices=["indian_myth", "world_myth", "science"])
 
     c = sub.add_parser("contact-sheet", help="grab frames from videos into one image")
     c.add_argument("videos", nargs="+")
@@ -192,6 +204,19 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_ledger(opts)
     if opts.command == "story-art":
         return cmd_story_art(opts)
+    if opts.command in ("review", "pick", "make", "new-story"):
+        from .tools import story_tools as st
+        if opts.command == "review":
+            out = st.review(opts.story)
+        elif opts.command == "pick":
+            out = st.pick(opts.story, opts.choices)
+        elif opts.command == "make":
+            out = st.make(opts.story, tuple(opts.langs.split(",")))
+        else:
+            out = [st.new_story(opts.story, opts.segment)]
+        for line in out:
+            print(line)
+        return 0
     if opts.command == "organise":
         return cmd_organise(opts)
     return cmd_render(opts)

@@ -188,8 +188,12 @@ class Story(Format):
         from ..story.theatre import Theatre
         self.theatre = Theatre.load(self.pg, self.sc, self.seed)
         if self.theatre:
-            from ..core.text import serif_path
-            self.caption_font = self.pg.font.Font(serif_path("Bold"), 84)
+            from ..core.text import font_file
+            self.caption_font = self.pg.font.Font(font_file("Poppins-ExtraBold"), 74)
+            # the end card in the same type: the title in the display face, the rest in Poppins
+            self.fonts.big = self.pg.font.Font(self.display_font(), 100)
+            self.fonts.stat = self.pg.font.Font(font_file("Poppins-SemiBold"), 40)
+            self.fonts.cta = self.pg.font.Font(font_file("Poppins-SemiBold"), 42)
             self.shade = self.caption_shade()
 
     def caption_shade(self):
@@ -229,6 +233,11 @@ class Story(Format):
             cap.set_alpha(int(255 * a))
             screen.blit(cap, cap.get_rect(center=(W / 2, ART_CAPTION_Y)))
 
+    def display_font(self) -> str:
+        """Cinzel Decorative for myths and legends, Poppins for science, maths and facts."""
+        from ..core.text import font_file
+        return font_file("Poppins-ExtraBold" if self.sc.get("topic") == "science" else "CinzelDecorative-Bold")
+
     def dip(self, screen, k: float) -> None:
         """Black over the frame, fully at k = 0 and gone by k = 1: a quick dip between cold open and story."""
         if k < 1:
@@ -239,15 +248,22 @@ class Story(Format):
     def draw_hook(self, screen) -> None:
         """The question in big type at the top, with the series and part above it."""
         if not hasattr(self, "hook_card"):
-            from ..core.text import outlined, serif_path, text_block
-            big = self.pg.font.Font(serif_path("Bold"), 104)
-            self.hook_card = text_block(self.pg, big, self.sc["title"]["en"].upper(), (250, 244, 228), W - 120, outline=7)
+            from ..core.text import font_file, soft_text, wrap
+            big = self.pg.font.Font(self.display_font(), 92 if self.sc.get("topic") != "science" else 96)
+            rows = [soft_text(self.pg, big, line, (255, 248, 232), 210)
+                    for line in wrap(big, self.sc["title"]["en"].upper(), W - 120)[:4]]
+            self.hook_card = self.pg.Surface((W, sum(r.get_height() - 18 for r in rows) + 18), self.pg.SRCALPHA)
+            y = 0
+            for r in rows:
+                self.hook_card.blit(r, r.get_rect(midtop=(W / 2, y)))
+                y += r.get_height() - 18
             part = self.sc.get("series_part")
             words = ("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN")
             part = words[part] if isinstance(part, int) and part < len(words) else part   # the serif's digits are small
             label = self.sc.get("series", {}).get("en", "") + (f"  ·  PART {part}" if part else "")
-            small = self.pg.font.Font(serif_path("Bold"), 58)
-            self.series_tag = outlined(self.pg, small, label.upper(), ART_HIGHLIGHT, 4) if label else None
+            small = self.pg.font.Font(font_file("Poppins-SemiBold"), 40)
+            spaced = "  ".join(label.upper().split()) if label else ""             # a little letter spacing
+            self.series_tag = soft_text(self.pg, small, " ".join(spaced), ART_HIGHLIGHT, 190) if label else None
         k = min(1.0, self.play_t / 0.35)
         self.hook_card.set_alpha(int(255 * k))
         top = 250
@@ -311,8 +327,13 @@ class Story(Format):
                 hot = w.startswith("*") or w.rstrip(".,!?").endswith("*")
                 words.append((w.replace("*", ""), hot))
             hi = ART_HIGHLIGHT if self.theatre else HIGHLIGHT
-            pieces = [outlined(self.pg, self.caption_font, w, hi if hot else (250, 244, 228), 5)
-                      for w, hot in words]
+            if self.theatre:
+                from ..core.text import soft_text
+                pieces = [soft_text(self.pg, self.caption_font, w, hi if hot else (255, 252, 244), 200)
+                          for w, hot in words]
+            else:
+                pieces = [outlined(self.pg, self.caption_font, w, hi if hot else (250, 244, 228), 5)
+                          for w, hot in words]
             if not pieces:
                 self.caption_cache[i] = None
             else:

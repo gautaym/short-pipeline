@@ -18,6 +18,32 @@ def serif_path(weight: str = "SemiBold") -> str:
     return str(p) if p.exists() else font_path()
 
 
+def font_file(name: str) -> str:
+    """A font from assets/fonts (all SIL Open Font Licence), e.g. "Poppins-ExtraBold"."""
+    from ..config import REPO_ROOT
+    p = REPO_ROOT / "assets" / "fonts" / f"{name}.ttf"
+    return str(p) if p.exists() else font_path()
+
+
+def soft_text(pg, font, text: str, colour, shadow: int = 150, offset: int = 5):
+    """Text with a soft blurred drop shadow (no hard outline), as in polished video captions."""
+    face = font.render(text, True, colour)
+    w, h = face.get_size()
+    pad = 14
+    dark = font.render(text, True, (0, 0, 0))
+    halo = pg.Surface((w + pad * 2, h + pad * 2), pg.SRCALPHA)
+    for dx, dy in ((0, 0), (2, 0), (-2, 0), (0, 2), (0, -2)):
+        halo.blit(dark, (pad + dx, pad + dy))
+    small = pg.transform.smoothscale(halo, (max(1, halo.get_width() // 5), max(1, halo.get_height() // 5)))
+    halo = pg.transform.smoothscale(small, halo.get_size())               # blurred by scaling down and up
+    halo.fill((255, 255, 255, shadow), special_flags=pg.BLEND_RGBA_MULT)
+    out = pg.Surface((w + pad * 2, h + pad * 2 + offset), pg.SRCALPHA)
+    out.blit(halo, (0, offset))
+    out.blit(halo, (0, offset))
+    out.blit(face, (pad, pad))
+    return out
+
+
 class Fonts:
     """The standard set of font sizes used by titles, HUDs, floaters, banners and end cards."""
 
