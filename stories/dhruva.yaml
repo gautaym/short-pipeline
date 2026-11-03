@@ -62,7 +62,7 @@ art:
   anchors: {}
 beats:
   - en: "Little prince Dhruva wanted to sit on his father's lap. But his stepmother, Queen Suruchi, sent him away."
-    hi: "नन्हे राजकुमार ध्रुव अपने पिता की गोद में बैठना चाहते थे। लेकिन उनकी सौतेली माँ, रानी सुरुचि ने उन्हें दूर भेज दिया।"
+    hi: "नन्हे राजकुमार ध्रुव अपने पिता की गोद में बैठना चाहते थे। पर सौतेली माँ, रानी सुरुचि ने उन्हें वहाँ से हटा दिया।"
     caption: "DHRUVA WAS *SENT AWAY*."
     scene: palace
     stage:
@@ -71,7 +71,7 @@ beats:
         queen: {puppet: queen, x: 770, y: 1600, h: 1100, face: left, motion: sway, enter: right}
         dhruva: {puppet: dhruva_sad, x: 300, y: 1600, h: 700, face: right, motion: tremble, enter: fade}
   - en: "Only five years old, he went into the forest and prayed to Lord Vishnu, without moving, through sun, rain and storm."
-    hi: "सिर्फ़ पाँच साल की उम्र में, वह वन में गए और भगवान विष्णु की तपस्या की, बिना हिले, धूप, बारिश और तूफ़ान में।"
+    hi: "सिर्फ़ पाँच साल के ध्रुव जंगल चले गए, और भगवान विष्णु की तपस्या में बैठ गए। धूप हो, बारिश हो या तूफ़ान, वे ज़रा भी नहीं हिले।"
     caption: "HE PRAYED, *UNMOVING*."
     scene: forest
     stage:
@@ -80,7 +80,7 @@ beats:
       actors:
         dhruva: {puppet: dhruva_pray, x: 540, y: 1600, h: 900, face: right, motion: breathe}
   - en: "Moved by his devotion, Vishnu appeared, and blessed him with a place no one could ever take."
-    hi: "उनकी भक्ति से प्रसन्न होकर, विष्णु प्रकट हुए, और उन्हें ऐसा स्थान दिया, जिसे कोई कभी छीन नहीं सकता।"
+    hi: "उनकी भक्ति देखकर विष्णु प्रकट हुए, और उन्हें ऐसी जगह का वरदान दिया, जिसे कोई कभी नहीं छीन सकता।"
     caption: "*VISHNU* APPEARED."
     scene: forest
     stage:
@@ -90,7 +90,7 @@ beats:
         dhruva: {puppet: dhruva_pray, x: 280, y: 1600, h: 760, face: right, motion: breathe}
         vishnu: {puppet: vishnu, x: 720, y: 1620, h: 1250, motion: breathe, enter: fade}
   - en: "Dhruva became the unmoving star of the north. Dhruva Tara, the Pole Star."
-    hi: "ध्रुव बन गए उत्तर दिशा का अटल तारा। ध्रुव तारा।"
+    hi: "ध्रुव बन गए उत्तर का अटल तारा। ध्रुव तारा।"
     caption: "THE *POLE STAR*."
     scene: cosmos
     stage:
@@ -99,7 +99,7 @@ beats:
       actors:
         dhruva: {puppet: pole_star, x: 540, y: 820, h: 380, motion: breathe}
   - en: "And science agrees, almost. The Pole Star sits nearly above Earth's North Pole, so as Earth spins, every other star circles around it."
-    hi: "और विज्ञान भी, लगभग, यही कहता है। ध्रुव तारा धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए धरती के घूमने पर बाकी सारे तारे उसके चारों ओर घूमते हैं।"
+    hi: "और विज्ञान भी करीब-करीब यही कहता है। ध्रुव तारा धरती के उत्तरी ध्रुव के लगभग ठीक ऊपर है, इसलिए जब धरती घूमती है, तो बाकी सारे तारे उसके चारों ओर घूमते दिखते हैं।"
     caption: "*EVERY* STAR CIRCLES IT."
     scene: cosmos
     stage:
@@ -108,7 +108,7 @@ beats:
       actors:
         dhruva: {puppet: pole_star, x: 540, y: 1020, h: 240, motion: breathe}
   - en: "So look north tonight, and find the one star that stays. Now you know why it never moves."
-    hi: "तो आज रात उत्तर की ओर देखिए, और वह एक तारा ढूँढिए जो नहीं हिलता। अब आप जानते हैं, क्यों।"
+    hi: "तो आज रात उत्तर की तरफ़ देखिए, और वह एक तारा ढूँढिए जो अपनी जगह से नहीं हिलता। अब आप जानते हैं, क्यों।"
     caption: "LOOK *NORTH* TONIGHT."
     scene: cosmos
     stage:

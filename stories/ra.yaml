@@ -72,7 +72,7 @@ art:
   anchors: {}
 beats:
   - en: "Every morning, the ancient Egyptians watched their god rise. Ra, the falcon-headed sun god, sailed across the sky in a golden boat, warming the river Nile and everything that lived."
-    hi: "हर सुबह, प्राचीन मिस्र के लोग अपने देवता को उगते देखते थे। रा, बाज़ के सिर वाले सूर्य देवता, एक सुनहरी नाव में आकाश पार करते थे, नील नदी और हर जीव को गर्मी देते हुए।"
+    hi: "हर सुबह, प्राचीन मिस्र के लोग अपने देवता को उगते देखते थे। बाज़ के सिर वाले सूर्य देव रा, सोने की नाव में आसमान पार करते, और नील नदी से लेकर हर जीव तक को गर्मी देते।"
     caption: "RA SAILED THE *SKY*."
     scene: cosmos
     stage:
@@ -82,7 +82,7 @@ beats:
         ra: {puppet: ra, x: 520, y: 1150, h: 760, face: right, motion: bob, enter: left}
         boat: {puppet: boat, x: 540, y: 1260, h: 380, z: 1, motion: bob, sync: ra, enter: left}
   - en: "But every evening, they watched him sink, and die."
-    hi: "लेकिन हर शाम, वे उन्हें डूबते देखते थे, और मरते हुए।"
+    hi: "पर हर शाम, वे उन्हें डूबते देखते थे। जैसे वे मर रहे हों।"
     caption: "EVERY EVENING, RA *DIED*."
     scene: cosmos
     stage:
@@ -92,7 +92,7 @@ beats:
         ra: {puppet: ra, x: 560, y: 1640, h: 720, face: right, motion: bob}
         boat: {puppet: boat, x: 580, y: 1750, h: 360, z: 1, motion: bob, sync: ra}
   - en: "His boat drifted into the Duat, the underworld. Twelve dark hours. Twelve gates, guarded by fire and monsters."
-    hi: "उनकी नाव डुआट में उतर जाती थी, पाताल लोक। बारह अंधेरे घंटे। बारह द्वार, जिनकी रखवाली आग और राक्षस करते थे।"
+    hi: "उनकी नाव उतर जाती डुआट में, यानी पाताल में। बारह घंटे का अंधेरा। बारह दरवाज़े, जिन पर आग और राक्षसों का पहरा था।"
     caption: "TWELVE HOURS OF *DARKNESS*."
     scene: cosmos
     stage:
@@ -102,7 +102,7 @@ beats:
         ra: {puppet: ra, x: 520, y: 1500, h: 760, face: right, motion: bob}
         boat: {puppet: boat, x: 540, y: 1610, h: 380, z: 1, motion: bob, sync: ra}
   - en: "And waiting in the dark was Apep. A serpent so huge, and so hungry, he wanted to swallow the Sun, and end every tomorrow."
-    hi: "और अंधेरे में इंतज़ार कर रहा था अपेप। इतना विशाल, इतना भूखा सर्प, जो सूरज को निगलकर हर आने वाले कल को ख़त्म कर देना चाहता था।"
+    hi: "और उस अंधेरे में घात लगाए बैठा था अपेप। इतना बड़ा और इतना भूखा साँप, जो सूरज को निगलकर हर आने वाली सुबह ख़त्म कर देना चाहता था।"
     caption: "*APEP* WAS WAITING."
     scene: cosmos
     stage:
@@ -113,7 +113,7 @@ beats:
         boat: {puppet: boat, x: 340, y: 1620, h: 340, z: 1, motion: bob, sync: ra}
         apep: {puppet: apep, x: 790, y: 1560, h: 1250, face: right, motion: slither, enter: right}
   - en: "Every single night, they fought. When storms rolled in, or the Sun went dark at midday, some Egyptians feared Apep was winning."
-    hi: "हर एक रात, दोनों में युद्ध होता था। जब तूफ़ान आते, या दोपहर में सूरज अंधेरा पड़ जाता, तो कुछ मिस्रवासी डरते थे कि अपेप जीत रहा है।"
+    hi: "हर रात दोनों में जंग होती। जब तूफ़ान आता, या भरी दोपहर में सूरज पर अंधेरा छा जाता, तो कुछ मिस्रवासी डर जाते कि अपेप जीत रहा है।"
     caption: "EVERY NIGHT, A *BATTLE*."
     scene: cosmos
     stage:
@@ -124,7 +124,7 @@ beats:
         boat: {puppet: boat, x: 320, y: 1620, h: 340, z: 1, motion: bob, sync: ra}
         apep: {puppet: apep, x: 740, y: 1560, h: 1300, face: right, motion: slither}
   - en: "So the priests joined the fight. They made little Apeps out of wax, spat on them, stamped on them, and burned them, to keep Ra safe."
-    hi: "इसलिए पुजारी भी लड़ाई में उतर आते। वे मोम से छोटे-छोटे अपेप बनाते, उन पर थूकते, उन्हें पैरों से कुचलते, और जला देते, ताकि रा सुरक्षित रहें।"
+    hi: "तो पुजारी भी इस लड़ाई में कूद पड़े। वे मोम के छोटे-छोटे अपेप बनाते, उन पर थूकते, पैरों से कुचलते, और जला देते, ताकि रा बचे रहें।"
     caption: "THE PRIESTS *BURNED* APEP."
     scene: cosmos
     stage:
@@ -135,7 +135,7 @@ beats:
         boat: {puppet: boat, x: 380, y: 1610, h: 380, z: 1, motion: bob, sync: ra}
         apep: {puppet: apep, x: 740, y: 1560, h: 560, face: right, motion: tremble, exit: fade}
   - en: "And every morning, it worked. Ra rose again, reborn as Khepri, the scarab beetle, rolling the Sun into a brand new day."
-    hi: "और हर सुबह, यह काम कर जाता। रा फिर उगते, खेप्री के रूप में नया जन्म लेकर, वह स्कारब भृंग जो सूरज को लुढ़काकर एक नए दिन में ले आता है।"
+    hi: "और हर सुबह, यह तरकीब काम कर जाती। रा फिर से उगते, खेप्री के रूप में नया जन्म लेकर। वह गुबरैला, जो सूरज को लुढ़काता हुआ एक नए दिन में ले आता है।"
     caption: "REBORN AT *DAWN*."
     scene: cosmos
     stage:
@@ -144,7 +144,7 @@ beats:
       actors:
         khepri: {puppet: khepri, x: 540, y: 1500, h: 900, motion: breathe, enter: bottom}
   - en: "Today we know the Sun never dies. Earth simply turns, and we roll from day into night, and back into morning."
-    hi: "आज हम जानते हैं कि सूरज कभी नहीं मरता। धरती बस घूमती है, और हम दिन से रात में, और फिर सुबह में पहुँच जाते हैं।"
+    hi: "आज हम जानते हैं कि सूरज कभी नहीं मरता। बस धरती घूमती है, और हम दिन से रात में, और फिर सुबह में पहुँच जाते हैं।"
     caption: "*EARTH* TURNS."
     scene: cosmos
     stage:
@@ -154,7 +154,7 @@ beats:
         sun: {puppet: sun, x: 160, y: 760, h: 380, motion: breathe, enter: fade}
         earth: {puppet: earth, x: 600, y: 1420, h: 640, motion: spin, enter: fade}
   - en: "But Apep is coming back. On the thirteenth of April, 2029, an asteroid named Apophis will fly past Earth, closer than some of our satellites, bright enough to see without a telescope. And this time, nobody has to fight. It will slip safely by, back into the dark."
-    hi: "लेकिन अपेप लौट रहा है। तेरह अप्रैल, दो हज़ार उनतीस को, एपोफ़िस नाम का एक क्षुद्रग्रह धरती के पास से गुज़रेगा, हमारे कुछ उपग्रहों से भी ज़्यादा पास, इतना चमकीला कि बिना दूरबीन के दिख जाए। और इस बार, किसी को लड़ना नहीं पड़ेगा। वह सुरक्षित निकल जाएगा, वापस अंधेरे में।"
+    hi: "लेकिन अपेप लौट रहा है। तेरह अप्रैल, दो हज़ार उनतीस को, एपोफ़िस नाम का एक क्षुद्रग्रह धरती के बेहद पास से गुज़रेगा, हमारे कुछ उपग्रहों से भी ज़्यादा पास। इतना चमकीला, कि बिना दूरबीन के दिख जाएगा। और इस बार किसी को लड़ना नहीं पड़ेगा। वह चुपचाप पास से निकलकर, वापस अंधेरे में खो जाएगा।"
     caption: "*APOPHIS* RETURNS."
     scene: cosmos
     stage:

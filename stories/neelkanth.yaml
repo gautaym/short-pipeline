@@ -72,7 +72,7 @@ art:
     kailash: "The snowy peaks of Mount Kailash at dawn, a soft golden and pink sky, pine trees below."
 beats:
   - en: "Long ago, the gods and the demons churned the cosmic ocean, in search of the nectar of immortality."
-    hi: "बहुत समय पहले, देवताओं और असुरों ने अमृत की खोज में क्षीर सागर का मंथन किया।"
+    hi: "बहुत समय पहले, अमृत पाने के लिए देवताओं और असुरों ने मिलकर क्षीर सागर को मथा।"
     caption: "THE OCEAN WAS *CHURNED*."
     scene: churning
     actors:
@@ -101,7 +101,7 @@ beats:
         deva: {puppet: deva_pull, x: 120, y: 1600, h: 760, face: right, motion: pull}
         asura: {puppet: asura_pull, x: 960, y: 1600, h: 760, face: left, motion: pull}
   - en: "But before any nectar, the ocean gave up something else. Halahala. A poison so deadly, it could end all creation."
-    hi: "लेकिन अमृत से पहले सागर से कुछ और निकला। हलाहल। ऐसा विष, जो पूरी सृष्टि को नष्ट कर सकता था।"
+    hi: "लेकिन अमृत से पहले, सागर से कुछ और निकला। हलाहल। ऐसा ज़हर, जो पूरी सृष्टि को ख़त्म कर सकता था।"
     caption: "THEN CAME *HALAHALA*."
     scene: poison
     actors:
@@ -115,7 +115,7 @@ beats:
         deva: {puppet: deva_pull, x: 200, y: 1560, h: 700, face: right, motion: tremble}
         asura: {puppet: asura_pull, x: 880, y: 1560, h: 700, face: left, motion: tremble}
   - en: "The skies turned dark. Gods and demons alike ran in fear."
-    hi: "आसमान काला पड़ गया। देवता और असुर, सब डरकर भागने लगे।"
+    hi: "आसमान काला पड़ गया। देवता हों या असुर, सब डरकर भागने लगे।"
     caption: "EVERYONE *RAN*."
     scene: poison
     actors:
@@ -140,7 +140,7 @@ beats:
       actors:
         shiva: {puppet: shiva, x: 560, y: 1580, h: 1150, face: left, motion: walk_in, enter: right}
   - en: "He took the poison in his hands, and drank it."
-    hi: "उन्होंने वह विष अपने हाथों में लिया, और पी गए।"
+    hi: "उन्होंने वह विष अपनी हथेलियों में लिया, और पी गए।"
     caption: "HE *DRANK* IT."
     scene: poison
     actors:
@@ -177,7 +177,7 @@ beats:
       actors:
         shiva: {puppet: shiva_blue, x: 540, y: 1720, h: 1500, face: right, motion: breathe, enter: fade}
   - en: "That is why he is called Neelkanth. The blue-throated one."
-    hi: "इसीलिए उन्हें कहते हैं नीलकंठ। नीले कंठ वाले।"
+    hi: "इसीलिए उन्हें नीलकंठ कहते हैं। यानी, नीले कंठ वाले।"
     caption: "*NEELKANTH*."
     scene: kailash
     actors:

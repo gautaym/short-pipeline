@@ -51,7 +51,7 @@ art:
   anchors: {}
 beats:
   - en: "Two particles. Light years apart. Yet somehow, they behave as one. This is quantum entanglement."
-    hi: "दो कण। प्रकाश-वर्षों की दूरी पर। फिर भी, वे एक की तरह व्यवहार करते हैं। इसे कहते हैं क्वांटम एंटैंगलमेंट।"
+    hi: "दो कण। एक-दूसरे से प्रकाश-वर्षों दूर। फिर भी, वे ऐसे बर्ताव करते हैं जैसे एक ही हों। इसे कहते हैं क्वांटम एंटैंगलमेंट।"
     caption: "TWO PARTICLES, *ONE* STORY."
     scene: cosmos
     stage:
@@ -61,7 +61,7 @@ beats:
         p1: {puppet: particle, x: 230, y: 1120, h: 300, motion: float, enter: left}
         p2: {puppet: particle, x: 850, y: 880, h: 300, motion: float, enter: right}
   - en: "When two particles are entangled, they share a single quantum state. Neither one has its own answer yet."
-    hi: "जब दो कण एंटैंगल होते हैं, तो वे एक ही क्वांटम अवस्था साझा करते हैं। अभी तक किसी का भी अपना कोई तय जवाब नहीं होता।"
+    hi: "जब दो कण एंटैंगल होते हैं, तो उनकी क्वांटम हालत एक ही होती है। अभी तक किसी का भी अपना कोई पक्का जवाब नहीं होता।"
     caption: "ONE SHARED *STATE*."
     scene: cosmos
     stage:
@@ -71,7 +71,7 @@ beats:
         p1: {puppet: particle, x: 280, y: 1060, h: 320, motion: float}
         p2: {puppet: particle, x: 800, y: 1060, h: 320, motion: float}
   - en: "Think of them like two magic coins, still spinning. Each could land heads or tails."
-    hi: "इन्हें ऐसे समझिए, जैसे दो जादुई सिक्के, जो अभी घूम रहे हैं। हर एक चित या पट, कुछ भी गिर सकता है।"
+    hi: "इन्हें दो जादुई सिक्कों की तरह समझिए, जो अभी हवा में घूम रहे हैं। हर सिक्का चित भी गिर सकता है, पट भी।"
     caption: "LIKE TWO SPINNING *COINS*."
     scene: cosmos
     stage:
@@ -81,7 +81,7 @@ beats:
         c1: {puppet: coin_sun, x: 300, y: 1180, h: 380, motion: flip, enter: {from: [280, 1060]}}
         c2: {puppet: coin_sun, x: 780, y: 1180, h: 380, motion: flip, enter: {from: [800, 1060]}}
   - en: "Look at one, and it lands at random. In that instant you know the other landed the opposite way, however far apart they are."
-    hi: "एक को देखिए, और वह किसी भी तरफ़ गिरता है। उसी पल आप जान जाते हैं कि दूसरा उल्टी तरफ़ गिरा है, चाहे वह कितनी भी दूर हो।"
+    hi: "एक को देखिए, और वह किसी भी तरफ़ गिरता है। उसी पल आपको पता चल जाता है कि दूसरा उल्टी तरफ़ गिरा है, चाहे वह कितनी भी दूर हो।"
     caption: "LOOK AT ONE, *KNOW* THE OTHER."
     scene: cosmos
     stage:
@@ -91,7 +91,7 @@ beats:
         c1: {puppet: coin_sun, x: 260, y: 1180, h: 380, motion: breathe}
         c2: {puppet: coin_moon, x: 820, y: 1180, h: 380, motion: breathe}
   - en: "Einstein disliked this. He called it spooky action at a distance, and suspected the coins had secretly decided all along."
-    hi: "आइंस्टीन को यह पसंद नहीं था। उन्होंने इसे दूर से होने वाला भुतहा असर कहा, और माना कि सिक्कों ने पहले से ही सब तय कर रखा था।"
+    hi: "आइंस्टीन को यह बात पसंद नहीं थी। उन्होंने इसे दूर से होने वाला भुतहा असर कहा, और उन्हें लगता था कि सिक्कों ने पहले से ही सब तय कर रखा है।"
     caption: "EINSTEIN: *SPOOKY*!"
     scene: cosmos
     stage:
@@ -99,7 +99,7 @@ beats:
       actors:
         ghost: {puppet: ghost, x: 540, y: 1420, h: 900, motion: float, enter: bottom}
   - en: "In 1964, John Bell found a way to test it. Experiments showed the results were not decided in advance, and won the 2022 Nobel Prize in Physics."
-    hi: "1964 में, जॉन बेल ने इसे परखने का तरीका खोजा। प्रयोगों ने दिखाया कि नतीजे पहले से तय नहीं थे, और इसे 2022 का भौतिकी नोबेल पुरस्कार मिला।"
+    hi: "उन्नीस सौ चौंसठ में, जॉन बेल ने इसे परखने का तरीका निकाला। प्रयोगों ने दिखाया कि नतीजे पहले से तय नहीं थे, और इन्हीं प्रयोगों को दो हज़ार बाईस का भौतिकी का नोबेल पुरस्कार मिला।"
     caption: "PROVED REAL: A *NOBEL* PRIZE."
     scene: cosmos
     stage:
@@ -108,7 +108,7 @@ beats:
       actors:
         medal: {puppet: medal, x: 540, y: 1300, h: 760, motion: breathe, enter: bottom}
   - en: "But no message travels between them. Each result is random, so entanglement cannot send information faster than light."
-    hi: "लेकिन उनके बीच कोई संदेश नहीं जाता। हर नतीजा बेतरतीब होता है, इसलिए एंटैंगलमेंट से प्रकाश से तेज़ कोई संदेश नहीं भेजा जा सकता।"
+    hi: "पर उनके बीच कोई संदेश नहीं जाता। हर नतीजा अपने-आप में बेतरतीब होता है, इसलिए एंटैंगलमेंट से रोशनी से तेज़ कोई संदेश नहीं भेजा जा सकता।"
     caption: "NO FASTER-THAN-LIGHT *MESSAGES*."
     scene: cosmos
     stage:
@@ -119,7 +119,7 @@ beats:
         p2: {puppet: particle, x: 930, y: 820, h: 240, motion: float, enter: right}
         letter: {puppet: envelope, x: 540, y: 1260, h: 420, motion: tremble, enter: fade, exit: fade}
   - en: "Today, entanglement is at the heart of quantum computers and ultra-secure quantum encryption. Spooky, but real."
-    hi: "आज, एंटैंगलमेंट क्वांटम कंप्यूटर और बेहद सुरक्षित क्वांटम एन्क्रिप्शन की नींव है। भुतहा, लेकिन सच।"
+    hi: "आज एंटैंगलमेंट क्वांटम कंप्यूटरों और बेहद सुरक्षित क्वांटम एन्क्रिप्शन की नींव है। भुतहा, लेकिन सच।"
     caption: "SPOOKY, BUT *REAL*."
     scene: cosmos
     stage:

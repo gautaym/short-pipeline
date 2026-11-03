@@ -65,7 +65,7 @@ art:
   anchors: {}
 beats:
   - en: "Long ago, the Greeks say, there was no winter at all. Persephone, daughter of Demeter, goddess of the harvest, gathered flowers in an endless spring."
-    hi: "यूनानी कहते हैं, बहुत पहले सर्दी होती ही नहीं थी। फसलों की देवी डिमीटर की बेटी पर्सेफ़ोनी, कभी न ख़त्म होने वाले बसंत में फूल चुनती थी।"
+    hi: "यूनानी कहानियों के मुताबिक, बहुत पहले सर्दी आती ही नहीं थी। फसलों की देवी डिमीटर की बेटी पर्सेफ़ोनी, कभी न ख़त्म होने वाले बसंत में फूल चुना करती थी।"
     caption: "AN *ENDLESS* SPRING."
     scene: cosmos
     stage:
@@ -75,7 +75,7 @@ beats:
         persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: sway, enter: left}
         demeter: {puppet: demeter, x: 760, y: 1660, h: 1000, face: left, motion: breathe, enter: right}
   - en: "Then the ground split open. Hades, king of the underworld, rose in the dark and carried her away."
-    hi: "फिर धरती फट गई। पाताल के राजा हेडीज़ अंधेरे से निकले, और उसे उठाकर ले गए।"
+    hi: "फिर अचानक धरती फटी। पाताल के राजा हेडीज़ अंधेरे से बाहर आए, और उसे उठा ले गए।"
     caption: "*HADES* TOOK HER."
     scene: cosmos
     stage:
@@ -85,7 +85,7 @@ beats:
         persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: tremble, exit: left}
         hades: {puppet: hades, x: 720, y: 1700, h: 1100, motion: sway, enter: bottom, exit: left}
   - en: "Demeter searched the whole world. And as she grieved, the crops died, the trees went bare, and the first winter fell."
-    hi: "डिमीटर ने पूरी दुनिया में उसे ढूँढा। और उसके शोक में फसलें मर गईं, पेड़ नंगे हो गए, और पहली सर्दी आ गई।"
+    hi: "डिमीटर ने उसे पूरी दुनिया में ढूँढा। और माँ के दुख में फसलें सूख गईं, पेड़ों के पत्ते झड़ गए, और पहली बार सर्दी आई।"
     caption: "THE FIRST *WINTER*."
     scene: cosmos
     stage:
@@ -94,7 +94,7 @@ beats:
       actors:
         demeter: {puppet: demeter_grief, x: 540, y: 1660, h: 1050, motion: tremble}
   - en: "In the underworld, Persephone ate a few pomegranate seeds. A small thing. But food of the dead binds you to them."
-    hi: "पाताल में, पर्सेफ़ोनी ने अनार के कुछ दाने खा लिए। छोटी-सी बात। लेकिन मृतकों का भोजन आपको उनसे बाँध देता है।"
+    hi: "पाताल में पर्सेफ़ोनी ने अनार के कुछ दाने खा लिए। बात छोटी-सी थी। पर जो मरे हुओं की दुनिया का खाना खा ले, वह वहीं का होकर रह जाता है।"
     caption: "A FEW *SEEDS*."
     scene: cosmos
     stage:
@@ -104,7 +104,7 @@ beats:
         persephone: {puppet: persephone_sad, x: 360, y: 1660, h: 900, face: right, motion: breathe, enter: fade}
         fruit: {puppet: pomegranate, x: 760, y: 1250, h: 300, motion: float, enter: fade}
   - en: "So a deal was made. Each year she returns to her mother, and spring blooms. Each year she goes back below, and winter comes."
-    hi: "तो एक समझौता हुआ। हर साल वह अपनी माँ के पास लौटती है, और बसंत खिल उठता है। हर साल वह फिर नीचे जाती है, और सर्दी आ जाती है।"
+    hi: "तो बीच का रास्ता निकाला गया। हर साल जब वह माँ के पास लौटती है, तो बसंत आता है। और जब वापस नीचे जाती है, तो सर्दी।"
     caption: "SPRING, THEN *WINTER*."
     scene: cosmos
     stage:
@@ -114,7 +114,7 @@ beats:
         persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: sway, enter: left}
         demeter: {puppet: demeter, x: 760, y: 1660, h: 1000, face: left, motion: breathe, enter: right}
   - en: "Science tells it differently. Earth is tilted, about twenty three degrees. As it circles the Sun, each half leans towards the light, then away."
-    hi: "विज्ञान इसे अलग तरह से बताता है। धरती लगभग तेईस डिग्री झुकी हुई है। सूरज की परिक्रमा करते हुए, उसका हर आधा हिस्सा पहले रोशनी की ओर झुकता है, फिर दूर।"
+    hi: "पर विज्ञान की कहानी कुछ और है। धरती करीब तेईस डिग्री झुकी हुई है। सूरज का चक्कर लगाते हुए, उसका हर हिस्सा कभी धूप की तरफ़ झुकता है, कभी दूर।"
     caption: "EARTH IS *TILTED*."
     scene: cosmos
     stage:
@@ -124,7 +124,7 @@ beats:
         sun: {puppet: sun, x: 180, y: 820, h: 380, motion: breathe, enter: fade}
         earth: {puppet: earth, x: 640, y: 1380, h: 600, motion: spin, enter: fade}
   - en: "And here is the surprise. Earth is closest to the Sun in early January, right in the middle of northern winter. Distance was never the reason. The tilt is."
-    hi: "और यह रहा अचरज। धरती जनवरी की शुरुआत में सूरज के सबसे पास होती है, ठीक उत्तरी सर्दी के बीच। वजह कभी दूरी थी ही नहीं। वजह है झुकाव।"
+    hi: "और मज़े की बात सुनिए। जनवरी की शुरुआत में धरती सूरज के सबसे पास होती है, ठीक तब, जब उत्तर में कड़ाके की सर्दी पड़ रही होती है। तो वजह दूरी नहीं, झुकाव है।"
     caption: "CLOSEST IN *JANUARY*."
     scene: cosmos
     stage:

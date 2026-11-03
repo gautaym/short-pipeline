@@ -173,11 +173,45 @@ def repitch(samples: np.ndarray, rate: int, semis: float, pace: float) -> np.nda
     return np.frombuffer(run.stdout, dtype=np.float32).copy()
 
 
+PAUSE_S = 0.3        # longest pause kept inside a line; models sometimes stop for 0.6 s mid-sentence
+EDGE_S = 0.04        # silence kept before and after a line
+
+
+def tighten(samples: np.ndarray, rate: int) -> np.ndarray:
+    """Trim the silence before and after a line and shorten any pause inside it to PAUSE_S."""
+    frame = max(1, int(rate * 0.02))
+    n = len(samples) // frame
+    if n == 0:
+        return samples
+    loud = np.abs(samples[:n * frame]).reshape(n, frame).max(axis=1)
+    quiet = loud < 0.03 * (loud.max() or 1.0)
+    voiced = np.where(~quiet)[0]
+    if len(voiced) == 0:
+        return samples
+    keep, edge, run = [], int(EDGE_S / 0.02), int(PAUSE_S / 0.02)
+    first, last = max(0, voiced[0] - edge), min(n, voiced[-1] + 1 + edge)
+    i = first
+    while i < last:
+        if quiet[i]:
+            j = i
+            while j < last and quiet[j]:
+                j += 1
+            keep.append(samples[i * frame:(i + min(j - i, run)) * frame])   # the pause, at most PAUSE_S
+            i = j
+        else:
+            keep.append(samples[i * frame:(i + 1) * frame])
+            i += 1
+    return np.concatenate(keep)
+
+
 def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
     """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
 
     A voice written "<voice>@+N~P" is raised N semitones at the same pace, then set to pace P
     (e.g. "af_bella@+3~0.88": a young girl asking, relaxed rather than rushed).
+
+    Silence at the ends is trimmed and long pauses inside the line are shortened (see tighten),
+    so lines flow into each other at the story's own pacing.
 
     Results are cached for the life of the process, so a story's narration is synthesised once
     for timing and reused for the final mix.
@@ -197,7 +231,7 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
         lang = language(voice)
         spoken = text if lang == "hi" else speakable(text)
         samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
-    samples = np.asarray(samples, dtype=np.float32)
+    samples = tighten(np.asarray(samples, dtype=np.float32), rate)
     if semis or pace != 1.0:                             # a younger, unhurried voice
         samples = repitch(samples, rate, semis, pace)
     if rate != SR:

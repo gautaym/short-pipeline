@@ -51,14 +51,14 @@ art:
     flask: {spark: [0.48, 0.40]}
 beats:
   - en: "Four billion years ago, Earth had no life at all. Just volcanoes, lightning, and a hot, restless ocean."
-    hi: "चार अरब साल पहले, धरती पर कोई जीवन नहीं था। बस ज्वालामुखी, बिजली, और एक गर्म, उफनता हुआ समुद्र।"
+    hi: "चार अरब साल पहले, धरती पर ज़िंदगी का नामो-निशान नहीं था। बस ज्वालामुखी, बिजलियाँ, और एक गर्म, उबलता हुआ समुद्र।"
     caption: "EARTH, *4 BILLION* YEARS AGO."
     scene: cosmos
     stage:
       backdrop: early_earth
       fx: [lightning]
   - en: "Lightning and heat broke simple gases apart, and the pieces joined into the building blocks of life."
-    hi: "बिजली और गर्मी ने सरल गैसों को तोड़ा, और उनके टुकड़े जुड़कर जीवन की ईंटें बन गए।"
+    hi: "बिजली और गर्मी ने सीधी-सादी गैसों को तोड़ डाला, और उनके टुकड़े जुड़कर बने जीवन की ईंटें।"
     caption: "LIGHTNING MADE *BUILDING BLOCKS*."
     scene: cosmos
     stage:
@@ -68,7 +68,7 @@ beats:
         mol1: {puppet: molecules, x: 330, y: 1250, h: 420, motion: float, enter: fade}
         mol2: {puppet: molecules, x: 770, y: 1000, h: 340, face: left, motion: float, enter: fade}
   - en: "In 1953, two scientists recreated this in a flask, and within a week, amino acids appeared."
-    hi: "1953 में, दो वैज्ञानिकों ने एक फ्लास्क में यही दोहराया, और एक हफ़्ते में अमीनो एसिड बन गए।"
+    hi: "उन्नीस सौ तिरेपन में, दो वैज्ञानिकों ने यही सब एक फ्लास्क में करके देखा, और एक हफ़्ते के अंदर अमीनो एसिड बन गए।"
     caption: "*1953*: LIFE'S PARTS IN A FLASK."
     scene: cosmos
     stage:
@@ -77,7 +77,7 @@ beats:
       actors:
         flask: {puppet: flask, x: 540, y: 1520, h: 1000, motion: breathe, enter: bottom}
   - en: "Deep in the ocean, hot vents poured out minerals and energy. A perfect kitchen for chemistry."
-    hi: "समुद्र की गहराई में, गर्म झरोखे खनिज और ऊर्जा उगल रहे थे। रसायन के लिए एकदम सही रसोई।"
+    hi: "समुद्र की गहराई में, गर्म झरने खनिज और ऊर्जा उगल रहे थे। रसायनों के लिए एकदम सही रसोई।"
     caption: "HOT *VENTS* COOKED CHEMISTRY."
     scene: cosmos
     stage:
@@ -86,7 +86,7 @@ beats:
       actors:
         vent: {puppet: vent, x: 540, y: 1700, h: 1150, motion: sway, enter: bottom}
   - en: "Scientists think some molecules, like RNA, could make copies of themselves."
-    hi: "वैज्ञानिक मानते हैं कि आर एन ए जैसे कुछ अणु अपनी नकल खुद बना सकते थे।"
+    hi: "वैज्ञानिकों का मानना है कि आर एन ए जैसे कुछ अणु खुद अपनी नकल बना सकते थे।"
     caption: "*RNA* COPIED ITSELF."
     scene: cosmos
     stage:
@@ -96,7 +96,7 @@ beats:
         rna1: {puppet: rna, x: 330, y: 1350, h: 900, motion: float, enter: fade}
         rna2: {puppet: rna, x: 760, y: 1350, h: 900, motion: float, enter: {from: [330, 1350]}}
   - en: "Fatty molecules folded into tiny bubbles. Natural walls that kept everything inside."
-    hi: "वसा के अणु मुड़कर छोटे-छोटे बुलबुले बन गए। ऐसी प्राकृतिक दीवारें, जो अंदर की हर चीज़ को थाम लेती थीं।"
+    hi: "चर्बी जैसे अणु मुड़कर नन्हे-नन्हे बुलबुले बन गए। कुदरती दीवारें, जो सब कुछ अंदर समेटे रखती थीं।"
     caption: "FATS MADE *BUBBLES*."
     scene: cosmos
     stage:
@@ -105,7 +105,7 @@ beats:
       actors:
         cell: {puppet: bubble, x: 540, y: 1420, h: 820, motion: breathe, enter: fade}
   - en: "When RNA was trapped inside a bubble, something new appeared. A protocell."
-    hi: "जब आर एन ए किसी बुलबुले के अंदर फँस गया, तो कुछ नया बना। एक आदि-कोशिका।"
+    hi: "जब आर एन ए किसी बुलबुले के अंदर बंद हो गया, तो कुछ नया बना। एक आदि-कोशिका।"
     caption: "THE FIRST *PROTOCELL*."
     scene: cosmos
     stage:
@@ -114,7 +114,7 @@ beats:
       actors:
         cell: {puppet: protocell, x: 540, y: 1460, h: 900, motion: breathe}
   - en: "It grew, split in two, and copied itself. Life had begun. Scientists are still piecing together how."
-    hi: "वह बढ़ी, दो में बँटी, और अपनी नकल बनाती गई। जीवन शुरू हो चुका था। वैज्ञानिक आज भी इसकी कड़ियाँ जोड़ रहे हैं।"
+    hi: "वह बढ़ी, दो हिस्सों में बँटी, और अपनी नकल बनाती चली गई। ज़िंदगी शुरू हो चुकी थी। यह सब ठीक-ठीक कैसे हुआ, वैज्ञानिक आज भी इसकी कड़ियाँ जोड़ रहे हैं।"
     caption: "AND LIFE *BEGAN*."
     scene: cosmos
     stage:

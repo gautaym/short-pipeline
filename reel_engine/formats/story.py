@@ -43,7 +43,7 @@ from . import EndCard, Format, Option, register
 
 STORIES = REPO_ROOT / "stories"
 GAP_S = 0.45                    # pause after each narrated line
-REPLY_GAP_S = 0.7               # the question hangs a moment before the narrator answers it
+REPLY_GAP_S = 0.3               # the narrator takes the question straight up, as in conversation
 MOVE_S = 0.9                    # puppets glide to their new marks over this long
 WORDS_PER_S = 2.4               # used to time lines when no voice model is installed
 CAPTION_Y = 470
@@ -117,7 +117,7 @@ class Story(Format):
         for n in lengths[:len(opening)]:
             self.open_times.append(t)
             t += n + REPLY_GAP_S
-        self.starts, t = [], t - REPLY_GAP_S + GAP_S + 0.2
+        self.starts, t = [], t - REPLY_GAP_S + GAP_S
         for n in lengths[len(opening):]:
             self.starts.append(t)
             t += n + GAP_S
