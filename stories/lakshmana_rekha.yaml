@@ -64,8 +64,18 @@ art:
     mandodari: "The puppet is {mandodari}, pointing scornfully with one hand, the other hand on her hip, side view facing right."
   props:
     deer: "The prop is a single golden deer with silver spots and small antlers, standing, side view facing right, an animal cut-out with four legs."
-    hut: "The prop is a small thatched forest hut made of bamboo and leaves, with a little doorway."
-    scroll: "The prop is a bundle of ancient palm-leaf manuscript pages tied with a red string, shown open."
+    hut:
+      style: >-
+        A single flat painted leather cut-out of a building, not a person: no body, no face, no arms, no legs.
+        Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+        backdrop, nothing else in the frame, no text.
+      text: "The cut-out is a small empty thatched forest hut with bamboo walls, a sloping roof of dry leaves and a dark open doorway, seen from the front."
+    scroll:
+      style: >-
+        A single flat painted leather cut-out of an object, not a person: no body, no face, no arms, no legs.
+        Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+        backdrop, nothing else in the frame.
+      text: "The cut-out is a stack of long narrow ancient palm-leaf manuscript pages, golden brown leaves with rows of dark handwritten script, tied with a red string, lying flat and fanned open."
   backdrops:
     panchavati: "A forest clearing by a river at dusk, tall trees, flowering bushes and soft orange light."
     deep_forest: "A dark dense forest at night with twisted trees and a stormy sky."
