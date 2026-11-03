@@ -1,0 +1,184 @@
+# What is the Ramayana, and why is it sacred to Hindus?
+# Review notes. Valmiki Ramayana: tradition holds that Valmiki, grieving when a hunter shot one of a
+# pair of krauncha birds, spoke the first shloka ("ma nishada"), and that this is the adi kavya, the
+# first poem in Sanskrit; Brahma then asked him to tell Rama's story. About 24,000 shlokas in seven
+# kandas (Bala, Ayodhya, Aranya, Kishkindha, Sundara, Yuddha, Uttara); scholars place its composition
+# over several centuries, roughly the 5th century BCE to the early centuries CE, so the script says
+# "more than two thousand years ago". "Ramayana" = Rama + ayana, Rama's journey. Rama is revered as
+# the seventh avatar of Vishnu and as Maryada Purushottam. Bharata ruled from Nandigram with Rama's
+# padukas on the throne. Tulsidas began the Ramcharitmanas in Awadhi in 1574 (16th century).
+# Retellings: Kamba Ramayanam (Tamil, 12th c.), Ramakien (Thailand) and many more across Asia.
+# Art reused from other stories: Rama and the Ayodhya backdrop (diwali); Sita, Lakshmana, Ravana,
+# the manuscript and the Panchavati backdrop (lakshmana_rekha), the night sky (dhruva), Vishnu (dhruva).
+# Ravana has seven heads (the model would not draw ten cleanly); the script never counts them.
+id: ramayana
+topic: mythology
+title:
+  en: "What is the Ramayana, and why is it so sacred?"
+  hi: "रामायण क्या है, और यह इतनी पवित्र क्यों मानी जाती है?"
+summary:
+  en: "Maharishi Valmiki's Ramayana, the first poem in Sanskrit, tells Lord Rama's journey. Hindus revere it because Lord Rama is an avatar of Lord Vishnu and the ideal of dharma, and because, through Tulsidas, Ramlila and Diwali, it lives in every home."
+  hi: "महर्षि वाल्मीकि की रामायण, संस्कृत की पहली कविता, प्रभु श्रीराम की यात्रा की कथा है। हिंदू इसे पवित्र मानते हैं क्योंकि प्रभु श्रीराम भगवान विष्णु के अवतार और धर्म के आदर्श हैं, और तुलसीदास, रामलीला और दिवाली के ज़रिए यह कथा हर घर में बसती है।"
+music: chill
+cast: {}
+# Opens on beat 6's frame (Lord Rama glowing before Lord Vishnu), with Meera's question and the Sutradhar.
+segment: indian_myth
+opening:
+  beat: 6
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather cut-out of an object, not a person: no body, no face, no arms, no legs.
+    Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+    backdrop, nothing else in the frame, no text.
+  backdrop_style: >-
+    An empty scene painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  backdrop_crop: 0.04
+  cast:
+    rama: >-
+      Lord Rama with blue skin, a tall gold crown, a yellow silk dhoti, gold jewellery and a quiver of arrows
+      on his back, exactly two arms
+    sita: >-
+      Sita, a young princess with golden skin and a long dark brown braid, dressed modestly in a full red and
+      gold silk saree draped over both shoulders and covering her waist, a full-sleeved red blouse, her head
+      uncovered, gold jewellery, exactly two arms with graceful hands, each with five fingers
+    lakshmana: >-
+      Lakshmana, Rama's younger brother, a young prince with golden skin, a gold crown, an orange silk dhoti,
+      gold jewellery and a quiver of arrows on his back, exactly two arms
+    ravana: >-
+      Ravana, the mighty king of Lanka, with exactly ten crowned heads side by side in one row on a single
+      body, each face with a thick dark brown moustache, tall golden crowns, a red and gold royal costume
+      with heavy gold jewellery, exactly two arms
+    vishnu: >-
+      Lord Vishnu with blue skin and exactly four arms, the upper hands holding a white conch shell and a
+      golden spinning discus, the lower hands holding a golden mace and a pink lotus, a tall gold crown,
+      a yellow silk dhoti and a garland of flowers
+    valmiki: >-
+      Maharishi Valmiki, a wise sage with warm brown skin, a long white beard, his hair tied in a knot on top
+      of his head, a saffron robe and a string of rudraksha beads, exactly two arms
+    hanuman: >-
+      Lord Hanuman, the mighty monkey god with a reddish-orange face, a golden crown, a red dhoti, gold
+      armbands and a long curling tail, exactly two arms and exactly one tail
+    tulsidas: >-
+      Goswami Tulsidas, a gentle poet-saint with warm brown skin, a short grey beard, a tilak on his
+      forehead, a white dhoti and a saffron shawl, exactly two arms
+  puppets:
+    rama: "The puppet is {rama}, walking home with a calm smile, holding a long bow in one hand, side view facing right."
+    sita: "The puppet is {sita}, standing gracefully with her hands folded in front of her, side view facing right."
+    lakshmana_pray: "The puppet is {lakshmana}, standing with his palms joined in prayer, head bowed, side view facing right."
+    ravana: "The puppet is {ravana}, standing proudly with one hand on a sword at his waist and the other hand clenched in anger, front view."
+    vishnu: "The puppet is {vishnu}, standing and smiling, front view."
+    valmiki: "The puppet is {valmiki}, seated cross-legged and writing on a palm leaf with a stylus, body turned to the right, face turned towards the viewer in three-quarter view."
+    hanuman: "The puppet is {hanuman}, leaping forward with one arm stretched out and the other holding a golden mace, body turned to the right, face turned towards the viewer in three-quarter view."
+    tulsidas: "The puppet is {tulsidas}, seated and writing in a bound book, body turned to the right, face turned towards the viewer in three-quarter view."
+  props:
+    scroll:
+      style: >-
+        A single flat painted leather cut-out of an object, not a person: no body, no face, no arms, no legs.
+        Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+        backdrop, nothing else in the frame.
+      text: "The cut-out is a stack of long narrow ancient palm-leaf manuscript pages, golden brown leaves with rows of dark handwritten script, tied with a red string, lying flat and fanned open."
+    cranes: "The cut-out is a pair of graceful white cranes with long necks and red-crowned heads, standing side by side, their necks touching, two birds only."
+    throne: "The cut-out is a golden royal throne with a red cushion, and on the seat a pair of simple wooden sandals placed side by side."
+  backdrops:
+    river: "A quiet riverbank at dawn with tall grass, flowering trees and a calm blue river."
+    ayodhya: "The city of Ayodhya at night, rows of palaces and temples with arches and domes under a dark blue sky, no lights yet."
+    panchavati: "A forest clearing by a river at dusk, tall trees, flowering bushes and soft orange light."
+    sea: "A wide stormy sea under a dramatic sky, a golden island city far away on the horizon."
+    cosmos: "A clear night sky full of stars above dark rolling hills, a deep blue and violet sky."
+    ghat: "The stone steps of a riverside ghat in Varanasi at sunrise, small temples and a wide river."
+    asia: "Ancient temple towers with tall pointed spires at sunset, palm trees and a golden sky."
+  anchors: {}
+beats:
+  - en: "More than two thousand years ago, Maharishi Valmiki watched a hunter shoot one of two cranes in love. His grief poured out as a verse, and tradition calls it the first poem in Sanskrit."
+    hi: "दो हज़ार साल से भी पहले, महर्षि वाल्मीकि ने देखा कि एक शिकारी ने प्रेम में डूबे क्रौंच पक्षियों के जोड़े में से एक को मार दिया। उनका दुख एक श्लोक बनकर फूट पड़ा, और परंपरा उसे संस्कृत की पहली कविता मानती है।"
+    caption: "THE *FIRST* POEM."
+    scene: river
+    stage:
+      backdrop: river
+      fx: [rays]
+      actors:
+        cranes: {puppet: cranes, x: 760, y: 1500, h: 520, motion: bob, enter: fade}
+        valmiki: {puppet: valmiki, x: 330, y: 1680, h: 820, face: right, motion: breathe, enter: left}
+  - en: "In that new verse, he told the story of Lord Rama, in about twenty four thousand verses and seven books. He called it the Ramayana, which means Rama's journey."
+    hi: "इसी नए छंद में उन्होंने प्रभु श्रीराम की कथा लिखी, लगभग चौबीस हज़ार श्लोकों और सात कांडों में। नाम रखा रामायण, यानी राम की यात्रा।"
+    caption: "RAMA'S *JOURNEY*."
+    scene: river
+    stage:
+      backdrop: river
+      fx: [{glow: {actor: scroll, colour: [255, 225, 150]}}]
+      actors:
+        valmiki: {puppet: valmiki, x: 330, y: 1680, h: 820, face: right, motion: breathe}
+        scroll: {puppet: scroll, x: 760, y: 1300, h: 480, motion: float, enter: fade}
+  - en: "It is the story of a prince of Ayodhya who gave up his throne to keep his father's word, and spent fourteen years in the forest with Maa Sita and Lakshmana."
+    hi: "यह अयोध्या के उस राजकुमार की कथा है, जिसने पिता का वचन निभाने के लिए राजगद्दी छोड़ दी, और माँ सीता और लक्ष्मण जी के साथ चौदह साल वन में बिताए।"
+    caption: "FOURTEEN YEARS IN THE *FOREST*."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      actors:
+        lakshmana: {puppet: lakshmana_pray, x: 220, y: 1690, h: 960, face: right, motion: walk_in, enter: left}
+        sita: {puppet: sita, x: 470, y: 1670, h: 900, face: right, motion: walk_in, enter: left}
+        rama: {puppet: rama, x: 760, y: 1690, h: 1000, face: right, motion: walk_in, enter: left}
+  - en: "When Ravana carried Maa Sita away to Lanka, Lord Rama crossed the sea with Hanuman ji and an army of vanaras, won the war, and brought her home."
+    hi: "जब रावण माँ सीता को उठाकर लंका ले गया, तो प्रभु श्रीराम हनुमान जी और वानर सेना के साथ समुद्र पार गए, युद्ध जीता, और उन्हें घर ले आए।"
+    caption: "ACROSS THE *SEA*."
+    scene: sea
+    stage:
+      backdrop: sea
+      fx: [waves, spray]
+      actors:
+        hanuman: {puppet: hanuman, x: 560, y: 1500, h: 900, face: right, motion: float, enter: left}
+        ravana: {puppet: ravana, x: 840, y: 1650, h: 900, motion: tremble, enter: fade, exit: fade}
+  - en: "[excited] But for Hindus, the Ramayana is far more than a story. Lord Rama is worshipped as an avatar of Lord Vishnu, who came to earth to restore dharma."
+    hi: "[excited] पर हिंदुओं के लिए रामायण सिर्फ़ एक कहानी नहीं है। प्रभु श्रीराम को भगवान विष्णु का अवतार माना जाता है, जो धरती पर धर्म की स्थापना के लिए आए।"
+    caption: "AN *AVATAR* OF VISHNU."
+    scene: cosmos
+    stage:
+      backdrop: cosmos
+      fx: [rays, {glow: {actor: vishnu, colour: [255, 220, 150]}}]
+      actors:
+        vishnu: {puppet: vishnu, x: 540, y: 1450, h: 1100, motion: float, enter: fade}
+  - en: "He is called Maryada Purushottam, the ideal man, who kept his word even when it cost him a kingdom."
+    hi: "उन्हें मर्यादा पुरुषोत्तम कहा जाता है, यानी आदर्श पुरुष, जिन्होंने राज्य गँवाकर भी अपना वचन निभाया।"
+    caption: "MARYADA *PURUSHOTTAM*."
+    scene: ayodhya
+    stage:
+      backdrop: ayodhya
+      fx: [rays, {glow: {actor: rama, colour: [180, 220, 255]}}]
+      actors:
+        rama: {puppet: rama, x: 560, y: 1690, h: 1050, face: right, motion: breathe, enter: fade}
+  - en: "And every character shows a way to live: Bharata ruling with Lord Rama's sandals on the throne, Lakshmana's loyalty, Maa Sita's courage, and Hanuman ji's devotion."
+    hi: "और हर पात्र जीने का एक रास्ता दिखाता है: प्रभु श्रीराम की खड़ाऊँ गद्दी पर रखकर राज चलाने वाले भरत, लक्ष्मण जी की निष्ठा, माँ सीता का साहस, और हनुमान जी की भक्ति।"
+    caption: "A WAY TO *LIVE*."
+    scene: ayodhya
+    stage:
+      backdrop: ayodhya
+      fx: [{glow: {actor: throne, colour: [255, 210, 120]}}]
+      actors:
+        throne: {puppet: throne, x: 540, y: 1560, h: 620, motion: breathe, enter: fade}
+  - en: "In the sixteenth century, Goswami Tulsidas retold it in the people's own language as the Ramcharitmanas, and it reached every home. Today it lives on in Ramlila, in Diwali, and in a simple greeting: Ram Ram."
+    hi: "सोलहवीं सदी में, गोस्वामी तुलसीदास ने इसे आम लोगों की भाषा में रामचरितमानस के रूप में लिखा, और यह कथा घर-घर पहुँच गई। आज यह रामलीला में, दिवाली में, और एक सीधे-से अभिवादन में ज़िंदा है: राम राम।"
+    caption: "IN *EVERY* HOME."
+    scene: ghat
+    stage:
+      backdrop: ghat
+      fx: [rays]
+      actors:
+        tulsidas: {puppet: tulsidas, x: 420, y: 1680, h: 820, face: right, motion: breathe, enter: fade}
+  - en: "It has travelled far beyond India too, from the Kamba Ramayanam in Tamil to the Ramakien in Thailand. One story, told in hundreds of ways, still teaching what it means to do the right thing."
+    hi: "यह कथा भारत से बहुत दूर तक गई है, तमिल के कंब रामायणम से लेकर थाईलैंड के रामकियेन तक। एक कहानी, सैकड़ों रूपों में, जो आज भी सिखाती है कि सही राह पर चलना क्या होता है।"
+    caption: "ONE STORY, *MANY* TELLINGS."
+    scene: asia
+    stage:
+      backdrop: asia
+      fx: [rays]
+      actors: {}
+end:
+  head: "RAMAYANA"
+  sub: "Rama's journey"
