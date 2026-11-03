@@ -17,7 +17,7 @@ segments:
 voices:
   sutradhar: {en: "maya:en:Akshat", hi: "maya:hi:Akshat"}
   storyteller: {en: "maya:en:Anirban", hi: "maya:hi:Anirban"}
-  professor: {en: "maya:en:Nivedita", hi: "maya:hi:Nivedita"}
+  professor: {en: "maya:en:Jahnavi", hi: "maya:hi:Jahnavi"}
   meera: {en: "maya:en:Malini", hi: "maya:hi:Malini"}
   lila: {en: "maya:en:Charvi", hi: "maya:hi:Charvi"}
   kabir: {en: "maya:en:Shaunak", hi: "maya:hi:Shaunak"}
