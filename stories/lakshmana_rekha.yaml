@@ -91,7 +91,7 @@ beats:
       backdrop: panchavati
       fx: [rays, {glow: {actor: deer, colour: [255, 210, 110]}}]
       actors:
-        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: sway, enter: fade}
         deer: {puppet: deer, x: 800, y: 1560, h: 420, face: right, motion: bob, enter: right, exit: right}
         rama: {puppet: rama, x: 620, y: 1680, h: 980, face: right, motion: run, enter: left, exit: right, delay: 2.0}
@@ -103,7 +103,7 @@ beats:
       backdrop: panchavati
       fx: [shake]
       actors:
-        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         sita: {puppet: sita_plead, x: 380, y: 1660, h: 900, face: right, motion: tremble}
         lakshmana: {puppet: lakshmana_pray, x: 770, y: 1680, h: 1000, face: left, motion: breathe, enter: right}
   - en: "The story most of us know goes like this. Before leaving, Lakshmana drew a glowing line around the hut. 'Do not step outside it,' he said. 'Nothing evil can cross it.'"
@@ -112,9 +112,9 @@ beats:
     scene: panchavati
     stage:
       backdrop: panchavati
-      fx: [{rekha: {x1: 60, x2: 640, y: 1600, sag: 70, grow: 3.0}}]
+      fx: [{rekha: {x1: 30, x2: 680, y: 1730, sag: 40, grow: 3.0}}]
       actors:
-        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: breathe}
         lakshmana: {puppet: lakshmana_draw, x: 780, y: 1680, h: 1000, face: left, motion: pull}
   - en: "Then Ravana came, disguised as a holy man, and tricked Sita into stepping over the line to give him alms. It is the scene played at every Ramlila."
@@ -123,9 +123,9 @@ beats:
     scene: panchavati
     stage:
       backdrop: panchavati
-      fx: [smoke, {rekha: {x1: 60, x2: 640, y: 1600, sag: 70, grow: 0.01}}]
+      fx: [smoke, {rekha: {x1: 30, x2: 680, y: 1730, sag: 40, grow: 0.01}}]
       actors:
-        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         sita: {puppet: sita, x: 600, y: 1660, h: 900, face: right, motion: sway}      # glides over the line
         monk: {puppet: monk, x: 820, y: 1690, h: 1050, face: left, motion: sway, enter: fade}
   - en: "[excited] But here is the twist. Open the oldest telling, Valmiki's Ramayana, and that line is simply not there."
@@ -134,9 +134,9 @@ beats:
     scene: panchavati
     stage:
       backdrop: panchavati
-      fx: [rays, {rekha: {x1: 60, x2: 640, y: 1600, sag: 70, fade: 2.5}}, {glow: {actor: scroll, colour: [255, 225, 150]}}]
+      fx: [rays, {rekha: {x1: 30, x2: 680, y: 1730, sag: 40, fade: 2.5}}, {glow: {actor: scroll, colour: [255, 225, 150]}}]
       actors:
-        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         scroll: {puppet: scroll, x: 640, y: 1250, h: 520, motion: float, enter: fade}
   - en: "In Valmiki, a frightened Sita speaks harsh words to Lakshmana, even doubting his intentions. Hurt, he folds his hands, asks the gods of the forest to protect her, and goes. No line. Only a prayer."
     hi: "वाल्मीकि की रामायण में, डरी हुई सीता लक्ष्मण से कड़वी बातें कह देती हैं, उनकी नीयत पर भी शक करती हैं। दुखी लक्ष्मण हाथ जोड़ते हैं, वन देवताओं से सीता की रक्षा की प्रार्थना करते हैं, और चले जाते हैं। कोई रेखा नहीं। बस एक प्रार्थना।"
@@ -173,7 +173,7 @@ beats:
     scene: ramlila
     stage:
       backdrop: ramlila
-      fx: [motes, {rekha: {x1: 120, x2: 960, y: 1620, sag: 50, grow: 2.5}}]
+      fx: [motes, {rekha: {x1: 120, x2: 960, y: 1740, sag: 40, grow: 2.5}}]
       actors:
         sita: {puppet: sita, x: 380, y: 1660, h: 880, face: right, motion: sway, enter: fade}
         lakshmana: {puppet: lakshmana_draw, x: 740, y: 1680, h: 980, face: left, motion: pull, enter: fade}

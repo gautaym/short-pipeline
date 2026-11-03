@@ -26,8 +26,8 @@ link draws a shimmering thread between two actors). Sky effects: {star_trails: {
 {constellation: {stars: [[x, y, size], ...], lines: [[i, j], ...], grow: seconds, highlight: [i, ...]}}
 draws glowing stars joined by lines, drawn in one by one over `grow` seconds, with highlighted
 stars pulsing; {pointer: {from: [x, y], to: [x, y], grow: seconds}} shoots a dashed guide line.
-{rekha: {x1, x2, y, sag, grow: seconds}} draws a glowing line along the ground, left to right, behind
-the actors; with `fade: seconds` it is already there and fades away (the line that was never drawn).
+{rekha: {x1, x2, y, sag, grow: seconds}} draws a glowing line along the ground, left to right, in front
+of the actors' feet; with `fade: seconds` it is already there and fades away (the line that was never drawn).
 
 A story's `opening` adds actors (the Sutradhar host) to a beat's frame for the cold open:
 draw(..., extras={name: spec}, extras_since=t) slides them on while the rest stays settled.
@@ -385,8 +385,6 @@ class Theatre:
                             cx=float(v.get("x", W / 2)), sprites=self.soot, period=4.5)
         if "waves" in fx:
             self.draw_waves(screen, t, back=True)
-        if "rekha" in fx:
-            self.draw_rekha(screen, fx["rekha"], since if not opening else 99.0, t)
         names = list(dict.fromkeys(list(self.beats[beat].get("actors", {}))
                                    + (list(self.beats[beat - 1].get("actors", {})) if beat > 0 else [])))
         states = {}
@@ -420,6 +418,8 @@ class Theatre:
         if "glow" in fx:
             for g in fx["glow"] if isinstance(fx["glow"], list) else [fx["glow"]]:
                 self.draw_glow(screen, g, states, t, since, length)
+        if "rekha" in fx:                                             # on the ground in front of the feet
+            self.draw_rekha(screen, fx["rekha"], since if not opening else 99.0, t)
         if "bubbles" in fx:
             self.draw_bubbles(screen, t)
         if "waves" in fx:
