@@ -1,6 +1,14 @@
 # Shared characters: drawn once with `reel story-art _library`, approved once, used by any story
 # whose stage names them. Not a story itself (files starting with _ are skipped).
+#
+# Segments pair a narrator with an asker (a small girl who asks the opening question). A story
+# names its segment (`segment: indian_myth`) and the reel opens with the asker asking, the narrator
+# joining her, and ends with the narrator. Pairs are reused across topics that suit them.
 id: _library
+segments:
+  indian_myth: {narrator: sutradhar, asker: meera}            # Indian mythology and legends
+  world_myth: {narrator: storyteller, asker: lila}            # Greek, Egyptian, Norse and other world myths
+  science: {narrator: professor, asker: kiki}                 # science, maths, facts, sports, the news
 art:
   puppet_style: >-
     A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
@@ -15,7 +23,37 @@ art:
       the sutradhar, the cheerful old storyteller of the puppet show, with warm brown skin, a white beard and
       moustache, a big red and yellow turban, gold earrings, a white kurta with a red and gold sash and a
       white dhoti, exactly two arms
+    meera: >-
+      Meera, a small Indian girl about seven years old with warm brown skin, two braided pigtails tied with
+      ribbons, a bright yellow and pink lehenga skirt and blouse, big curious eyes, exactly two arms
+    storyteller: >-
+      a kind old storyteller with a short grey beard, wearing a plain long dark blue hooded cloak over a
+      simple brown tunic, no jewellery and no symbols of any culture, exactly two arms
+    lila: >-
+      Lila, a small girl about seven years old with short curly brown hair, a plain green tunic dress and
+      simple sandals, big curious eyes, exactly two arms
+    professor: >-
+      a friendly young woman scientist with dark hair in a bun, round glasses, a white lab coat over a teal
+      top and dark trousers, exactly two arms
+    kiki: >-
+      Kiki, a small curious girl about seven years old with two puffy hair buns, a yellow jacket and a red
+      skirt, holding a small notebook, exactly two arms
   puppets:
     sutradhar: "The puppet is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip, side view facing right."
+    meera: "The puppet is {meera}, one hand raised high as if asking a question, side view facing right."
+    storyteller: "The puppet is {storyteller}, one hand raised with the index finger up as if telling a story, the other hand at his side, side view facing right."
+    lila: "The puppet is {lila}, one hand raised high as if asking a question, side view facing right."
+    professor:
+      style: >-
+        A single full-body character cut-out made of layered coloured paper, flat paper-craft illustration
+        with clean cut edges and subtle paper texture, bright colours, full body from head to feet, studio
+        photo against a plain pure black backdrop, nothing else in the frame, no text.
+      text: "The cut-out is {professor}, one hand raised with the index finger up as if explaining, side view facing right."
+    kiki:
+      style: >-
+        A single full-body character cut-out made of layered coloured paper, flat paper-craft illustration
+        with clean cut edges and subtle paper texture, bright colours, full body from head to feet, studio
+        photo against a plain pure black backdrop, nothing else in the frame, no text.
+      text: "The cut-out is {kiki}, one hand raised high as if asking a question, side view facing right."
   props:
     pole_star: "The prop is a single large golden eight-pointed star with long glowing rays and a bright white centre."

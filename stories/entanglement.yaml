@@ -19,6 +19,9 @@ summary:
   en: "Two entangled particles share one quantum state: measure one, and you instantly know the other, however far apart they are. Einstein called it spooky, experiments proved it real, and it still cannot send messages faster than light."
   hi: "दो एंटैंगल्ड कण एक ही क्वांटम अवस्था साझा करते हैं: एक को मापिए, और दूसरे का नतीजा तुरंत पता चल जाता है, चाहे वे कितनी भी दूर हों। आइंस्टीन ने इसे भुतहा कहा, प्रयोगों ने इसे सच साबित किया, और फिर भी इससे प्रकाश से तेज़ संदेश नहीं भेजा जा सकता।"
 music: chill
+segment: science
+opening:
+  beat: 4
 cast: {}
 # Paper-cut version, drawn locally by `reel story-art entanglement`.
 art:

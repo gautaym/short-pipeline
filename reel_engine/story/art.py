@@ -11,7 +11,7 @@ puppets and backdrops the story needs, with characters named as {shiva}, {deva},
       cast: {shiva: "Lord Shiva with blue skin ...", ...}
       puppets: {shiva: "The puppet is {shiva}, standing calmly, side view facing right.", ...}
       props: {mandara: "The prop is a tall rocky mountain ..."}    (prop_style; moved like puppets;
-              a prop may be {style: "...", text: "..."} to use its own style)
+              a puppet or prop may be {style: "...", text: "..."} to use its own style)
       backdrops: {ocean: "A vast white ocean of milk ...", ...}
 
 Characters used across stories (the Sutradhar host, gods drawn once and approved once) live in
@@ -62,6 +62,36 @@ def backdrop_file(story_id: str, name: str) -> Path:
     return folder(story_id) / f"backdrop_{name}.png"
 
 
+def segment(sc: dict) -> dict | None:
+    """The story's segment from the library: {"narrator": name, "asker": name}, or None."""
+    name = sc.get("segment")
+    if not name:
+        return None
+    from ..formats.story import load_story
+    return load_story(LIBRARY)["segments"][name]
+
+
+def cast_segment(sc: dict) -> None:
+    """Put the segment's pair on stage: in the cold open the asker walks in and asks the question
+    and the narrator joins her; in the last beat the narrator rises to close, the asker beside him."""
+    pair = segment(sc)
+    if not pair:
+        return
+    opening = sc.setdefault("opening", {})
+    opening.setdefault("beat", 1)
+    opening["actors"] = {
+        "asker": {"puppet": pair["asker"], "x": 330, "y": 1980, "h": 600, "z": 10, "face": "right",
+                  "motion": "talk", "enter": "left"},
+        "narrator": {"puppet": pair["narrator"], "x": 770, "y": 2010, "h": 780, "z": 11, "face": "left",
+                     "motion": "talk", "enter": "right", "delay": 1.2},
+        **opening.get("actors", {})}
+    last = sc["beats"][-1]["stage"].setdefault("actors", {})
+    last.setdefault("narrator", {"puppet": pair["narrator"], "x": 600, "y": 2150, "h": 780, "z": 11,
+                                 "face": "left", "motion": "talk", "enter": "right"})
+    last.setdefault("asker", {"puppet": pair["asker"], "x": 230, "y": 2130, "h": 600, "z": 10,
+                              "face": "right", "motion": "breathe", "enter": "left"})
+
+
 def _clean(text: str) -> str:
     return " ".join(text.split())
 
@@ -72,7 +102,10 @@ def prompts(sc: dict) -> dict[str, tuple[str, tuple[int, int]]]:
     cast = {k: _clean(v) for k, v in art.get("cast", {}).items()}
     out = {}
     for name, text in art.get("puppets", {}).items():
-        out[f"puppet_{name}"] = (f"{_clean(art['puppet_style'])} {text.format(**cast)}", PUPPET_SIZE)
+        style = art["puppet_style"]
+        if isinstance(text, dict):                                   # a puppet with its own style
+            style, text = text["style"], text["text"]
+        out[f"puppet_{name}"] = (f"{_clean(style)} {text.format(**cast)}", PUPPET_SIZE)
     for name, text in art.get("props", {}).items():                # scenery pieces moved like puppets
         style = art["prop_style"]
         if isinstance(text, dict):                                   # a prop with its own style

@@ -13,6 +13,9 @@ summary:
   en: "During the churning of the ocean, a poison rose that could end all creation. Shiva drank it, and it turned his throat blue: that is why he is called Neelkanth."
   hi: "समुद्र मंथन में ऐसा विष निकला जो पूरी सृष्टि को नष्ट कर सकता था। भगवान शिव ने उसे पी लिया और उनका कंठ नीला हो गया। इसीलिए उन्हें नीलकंठ कहते हैं।"
 music: tense
+segment: indian_myth
+opening:
+  beat: 6
 cast:
   shiva: {preset: shiva}
   parvati: {preset: parvati}

@@ -94,6 +94,8 @@ class Story(Format):
     def setup(self) -> None:
         sid = getattr(self.opts, "story", None) or self.rng.choice(story_ids())
         self.sc = load_story(sid)
+        from ..story.art import cast_segment
+        cast_segment(self.sc)
         self.lang = getattr(self.opts, "lang", None) or "en"
         self.music = self.sc.get("music", "chill")
         self.settings = load_settings(getattr(self.opts, "config", None))
@@ -101,9 +103,12 @@ class Story(Format):
         self.beats = self.sc["beats"]
         self.title_text = self.sc["title"][self.lang]
         self.lines = [self.sc["title"][self.lang]] + [b[self.lang] for b in self.beats]
-        if self.settings.voice and tts.available(self.narrator(self.settings)):
-            tts.prepare(self.lines, self.narrator(self.settings))
-        lengths = [self.spoken_length(text) for text in self.lines]
+        self.voices = [self.asker(self.settings)] + [self.narrator(self.settings)] * len(self.beats)
+        if self.settings.voice:
+            for v in dict.fromkeys(self.voices):
+                if tts.available(v):
+                    tts.prepare([t for t, w in zip(self.lines, self.voices) if w == v], v)
+        lengths = [self.spoken_length(text, v) for text, v in zip(self.lines, self.voices)]
         self.starts, t = [], lengths[0] + GAP_S + 0.2
         for n in lengths[1:]:
             self.starts.append(t)
@@ -117,13 +122,22 @@ class Story(Format):
     def narrator(self, settings) -> str:
         return settings.voice_name_hi if self.lang == "hi" else settings.voice_name
 
-    def spoken_length(self, text: str) -> float:
-        if self.settings.voice and tts.available(self.narrator(self.settings)):
-            return len(tts.say(text, self.narrator(self.settings), self.settings.voice_speed)) / SR
+    def asker(self, settings) -> str:
+        """The question is asked by the segment's asker (a young girl's voice), else the narrator."""
+        if not self.sc.get("segment"):
+            return self.narrator(settings)
+        return settings.voice_name_asker_hi if self.lang == "hi" else settings.voice_name_asker
+
+    def spoken_length(self, text: str, voice: str | None = None) -> float:
+        voice = voice or self.narrator(self.settings)
+        if self.settings.voice and tts.available(voice):
+            return len(tts.say(text, voice, self.settings.voice_speed)) / SR
         return max(1.2, len(text.split()) / WORDS_PER_S)
 
-    def narration(self) -> list[tuple[float, str]]:
-        return [(0.15, self.lines[0])] + [(t + 0.1, text) for t, text in zip(self.starts, self.lines[1:])]
+    def narration(self) -> list[tuple]:
+        """(start, text, voice) for every spoken line: the question, then each beat."""
+        times = [0.15] + [t + 0.1 for t in self.starts]
+        return [(t, text, v) for t, text, v in zip(times, self.lines, self.voices)]
 
     def title_hooks(self) -> list[str]:
         return [self.sc["title"]["en"]]

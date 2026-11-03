@@ -51,6 +51,7 @@ def backend(voice: str) -> str | None:
 
 
 def available(voice: str = "") -> bool:
+    voice = voice.partition("@")[0]
     if backend(voice):
         return all(p.exists() for p in BACKENDS[backend(voice)])
     if not (MODEL.exists() and VOICES.exists()):
@@ -95,6 +96,7 @@ def _batch_spec(voice: str) -> dict:
 
 def prepare(texts: list[str], voice: str) -> None:
     """Make every missing line for a batch-script voice in one run, so the model loads once."""
+    voice = voice.partition("@")[0]
     if not backend(voice):
         return
     missing = [t for t in dict.fromkeys(texts) if not _cached(t, voice).exists()]
@@ -121,8 +123,17 @@ def _load_wav(path: Path) -> tuple[np.ndarray, int]:
     return np.frombuffer(raw, dtype="<i4").astype(np.float32) / 2147483648.0, rate
 
 
+def split_pitch(voice: str) -> tuple[str, float]:
+    """"af_sky@+4" -> ("af_sky", 4.0): a voice and how many semitones to raise it."""
+    base, _, shift = voice.partition("@")
+    return base, float(shift) if shift else 0.0
+
+
 def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
     """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
+
+    A voice written "<voice>@+N" is raised N semitones, e.g. a child asking a question: Kokoro
+    voices are spoken that much slower first so the pace stays natural.
 
     Results are cached for the life of the process, so a story's narration is synthesised once
     for timing and reused for the final mix.
@@ -131,6 +142,10 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
     key = (text, voice, speed)
     if key in _cache:
         return _cache[key]
+    voice, semis = split_pitch(voice)
+    ratio = 2 ** (semis / 12)
+    if not backend(voice):
+        speed = speed / ratio
     if backend(voice):
         prepare([text], voice)
         samples, rate = _load_wav(_cached(text, voice))
@@ -142,6 +157,7 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
         spoken = text if lang == "hi" else speakable(text)
         samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
     samples = np.asarray(samples, dtype=np.float32)
+    rate = rate * ratio                                  # played faster: higher, younger
     if rate != SR:
         t_out = np.arange(int(len(samples) * SR / rate)) / SR
         samples = np.interp(t_out, np.arange(len(samples)) / rate, samples).astype(np.float32)

@@ -13,6 +13,8 @@ render:
   voice_speed: 0.95
   voice_level: 2.2       # how loud the voice is compared with music and effects (raise for louder speech)
   voice_name_hi: "chatterbox:hi:aman" # Hindi narrator: chatterbox:hi[:<clip in models/voice_refs>] (needs cbenv), indic:<Speaker>[:warm|deep] (needs ttsenv), or a Kokoro voice such as hm_omega
+  voice_name_asker: "af_sky@+4"                # the girl who asks a story's question; @+N raises the pitch
+  voice_name_asker_hi: "chatterbox:hi:rani@+3"
   crf: 20                # x264 quality: lower is better and bigger
   preset: veryfast       # x264 speed/size trade-off
   audio_bitrate: 160k

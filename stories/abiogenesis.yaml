@@ -17,6 +17,9 @@ summary:
   en: "Around 4 billion years ago, lightning, heat and chemistry turned simple molecules into the first protocells. This is abiogenesis, the leading scientific idea for how life began."
   hi: "लगभग चार अरब साल पहले, बिजली, गर्मी और रसायन ने सरल अणुओं से पहली आदि-कोशिकाएँ बनाईं। इसे अजीवात् जीवोत्पत्ति कहते हैं, जीवन की शुरुआत का सबसे प्रमुख वैज्ञानिक विचार।"
 music: chill
+segment: science
+opening:
+  beat: 1
 cast: {}
 # Paper-cut version, drawn locally by `reel story-art abiogenesis`: every object is a separate
 # paper cut-out (drawn alone on black, then cut out) moved over paper-cut scenery.

@@ -178,7 +178,8 @@ class Theatre:
                 "h": float(spec.get("h", 900)), "face": 1 if spec.get("face", "right") == "right" else -1,
                 "motion": spec.get("motion", "sway"), "enter": spec.get("enter", "fade"),
                 "from": spec["enter"].get("from") if isinstance(spec.get("enter"), dict) else None,
-                "exit": spec.get("exit"), "z": float(spec.get("z", 0)), "sync": spec.get("sync")}
+                "exit": spec.get("exit"), "z": float(spec.get("z", 0)), "sync": spec.get("sync"),
+                "delay": float(spec.get("delay", 0))}
 
     def actor_state(self, beat: int, name: str, since: float, length: float, spec: dict | None = None) -> dict | None:
         """Where the actor is `since` seconds into the beat: position, size, facing, opacity.
@@ -186,6 +187,9 @@ class Theatre:
         With `spec`, the actor is one added just for this moment (the cold open's host): it enters fresh."""
         if spec is not None:
             now, before = self.mark_from(spec), None
+            since -= now["delay"]                                # waits in the wings before entering
+            if since < 0:
+                return None
         else:
             now, before = self.mark(beat, name), self.mark(beat - 1, name)
         if now is None:                                          # gone: fade out where it was

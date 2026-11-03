@@ -24,10 +24,9 @@ summary:
   hi: "प्राचीन मिस्र के लोग मानते थे कि सूर्य देवता रा हर रात पाताल लोक से गुज़रते हैं, सर्प अपेप से लड़ते हैं और सुबह फिर उगते हैं। आज हम जानते हैं कि धरती घूमती है, लेकिन अपेप लौट रहा है: क्षुद्रग्रह एपोफ़िस बनकर, जो 2029 में धरती के पास से सुरक्षित गुज़रेगा।"
 music: tense
 cast: {}
+segment: world_myth
 opening:
   beat: 5
-  actors:
-    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
 art:
   puppet_style: >-
     A single flat painted leather shadow puppet in the style of ancient Egyptian tomb paintings, mounted on a
@@ -163,7 +162,6 @@ beats:
       actors:
         earth: {puppet: earth, x: 330, y: 1120, h: 520, motion: spin}
         rock: {puppet: asteroid, x: 760, y: 700, h: 230, motion: spin, enter: right, exit: left}
-        host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
 end:
   head: "APOPHIS"
   sub: "the serpent returns, in 2029"

@@ -163,7 +163,8 @@ def spoken_lines(game, settings: RenderSettings, opts: Namespace) -> list:
         print("note: voice files not found in models/; rendering without a voice", flush=True)
         return []
     if hasattr(game, "narration"):                       # story formats narrate every line themselves
-        return [(t, voice.say(text, name, settings.voice_speed)) for t, text in game.narration()]
+        return [(line[0], voice.say(line[1], line[2] if len(line) > 2 else name, settings.voice_speed))
+                for line in game.narration()]
     lines = [(0.15, game.title)]
     if game.end_t is not None:
         lines.append((game.end_t + 0.35, game.end_card().head))

@@ -21,10 +21,9 @@ summary:
 music: chill
 cast: {}
 # Opens on beat 5's frame (the star trails) with the question and the Sutradhar, then tells the story.
+segment: indian_myth
 opening:
   beat: 5
-  actors:
-    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
 art:
   puppet_style: >-
     A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
@@ -117,7 +116,6 @@ beats:
       fx: [{star_trails: {x: 540, y: 900}}, {glow: {actor: dhruva, colour: [255, 230, 160]}}]
       actors:
         dhruva: {puppet: pole_star, x: 540, y: 1020, h: 240, motion: breathe}
-        host: {puppet: sutradhar, x: 840, y: 1980, h: 980, face: left, motion: talk, enter: right}
 end:
   head: "DHRUVA TARA"
   sub: "the Pole Star"

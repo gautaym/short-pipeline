@@ -20,10 +20,9 @@ summary:
   hi: "बिग डिपर के सात ऋषि, और ऋषि वशिष्ठ के पास धुँधला तारा अरुंधती: वह तारा जो नवविवाहितों को साथ निभाने के वचन के रूप में दिखाया जाता है। विज्ञान कहता है कि यह जोड़ी, मिज़ार और अल्कोर, शायद गुरुत्वाकर्षण से बँधी है।"
 music: chill
 cast: {}
+segment: indian_myth
 opening:
   beat: 4
-  actors:
-    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
 # The Big Dipper, drawn as glowing stars joined by lines: the handle Alkaid, Mizar (Vasishtha) and
 # Alioth, then the bowl Megrez, Phecda, Merak and Dubhe; Alcor (Arundhati) sits just beside Mizar.
 dipper: &dipper
@@ -120,7 +119,6 @@ beats:
       fx: [{constellation: {<<: *dipper, highlight: [1, 7]}}, {glow: {actor: dhruva, colour: [255, 230, 160]}}]
       actors:
         dhruva: {puppet: pole_star, x: 808, y: 340, h: 170, motion: breathe}
-        host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
 end:
   head: "ARUNDHATI"
   sub: "the faithful star"
