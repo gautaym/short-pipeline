@@ -187,36 +187,111 @@ def cut_out(rgb: np.ndarray) -> np.ndarray:
     return (np.minimum(alpha, soft) * 255).astype(np.uint8)
 
 
-def cut(pg, story_id: str, name: str):
-    """The puppet cut out of its background and cropped to it, cached as puppet_<name>_cut.png."""
-    src, dst = puppet_file(story_id, name), cut_file(story_id, name)
-    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
-        return pg.image.load(str(dst))
-    img = pg.image.load(str(src))
-    rgb = pg.surfarray.array3d(img)                              # (w, h, 3)
+def outline(pg, rgb: np.ndarray) -> tuple[np.ndarray, tuple[int, int, int, int] | None]:
+    """The puppet's alpha mask on its black backdrop, and the rectangle it fills (None if empty)."""
     alpha = cut_out(rgb)
-    surf = pg.Surface(img.get_size(), pg.SRCALPHA)
-    pg.surfarray.pixels3d(surf)[:] = rgb
-    pg.surfarray.pixels_alpha(surf)[:] = alpha
-    pocket = pg.Surface(img.get_size(), pg.SRCALPHA)                  # background trapped inside the outline,
+    size = rgb.shape[:2]
+    pocket = pg.Surface(size, pg.SRCALPHA)                            # background trapped inside the outline,
     pg.surfarray.pixels_alpha(pocket)[:] = np.where((rgb.max(axis=2) < BLACK) & (alpha > 0), 255, 0)  # e.g.
     for p in pg.mask.from_surface(pocket, 127).connected_components():  # between an arm and the body
         if p.count() >= 0.002 * rgb.shape[0] * rgb.shape[1]:          # big enough not to be paint or outline
             hole = pg.surfarray.array_alpha(p.to_surface(setcolor=(255, 255, 255, 255), unsetcolor=(0, 0, 0, 0)))
             alpha = np.where(hole > 0, 0, alpha)
+    surf = pg.Surface(size, pg.SRCALPHA)
     pg.surfarray.pixels_alpha(surf)[:] = alpha
     pieces = pg.mask.from_surface(surf, 127).connected_components()   # drop specks of textured background
     if pieces:
         biggest = max(p.count() for p in pieces)
-        keep = pg.mask.Mask(surf.get_size())
+        keep = pg.mask.Mask(size)
         for p in pieces:
             if p.count() >= 0.1 * biggest:
                 keep.draw(p, (0, 0))
         alpha = np.where(pg.surfarray.array_alpha(keep.to_surface(setcolor=(255, 255, 255, 255),
                                                                   unsetcolor=(0, 0, 0, 0))) > 0, alpha, 0)
-        pg.surfarray.pixels_alpha(surf)[:] = alpha
     cols, rows = np.flatnonzero(alpha.max(axis=1) > 0), np.flatnonzero(alpha.max(axis=0) > 0)
-    if len(cols) and len(rows):
-        surf = surf.subsurface((cols[0], rows[0], cols[-1] - cols[0] + 1, rows[-1] - rows[0] + 1)).copy()
+    if not (len(cols) and len(rows)):
+        return alpha, None
+    return alpha, (cols[0], rows[0], cols[-1] - cols[0] + 1, rows[-1] - rows[0] + 1)
+
+
+def cut_with(pg, rgb: np.ndarray, alpha: np.ndarray, rect):
+    surf = pg.Surface(rgb.shape[:2], pg.SRCALPHA)
+    pg.surfarray.pixels3d(surf)[:] = rgb
+    pg.surfarray.pixels_alpha(surf)[:] = alpha
+    return surf.subsurface(rect).copy() if rect else surf
+
+
+def cut(pg, story_id: str, name: str):
+    """The puppet cut out of its background and cropped to it, cached as puppet_<name>_cut.png."""
+    src, dst = puppet_file(story_id, name), cut_file(story_id, name)
+    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
+        return pg.image.load(str(dst))
+    rgb = pg.surfarray.array3d(pg.image.load(str(src)))             # (w, h, 3)
+    alpha, rect = outline(pg, rgb)
+    surf = cut_with(pg, rgb, alpha, rect)
     pg.image.save(surf, str(dst))
     return surf
+
+
+def live_face(sc: dict, name: str) -> list[float] | None:
+    """The face box [cx, cy, width] (fractions of the picture) of a puppet that comes alive, from the
+    story's `art.live` or the library's; None for a puppet that stays still."""
+    own = sc.get("art", {}).get("live", {})
+    if name in own:
+        return own[name]
+    from ..formats.story import load_story
+    return load_story(LIBRARY).get("art", {}).get("live", {}).get(name)
+
+
+def live_dir(story_id: str, name: str) -> Path:
+    """Where a puppet's living-face frames are kept, next to its picture: raw frames 0000.png ...,
+    cut-out frames c0000.png ..."""
+    src = puppet_file(story_id, name)
+    return src.with_name(f"{src.stem}_live")
+
+
+def live_frames(pg, story_id: str, name: str) -> list:
+    """The puppet's living-face loop, cut out with the still picture's own outline (cached)."""
+    folder = live_dir(story_id, name)
+    raw = sorted(folder.glob("[0-9][0-9][0-9][0-9].png")) if folder.is_dir() else []
+    if not raw:
+        return []
+    cuts = [folder / f"c{f.name}" for f in raw]
+    if all(c.exists() and c.stat().st_mtime >= f.stat().st_mtime for c, f in zip(cuts, raw)):
+        return [pg.image.load(str(c)) for c in cuts]
+    alpha, rect = outline(pg, pg.surfarray.array3d(pg.image.load(str(puppet_file(story_id, name)))))
+    frames = []
+    for f, c in zip(raw, cuts):
+        surf = cut_with(pg, pg.surfarray.array3d(pg.image.load(str(f))), alpha, rect)
+        pg.image.save(surf, str(c))
+        frames.append(surf)
+    return frames
+
+
+def make_live(sc: dict) -> list[str]:
+    """Make the living-face loops a story needs that are missing or older than their picture (lpenv)."""
+    names = {a["puppet"] for b in sc["beats"] for a in b["stage"].get("actors", {}).values()}
+    names |= {a["puppet"] for a in (sc.get("opening") or {}).get("actors", {}).values()}
+    seg = segment(sc)
+    if seg:
+        names |= {seg["narrator"], seg["asker"]}
+    jobs = []
+    for name in sorted(names):
+        face = live_face(sc, name)
+        src = puppet_file(sc["id"], name)
+        if not face or not src.exists():
+            continue
+        folder = live_dir(sc["id"], name)
+        first = folder / "0000.png"
+        if first.exists() and first.stat().st_mtime >= src.stat().st_mtime:
+            continue
+        jobs.append({"src": str(src.relative_to(REPO_ROOT)), "face": face,
+                     "out": str(folder.relative_to(REPO_ROOT))})
+    if not jobs:
+        return []
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+        json.dump(jobs, f)
+    python = REPO_ROOT / "lpenv" / "Scripts" / "python.exe"
+    subprocess.run([str(python), str(REPO_ROOT / "ai" / "liveface.py"), f.name], check=True, cwd=REPO_ROOT,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return [j["out"] for j in jobs]

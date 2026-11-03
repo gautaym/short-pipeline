@@ -42,6 +42,9 @@ birds: a flock crossing, one or two circling high up, and a burst flying off whe
 or lightning strikes; `birds: none`, `birds: white` (for dark skies) or `birds: black` on a beat
 overrides the choice.
 
+Puppets listed in `art.live` ({name: [face cx, cy, width]}, the story's or the library's) come
+alive: a looping blink and gentle head movement made with LivePortrait (`reel live`, or `reel make`).
+
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
 bowl use them.
@@ -58,6 +61,7 @@ MOVE_S = 1.0          # gliding to a new mark
 ENTER_S = 1.3         # sliding on stage
 FADE_S = 0.8          # fading in or out
 TURN_S = 0.45         # flipping to face the other way
+LIVE_FPS = 30         # living-face loops (art.live) play at this rate
 CAMERA_ZOOM = 0.07    # each beat the camera pushes in this much over the beat
 CAMERA_PAN = 70       # and drifts this far sideways, alternating direction
 BIRD_WORDS = ("forest", "road", "meadow", "river", "panchavati", "dwarka", "shore", "kailash", "dawn",
@@ -130,9 +134,14 @@ class Theatre:
         self.beats = [b["stage"] for b in sc["beats"]]
         self.anchors = sc["art"].get("anchors", {})
         self.puppets = {p: art.cut(pg, sc["id"], p) for p in puppets}
+        self.live = {p: art.live_frames(pg, sc["id"], p) for p in puppets if art.live_face(sc, p)}
+        self.live = {p: frames for p, frames in self.live.items() if frames}   # living faces, looped
         for p in puppets:                                           # stage directions assume pictures face right
             if art.facing(sc, p) == "left":
                 self.puppets[p] = pg.transform.flip(self.puppets[p], True, False)
+                if p in self.live:
+                    self.live[p] = [pg.transform.flip(f, True, False) for f in self.live[p]]
+        self.clock = 0.0
         size = (int(W * BACKDROP_ROOM), int(H * BACKDROP_ROOM))
         crop = float(sc["art"].get("backdrop_crop", 0.0))          # trims a border the model drew round the scene
         self.backdrops = {}
@@ -344,6 +353,10 @@ class Theatre:
         pg = self.pg
         h = max(8, int(s["h"] * scale))
         img, shadow = self.sized_puppet(puppet, h)
+        if puppet in self.live:                                     # a living face: this moment's frame
+            frames = self.live[puppet]
+            frame = frames[int(self.clock * LIVE_FPS + self.phase.get(puppet, 0) * 10) % len(frames)]
+            img = pg.transform.smoothscale(frame, img.get_size())
         sx = s["sx"]
         w = max(2, int(img.get_width() * abs(sx)))
         if w != img.get_width():
@@ -488,6 +501,7 @@ class Theatre:
     def draw_stage(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False,
                    extras: dict | None = None, extras_since: float = 0.0) -> None:
         pg = self.pg
+        self.clock = t
         fx = self.fx(beat)
         shake = (0.0, 0.0)
         if "shake" in fx and not opening:

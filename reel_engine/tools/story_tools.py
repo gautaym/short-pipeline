@@ -71,10 +71,19 @@ def pick(story_id: str, choices: list[str]) -> list[str]:
     return done
 
 
+def live(story_id: str) -> list[str]:
+    """Make the story's missing living-face loops (LivePortrait, in lpenv)."""
+    from ..formats.story import load_story
+    from ..story.art import make_live
+    return make_live(load_story(story_id))
+
+
 def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1) -> list[Path]:
-    """Render the story in each language, then a frame sheet and a phone-size preview beside each reel."""
+    """Render the story in each language, then a frame sheet and a phone-size preview beside each reel.
+    Living faces the story lists (art.live) are made first if missing."""
     import re
     import sys
+    live(story_id)
     made = []
     for lang in langs:
         run = subprocess.run([sys.executable, "-m", "reel_engine", "render", "--mode", "story", "--story", story_id,

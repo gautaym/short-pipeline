@@ -73,6 +73,9 @@ art:
     courtyard: "A decorated home courtyard at night with a colourful rangoli pattern on the floor, marigold garlands and an open doorway."
     battle: "A rocky battlefield at dawn under a red sky, broken chariot wheels and distant hills."
     temple: "At night under a dark navy sky with stars: a golden temple in the middle of a still dark lake, a causeway leading to it, its golden reflection in the black water."
+  # Faces that come alive (blink, gentle head movement): [centre x, centre y, face width] as fractions.
+  live:
+    lakshmi: [0.5, 0.23, 0.145]
   anchors: {}
 beats:
   - en: "After fourteen years in exile, Lord Rama was finally coming home. He had defeated Ravana and rescued Maa Sita, and with Lakshmana at their side, they turned towards Ayodhya."

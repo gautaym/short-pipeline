@@ -36,3 +36,6 @@ cbenv/
 
 # Pictures drawn for illustrated stories (reel story-art)
 stories/art/
+
+# LivePortrait (face animation) environment
+lpenv/
