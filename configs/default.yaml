@@ -21,7 +21,7 @@ render:
   # ledger: out/ledger.sqlite   # record of every reel; defaults to <output_dir>/ledger.sqlite
 
 channel:
-  name: ""
+  name: "KathaVerse"   # handle currently @nhverse
   # Must be set to true or false before anything is uploaded. There is deliberately no default:
   # it is a legal declaration (YouTube's COPPA setting) that only you can make.
   made_for_kids:
