@@ -19,13 +19,15 @@ float, spin, flip (a tossed coin turning over and over), bob (rising and falling
 moves it in time with another, as a boat and the god standing in it. Everything is a function of time, so any frame can be drawn on its own.
 
 Effects are names, or a name with settings: [waves, spray, smoke, smoke_far, smoke_in, rays, shake,
-lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
+lightning, bubbles, throat_glow, motes (rising sparks), {vent_smoke: {x: 540, y: 640}},
 {glow: {actor: cell, at: spark, colour: [255, 240, 170]}}, {link: {a: p1, b: p2}}] (glow's `at` is
 an anchor, without it the middle of the puppet, and glow takes a list to light several actors;
 link draws a shimmering thread between two actors). Sky effects: {star_trails: {x, y}};
 {constellation: {stars: [[x, y, size], ...], lines: [[i, j], ...], grow: seconds, highlight: [i, ...]}}
 draws glowing stars joined by lines, drawn in one by one over `grow` seconds, with highlighted
 stars pulsing; {pointer: {from: [x, y], to: [x, y], grow: seconds}} shoots a dashed guide line.
+{rekha: {x1, x2, y, sag, grow: seconds}} draws a glowing line along the ground, left to right, behind
+the actors; with `fade: seconds` it is already there and fades away (the line that was never drawn).
 
 A story's `opening` adds actors (the Sutradhar host) to a beat's frame for the cold open:
 draw(..., extras={name: spec}, extras_since=t) slides them on while the rest stays settled.
@@ -128,6 +130,8 @@ class Theatre:
         self.glow_blue = light(pg, 120, (90, 200, 255), 1.5)       # cyan: plain blue would vanish on blue skin
         self.mote = soft_blob(pg, 6, (255, 220, 160, 200))
         self.motes = [(r.uniform(0, W), r.uniform(0, H), r.uniform(10, 34), r.uniform(0, 6.3)) for _ in range(40)]
+        self.ember = soft_blob(pg, 11, (255, 170, 70, 230))
+        self.embers = [(r.uniform(0, W), r.uniform(0, H), r.uniform(40, 120), r.uniform(0, 6.3)) for _ in range(70)]
         self.rays = self.make_rays()
         self.lamp = light(pg, 900, (255, 200, 130), 0.16)
 
@@ -381,6 +385,8 @@ class Theatre:
                             cx=float(v.get("x", W / 2)), sprites=self.soot, period=4.5)
         if "waves" in fx:
             self.draw_waves(screen, t, back=True)
+        if "rekha" in fx:
+            self.draw_rekha(screen, fx["rekha"], since if not opening else 99.0, t)
         names = list(dict.fromkeys(list(self.beats[beat].get("actors", {}))
                                    + (list(self.beats[beat - 1].get("actors", {})) if beat > 0 else [])))
         states = {}
@@ -424,6 +430,11 @@ class Theatre:
             m = self.mote.copy()
             m.set_alpha(int(90 + 80 * math.sin(t * 1.7 + ph)))
             screen.blit(m, (x + 14 * math.sin(t * 0.6 + ph), (y - speed * t) % H))
+        if "motes" in fx:                                             # sparks rising from lamps and fires
+            for x, y, speed, ph in self.embers:
+                m = self.ember.copy()
+                m.set_alpha(int(120 + 110 * math.sin(t * 3.1 + ph)))
+                screen.blit(m, (x + 30 * math.sin(t * 0.9 + ph), H - (H - y + speed * t) % (H * 0.75)))
         if "lightning" in fx and not opening:
             self.draw_lightning(screen, t)
         dim = pg.Surface((W, H))
@@ -620,6 +631,27 @@ class Theatre:
             if n in highlight:                                     # a ring round the stars we are talking about
                 r = int(46 * size * pulse)
                 self.pg.draw.circle(screen, (255, 214, 120), (int(x), int(y)), r, 3)
+
+    def draw_rekha(self, screen, g: dict, since: float, t: float) -> None:
+        """A glowing line along the ground: drawn in from the left over `grow` seconds, or there
+        from the start and fading out over `fade` seconds."""
+        x1, x2, y, sag = float(g.get("x1", 120)), float(g.get("x2", 960)), float(g.get("y", 1700)), float(g.get("sag", 60))
+        if "fade" in g:
+            k, alpha = 1.0, 1 - ease(since / float(g["fade"]))
+        else:
+            k, alpha = ease(since / float(g.get("grow", 1.6))), 1.0
+        if alpha <= 0.01 or k <= 0:
+            return
+        n = 60
+        pts = [(x1 + (x2 - x1) * i / n, y + sag * math.sin(math.pi * i / n)) for i in range(int(n * k) + 1)]
+        if len(pts) < 2:
+            return
+        flicker = 0.85 + 0.15 * math.sin(t * 7.0)
+        layer = self.pg.Surface((W, H))
+        for width, colour in ((34, (90, 40, 6)), (18, (190, 100, 20)), (7, (255, 210, 120))):
+            c = tuple(int(v * alpha * flicker) for v in colour)
+            self.pg.draw.lines(layer, c, False, pts, width)
+        screen.blit(layer, (0, 0), special_flags=self.pg.BLEND_RGB_ADD)
 
     def draw_pointer(self, screen, g: dict, since: float, t: float) -> None:
         """A dashed guide line shooting from one point of the sky to another."""

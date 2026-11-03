@@ -1,0 +1,181 @@
+# The Lakshmana Rekha: the line that is not in the oldest Ramayana.
+# Review notes. Valmiki Ramayana, Aranya Kanda 3.43-46: Maricha, as a golden deer, lures Rama away and
+# cries out in Rama's voice; Sita, frightened, speaks harshly to Lakshmana and questions his motives;
+# he answers, asks the deities of the forest to protect her (3.45.33) and leaves; Ravana comes as a
+# wandering ascetic, Sita receives him as a guest, and he abducts her. No line is drawn.
+# Tulsidas's Ramcharitmanas has no line at the hut either (Aranya Kand); the only mention is in Lanka
+# Kand (6.35.1), where Mandodari mocks Ravana that he could not cross even the small line drawn by
+# Rama's younger brother. The full scene (the line drawn, Sita stepping over it to give alms) comes
+# from later retellings such as the Radheshyam Ramayana and the Ramlila stage. Sources:
+# en.wikipedia.org/wiki/Lakshmana_rekha; vedapath.app/en/ramayana/aranya-kanda/45. The user's brief said
+# Tulsidas popularised the scene; the script says, more precisely, that he mentions it once.
+# Script choices: "the oldest telling" for Valmiki; "later retellings and Ramlila stages" rather than
+# naming a single source for the full scene.
+id: lakshmana_rekha
+topic: mythology
+title:
+  en: "Did Lakshmana really draw a line around Sita?"
+  hi: "क्या लक्ष्मण ने सच में सीता के लिए रेखा खींची थी?"
+summary:
+  en: "The Lakshman Rekha is one of the most famous scenes of the Ramayana, but it is not in Valmiki's telling. Tulsidas mentions it only once, through Mandodari; later retellings and the Ramlila stage made it the scene everyone knows."
+  hi: "लक्ष्मण रेखा रामायण के सबसे मशहूर दृश्यों में से है, पर वाल्मीकि की रामायण में यह है ही नहीं। तुलसीदास इसका ज़िक्र सिर्फ़ एक बार, मंदोदरी के मुँह से करते हैं; बाद की कथाओं और रामलीला ने इसे वह दृश्य बना दिया जिसे सब जानते हैं।"
+music: tense
+cast: {}
+# Opens on beat 3's frame (the glowing line), with Meera's question and the Sutradhar.
+segment: indian_myth
+opening:
+  beat: 3
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather shadow puppet scenery piece, a cut-out prop rather than a character,
+    traditional Andhra Tholu Bommalata style, bright flat colours with dark outlines and a pale cut edge,
+    studio photo against a plain pure black backdrop, nothing else in the frame.
+  backdrop_style: >-
+    An empty landscape painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    rama: >-
+      Lord Rama with blue skin, a tall gold crown, a yellow silk dhoti, gold jewellery and a quiver of arrows
+      on his back, exactly two arms
+    lakshmana: >-
+      Lakshmana, Rama's younger brother, a young prince with golden skin, a gold crown, an orange silk dhoti,
+      gold jewellery and a quiver of arrows on his back, exactly two arms
+    sita: >-
+      Sita, a young princess with golden skin, a long dark brown braid, a red and gold saree and gold
+      jewellery, exactly two arms
+    monk: >-
+      Ravana disguised as a wandering holy man, a tall man with only one head, a long dark brown beard and
+      matted dark brown hair, saffron robes, a wooden staff and a small begging bowl, exactly two arms
+    mandodari: >-
+      Mandodari, queen of Lanka, a regal woman with a tall gold crown, a purple and gold saree and heavy gold
+      jewellery, exactly two arms
+  puppets:
+    rama: "The puppet is {rama}, running forward holding a long bow in one hand, side view facing right."
+    sita: "The puppet is {sita}, standing gracefully, one hand raised in surprise, side view facing right."
+    sita_plead: "The puppet is {sita}, pleading with both hands held out in front of her, side view facing right."
+    lakshmana_draw: "The puppet is {lakshmana}, bending forward and drawing a line on the ground with the tip of an arrow held in one hand, side view facing right."
+    lakshmana_pray: "The puppet is {lakshmana}, standing with his palms joined in prayer, head bowed, side view facing right."
+    monk: "The puppet is {monk}, holding out the begging bowl in one hand and the staff in the other, side view facing right."
+    mandodari: "The puppet is {mandodari}, pointing scornfully with one hand, the other hand on her hip, side view facing right."
+  props:
+    deer: "The prop is a single golden deer with silver spots and small antlers, standing, side view facing right, an animal cut-out with four legs."
+    hut: "The prop is a small thatched forest hut made of bamboo and leaves, with a little doorway."
+    scroll: "The prop is a bundle of ancient palm-leaf manuscript pages tied with a red string, shown open."
+  backdrops:
+    panchavati: "A forest clearing by a river at dusk, tall trees, flowering bushes and soft orange light."
+    deep_forest: "A dark dense forest at night with twisted trees and a stormy sky."
+    lanka: "A golden palace hall in Lanka with tall carved pillars and red curtains."
+    ramlila: "An open-air village stage at night with a painted curtain, garlands of marigolds and oil lamps along its front edge."
+  anchors: {}
+beats:
+  - en: "In the forest of Panchavati, a golden deer shimmered near Sita's hut. She longed for it, so Rama took his bow and chased it into the trees."
+    hi: "पंचवटी के जंगल में, सीता की कुटिया के पास एक सुनहरा हिरण चमक रहा था। सीता का मन उस पर आ गया, तो राम धनुष उठाकर उसके पीछे जंगल में चले गए।"
+    caption: "A *GOLDEN* DEER."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [rays, {glow: {actor: deer, colour: [255, 210, 110]}}]
+      actors:
+        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: sway, enter: fade}
+        deer: {puppet: deer, x: 800, y: 1560, h: 420, face: right, motion: bob, enter: right, exit: right}
+        rama: {puppet: rama, x: 620, y: 1680, h: 980, face: right, motion: run, enter: left, exit: right, delay: 2.0}
+  - en: "Then a cry tore through the forest, in Rama's own voice. 'Ha Sita! Ha Lakshmana!' Sita begged Lakshmana to run to him. But Rama had told him to stay and guard her."
+    hi: "तभी जंगल में राम की आवाज़ में एक चीख़ गूँजी, 'हा सीता! हा लक्ष्मण!' सीता ने लक्ष्मण से विनती की कि वे फ़ौरन जाएँ। पर राम ने उन्हें सीता की रक्षा के लिए वहीं रुकने को कहा था।"
+    caption: "A CRY FOR *HELP*."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [shake]
+      actors:
+        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        sita: {puppet: sita_plead, x: 380, y: 1660, h: 900, face: right, motion: tremble}
+        lakshmana: {puppet: lakshmana_pray, x: 770, y: 1680, h: 1000, face: left, motion: breathe, enter: right}
+  - en: "The story most of us know goes like this. Before leaving, Lakshmana drew a glowing line around the hut. 'Do not step outside it,' he said. 'Nothing evil can cross it.'"
+    hi: "जो कहानी हम सब जानते हैं, वह कुछ यूँ है। जाने से पहले लक्ष्मण ने कुटिया के चारों ओर एक रेखा खींची, और कहा, 'इसके बाहर कदम मत रखना। कोई बुरी ताक़त इसे पार नहीं कर सकती।'"
+    caption: "THE *LAKSHMAN REKHA*."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [{rekha: {x1: 60, x2: 640, y: 1600, sag: 70, grow: 3.0}}]
+      actors:
+        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: breathe}
+        lakshmana: {puppet: lakshmana_draw, x: 780, y: 1680, h: 1000, face: left, motion: pull}
+  - en: "Then Ravana came, disguised as a holy man, and tricked Sita into stepping over the line to give him alms. It is the scene played at every Ramlila."
+    hi: "फिर रावण साधु बनकर आया, और भिक्षा देने के बहाने सीता से वह रेखा पार करवा ली। यही दृश्य हर रामलीला में खेला जाता है।"
+    caption: "SITA *CROSSED* IT."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [smoke, {rekha: {x1: 60, x2: 640, y: 1600, sag: 70, grow: 0.01}}]
+      actors:
+        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        sita: {puppet: sita, x: 600, y: 1660, h: 900, face: right, motion: sway}      # glides over the line
+        monk: {puppet: monk, x: 820, y: 1690, h: 1050, face: left, motion: sway, enter: fade}
+  - en: "[excited] But here is the twist. Open the oldest telling, Valmiki's Ramayana, and that line is simply not there."
+    hi: "[excited] पर असली मोड़ यहाँ है। सबसे पुरानी रामायण, वाल्मीकि की, खोलकर देखिए। उसमें यह रेखा है ही नहीं।"
+    caption: "*NO LINE* IN VALMIKI."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [rays, {rekha: {x1: 60, x2: 640, y: 1600, sag: 70, fade: 2.5}}, {glow: {actor: scroll, colour: [255, 225, 150]}}]
+      actors:
+        hut: {puppet: hut, x: 220, y: 1640, h: 700, motion: breathe}
+        scroll: {puppet: scroll, x: 640, y: 1250, h: 520, motion: float, enter: fade}
+  - en: "In Valmiki, a frightened Sita speaks harsh words to Lakshmana, even doubting his intentions. Hurt, he folds his hands, asks the gods of the forest to protect her, and goes. No line. Only a prayer."
+    hi: "वाल्मीकि की रामायण में, डरी हुई सीता लक्ष्मण से कड़वी बातें कह देती हैं, उनकी नीयत पर भी शक करती हैं। दुखी लक्ष्मण हाथ जोड़ते हैं, वन देवताओं से सीता की रक्षा की प्रार्थना करते हैं, और चले जाते हैं। कोई रेखा नहीं। बस एक प्रार्थना।"
+    caption: "ONLY A *PRAYER*."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [motes, {glow: {actor: lakshmana, colour: [255, 220, 160]}}]
+      actors:
+        sita: {puppet: sita_plead, x: 330, y: 1660, h: 900, face: right, motion: tremble}
+        lakshmana: {puppet: lakshmana_pray, x: 760, y: 1680, h: 1000, face: left, motion: breathe, exit: right}
+  - en: "Ravana arrives as a wandering monk. Sita welcomes him as a guest, as dharma asks. And he carries her away."
+    hi: "रावण एक साधु के भेस में आता है। सीता धर्म के अनुसार उसका अतिथि की तरह स्वागत करती हैं। और वह उन्हें उठा ले जाता है।"
+    caption: "RAVANA *TOOK* HER."
+    scene: deep_forest
+    stage:
+      backdrop: deep_forest
+      fx: [smoke, lightning, shake]
+      actors:
+        sita: {puppet: sita_plead, x: 360, y: 1660, h: 900, face: right, motion: tremble, exit: left}
+        monk: {puppet: monk, x: 740, y: 1690, h: 1050, face: left, motion: sway, enter: right, exit: left}
+  - en: "So where did the line come from? Even Tulsidas's Ramcharitmanas doesn't show it at the hut. It is mentioned just once, much later, when Ravana's wife Mandodari mocks him: you could not even cross a small line drawn by Lakshmana."
+    hi: "तो फिर यह रेखा आई कहाँ से? तुलसीदास के रामचरितमानस में भी कुटिया वाला यह दृश्य नहीं है। इसका ज़िक्र बस एक बार आता है, बहुत बाद में, जब मंदोदरी रावण को ताना मारती है कि तुम तो लक्ष्मण की खींची एक छोटी-सी रेखा भी पार नहीं कर पाए।"
+    caption: "JUST *ONE MENTION*."
+    scene: lanka
+    stage:
+      backdrop: lanka
+      fx: [{glow: {actor: mandodari, colour: [220, 160, 255]}}]
+      actors:
+        mandodari: {puppet: mandodari, x: 560, y: 1680, h: 1050, face: left, motion: sway, enter: right}
+  - en: "Later retellings and Ramlila stages grew that one mention into the full scene, and it became the version all of us remember."
+    hi: "बाद की कथाओं और रामलीला के मंचों ने उसी एक ज़िक्र से पूरा दृश्य गढ़ दिया, और वही कहानी हम सबकी यादों में बस गई।"
+    caption: "THE *STAGE* MADE IT."
+    scene: ramlila
+    stage:
+      backdrop: ramlila
+      fx: [motes, {rekha: {x1: 120, x2: 960, y: 1620, sag: 50, grow: 2.5}}]
+      actors:
+        sita: {puppet: sita, x: 380, y: 1660, h: 880, face: right, motion: sway, enter: fade}
+        lakshmana: {puppet: lakshmana_draw, x: 740, y: 1680, h: 980, face: left, motion: pull, enter: fade}
+  - en: "Today, Lakshman Rekha means a limit you must never cross. A line so famous, and yet in the oldest story, it was never drawn at all."
+    hi: "आज 'लक्ष्मण रेखा' का मतलब है ऐसी सीमा, जिसे कभी पार नहीं करना चाहिए। एक रेखा जो इतनी मशहूर है, और फिर भी सबसे पुरानी कहानी में कभी खींची ही नहीं गई।"
+    caption: "A LINE NEVER *DRAWN*."
+    scene: panchavati
+    stage:
+      backdrop: panchavati
+      fx: [rays, {rekha: {x1: 120, x2: 960, y: 1700, sag: 50, fade: 4.0}}]
+      actors:
+        hut: {puppet: hut, x: 860, y: 1560, h: 560, motion: breathe}
+end:
+  head: "LAKSHMAN REKHA"
+  sub: "the line that wasn't there"
