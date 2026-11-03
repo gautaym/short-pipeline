@@ -128,7 +128,7 @@ beats:
       actors:
         deva: {puppet: deva_afraid, x: 330, y: 1560, h: 720, face: left, motion: run, exit: left}
         asura: {puppet: asura_afraid, x: 750, y: 1560, h: 720, face: right, motion: run, exit: right}
-  - en: "Only one did not run. Shiva."
+  - en: "Only one did not run. Lord Shiva."
     hi: "बस एक नहीं भागे। भगवान शिव।"
     caption: "ONLY *SHIVA* STAYED."
     scene: cosmos
@@ -151,7 +151,7 @@ beats:
       fx: [smoke_in, rays]
       actors:
         shiva: {puppet: shiva_drink, x: 560, y: 1600, h: 1250, face: right, motion: drink}
-  - en: "Parvati held his throat, so the poison would go no further."
+  - en: "Maa Parvati held his throat, so the poison would go no further."
     hi: "माता पार्वती ने उनका कंठ थाम लिया, ताकि विष आगे न बढ़े।"
     caption: "*PARVATI* HELD ON."
     scene: cosmos

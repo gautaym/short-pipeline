@@ -79,8 +79,8 @@ beats:
       fx: [lightning]
       actors:
         dhruva: {puppet: dhruva_pray, x: 540, y: 1600, h: 900, face: right, motion: breathe}
-  - en: "Moved by his devotion, Vishnu appeared, and blessed him with a place no one could ever take."
-    hi: "उनकी भक्ति देखकर विष्णु प्रकट हुए, और उन्हें ऐसी जगह का वरदान दिया, जिसे कोई कभी नहीं छीन सकता।"
+  - en: "Moved by his devotion, Lord Vishnu appeared, and blessed him with a place no one could ever take."
+    hi: "उनकी भक्ति देखकर भगवान विष्णु प्रकट हुए, और उन्हें ऐसी जगह का वरदान दिया, जिसे कोई कभी नहीं छीन सकता।"
     caption: "*VISHNU* APPEARED."
     scene: forest
     stage:

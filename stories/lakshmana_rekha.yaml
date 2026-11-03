@@ -84,8 +84,8 @@ art:
     ramlila: "An open-air village stage at night with a painted curtain, garlands of marigolds and oil lamps along its front edge."
   anchors: {}
 beats:
-  - en: "In the forest of Panchavati, a golden deer shimmered near Sita's hut. She longed for it, so Rama took his bow and chased it into the trees."
-    hi: "पंचवटी के जंगल में, सीता की कुटिया के पास एक सुनहरा हिरण चमक रहा था। सीता का मन उस पर आ गया, तो राम धनुष उठाकर उसके पीछे जंगल में चले गए।"
+  - en: "In the forest of Panchavati, a golden deer shimmered near Maa Sita's hut. She longed for it, so Lord Rama took his bow and chased it into the trees."
+    hi: "पंचवटी के जंगल में, माँ सीता की कुटिया के पास एक सुनहरा हिरण चमक रहा था। उनका मन उस पर आ गया, तो प्रभु श्रीराम धनुष उठाकर उसके पीछे जंगल में चले गए।"
     caption: "A *GOLDEN* DEER."
     scene: panchavati
     stage:
@@ -96,8 +96,8 @@ beats:
         sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: sway, enter: fade}
         deer: {puppet: deer, x: 800, y: 1560, h: 420, face: right, motion: bob, enter: right, exit: right}
         rama: {puppet: rama, x: 620, y: 1680, h: 980, face: right, motion: run, enter: left, exit: right, delay: 2.0}
-  - en: "Then a cry tore through the forest, in Rama's own voice. 'Ha Sita! Ha Lakshmana!' Sita begged Lakshmana to run to him. But Rama had told him to stay and guard her."
-    hi: "तभी जंगल में राम की आवाज़ में एक चीख़ गूँजी, 'हा सीता! हा लक्ष्मण!' सीता ने लक्ष्मण से विनती की कि वे फ़ौरन जाएँ। पर राम ने उन्हें सीता की रक्षा के लिए वहीं रुकने को कहा था।"
+  - en: "Then a cry tore through the forest, in Lord Rama's own voice. 'Ha Sita! Ha Lakshmana!' Maa Sita begged Lakshmana to run to him. But Lord Rama had told him to stay and guard her."
+    hi: "तभी जंगल में प्रभु श्रीराम की आवाज़ में एक चीख़ गूँजी, 'हा सीता! हा लक्ष्मण!' माँ सीता ने लक्ष्मण जी से विनती की कि वे फ़ौरन जाएँ। पर प्रभु श्रीराम ने उन्हें माँ सीता की रक्षा के लिए वहीं रुकने को कहा था।"
     caption: "A CRY FOR *HELP*."
     scene: panchavati
     stage:
@@ -118,9 +118,9 @@ beats:
         hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         sita: {puppet: sita, x: 380, y: 1660, h: 900, face: right, motion: breathe}
         lakshmana: {puppet: lakshmana_draw, x: 780, y: 1680, h: 1000, face: left, motion: pull}
-  - en: "Then Ravana came, disguised as a holy man, and tricked Sita into stepping over the line to give him alms. It is the scene played at every Ramlila."
-    hi: "फिर रावण साधु बनकर आया, और भिक्षा देने के बहाने सीता से वह रेखा पार करवा ली। यही दृश्य हर रामलीला में खेला जाता है।"
-    caption: "SITA *CROSSED* IT."
+  - en: "Then Ravana came, disguised as a holy man, and tricked Maa Sita into stepping over the line to give him alms. It is the scene played at every Ramlila."
+    hi: "फिर रावण साधु बनकर आया, और भिक्षा देने के बहाने माँ सीता से वह रेखा पार करवा ली। यही दृश्य हर रामलीला में खेला जाता है।"
+    caption: "MAA SITA *CROSSED* IT."
     scene: panchavati
     stage:
       backdrop: panchavati
@@ -139,8 +139,8 @@ beats:
       actors:
         hut: {puppet: hut, x: 190, y: 1500, h: 440, z: -1, motion: breathe}
         scroll: {puppet: scroll, x: 640, y: 1250, h: 520, motion: float, enter: fade}
-  - en: "In Valmiki, a frightened Sita speaks harsh words to Lakshmana, even doubting his intentions. Hurt, he folds his hands, asks the gods of the forest to protect her, and goes. No line. Only a prayer."
-    hi: "वाल्मीकि की रामायण में, डरी हुई सीता लक्ष्मण से कड़वी बातें कह देती हैं, उनकी नीयत पर भी शक करती हैं। दुखी लक्ष्मण हाथ जोड़ते हैं, वन देवताओं से सीता की रक्षा की प्रार्थना करते हैं, और चले जाते हैं। कोई रेखा नहीं। बस एक प्रार्थना।"
+  - en: "In Valmiki, a frightened Maa Sita speaks harsh words to Lakshmana, even doubting his intentions. Hurt, he folds his hands, asks the gods of the forest to protect her, and goes. No line. Only a prayer."
+    hi: "वाल्मीकि की रामायण में, डरी हुई माँ सीता लक्ष्मण जी से कड़वी बातें कह देती हैं, उनकी नीयत पर भी शक करती हैं। दुखी लक्ष्मण जी हाथ जोड़ते हैं, वन देवताओं से सीता की रक्षा की प्रार्थना करते हैं, और चले जाते हैं। कोई रेखा नहीं। बस एक प्रार्थना।"
     caption: "ONLY A *PRAYER*."
     scene: panchavati
     stage:
@@ -149,8 +149,8 @@ beats:
       actors:
         sita: {puppet: sita_plead, x: 330, y: 1660, h: 900, face: right, motion: tremble}
         lakshmana: {puppet: lakshmana_pray, x: 760, y: 1680, h: 1000, face: left, motion: breathe, exit: right}
-  - en: "Ravana arrives as a wandering monk. Sita welcomes him as a guest, as dharma asks. And he carries her away."
-    hi: "रावण एक साधु के भेस में आता है। सीता धर्म के अनुसार उसका अतिथि की तरह स्वागत करती हैं। और वह उन्हें उठा ले जाता है।"
+  - en: "Ravana arrives as a wandering monk. Maa Sita welcomes him as a guest, as dharma asks. And he carries her away."
+    hi: "रावण एक साधु के भेस में आता है। माँ सीता धर्म के अनुसार उसका अतिथि की तरह स्वागत करती हैं। और वह उन्हें उठा ले जाता है।"
     caption: "RAVANA *TOOK* HER."
     scene: deep_forest
     stage:
