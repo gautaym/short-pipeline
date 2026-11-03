@@ -10,7 +10,8 @@ puppets and backdrops the story needs, with characters named as {shiva}, {deva},
       backdrop_style: "The painted cloth backdrop of a traditional Indian shadow puppet theatre ..."
       cast: {shiva: "Lord Shiva with blue skin ...", ...}
       puppets: {shiva: "The puppet is {shiva}, standing calmly, side view facing right.", ...}
-      props: {mandara: "The prop is a tall rocky mountain ..."}    (prop_style; moved like puppets)
+      props: {mandara: "The prop is a tall rocky mountain ..."}    (prop_style; moved like puppets;
+              a prop may be {style: "...", text: "..."} to use its own style)
       backdrops: {ocean: "A vast white ocean of milk ...", ...}
 
 Characters used across stories (the Sutradhar host, gods drawn once and approved once) live in
@@ -73,7 +74,10 @@ def prompts(sc: dict) -> dict[str, tuple[str, tuple[int, int]]]:
     for name, text in art.get("puppets", {}).items():
         out[f"puppet_{name}"] = (f"{_clean(art['puppet_style'])} {text.format(**cast)}", PUPPET_SIZE)
     for name, text in art.get("props", {}).items():                # scenery pieces moved like puppets
-        out[f"puppet_{name}"] = (f"{_clean(art['prop_style'])} {text.format(**cast)}", PUPPET_SIZE)
+        style = art["prop_style"]
+        if isinstance(text, dict):                                   # a prop with its own style
+            style, text = text["style"], text["text"]
+        out[f"puppet_{name}"] = (f"{_clean(style)} {text.format(**cast)}", PUPPET_SIZE)
     for name, text in art.get("backdrops", {}).items():
         out[f"backdrop_{name}"] = (f"{_clean(art['backdrop_style'])} The scene: {text.format(**cast)}", BACKDROP_SIZE)
     return out

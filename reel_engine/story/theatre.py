@@ -14,7 +14,9 @@ being flipped, when its facing changes); a new one enters (left, right, bottom, 
 {from: [x, y]} to slide out of a point, as a copy splitting off); one that is gone fades away,
 unless it was given `exit: left|right|fade`, in which case it leaves during its own beat. Motions
 are what the puppeteer's hand does: sway, pull, churn, tremble, run, walk_in, drink, breathe,
-float, spin, flip (a tossed coin turning over and over). Everything is a function of time, so any frame can be drawn on its own.
+float, spin, flip (a tossed coin turning over and over), bob (rising and falling on water), slither.
+`z` puts an actor in front of bigger ones (puppets are otherwise layered by size), and `sync: <actor>`
+moves it in time with another, as a boat and the god standing in it. Everything is a function of time, so any frame can be drawn on its own.
 
 Effects are names, or a name with settings: [waves, spray, smoke, smoke_far, smoke_in, rays, shake,
 lightning, bubbles, throat_glow, {vent_smoke: {x: 540, y: 640}},
@@ -176,7 +178,7 @@ class Theatre:
                 "h": float(spec.get("h", 900)), "face": 1 if spec.get("face", "right") == "right" else -1,
                 "motion": spec.get("motion", "sway"), "enter": spec.get("enter", "fade"),
                 "from": spec["enter"].get("from") if isinstance(spec.get("enter"), dict) else None,
-                "exit": spec.get("exit")}
+                "exit": spec.get("exit"), "z": float(spec.get("z", 0)), "sync": spec.get("sync")}
 
     def actor_state(self, beat: int, name: str, since: float, length: float, spec: dict | None = None) -> dict | None:
         """Where the actor is `since` seconds into the beat: position, size, facing, opacity.
@@ -228,7 +230,7 @@ class Theatre:
 
     def motion(self, s: dict, name: str, since: float, length: float, t: float) -> tuple[float, float, float, float]:
         """The puppeteer's hand: (dx, dy, degrees of tilt (anticlockwise), extra scale)."""
-        ph = self.phase.get(name, 0.0)
+        ph = self.phase.get(s.get("sync") or name, 0.0)
         face = 1 if s["sx"] >= 0 else -1
         dx, dy = 0.0, 3 * math.sin(t * 1.9 + ph)
         rot = 1.2 * math.sin(t * 1.3 + ph)                       # a hand is never quite still
@@ -267,6 +269,13 @@ class Theatre:
         elif m == "talk":                                        # the storyteller nods along as he speaks
             dy -= abs(math.sin(t * 6.5 + ph)) * 12
             rot += 2.5 * math.sin(t * 3.2 + ph)
+        elif m == "bob":                                         # rising and falling on water
+            dy += 16 * math.sin(t * 1.4 + ph)
+            rot = 1.5 * math.sin(t * 1.4 + ph + 0.8)
+        elif m == "slither":                                     # a serpent rearing and swaying
+            rot += 6 * math.sin(t * 1.8 + ph)
+            dx += 30 * math.sin(t * 0.9 + ph)
+            dy -= 20 * abs(math.sin(t * 1.8 + ph))
         elif m == "flip":                                        # edge-on and back, over and over
             s["sx"] *= math.cos(t * 7 + ph)
             dy -= 30 * abs(math.sin(t * 3.5 + ph))
@@ -377,7 +386,7 @@ class Theatre:
             s = self.actor_state(beat, name, extras_since, length, spec)
             if s is not None:
                 states[name] = s
-        for name in sorted(states, key=lambda n: states[n]["h"]):    # bigger puppets nearer the screen
+        for name in sorted(states, key=lambda n: (states[n]["z"], states[n]["h"])):   # bigger ones nearer, unless z says
             s = states[name]
             dx, dy, rot, scale = self.motion(s, name, since, length, t)
             dx, dy = dx + shake[0], dy + shake[1]

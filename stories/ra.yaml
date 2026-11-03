@@ -1,0 +1,169 @@
+# Sky Stories, part 3: Ra and the serpent of the night.
+# Review notes. Myth (ancient Egypt): Ra, the falcon-headed sun god, crosses the sky by day in his
+# sun boat; at sunset he enters the Duat (underworld), where the serpent Apep (Apophis in Greek)
+# attacks him every night; Ra prevails and is reborn at dawn as Khepri, the scarab who rolls the sun.
+# Science: the Sun does not travel round us; Earth's spin brings day and night. Asteroid 99942
+# Apophis, named after Apep, passes about 32,000 km from Earth's surface on 13 April 2029, closer
+# than geostationary satellites (~35,800 km); impact has been ruled out for 2029 and beyond.
+# Wax figures: the Bremner-Rhind papyrus ("Book of Overthrowing Apep") describes priests making
+# figures of Apep, spitting on them, trampling them and burning them. Storms and daytime darkness
+# as signs of Apep's attacks are a common reading of the myth, hence "some Egyptians feared".
+# Apophis will be bright enough to see without a telescope from parts of the world.
+# Numbers are written out in the Hindi lines so the voice reads them cleanly.
+id: ra
+topic: mythology
+series_part: 3
+title:
+  en: "Where did the Sun go at night?"
+  hi: "रात में सूरज कहाँ जाता था?"
+series:
+  en: "Sky Stories"
+  hi: "आकाश की कहानियाँ"
+summary:
+  en: "Ancient Egyptians believed the sun god Ra sailed through the underworld every night, fighting the serpent Apep before rising again at dawn. Today we know Earth spins, but Apep is coming back: as the asteroid Apophis, passing Earth safely in 2029."
+  hi: "प्राचीन मिस्र के लोग मानते थे कि सूर्य देवता रा हर रात पाताल लोक से गुज़रते हैं, सर्प अपेप से लड़ते हैं और सुबह फिर उगते हैं। आज हम जानते हैं कि धरती घूमती है, लेकिन अपेप लौट रहा है: क्षुद्रग्रह एपोफ़िस बनकर, जो 2029 में धरती के पास से सुरक्षित गुज़रेगा।"
+music: tense
+cast: {}
+opening:
+  beat: 5
+  actors:
+    host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet in the style of ancient Egyptian tomb paintings, mounted on a
+    thin bamboo stick, flat colours of gold, lapis blue, turquoise, red ochre and black with dark outlines,
+    a pale cut edge and visible rivet joints, the figure in classic Egyptian side profile, full body from
+    head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted cut-out object, not a person: no human figure, no body, no head, no arms, no legs.
+    Painted leather in the colours of ancient Egyptian art, gold, lapis blue, turquoise and red ochre, with
+    dark outlines and a pale cut edge, studio photo against a plain pure black backdrop, nothing else in the
+    frame, no hieroglyphs, no text.
+  backdrop_style: >-
+    An empty landscape painted in the flat style of ancient Egyptian wall paintings, flat colours with dark
+    outlines, seen full frame with no border or frame. Uninhabited scenery only: no people, no figures,
+    no animals, no hieroglyphs, no text. Vertical composition.
+  cast:
+    ra: >-
+      Ra, the ancient Egyptian sun god: a man's body with the head of a falcon, a large red-gold sun disc on
+      his head with a small cobra coiled around it, a white pleated kilt and a broad gold and blue collar,
+      exactly two arms, holding an ankh in one hand and a long staff in the other
+    apep: >-
+      the giant serpent Apep, dark purple and black scales with red markings, with only one head, its jaws
+      open, its long body twisting into loops and ending in a thin tail
+  puppets:
+    ra: "The puppet is {ra}, standing tall, side view facing right."
+  props:
+    boat: "The object is a long empty golden ancient Egyptian boat seen from the side, both ends curving up like papyrus stems, a small canopy in the middle, nobody in it."
+    apep: "The object is a giant snake: {apep}. It is only a serpent, with no arms and no legs, rearing up in an S-shaped coil as if to strike, side view facing left."
+    khepri: "The object is a large scarab beetle in lapis blue and gold with exactly six legs, its front legs pushing a glowing red-gold sun disc above its head."
+    sun: "The object is only a round glowing golden sun disc with short flame-like rays around its edge."
+    earth: "The object is only a round ball: the planet Earth seen from space, showing Africa and Europe, blue oceans and white clouds, with no stand."
+    asteroid:
+      style: >-
+        A single flat painted leather cut-out object with dark outlines and a pale cut edge, studio photo
+        against a plain pure black backdrop, nothing else in the frame, no text.
+      text: "The object is a lumpy grey rocky asteroid covered in small round craters, plain bare rock."
+  backdrops:
+    desert_day: "The river Nile winding through golden desert with distant pyramids under a bright blue sky."
+    duat: "A dark underworld cavern with a black river flowing through it, faint torchlight, deep blue and purple shadows."
+    dawn: "A desert horizon at dawn with pyramids in silhouette, the sky glowing orange and pink."
+    space: "Deep space full of tiny stars, dark navy and violet."
+  backdrop_crop: 0.06
+  anchors: {}
+beats:
+  - en: "Every morning, the ancient Egyptians watched their god rise. Ra, the falcon-headed sun god, sailed across the sky in a golden boat, warming the river Nile and everything that lived."
+    hi: "हर सुबह, प्राचीन मिस्र के लोग अपने देवता को उगते देखते थे। रा, बाज़ के सिर वाले सूर्य देवता, एक सुनहरी नाव में आकाश पार करते थे, नील नदी और हर जीव को गर्मी देते हुए।"
+    caption: "RA SAILED THE *SKY*."
+    scene: cosmos
+    stage:
+      backdrop: desert_day
+      fx: [rays, {glow: {actor: ra, colour: [255, 210, 120]}}]
+      actors:
+        ra: {puppet: ra, x: 520, y: 1150, h: 760, face: right, motion: bob, enter: left}
+        boat: {puppet: boat, x: 540, y: 1260, h: 380, z: 1, motion: bob, sync: ra, enter: left}
+  - en: "But every evening, they watched him sink, and die."
+    hi: "लेकिन हर शाम, वे उन्हें डूबते देखते थे, और मरते हुए।"
+    caption: "EVERY EVENING, RA *DIED*."
+    scene: cosmos
+    stage:
+      backdrop: dawn
+      fx: [{glow: {actor: ra, colour: [255, 150, 90]}}]
+      actors:
+        ra: {puppet: ra, x: 560, y: 1640, h: 720, face: right, motion: bob}
+        boat: {puppet: boat, x: 580, y: 1750, h: 360, z: 1, motion: bob, sync: ra}
+  - en: "His boat drifted into the Duat, the underworld. Twelve dark hours. Twelve gates, guarded by fire and monsters."
+    hi: "उनकी नाव डुआट में उतर जाती थी, पाताल लोक। बारह अंधेरे घंटे। बारह द्वार, जिनकी रखवाली आग और राक्षस करते थे।"
+    caption: "TWELVE HOURS OF *DARKNESS*."
+    scene: cosmos
+    stage:
+      backdrop: duat
+      fx: [{glow: {actor: ra, colour: [255, 190, 110]}}]
+      actors:
+        ra: {puppet: ra, x: 520, y: 1500, h: 760, face: right, motion: bob}
+        boat: {puppet: boat, x: 540, y: 1610, h: 380, z: 1, motion: bob, sync: ra}
+  - en: "And waiting in the dark was Apep. A serpent so huge, and so hungry, he wanted to swallow the Sun, and end every tomorrow."
+    hi: "और अंधेरे में इंतज़ार कर रहा था अपेप। इतना विशाल, इतना भूखा सर्प, जो सूरज को निगलकर हर आने वाले कल को ख़त्म कर देना चाहता था।"
+    caption: "*APEP* WAS WAITING."
+    scene: cosmos
+    stage:
+      backdrop: duat
+      fx: [{glow: [{actor: ra, colour: [255, 190, 110]}, {actor: apep, colour: [150, 60, 170]}]}]
+      actors:
+        ra: {puppet: ra, x: 320, y: 1520, h: 720, face: right, motion: bob}
+        boat: {puppet: boat, x: 340, y: 1620, h: 340, z: 1, motion: bob, sync: ra}
+        apep: {puppet: apep, x: 790, y: 1560, h: 1250, face: right, motion: slither, enter: right}
+  - en: "Every single night, they fought. When storms rolled in, or the Sun went dark at midday, some Egyptians feared Apep was winning."
+    hi: "हर एक रात, दोनों में युद्ध होता था। जब तूफ़ान आते, या दोपहर में सूरज अंधेरा पड़ जाता, तो कुछ मिस्रवासी डरते थे कि अपेप जीत रहा है।"
+    caption: "EVERY NIGHT, A *BATTLE*."
+    scene: cosmos
+    stage:
+      backdrop: duat
+      fx: [shake, lightning, {glow: [{actor: ra, colour: [255, 190, 110]}, {actor: apep, colour: [150, 60, 170]}]}]
+      actors:
+        ra: {puppet: ra, x: 300, y: 1520, h: 720, face: right, motion: tremble}
+        boat: {puppet: boat, x: 320, y: 1620, h: 340, z: 1, motion: bob, sync: ra}
+        apep: {puppet: apep, x: 740, y: 1560, h: 1300, face: right, motion: slither}
+  - en: "So the priests joined the fight. They made little Apeps out of wax, spat on them, stamped on them, and burned them, to keep Ra safe."
+    hi: "इसलिए पुजारी भी लड़ाई में उतर आते। वे मोम से छोटे-छोटे अपेप बनाते, उन पर थूकते, उन्हें पैरों से कुचलते, और जला देते, ताकि रा सुरक्षित रहें।"
+    caption: "THE PRIESTS *BURNED* APEP."
+    scene: cosmos
+    stage:
+      backdrop: duat
+      fx: [{vent_smoke: {x: 720, y: 1250}}, {glow: [{actor: apep, colour: [255, 130, 50]}, {actor: ra, colour: [255, 190, 110]}]}]
+      actors:
+        ra: {puppet: ra, x: 360, y: 1500, h: 760, face: right, motion: bob}
+        boat: {puppet: boat, x: 380, y: 1610, h: 380, z: 1, motion: bob, sync: ra}
+        apep: {puppet: apep, x: 740, y: 1560, h: 560, face: right, motion: tremble, exit: fade}
+  - en: "And every morning, it worked. Ra rose again, reborn as Khepri, the scarab beetle, rolling the Sun into a brand new day."
+    hi: "और हर सुबह, यह काम कर जाता। रा फिर उगते, खेप्री के रूप में नया जन्म लेकर, वह स्कारब भृंग जो सूरज को लुढ़काकर एक नए दिन में ले आता है।"
+    caption: "REBORN AT *DAWN*."
+    scene: cosmos
+    stage:
+      backdrop: dawn
+      fx: [rays, {glow: {actor: khepri, colour: [255, 190, 110]}}]
+      actors:
+        khepri: {puppet: khepri, x: 540, y: 1500, h: 900, motion: breathe, enter: bottom}
+  - en: "Today we know the Sun never dies. Earth simply turns, and we roll from day into night, and back into morning."
+    hi: "आज हम जानते हैं कि सूरज कभी नहीं मरता। धरती बस घूमती है, और हम दिन से रात में, और फिर सुबह में पहुँच जाते हैं।"
+    caption: "*EARTH* TURNS."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{glow: {actor: sun, colour: [255, 200, 110]}}]
+      actors:
+        sun: {puppet: sun, x: 160, y: 760, h: 380, motion: breathe, enter: fade}
+        earth: {puppet: earth, x: 600, y: 1420, h: 640, motion: spin, enter: fade}
+  - en: "But Apep is coming back. On the thirteenth of April, 2029, an asteroid named Apophis will fly past Earth, closer than some of our satellites, bright enough to see without a telescope. And this time, nobody has to fight. It will slip safely by, back into the dark."
+    hi: "लेकिन अपेप लौट रहा है। तेरह अप्रैल, दो हज़ार उनतीस को, एपोफ़िस नाम का एक क्षुद्रग्रह धरती के पास से गुज़रेगा, हमारे कुछ उपग्रहों से भी ज़्यादा पास, इतना चमकीला कि बिना दूरबीन के दिख जाए। और इस बार, किसी को लड़ना नहीं पड़ेगा। वह सुरक्षित निकल जाएगा, वापस अंधेरे में।"
+    caption: "*APOPHIS* RETURNS."
+    scene: cosmos
+    stage:
+      backdrop: space
+      actors:
+        earth: {puppet: earth, x: 330, y: 1120, h: 520, motion: spin}
+        rock: {puppet: asteroid, x: 760, y: 700, h: 230, motion: spin, enter: right, exit: left}
+        host: {puppet: sutradhar, x: 860, y: 1980, h: 980, face: left, motion: talk, enter: right}
+end:
+  head: "APOPHIS"
+  sub: "the serpent returns, in 2029"
