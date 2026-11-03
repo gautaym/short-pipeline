@@ -150,17 +150,34 @@ def _load_wav(path: Path) -> tuple[np.ndarray, int]:
     return np.frombuffer(raw, dtype="<i4").astype(np.float32) / 2147483648.0, rate
 
 
-def split_pitch(voice: str) -> tuple[str, float]:
-    """"af_sky@+4" -> ("af_sky", 4.0): a voice and how many semitones to raise it."""
-    base, _, shift = voice.partition("@")
-    return base, float(shift) if shift else 0.0
+def split_pitch(voice: str) -> tuple[str, float, float]:
+    """"af_bella@+3~0.88" -> ("af_bella", 3.0, 0.88): a voice, semitones to raise it, and its pace."""
+    base, _, rest = voice.partition("@")
+    shift, _, pace = rest.partition("~")
+    return base, float(shift) if shift else 0.0, float(pace) if pace else 1.0
+
+
+def repitch(samples: np.ndarray, rate: int, semis: float, pace: float) -> np.ndarray:
+    """Raise the pitch without hurrying the speech, then set its pace (ffmpeg: asetrate + atempo)."""
+    from .video import find_tool
+    ratio = 2 ** (semis / 12)
+    tempo = pace / ratio                                   # undo the speed-up the pitch change brings
+    chain = [f"asetrate={int(rate * ratio)}", f"aresample={rate}"]
+    while tempo < 0.5:                                     # atempo takes 0.5-2 per stage
+        chain.append("atempo=0.5")
+        tempo /= 0.5
+    chain.append(f"atempo={tempo:.4f}")
+    run = subprocess.run([find_tool(), "-v", "error", "-f", "f32le", "-ar", str(rate), "-ac", "1", "-i", "-",
+                          "-af", ",".join(chain), "-f", "f32le", "-"],
+                         input=samples.astype(np.float32).tobytes(), capture_output=True, check=True)
+    return np.frombuffer(run.stdout, dtype=np.float32).copy()
 
 
 def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray:
     """Speech for the text as float32 at the engine's sample rate, peak-normalised to 0.6.
 
-    A voice written "<voice>@+N" is raised N semitones, e.g. a child asking a question: Kokoro
-    voices are spoken that much slower first so the pace stays natural.
+    A voice written "<voice>@+N~P" is raised N semitones at the same pace, then set to pace P
+    (e.g. "af_bella@+3~0.88": a young girl asking, relaxed rather than rushed).
 
     Results are cached for the life of the process, so a story's narration is synthesised once
     for timing and reused for the final mix.
@@ -169,10 +186,7 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
     key = (text, voice, speed)
     if key in _cache:
         return _cache[key]
-    voice, semis = split_pitch(voice)
-    ratio = 2 ** (semis / 12)
-    if not backend(voice):
-        speed = speed / ratio
+    voice, semis, pace = split_pitch(voice)
     if backend(voice):
         prepare([text], voice)
         samples, rate = _load_wav(_cached(text, voice))
@@ -184,7 +198,8 @@ def say(text: str, voice: str = "am_michael", speed: float = 1.05) -> np.ndarray
         spoken = text if lang == "hi" else speakable(text)
         samples, rate = _engine.create(spoken, voice=voice, speed=speed, lang=lang)
     samples = np.asarray(samples, dtype=np.float32)
-    rate = rate * ratio                                  # played faster: higher, younger
+    if semis or pace != 1.0:                             # a younger, unhurried voice
+        samples = repitch(samples, rate, semis, pace)
     if rate != SR:
         t_out = np.arange(int(len(samples) * SR / rate)) / SR
         samples = np.interp(t_out, np.arange(len(samples)) / rate, samples).astype(np.float32)
