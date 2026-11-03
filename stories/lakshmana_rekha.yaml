@@ -46,8 +46,9 @@ art:
       Lakshmana, Rama's younger brother, a young prince with golden skin, a gold crown, an orange silk dhoti,
       gold jewellery and a quiver of arrows on his back, exactly two arms
     sita: >-
-      Sita, a young princess with golden skin, a long dark brown braid, a red and gold saree and gold
-      jewellery, exactly two arms
+      Sita, a young princess with golden skin and a long dark brown braid, dressed modestly in a full red and
+      gold silk saree draped over both shoulders and covering her waist, a full-sleeved red blouse, her head
+      uncovered, gold jewellery, exactly two arms with graceful hands, each with five fingers
     monk: >-
       Ravana disguised as a wandering holy man, a tall man with only one head, a long dark brown beard and
       matted dark brown hair, saffron robes, a wooden staff and a small begging bowl, exactly two arms
@@ -56,8 +57,8 @@ art:
       jewellery, exactly two arms
   puppets:
     rama: "The puppet is {rama}, running forward holding a long bow in one hand, side view facing right."
-    sita: "The puppet is {sita}, standing gracefully, one hand raised in surprise, side view facing right."
-    sita_plead: "The puppet is {sita}, pleading with both hands held out in front of her, side view facing right."
+    sita: "The puppet is {sita}, standing gracefully with her hands folded in front of her, side view facing right."
+    sita_plead: "The puppet is {sita}, pleading with both palms joined together in front of her chest, side view facing right."
     lakshmana_draw: "The puppet is {lakshmana}, bending forward and drawing a line on the ground with the tip of an arrow held in one hand, side view facing right."
     lakshmana_pray: "The puppet is {lakshmana}, standing with his palms joined in prayer, head bowed, side view facing right."
     monk: "The puppet is {monk}, holding out the begging bowl in one hand and the staff in the other, side view facing right."
