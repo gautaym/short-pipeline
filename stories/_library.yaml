@@ -9,6 +9,16 @@ segments:
   indian_myth: {narrator: sutradhar, asker: meera}            # Indian mythology and legends
   world_myth: {narrator: storyteller, asker: lila}            # Greek, Egyptian, Norse and other world myths
   science: {narrator: professor, asker: kiki}                 # science, maths, facts, sports, the news
+# Each character speaks with one voice in both languages, so the narrator sounds like the same
+# person in Hindi and English. "chatterbox:<lang>:<clip>" takes on the voice of models/voice_refs/<clip>.wav;
+# "@+N" raises it N semitones (the young askers).
+voices:
+  sutradhar: {en: "chatterbox:en:aman", hi: "chatterbox:hi:aman"}
+  storyteller: {en: "chatterbox:en:aman", hi: "chatterbox:hi:aman"}
+  professor: {en: "af_heart", hi: "chatterbox:hi:rani"}
+  meera: {en: "af_sky@+4", hi: "chatterbox:hi:rani@+3"}
+  lila: {en: "af_sky@+4", hi: "chatterbox:hi:rani@+3"}
+  kiki: {en: "af_sky@+4", hi: "chatterbox:hi:rani@+3"}
 art:
   puppet_style: >-
     A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a

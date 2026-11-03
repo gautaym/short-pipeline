@@ -120,13 +120,22 @@ class Story(Format):
         self.state: dict = {}
 
     def narrator(self, settings) -> str:
-        return settings.voice_name_hi if self.lang == "hi" else settings.voice_name
+        """The segment narrator's own voice (the same person in both languages), else the default."""
+        return self.character_voice("narrator") or (settings.voice_name_hi if self.lang == "hi" else settings.voice_name)
+
+    def character_voice(self, role: str) -> str | None:
+        from ..story.art import segment
+        pair = segment(self.sc)
+        if not pair:
+            return None
+        return load_story("_library").get("voices", {}).get(pair[role], {}).get(self.lang)
 
     def asker(self, settings) -> str:
         """The question is asked by the segment's asker (a young girl's voice), else the narrator."""
         if not self.sc.get("segment"):
             return self.narrator(settings)
-        return settings.voice_name_asker_hi if self.lang == "hi" else settings.voice_name_asker
+        return self.character_voice("asker") or (settings.voice_name_asker_hi if self.lang == "hi"
+                                                 else settings.voice_name_asker)
 
     def spoken_length(self, text: str, voice: str | None = None) -> float:
         voice = voice or self.narrator(self.settings)
