@@ -74,6 +74,6 @@ art:
         photo against a plain pure black backdrop, nothing else in the frame, no text.
       text: "The cut-out is {kabir}, one hand raised as if asking a question, seen in profile from the side, turned to the right, not facing the viewer."
   # Which way each picture faces when the model did not draw the side it was asked for (default right).
-  facing: {}
+  facing: {sutradhar: left}
   props:
     pole_star: "The prop is a single large golden eight-pointed star with long glowing rays and a bright white centre."
