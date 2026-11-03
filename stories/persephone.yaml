@@ -1,0 +1,138 @@
+# Sky Stories, part 4: Persephone and the first winter.
+# Review notes. Myth (Homeric Hymn to Demeter; Ovid): Hades carries Persephone, daughter of the
+# harvest goddess Demeter, to the underworld; Demeter's grief makes the crops fail; Zeus orders her
+# return, but she has eaten pomegranate seeds (one in the Hymn, more in later tellings, so the script
+# says "a few") and must spend part of each year below: winter while she is gone, spring when she returns.
+# Science: seasons come from Earth's axial tilt (about 23.4 degrees), not its distance from the Sun;
+# Earth is closest to the Sun (perihelion) in early January, during northern winter.
+id: persephone
+topic: mythology
+series_part: 4
+segment: world_myth
+opening:
+  beat: 3
+title:
+  en: "Why does winter come every year?"
+  hi: "हर साल सर्दी क्यों आती है?"
+series:
+  en: "Sky Stories"
+  hi: "आकाश की कहानियाँ"
+summary:
+  en: "The Greeks said winter came when Persephone went down to the underworld and her mother Demeter grieved. Science says it is Earth's tilt, and that we are closest to the Sun in January."
+  hi: "यूनानी कहते थे कि सर्दी तब आती है जब पर्सेफ़ोनी पाताल लोक जाती है और उसकी माँ डिमीटर शोक मनाती है। विज्ञान कहता है कि यह धरती के झुकाव से होता है, और जनवरी में हम सूरज के सबसे पास होते हैं।"
+music: tense
+cast: {}
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet in the style of ancient Greek vase paintings, mounted on a thin
+    bamboo stick, terracotta orange, black, cream and gold with dark outlines, a pale cut edge and visible rivet
+    joints, the figure in side profile, full body from head to feet, studio photo against a plain pure black
+    backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted cut-out object, not a person: no body, no head, no arms, no legs. Painted leather in
+    the colours of ancient Greek vases, terracotta orange, black, cream and gold, with dark outlines and a pale
+    cut edge, studio photo against a plain pure black backdrop, nothing else in the frame, no text.
+  backdrop_style: >-
+    An empty landscape painted in flat folk art style with the colours of ancient Greek pottery, bright colours
+    with dark outlines, seen full frame with no border or frame. Uninhabited scenery only: no people, no figures,
+    no animals, no text. Vertical composition.
+  backdrop_crop: 0.06
+  cast:
+    persephone: >-
+      Persephone, a young Greek goddess with fair skin and long dark hair crowned with spring flowers, a flowing
+      pale green chiton dress, exactly two arms
+    demeter: >-
+      Demeter, the Greek goddess of the harvest, a motherly woman with a golden crown of wheat, a long golden
+      robe, exactly two arms
+    hades: >-
+      Hades, the Greek god of the underworld, a tall stern bearded man with a dark crown, a black and deep red
+      robe, exactly two arms
+  puppets:
+    persephone: "The puppet is {persephone}, gathering flowers, one hand holding a small bunch of flowers, side view facing right."
+    persephone_sad: "The puppet is {persephone}, standing sadly with her head bowed, side view facing right."
+    demeter: "The puppet is {demeter}, standing tall with her arms open, side view facing right."
+    demeter_grief: "The puppet is {demeter}, weeping with her face in her hands, side view facing right."
+    hades: "The puppet is {hades}, reaching out with one hand, side view facing left."
+  props:
+    pomegranate: "The object is a single ripe red pomegranate split open, showing its shining red seeds."
+    sun: "The object is only a round glowing golden sun disc with short flame-like rays around its edge."
+    earth: "The object is only a round ball: the planet Earth seen from space, blue oceans, green and brown land and white clouds, with no stand."
+  backdrops:
+    meadow: "A sunny spring meadow full of flowers, olive trees and blue hills, a bright blue sky."
+    underworld: "A dark underworld cavern with a black river, glowing embers and purple shadows."
+    winter: "A bare winter field under grey snow clouds, leafless trees, frost on the ground."
+    space: "Deep space full of tiny stars, dark navy and violet."
+  anchors: {}
+beats:
+  - en: "Long ago, the Greeks say, there was no winter at all. Persephone, daughter of Demeter, goddess of the harvest, gathered flowers in an endless spring."
+    hi: "यूनानी कहते हैं, बहुत पहले सर्दी होती ही नहीं थी। फसलों की देवी डिमीटर की बेटी पर्सेफ़ोनी, कभी न ख़त्म होने वाले बसंत में फूल चुनती थी।"
+    caption: "AN *ENDLESS* SPRING."
+    scene: cosmos
+    stage:
+      backdrop: meadow
+      fx: [rays]
+      actors:
+        persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: sway, enter: left}
+        demeter: {puppet: demeter, x: 760, y: 1660, h: 1000, face: left, motion: breathe, enter: right}
+  - en: "Then the ground split open. Hades, king of the underworld, rose in the dark and carried her away."
+    hi: "फिर धरती फट गई। पाताल के राजा हेडीज़ अंधेरे से निकले, और उसे उठाकर ले गए।"
+    caption: "*HADES* TOOK HER."
+    scene: cosmos
+    stage:
+      backdrop: meadow
+      fx: [shake, smoke]
+      actors:
+        persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: tremble, exit: left}
+        hades: {puppet: hades, x: 720, y: 1700, h: 1100, motion: sway, enter: bottom, exit: left}
+  - en: "Demeter searched the whole world. And as she grieved, the crops died, the trees went bare, and the first winter fell."
+    hi: "डिमीटर ने पूरी दुनिया में उसे ढूँढा। और उसके शोक में फसलें मर गईं, पेड़ नंगे हो गए, और पहली सर्दी आ गई।"
+    caption: "THE FIRST *WINTER*."
+    scene: cosmos
+    stage:
+      backdrop: winter
+      fx: [motes]
+      actors:
+        demeter: {puppet: demeter_grief, x: 540, y: 1660, h: 1050, motion: tremble}
+  - en: "In the underworld, Persephone ate a few pomegranate seeds. A small thing. But food of the dead binds you to them."
+    hi: "पाताल में, पर्सेफ़ोनी ने अनार के कुछ दाने खा लिए। छोटी-सी बात। लेकिन मृतकों का भोजन आपको उनसे बाँध देता है।"
+    caption: "A FEW *SEEDS*."
+    scene: cosmos
+    stage:
+      backdrop: underworld
+      fx: [{glow: {actor: fruit, colour: [255, 90, 90]}}]
+      actors:
+        persephone: {puppet: persephone_sad, x: 360, y: 1660, h: 900, face: right, motion: breathe, enter: fade}
+        fruit: {puppet: pomegranate, x: 760, y: 1250, h: 300, motion: float, enter: fade}
+  - en: "So a deal was made. Each year she returns to her mother, and spring blooms. Each year she goes back below, and winter comes."
+    hi: "तो एक समझौता हुआ। हर साल वह अपनी माँ के पास लौटती है, और बसंत खिल उठता है। हर साल वह फिर नीचे जाती है, और सर्दी आ जाती है।"
+    caption: "SPRING, THEN *WINTER*."
+    scene: cosmos
+    stage:
+      backdrop: meadow
+      fx: [rays]
+      actors:
+        persephone: {puppet: persephone, x: 360, y: 1640, h: 900, face: right, motion: sway, enter: left}
+        demeter: {puppet: demeter, x: 760, y: 1660, h: 1000, face: left, motion: breathe, enter: right}
+  - en: "Science tells it differently. Earth is tilted, about twenty three degrees. As it circles the Sun, each half leans towards the light, then away."
+    hi: "विज्ञान इसे अलग तरह से बताता है। धरती लगभग तेईस डिग्री झुकी हुई है। सूरज की परिक्रमा करते हुए, उसका हर आधा हिस्सा पहले रोशनी की ओर झुकता है, फिर दूर।"
+    caption: "EARTH IS *TILTED*."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{glow: {actor: sun, colour: [255, 200, 110]}}]
+      actors:
+        sun: {puppet: sun, x: 180, y: 820, h: 380, motion: breathe, enter: fade}
+        earth: {puppet: earth, x: 640, y: 1380, h: 600, motion: spin, enter: fade}
+  - en: "And here is the surprise. Earth is closest to the Sun in early January, right in the middle of northern winter. Distance was never the reason. The tilt is."
+    hi: "और यह रहा अचरज। धरती जनवरी की शुरुआत में सूरज के सबसे पास होती है, ठीक उत्तरी सर्दी के बीच। वजह कभी दूरी थी ही नहीं। वजह है झुकाव।"
+    caption: "CLOSEST IN *JANUARY*."
+    scene: cosmos
+    stage:
+      backdrop: space
+      fx: [{glow: {actor: sun, colour: [255, 200, 110]}}]
+      actors:
+        sun: {puppet: sun, x: 300, y: 900, h: 420, motion: breathe}
+        earth: {puppet: earth, x: 700, y: 1250, h: 480, motion: spin}
+end:
+  head: "PERSEPHONE"
+  sub: "the girl who brings the spring"
