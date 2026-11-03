@@ -52,6 +52,10 @@ art:
     monk: >-
       Ravana disguised as a wandering holy man, a tall man with only one head, a long dark brown beard and
       matted dark brown hair, saffron robes, a wooden staff and a small begging bowl, exactly two arms
+    ravana: >-
+      Ravana, the mighty king of Lanka, with exactly ten crowned heads side by side in one row on a single
+      body, each face with a thick dark brown moustache, tall golden crowns, a red and gold royal costume
+      with heavy gold jewellery, exactly two arms
     mandodari: >-
       Mandodari, queen of Lanka, a regal woman with a tall gold crown, a purple and gold saree and heavy gold
       jewellery, exactly two arms
@@ -62,6 +66,7 @@ art:
     lakshmana_draw: "The puppet is {lakshmana}, bending forward and drawing a line on the ground with the tip of an arrow held in one hand, side view facing right."
     lakshmana_pray: "The puppet is {lakshmana}, standing with his palms joined in prayer, head bowed, side view facing right."
     monk: "The puppet is {monk}, holding out the begging bowl in one hand and the staff in the other, side view facing right."
+    ravana: "The puppet is {ravana}, standing proudly with one hand on a sword at his waist and the other hand clenched in anger, front view."
     mandodari: "The puppet is {mandodari}, pointing scornfully with one hand, the other hand on her hip, side view facing right."
   props:
     deer: "The prop is a single golden deer with silver spots and small antlers, standing, side view facing right, an animal cut-out with four legs."
@@ -167,7 +172,8 @@ beats:
       backdrop: lanka
       fx: [{glow: {actor: mandodari, colour: [220, 160, 255]}}]
       actors:
-        mandodari: {puppet: mandodari, x: 560, y: 1680, h: 1050, face: left, motion: sway, enter: right}
+        mandodari: {puppet: mandodari, x: 320, y: 1680, h: 1000, face: right, motion: sway, enter: left}
+        ravana: {puppet: ravana, x: 760, y: 1720, h: 1150, motion: tremble, enter: right}
   - en: "Later retellings and Ramlila stages grew that one mention into the full scene, and it became the version all of us remember."
     hi: "बाद की कथाओं और रामलीला के मंचों ने उसी एक ज़िक्र से पूरा दृश्य गढ़ दिया, और वही कहानी हम सबकी यादों में बस गई।"
     caption: "THE *STAGE* MADE IT."
