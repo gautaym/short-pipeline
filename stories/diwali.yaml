@@ -75,9 +75,9 @@ art:
     temple: "At night under a dark navy sky with stars: a golden temple in the middle of a still dark lake, a causeway leading to it, its golden reflection in the black water."
   anchors: {}
 beats:
-  - en: "After fourteen years in exile, Rama was finally coming home. He had defeated Ravana and rescued Sita, and with Lakshmana at their side, they turned towards Ayodhya."
-    hi: "चौदह साल के वनवास के बाद, आख़िरकार राम घर लौट रहे थे। रावण को हराकर उन्होंने सीता को छुड़ा लिया था, और लक्ष्मण के साथ वे अयोध्या की ओर चल पड़े।"
-    caption: "RAMA COMES *HOME*."
+  - en: "After fourteen years in exile, Lord Rama was finally coming home. He had defeated Ravana and rescued Maa Sita, and with Lakshmana at their side, they turned towards Ayodhya."
+    hi: "चौदह साल के वनवास के बाद, आख़िरकार प्रभु श्रीराम घर लौट रहे थे। रावण को हराकर उन्होंने माँ सीता को छुड़ा लिया था, और लक्ष्मण जी के साथ वे अयोध्या की ओर चल पड़े।"
+    caption: "LORD RAMA COMES *HOME*."
     scene: road
     stage:
       backdrop: road
@@ -86,7 +86,7 @@ beats:
         sita: {puppet: sita, x: 470, y: 1670, h: 900, face: right, motion: walk_in, enter: left}
         rama: {puppet: rama, x: 760, y: 1690, h: 1000, face: right, motion: walk_in, enter: left}
   - en: "It was the darkest night of the month, the new moon of Kartik. So the people of Ayodhya lit rows and rows of clay lamps, to light their king's way home."
-    hi: "वह महीने की सबसे अंधेरी रात थी, कार्तिक की अमावस्या। तो अयोध्या के लोगों ने मिट्टी के दीयों की कतारें जला दीं, ताकि उनके राजा को घर का रास्ता दिखे।"
+    hi: "वह महीने की सबसे अंधेरी रात थी, कार्तिक की अमावस्या। तो अयोध्या के लोगों ने मिट्टी के दीयों की कतारें जला दीं, ताकि उनके प्रभु को घर का रास्ता दिखे।"
     caption: "A CITY OF *LAMPS*."
     scene: ayodhya
     stage:
@@ -111,9 +111,9 @@ beats:
       backdrop: courtyard
       fx: [{diyas: {y: 1660, rows: 3, n: 9, grow: 3.0}}]
       actors: {}
-  - en: "In the South, it marks the day Krishna defeated the demon king Narakasura, and set free the people he had imprisoned."
+  - en: "In the South, it marks the day Lord Krishna defeated the demon king Narakasura, and set free the people he had imprisoned."
     hi: "दक्षिण भारत में, यह वह दिन है जब श्रीकृष्ण ने राक्षस राजा नरकासुर को हराया, और उसकी क़ैद में बंद लोगों को आज़ाद किया।"
-    caption: "KRISHNA *WINS*."
+    caption: "LORD KRISHNA *WINS*."
     scene: battle
     stage:
       backdrop: battle
@@ -130,7 +130,7 @@ beats:
       fx: [rays, {glow: {actor: lakshmi, colour: [255, 215, 120]}}, {diyas: {y: 1760, rows: 1, n: 9, grow: 0.01}}]
       actors:
         lakshmi: {puppet: lakshmi, x: 540, y: 1600, h: 1050, motion: float, enter: fade}
-  - en: "For Jains, it is the night Lord Mahavira attained nirvana. And for Sikhs, it is Bandi Chhor Divas, when Guru Hargobind was freed from prison and returned to Amritsar, and the Golden Temple glowed with lamps."
+  - en: "For Jains, it is the night Lord Mahavira attained nirvana. And for Sikhs, it is Bandi Chhor Divas, when Guru Hargobind Ji was freed from prison and returned to Amritsar, and the Golden Temple glowed with lamps."
     hi: "जैनों के लिए, यह वह रात है जब भगवान महावीर को निर्वाण मिला। और सिखों के लिए यह बंदी छोड़ दिवस है, जब गुरु हरगोबिंद जी क़ैद से रिहा होकर अमृतसर लौटे, और हरमंदिर साहिब दीयों से जगमगा उठा।"
     caption: "ONE NIGHT, *MANY* FAITHS."
     scene: temple

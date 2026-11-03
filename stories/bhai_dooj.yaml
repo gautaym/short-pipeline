@@ -129,9 +129,9 @@ beats:
       actors:
         yamuna: {puppet: yamuna, x: 330, y: 1670, h: 900, face: right, motion: sway, enter: fade}
         yama: {puppet: yama, x: 760, y: 1700, h: 1020, face: left, motion: breathe, enter: fade}
-  - en: "Another story says that after defeating Narakasura, Krishna went to see his sister Subhadra, and she welcomed him with lamps, sweets and a tilak."
+  - en: "Another story says that after defeating Narakasura, Lord Krishna went to see his sister Subhadra, and she welcomed him with lamps, sweets and a tilak."
     hi: "एक और कहानी कहती है कि नरकासुर को हराने के बाद श्रीकृष्ण अपनी बहन सुभद्रा से मिलने गए, और सुभद्रा ने दीयों, मिठाइयों और तिलक से उनका स्वागत किया।"
-    caption: "KRISHNA AND *SUBHADRA*."
+    caption: "SHRI KRISHNA AND *SUBHADRA*."
     scene: dwarka
     stage:
       backdrop: dwarka
