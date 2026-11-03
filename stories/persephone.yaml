@@ -123,7 +123,7 @@ beats:
       actors:
         sun: {puppet: sun, x: 180, y: 820, h: 380, motion: breathe, enter: fade}
         earth: {puppet: earth, x: 640, y: 1380, h: 600, motion: spin, enter: fade}
-  - en: "[excited] And here is the surprise. Earth is closest to the Sun in early January, right in the middle of northern winter. Distance was never the reason. The tilt is."
+  - en: "[excited] And here is the surprise. Earth is closest to the Sun in early January, right in the middle of northern winter. So it was never about distance. It is all about the tilt."
     hi: "[excited] और मज़े की बात सुनिए। जनवरी की शुरुआत में धरती सूरज के सबसे पास होती है, ठीक तब, जब उत्तर में कड़ाके की सर्दी पड़ रही होती है। तो वजह दूरी नहीं, झुकाव है।"
     caption: "CLOSEST IN *JANUARY*."
     scene: cosmos
