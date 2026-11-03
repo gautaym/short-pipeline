@@ -34,7 +34,7 @@ draw(..., extras={name: spec}, extras_since=t) slides them on while the rest sta
 
 Every reel also gets, without asking: a slow camera move in each beat (a push in, drifting
 left or right in turn), and ambient particles chosen from the backdrop's name: falling leaves in
-forests and meadows, twinkling stars in night skies and space, snow in winter, rising sparks in
+forests and meadows, snow in winter, rising sparks in
 underworlds and on lamp-lit stages. A beat sets `ambient: none` (or another kind) to change that.
 
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
@@ -57,7 +57,7 @@ CAMERA_ZOOM = 0.07    # each beat the camera pushes in this much over the beat
 CAMERA_PAN = 70       # and drifts this far sideways, alternating direction
 AMBIENT_WORDS = {     # backdrop name -> ambient particles
     "snow": ("winter", "snow"),
-    "twinkle": ("night", "space", "sky", "void", "cosmos", "star"),
+    # twinkling stars ("twinkle") are off by default: their glow read as square spots on screen
     "sparks": ("underworld", "duat", "ramlila", "fire", "poison", "volcano"),
     "leaves": ("forest", "meadow", "panchavati", "garden", "kailash"),
 }
