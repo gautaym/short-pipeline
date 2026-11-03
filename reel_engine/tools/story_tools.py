@@ -6,6 +6,7 @@ previews, and start a new script.
     reel make <id>                   render English and Hindi, each with a frame sheet and a phone preview
     reel new-story <id> --segment science
 """
+import re
 import subprocess
 from pathlib import Path
 
@@ -109,28 +110,35 @@ def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1) ->
     return made
 
 
-TAGS_LIMIT = 500          # YouTube's Tags box: characters, counting ", " between tags to be safe
+TAGS_LIMIT = 500          # characters of tags, as YouTube's Tags box allows
+HASHTAGS_MAX = 60         # YouTube ignores every hashtag in a description that has more than this
+
+
+def as_hashtag(tag: str) -> str:
+    """"diwali kyu manate hai" -> "#diwalikyumanatehai" (spaces and punctuation dropped, Hindi kept whole)."""
+    return "#" + re.sub(r"[\s,.'’:;!?()\-#]", "", tag.lower())
 
 
 def upload_text(story_id: str, lang: str) -> str | None:
-    """The upload.txt beside a reel, as in reels-2: TITLE, DESCRIPTION, the hashtags, then TAGS for
-    YouTube's Tags box. From the story's `upload` block (None if it has none)."""
+    """The upload.txt beside a reel, as in reels-2: TITLE, DESCRIPTION, the hashtags, then more TAGS,
+    every one written as a hashtag. From the story's `upload` block (None if it has none)."""
     from ..formats.story import load_story
     up = load_story(story_id).get("upload")
     if not up or lang not in up:
         return None
-    hashtags = " ".join("#" + h.lstrip("#") for h in up.get("hashtags", []) + up[lang].get("hashtags", []))
+    hashtags = [as_hashtag(h) for h in up.get("hashtags", []) + up[lang].get("hashtags", [])]
     tags, used = [], 0
     for tag in up[lang].get("tags", []) + up.get("tags", []):     # the language's own searches first
-        if tag.lower() in (t.lower() for t in tags):
+        tag = as_hashtag(tag)
+        if tag in tags or tag in hashtags or len(tag) < 3:
             continue
-        if used + len(tag) + (2 if tags else 0) > TAGS_LIMIT:
+        if used + len(tag) + 1 > TAGS_LIMIT or len(hashtags) + len(tags) >= HASHTAGS_MAX:
             continue                                                  # a shorter tag may still fit
-        used += len(tag) + (2 if tags else 0)
+        used += len(tag) + 1
         tags.append(tag)
     description = " ".join(up[lang]["description"].split())
-    return (f"TITLE\n{up[lang]['title']}\n\nDESCRIPTION\n{description}\n\n{hashtags}\n\n"
-            f"TAGS (paste into YouTube's Tags box)\n{', '.join(tags)}\n")
+    return (f"TITLE\n{up[lang]['title']}\n\nDESCRIPTION\n{description}\n\n{' '.join(hashtags)}\n\n"
+            f"TAGS\n{' '.join(tags)}\n")
 
 
 def write_upload(story_id: str) -> list[Path]:
