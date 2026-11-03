@@ -9,7 +9,8 @@
 # padukas on the throne. Tulsidas began the Ramcharitmanas in Awadhi in 1574 (16th century).
 # Retellings: Kamba Ramayanam (Tamil, 12th c.), Ramakien (Thailand) and many more across Asia.
 # Art reused from other stories: Rama and the Ayodhya backdrop (diwali); Sita, Lakshmana, Ravana,
-# the manuscript and the Panchavati backdrop (lakshmana_rekha), the night sky (dhruva), Vishnu (dhruva).
+# the manuscript and the Panchavati and Ramlila backdrops (lakshmana_rekha); the night sky and Vishnu
+# (dhruva). A Varanasi ghat was tried for Tulsidas but came out as a photograph twice.
 # Ravana has seven heads (the model would not draw ten cleanly); the script never counts them.
 id: ramayana
 topic: mythology
@@ -91,8 +92,16 @@ art:
     panchavati: "A forest clearing by a river at dusk, tall trees, flowering bushes and soft orange light."
     sea: "A wide stormy sea under a dramatic sky, a golden island city far away on the horizon."
     cosmos: "A clear night sky full of stars above dark rolling hills, a deep blue and violet sky."
-    ghat: "The stone steps of a riverside ghat in Varanasi at sunrise, small temples and a wide river."
+    ramlila: "An open-air village stage at night with a painted curtain, garlands of marigolds and oil lamps along its front edge."
     asia: "Ancient temple towers with tall pointed spires at sunset, palm trees and a golden sky."
+  # Faces that come alive (head movement; blinks only on faces turned to the viewer):
+  # [centre x, centre y, face width] as fractions of the picture.
+  live:
+    rama: [0.517, 0.288, 0.144]
+    vishnu: [0.49, 0.263, 0.14]
+    valmiki: [0.493, 0.263, 0.145]
+    hanuman: [0.48, 0.247, 0.13]
+    tulsidas: [0.53, 0.263, 0.13]
   anchors: {}
 beats:
   - en: "More than two thousand years ago, Maharishi Valmiki watched a hunter shoot one of two cranes in love. His grief poured out as a verse, and tradition calls it the first poem in Sanskrit."
@@ -165,10 +174,10 @@ beats:
   - en: "In the sixteenth century, Goswami Tulsidas retold it in the people's own language as the Ramcharitmanas, and it reached every home. Today it lives on in Ramlila, in Diwali, and in a simple greeting: Ram Ram."
     hi: "सोलहवीं सदी में, गोस्वामी तुलसीदास ने इसे आम लोगों की भाषा में रामचरितमानस के रूप में लिखा, और यह कथा घर-घर पहुँच गई। आज यह रामलीला में, दिवाली में, और एक सीधे-से अभिवादन में ज़िंदा है: राम राम।"
     caption: "IN *EVERY* HOME."
-    scene: ghat
+    scene: ramlila
     stage:
-      backdrop: ghat
-      fx: [rays]
+      backdrop: ramlila
+      fx: [motes]
       actors:
         tulsidas: {puppet: tulsidas, x: 420, y: 1680, h: 820, face: right, motion: breathe, enter: fade}
   - en: "It has travelled far beyond India too, from the Kamba Ramayanam in Tamil to the Ramakien in Thailand. One story, told in hundreds of ways, still teaching what it means to do the right thing."
