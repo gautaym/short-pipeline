@@ -174,11 +174,13 @@ def repitch(samples: np.ndarray, rate: int, semis: float, pace: float) -> np.nda
 
 
 PAUSE_S = 0.3        # longest pause kept inside a line; models sometimes stop for 0.6 s mid-sentence
+SHORT_S, SHORT_PAUSE_S = 4.0, 0.1   # a short line (a question, a reply) is said as one phrase
 EDGE_S = 0.04        # silence kept before and after a line
 
 
 def tighten(samples: np.ndarray, rate: int) -> np.ndarray:
-    """Trim the silence before and after a line and shorten any pause inside it to PAUSE_S."""
+    """Trim the silence before and after a line and shorten any pause inside it to PAUSE_S
+    (SHORT_PAUSE_S in a line under SHORT_S, where any stop sounds like hesitation)."""
     frame = max(1, int(rate * 0.02))
     n = len(samples) // frame
     if n == 0:
@@ -188,8 +190,8 @@ def tighten(samples: np.ndarray, rate: int) -> np.ndarray:
     voiced = np.where(~quiet)[0]
     if len(voiced) == 0:
         return samples
-    keep, edge, run = [], int(EDGE_S / 0.02), int(PAUSE_S / 0.02)
-    first, last = max(0, voiced[0] - edge), min(n, voiced[-1] + 1 + edge)
+    first, last = max(0, voiced[0] - int(EDGE_S / 0.02)), min(n, voiced[-1] + 1 + int(EDGE_S / 0.02))
+    keep, run = [], int((SHORT_PAUSE_S if (last - first) * 0.02 < SHORT_S else PAUSE_S) / 0.02)
     i = first
     while i < last:
         if quiet[i]:

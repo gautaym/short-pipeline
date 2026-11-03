@@ -103,7 +103,7 @@ class Story(Format):
         self.cast = {k: PRESETS[v["preset"]] for k, v in self.sc["cast"].items()}
         self.beats = self.sc["beats"]
         self.title_text = self.sc["title"][self.lang]
-        opening = [(self.title_text, self.asker(self.settings))]       # the hook: the asker's question
+        opening = [("[excited] " + self.title_text, self.asker(self.settings))]   # the hook, asked eagerly
         if self.reply():                                                # and the narrator taking it up
             opening.append((self.reply(), self.narrator(self.settings)))
         self.lines = [t for t, _ in opening] + [b[self.lang] for b in self.beats]
