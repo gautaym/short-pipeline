@@ -13,6 +13,9 @@ can speak Hindi and English in the same voice; otherwise "voice" is one of Maya'
 
 About one Hindi take in five comes out garbled. With "check", Whisper listens to each take and one
 scoring under MATCH_OK is made again with a new seed, up to TRIES times; the best take is kept.
+
+Lines may carry Maya's emotion tags, e.g. "[excited] And here is the surprise!" ([sad], [whispers],
+[laughs], [sighs]); the model card calls them best effort, so they are listened to before use.
 """
 import difflib
 import json
@@ -35,7 +38,7 @@ def match(model, wav, text: str, language: str) -> float:
     audio = np.interp(np.arange(int(len(wav) * 16000 / RATE)) / 16000, np.arange(len(wav)) / RATE, wav)
     heard = model.transcribe(audio.astype(np.float32), language=language, fp16=True)["text"]
     def norm(t: str) -> str:
-        return re.sub(r"[^\w]", "", t.lower())
+        return re.sub(r"[^\w]", "", re.sub(r"\[[a-z ]+\]", "", t.lower()))   # emotion tags are not spoken
     return difflib.SequenceMatcher(None, norm(text), norm(heard)).ratio()
 
 
