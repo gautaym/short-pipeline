@@ -24,17 +24,16 @@ music: tense
 cast: {}
 art:
   puppet_style: >-
-    A single flat painted leather shadow puppet in the style of ancient Greek vase paintings, mounted on a thin
-    bamboo stick, terracotta orange, black, cream and gold with dark outlines, a pale cut edge and visible rivet
-    joints, the figure in side profile, full body from head to feet, studio photo against a plain pure black
+    A single flat painted leather shadow puppet of a classical ancient Greek figure, mounted on a thin bamboo
+    stick, bright colours with dark outlines, a pale cut edge and visible rivet joints, Greek clothing only,
+    nothing Egyptian, the figure in side profile, full body from head to feet, studio photo against a plain pure black
     backdrop, nothing else in the frame.
   prop_style: >-
-    A single flat painted cut-out object, not a person: no body, no head, no arms, no legs. Painted leather in
-    the colours of ancient Greek vases, terracotta orange, black, cream and gold, with dark outlines and a pale
+    A single flat painted cut-out object on its own, not a person and not a vase: no body, no head, no arms,
+    no legs, no pot, no jar, no container. Painted leather in bright colours with dark outlines and a pale
     cut edge, studio photo against a plain pure black backdrop, nothing else in the frame, no text.
   backdrop_style: >-
-    An empty landscape painted in flat folk art style with the colours of ancient Greek pottery, bright colours
-    with dark outlines, seen full frame with no border or frame. Uninhabited scenery only: no people, no figures,
+    An empty scene painted in flat folk art style, bright colours with dark outlines, no pots, no vases, seen full frame with no border or frame. Uninhabited scenery only: no people, no figures,
     no animals, no text. Vertical composition.
   backdrop_crop: 0.06
   cast:
@@ -42,11 +41,12 @@ art:
       Persephone, a young Greek goddess with fair skin and long dark hair crowned with spring flowers, a flowing
       pale green chiton dress, exactly two arms
     demeter: >-
-      Demeter, the Greek goddess of the harvest, a motherly woman with a golden crown of wheat, a long golden
-      robe, exactly two arms
+      Demeter, the classical Greek goddess of the harvest, a motherly woman with long loose brown hair and a
+      wreath of wheat ears, a long draped golden Greek peplos robe, exactly two arms
     hades: >-
-      Hades, the Greek god of the underworld, a tall stern bearded man with a dark crown, a black and deep red
-      robe, exactly two arms
+      Hades, the classical Greek god of the underworld, a tall stern man with a full curly black beard and
+      curly black hair under a simple dark iron crown, a draped black and deep red Greek himation, exactly two
+      arms
   puppets:
     persephone: "The puppet is {persephone}, gathering flowers, one hand holding a small bunch of flowers, side view facing right."
     persephone_sad: "The puppet is {persephone}, standing sadly with her head bowed, side view facing right."
@@ -60,8 +60,8 @@ art:
   backdrops:
     meadow: "A sunny spring meadow full of flowers, olive trees and blue hills, a bright blue sky."
     underworld: "A dark underworld cavern with a black river, glowing embers and purple shadows."
-    winter: "A bare winter field under grey snow clouds, leafless trees, frost on the ground."
-    space: "Deep space full of tiny stars, dark navy and violet."
+    winter: "A bare snowy winter field under grey snow clouds, leafless trees, frost on the ground, nothing in the foreground."
+    space: "Outer space only: a black and dark navy night sky full of tiny stars and faint violet clouds, no ground, no land, no horizon."
   anchors: {}
 beats:
   - en: "Long ago, the Greeks say, there was no winter at all. Persephone, daughter of Demeter, goddess of the harvest, gathered flowers in an endless spring."
