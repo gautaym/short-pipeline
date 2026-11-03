@@ -103,9 +103,12 @@ class Story(Format):
         self.cast = {k: PRESETS[v["preset"]] for k, v in self.sc["cast"].items()}
         self.beats = self.sc["beats"]
         self.title_text = self.sc["title"][self.lang]
-        opening = [("[excited] " + self.title_text, self.asker(self.settings))]   # the hook, asked eagerly
-        if self.reply():                                                # and the narrator taking it up
-            opening.append((self.reply(), self.narrator(self.settings)))
+        if self.asks():
+            opening = [("[excited] " + self.title_text, self.asker(self.settings))]   # the hook, asked eagerly
+            if self.reply():                                                # and the narrator taking it up
+                opening.append((self.reply(), self.narrator(self.settings)))
+        else:                                                               # a story told straight: the
+            opening = [(self.title_text, self.narrator(self.settings))]     # narrator says the hook
         self.lines = [t for t, _ in opening] + [b[self.lang] for b in self.beats]
         self.voices = [v for _, v in opening] + [self.narrator(self.settings)] * len(self.beats)
         if self.settings.voice:
@@ -137,6 +140,11 @@ class Story(Format):
         if not pair:
             return None
         return load_story("_library").get("voices", {}).get(pair[role], {}).get(self.lang)
+
+    def asks(self) -> bool:
+        """Whether the reel opens on the asker's question: most do, but a story that is not a
+        question-and-answer sets `ask: false` and the narrator opens alone."""
+        return bool(self.sc.get("segment")) and self.sc.get("ask", True) is not False
 
     def reply(self) -> str | None:
         """What the narrator says to the question before the story starts ("Let me tell you."), from

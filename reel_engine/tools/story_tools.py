@@ -102,8 +102,9 @@ TEMPLATE = '''# {title}
 id: {id}
 topic: {topic}
 segment: {segment}
+# ask: false        # uncomment for a story that is not a question: the narrator opens with the title alone
 title:
-  en: "A question a child would ask?"
+  en: "A question someone would ask?"
   hi: "..."
 series:
   en: "{series}"

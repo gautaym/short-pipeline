@@ -90,6 +90,14 @@ def cast_segment(sc: dict) -> None:
         return
     opening = sc.setdefault("opening", {})
     opening.setdefault("beat", 1)
+    if sc.get("ask", True) is False:                     # told straight: the narrator opens and closes alone
+        opening["actors"] = {"narrator": {"puppet": pair["narrator"], "x": 540, "y": 2010, "h": 780, "z": 11,
+                                          "face": "left", "motion": "talk", "enter": "right"},
+                             **opening.get("actors", {})}
+        sc["beats"][-1]["stage"].setdefault("actors", {}).setdefault(
+            "narrator", {"puppet": pair["narrator"], "x": 600, "y": 2150, "h": 780, "z": 11,
+                         "face": "left", "motion": "talk", "enter": "right"})
+        return
     opening["actors"] = {
         "asker": {"puppet": pair["asker"], "x": 310, "y": 2000, "h": 720, "z": 10, "face": "right",
                   "motion": "talk", "enter": "left"},

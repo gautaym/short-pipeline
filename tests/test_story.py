@@ -69,3 +69,12 @@ def test_cut_out_keeps_dark_paint_inside_the_puppet():
     rgb[15:25, 15:25] = 5                                # ... with black paint in the middle
     alpha = cut_out(rgb)
     assert alpha[0, 0] == 0 and alpha[20, 20] == 255 and alpha[12, 12] == 255
+
+
+def test_story_without_a_question():
+    from reel_engine.story.art import cast_segment
+    sc = load_story("persephone")
+    sc["ask"] = False
+    cast_segment(sc)
+    assert list(sc["opening"]["actors"]) == ["narrator"]             # no asker on stage
+    assert "asker" not in sc["beats"][-1]["stage"]["actors"]
