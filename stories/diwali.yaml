@@ -67,11 +67,11 @@ art:
     narakasura: "The puppet is {narakasura}, swinging a heavy club, side view facing right."
     lakshmi: "The puppet is {lakshmi}, standing on a large pink lotus flower, front view."
   backdrops:
-    road: "A forest road at dusk leading towards a distant golden city on a hill, tall trees on both sides."
+    road: "An ancient narrow dirt path through a forest at dusk, no paved road and nothing modern, winding towards a distant ancient city of golden palaces and temple domes on a hill."
     ayodhya: "The city of Ayodhya at night, rows of palaces and temples with arches and domes under a dark blue sky, no lights yet."
     courtyard: "A decorated home courtyard at night with a colourful rangoli pattern on the floor, marigold garlands and an open doorway."
     battle: "A rocky battlefield at dawn under a red sky, broken chariot wheels and distant hills."
-    temple: "A golden temple in the middle of a still lake at night, a causeway leading to it, its reflection in the water."
+    temple: "At night under a dark navy sky with stars: a golden temple in the middle of a still dark lake, a causeway leading to it, its golden reflection in the black water."
   anchors: {}
 beats:
   - en: "After fourteen years in exile, Rama was finally coming home. He had defeated Ravana and rescued Sita, and with Lakshmana at their side, they turned towards Ayodhya."
