@@ -196,3 +196,81 @@ beats:
 end:
   head: "LAKSHMAN REKHA"
   sub: "the line that wasn't there"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - ramayan
+  - lakshmanrekha
+  - jaishreeram
+  - indianmythology
+  - hinduism
+  - sanatandharma
+  - valmikiramayan
+  - ramcharitmanas
+  - mythology
+  - storytime
+  - facts
+  tags:
+  - lakshman rekha
+  - laxman rekha
+  - lakshmana rekha
+  - lakshman rekha in valmiki ramayana
+  - valmiki ramayana
+  - ramcharitmanas
+  - tulsidas
+  - mandodari
+  - maa sita
+  - lord rama
+  - sita haran
+  - ramayan facts
+  - ramayan unknown facts
+  - ramlila
+  - panchavati
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Did Lakshmana really draw a line around Maa Sita? #shorts'
+    description: The Lakshman Rekha is one of the most famous scenes of the Ramayana, but it is not in Valmiki's
+      telling. Tulsidas mentions it only once, through Mandodari's taunt; later retellings and the Ramlila stage
+      made it the scene everyone remembers.
+  hi:
+    title: 'क्या लक्ष्मण जी ने सच में माँ सीता के लिए रेखा खींची थी? #shorts'
+    description: लक्ष्मण रेखा रामायण के सबसे मशहूर दृश्यों में से है, पर वाल्मीकि रामायण में यह है ही नहीं। तुलसीदास
+      इसका ज़िक्र सिर्फ़ एक बार, मंदोदरी के ताने में करते हैं; बाद की कथाओं और रामलीला ने इसे वह दृश्य बना दिया
+      जिसे सब जानते हैं।
+    hashtags:
+    - hindi
+    - ramayan
+    tags:
+    - लक्ष्मण रेखा
+    - वाल्मीकि रामायण
+    - रामचरितमानस
+    - laxman rekha ka sach
+    - lakshman rekha ki kahani
+    - ramayan ki kahani
+    - jai shri ram
+    - सीता हरण
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

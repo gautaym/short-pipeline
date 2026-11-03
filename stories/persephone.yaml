@@ -136,3 +136,75 @@ beats:
 end:
   head: "PERSEPHONE"
   sub: "the girl who brings the spring"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - greekmythology
+  - science
+  - seasons
+  - mythology
+  - astronomy
+  - persephone
+  - mythvsscience
+  - earthtilt
+  - facts
+  - storytime
+  - winter
+  tags:
+  - why does winter come
+  - why do seasons change
+  - seasons explained
+  - earth tilt
+  - axial tilt
+  - persephone
+  - demeter
+  - hades
+  - persephone and hades
+  - greek mythology
+  - greek myths
+  - myth vs science
+  - perihelion
+  - earth closest to sun in january
+  - winter explained
+  - astronomy facts
+  - science facts
+  - sky stories
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why does winter come every year? Greek myth vs real science #shorts'
+    description: 'The Greeks said winter came when Persephone was taken to the underworld and her mother Demeter
+      grieved. Science says it is Earth''s 23.4 degree tilt, and here is the surprise: Earth is closest to the Sun
+      in January! Sky Stories, part 4.'
+  hi:
+    title: 'हर साल सर्दी क्यों आती है? यूनानी कहानी और असली विज्ञान #shorts'
+    description: 'यूनानी कहते थे कि सर्दी तब आती है जब पर्सेफ़ोनी पाताल जाती है और माँ डिमीटर शोक मनाती हैं। विज्ञान
+      कहता है वजह है धरती का 23.4 डिग्री झुकाव, और मज़े की बात: जनवरी में धरती सूरज के सबसे पास होती है! आकाश की
+      कहानियाँ, भाग 4।'
+    hashtags:
+    - hindi
+    - vigyan
+    tags:
+    - sardi kyu aati hai
+    - mausam kyu badalta hai
+    - dharti ka jhukav
+    - सर्दी क्यों आती है
+    - मौसम क्यों बदलते हैं
+    - science in hindi
+    - vigyan
+    - hindi facts
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

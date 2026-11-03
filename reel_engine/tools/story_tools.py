@@ -103,7 +103,49 @@ def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1) ->
                         str(preview)], check=True)
         print(f"{lang}: {video} ({duration:.1f}s), preview {preview.stat().st_size / 1e6:.1f} MB", flush=True)
         made += [video, preview]
+        text = upload_text(story_id, lang)
+        if text:
+            (video.parent / "upload.txt").write_text(text, encoding="utf-8")
     return made
+
+
+TAGS_LIMIT = 500          # YouTube's Tags box: characters, counting ", " between tags to be safe
+
+
+def upload_text(story_id: str, lang: str) -> str | None:
+    """The upload.txt beside a reel, as in reels-2: TITLE, DESCRIPTION, the hashtags, then TAGS for
+    YouTube's Tags box. From the story's `upload` block (None if it has none)."""
+    from ..formats.story import load_story
+    up = load_story(story_id).get("upload")
+    if not up or lang not in up:
+        return None
+    hashtags = " ".join("#" + h.lstrip("#") for h in up.get("hashtags", []) + up[lang].get("hashtags", []))
+    tags, used = [], 0
+    for tag in up[lang].get("tags", []) + up.get("tags", []):     # the language's own searches first
+        if tag.lower() in (t.lower() for t in tags):
+            continue
+        if used + len(tag) + (2 if tags else 0) > TAGS_LIMIT:
+            continue                                                  # a shorter tag may still fit
+        used += len(tag) + (2 if tags else 0)
+        tags.append(tag)
+    description = " ".join(up[lang]["description"].split())
+    return (f"TITLE\n{up[lang]['title']}\n\nDESCRIPTION\n{description}\n\n{hashtags}\n\n"
+            f"TAGS (paste into YouTube's Tags box)\n{', '.join(tags)}\n")
+
+
+def write_upload(story_id: str) -> list[Path]:
+    """Write upload.txt beside the newest render of the story in each language."""
+    from ..config import REPO_ROOT as root
+    written = []
+    for lang in ("en", "hi"):
+        found = sorted((root / "out").glob(f"*/story_{story_id}_{lang}_1/story_{story_id}_{lang}_1.mp4"),
+                       key=lambda q: q.stat().st_mtime)
+        text = upload_text(story_id, lang)
+        if found and text:
+            path = found[-1].parent / "upload.txt"
+            path.write_text(text, encoding="utf-8")
+            written.append(path)
+    return written
 
 
 TEMPLATE = '''# {title}

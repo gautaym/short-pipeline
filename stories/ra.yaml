@@ -165,3 +165,70 @@ beats:
 end:
   head: "APOPHIS"
   sub: "the serpent returns, in 2029"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - egyptianmythology
+  - ra
+  - apophis
+  - mythology
+  - astronomy
+  - ancientegypt
+  - space
+  - asteroid
+  - mythvsscience
+  - storytime
+  - facts
+  tags:
+  - ra sun god
+  - egyptian mythology
+  - apep
+  - apophis
+  - apophis asteroid 2029
+  - duat
+  - khepri
+  - ancient egypt
+  - egyptian gods
+  - sun god
+  - where does the sun go at night
+  - asteroid flyby
+  - myth vs science
+  - sky stories
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Where did the Sun go at night? Ra, Apep and the asteroid of 2029 #shorts'
+    description: 'The ancient Egyptians believed Ra sailed through the underworld every night, fighting the serpent
+      Apep. Today we know Earth simply turns, but Apep is coming back: the asteroid Apophis will pass Earth safely
+      on 13 April 2029, close enough to see. Sky Stories, part 3.'
+  hi:
+    title: 'रात में सूरज कहाँ जाता था? रा, अपेप और 2029 का क्षुद्रग्रह #shorts'
+    description: 'प्राचीन मिस्र के लोग मानते थे कि सूर्य देव रा हर रात पाताल में सर्प अपेप से लड़ते हैं। आज हम जानते
+      हैं कि धरती बस घूमती है, पर अपेप लौट रहा है: 13 अप्रैल 2029 को क्षुद्रग्रह एपोफ़िस धरती के पास से सुरक्षित
+      गुज़रेगा। आकाश की कहानियाँ, भाग 3।'
+    hashtags:
+    - hindi
+    - misr
+    tags:
+    - मिस्र की कहानी
+    - सूर्य देव रा
+    - एपोफ़िस
+    - apophis asteroid hindi
+    - misr ke devta
+    - raat me suraj kaha jata hai
+    - space facts hindi
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

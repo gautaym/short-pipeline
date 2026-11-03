@@ -126,3 +126,71 @@ beats:
 end:
   head: "ABIOGENESIS"
   sub: "life from non-life"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - science
+  - biology
+  - originoflife
+  - abiogenesis
+  - evolution
+  - earth
+  - learnonshorts
+  - sciencefacts
+  - rna
+  - class9
+  - facts
+  tags:
+  - abiogenesis
+  - origin of life
+  - how did life begin
+  - first cell
+  - miller urey experiment
+  - rna world
+  - hydrothermal vents
+  - protocell
+  - early earth
+  - evolution
+  - biology explained
+  - science explained
+  - chemistry of life
+  - class 9 biology
+  - ncert science
+  - science for students
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'How did the first cell form? Life from chemistry, explained #shorts'
+    description: Four billion years ago Earth had no life at all. Lightning, heat and deep-sea vents built the building
+      blocks; RNA may have copied itself; fatty bubbles trapped it, and the first protocells were born. Scientists
+      are still piecing together how.
+  hi:
+    title: 'पहली कोशिका कैसे बनी? धरती पर जीवन की शुरुआत #shorts'
+    description: चार अरब साल पहले धरती पर ज़िंदगी का नामो-निशान नहीं था। बिजली, गर्मी और समुद्र की गहराई के गर्म
+      झरनों ने जीवन की ईंटें बनाईं, आर एन ए ने अपनी नकल बनाई, और पहली आदि-कोशिका बनी।
+    hashtags:
+    - hindi
+    - vigyan
+    tags:
+    - पहली कोशिका
+    - जीवन की उत्पत्ति
+    - jivan ki utpatti
+    - pehli koshika kaise bani
+    - science in hindi
+    - biology in hindi
+    - vigyan
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

@@ -192,3 +192,80 @@ beats:
 end:
   head: "NEELKANTH"
   sub: "the blue-throated one"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - mahadev
+  - neelkanth
+  - lordshiva
+  - samudramanthan
+  - harharmahadev
+  - indianmythology
+  - hinduism
+  - sanatandharma
+  - bholenath
+  - storytime
+  - shiva
+  tags:
+  - neelkanth
+  - why is shiva throat blue
+  - samudra manthan
+  - halahala
+  - lord shiva
+  - mahadev
+  - bholenath
+  - shiv ji
+  - maa parvati
+  - vasuki
+  - mount mandara
+  - churning of the ocean
+  - amrit
+  - devas and asuras
+  - shiva story
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why is Lord Shiva''s throat blue? The story of Neelkanth #shorts'
+    description: When the gods and demons churned the ocean, a poison called Halahala rose that could end all creation.
+      Everyone ran, except Lord Shiva. He drank it, Maa Parvati held his throat, and it turned blue. That is why
+      he is Neelkanth.
+  hi:
+    title: 'भगवान शिव का कंठ नीला क्यों है? नीलकंठ की कथा #shorts'
+    description: समुद्र मंथन में ऐसा विष निकला जो पूरी सृष्टि को ख़त्म कर सकता था। सब भागे, बस भगवान शिव नहीं भागे।
+      उन्होंने विष पी लिया, माता पार्वती ने उनका कंठ थामा, और कंठ नीला पड़ गया। इसीलिए वे नीलकंठ कहलाते हैं।
+    hashtags:
+    - hindi
+    - bhakti
+    tags:
+    - नीलकंठ
+    - समुद्र मंथन
+    - हलाहल विष
+    - shiv ji ka gala neela kyu hai
+    - neelkanth ki katha
+    - samudra manthan katha
+    - har har mahadev
+    - महादेव
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

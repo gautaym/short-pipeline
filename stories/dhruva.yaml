@@ -119,3 +119,77 @@ beats:
 end:
   head: "DHRUVA TARA"
   sub: "the Pole Star"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - indianmythology
+  - dhruvatara
+  - polestar
+  - hinduism
+  - astronomy
+  - sanatandharma
+  - bhakti
+  - mythvsscience
+  - storytime
+  - facts
+  - skystories
+  tags:
+  - dhruva tara
+  - pole star
+  - polaris
+  - dhruva story
+  - bhakt dhruva
+  - dhruv tara kahani
+  - lord vishnu
+  - why pole star does not move
+  - north star
+  - astronomy
+  - myth vs science
+  - vishnu purana
+  - bhagavata purana
+  - sky stories
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why does one star never move? The story of Dhruva Tara #shorts'
+    description: 'Little prince Dhruva prayed to Lord Vishnu without moving, through sun, rain and storm, and won
+      a place no one could take: the Pole Star. And science agrees, almost: Polaris sits nearly above Earth''s North
+      Pole, so every other star circles it. Sky Stories, part 1.'
+  hi:
+    title: 'एक तारा कभी क्यों नहीं हिलता? ध्रुव तारे की कहानी #shorts'
+    description: 'नन्हे ध्रुव ने बिना हिले भगवान विष्णु की तपस्या की, और उन्हें ऐसी जगह मिली जिसे कोई नहीं छीन सकता:
+      ध्रुव तारा। और विज्ञान भी करीब-करीब यही कहता है। आकाश की कहानियाँ, भाग 1।'
+    hashtags:
+    - hindi
+    - dhruv
+    tags:
+    - ध्रुव तारा
+    - भक्त ध्रुव
+    - dhruv tara ki kahani
+    - dhruv bhakt katha
+    - ध्रुव तारा क्यों नहीं हिलता
+    - bhagwan vishnu
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

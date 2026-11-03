@@ -160,3 +160,83 @@ beats:
 end:
   head: "DIWALI"
   sub: "five days of light"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - diwali
+  - happydiwali
+  - deepawali
+  - festivalsofindia
+  - jaishreeram
+  - indianmythology
+  - hinduism
+  - sanatandharma
+  - bandichhordivas
+  - festivalstories
+  - storytime
+  tags:
+  - why do we celebrate diwali
+  - diwali story
+  - diwali history
+  - deepawali
+  - festival of lights
+  - lord rama
+  - ayodhya
+  - narakasura
+  - naraka chaturdashi
+  - lakshmi puja
+  - dhanteras
+  - govardhan puja
+  - bhai dooj
+  - mahavira nirvana
+  - bandi chhor divas
+  - five days of diwali
+  - indian festivals
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why do we celebrate Diwali? It is not just one story #shorts'
+    description: 'Lord Rama''s homecoming to Ayodhya, lit by rows of diyas, but also Lord Krishna''s victory over
+      Narakasura, Lakshmi''s night, Lord Mahavira''s nirvana and the Sikhs'' Bandi Chhor Divas: five days of light
+      that end with Bhai Dooj. Festival Stories, part 1.'
+  hi:
+    title: 'हम दिवाली क्यों मनाते हैं? एक नहीं, कई कहानियाँ #shorts'
+    description: 'प्रभु श्रीराम का अयोध्या लौटना, नरकासुर पर श्रीकृष्ण की जीत, लक्ष्मी पूजा की रात, भगवान महावीर
+      का निर्वाण और बंदी छोड़ दिवस: रोशनी के पाँच दिन, जो भाई दूज पर ख़त्म होते हैं। त्योहारों की कहानियाँ, भाग
+      1।'
+    hashtags:
+    - hindi
+    - diwali2026
+    tags:
+    - दिवाली क्यों मनाते हैं
+    - दीपावली
+    - diwali kyu manate hai
+    - diwali ki kahani
+    - deepawali kyon manai jati hai
+    - लक्ष्मी पूजा
+    - धनतेरस
+    - shubh deepawali
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

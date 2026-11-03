@@ -191,3 +191,82 @@ beats:
 end:
   head: "RAMAYANA"
   sub: "Rama's journey"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - ramayan
+  - jaishreeram
+  - ramayana
+  - lordrama
+  - valmiki
+  - ramcharitmanas
+  - indianmythology
+  - hinduism
+  - sanatandharma
+  - hanuman
+  - storytime
+  tags:
+  - what is ramayana
+  - ramayana explained
+  - why is ramayana sacred
+  - valmiki ramayana
+  - adi kavya
+  - first poem in sanskrit
+  - maryada purushottam
+  - lord rama
+  - maa sita
+  - hanuman ji
+  - ramcharitmanas
+  - tulsidas
+  - kamba ramayanam
+  - ramakien
+  - avatar of vishnu
+  - ramlila
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'What is the Ramayana, and why is it so sacred? #shorts'
+    description: Maharishi Valmiki's Ramayana, the first poem in Sanskrit, tells Lord Rama's journey in about 24,000
+      verses. Hindus revere it because Lord Rama is an avatar of Lord Vishnu and the ideal of dharma, and through
+      Tulsidas, Ramlila and Diwali it lives in every home.
+  hi:
+    title: 'रामायण क्या है, और यह इतनी पवित्र क्यों मानी जाती है? #shorts'
+    description: महर्षि वाल्मीकि की रामायण, संस्कृत की पहली कविता, प्रभु श्रीराम की यात्रा की कथा है। हिंदू इसे
+      पवित्र मानते हैं क्योंकि प्रभु श्रीराम भगवान विष्णु के अवतार और मर्यादा पुरुषोत्तम हैं, और तुलसीदास, रामलीला
+      और दिवाली के ज़रिए यह कथा हर घर में बसती है।
+    hashtags:
+    - hindi
+    - ramkatha
+    tags:
+    - रामायण क्या है
+    - रामायण
+    - रामचरितमानस
+    - ramayan kya hai
+    - ramayan ki katha
+    - ram katha
+    - मर्यादा पुरुषोत्तम
+    - jai shri ram
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

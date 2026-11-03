@@ -130,3 +130,67 @@ beats:
 end:
   head: "ENTANGLEMENT"
   sub: "spooky, but real"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - quantumphysics
+  - physics
+  - science
+  - quantum
+  - entanglement
+  - einstein
+  - nobelprize
+  - learnonshorts
+  - sciencefacts
+  - quantumcomputing
+  - facts
+  tags:
+  - quantum entanglement
+  - quantum entanglement explained
+  - spooky action at a distance
+  - einstein
+  - john bell
+  - bell test
+  - nobel prize physics 2022
+  - quantum physics
+  - quantum mechanics
+  - quantum computer
+  - quantum encryption
+  - physics explained
+  - science explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'What is quantum entanglement? Explained with two magic coins #shorts'
+    description: Two particles, light years apart, behaving as one. Einstein called it spooky action at a distance;
+      John Bell found a way to test it, and the experiments won the 2022 Nobel Prize in Physics. But no message
+      travels faster than light.
+  hi:
+    title: 'क्वांटम एंटैंगलमेंट क्या है? दो जादुई सिक्कों से समझिए #shorts'
+    description: दो कण, प्रकाश-वर्षों दूर, फिर भी एक जैसे। आइंस्टीन ने इसे भुतहा असर कहा, जॉन बेल ने इसे परखने का
+      तरीका निकाला, और इन प्रयोगों को 2022 का भौतिकी का नोबेल मिला। पर इससे रोशनी से तेज़ संदेश नहीं भेजा जा सकता।
+    hashtags:
+    - hindi
+    - vigyan
+    tags:
+    - क्वांटम एंटैंगलमेंट
+    - quantum entanglement hindi
+    - quantum physics in hindi
+    - physics in hindi
+    - science in hindi
+    - vigyan
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

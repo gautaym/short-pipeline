@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story", "track", "live")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story", "track", "live", "upload-text")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -77,6 +77,8 @@ def build_parser() -> argparse.ArgumentParser:
     mk = sub.add_parser("make", help="render a story in English and Hindi, with frame sheets and phone previews")
     mk.add_argument("story")
     mk.add_argument("--langs", default="en,hi")
+    ut = sub.add_parser("upload-text", help="write upload.txt (title, description, hashtags, tags) beside a story's reels")
+    ut.add_argument("stories", nargs="+")
     lv = sub.add_parser("live", help="make the living-face loops (blinks, head movement) a story lists")
     lv.add_argument("story")
     tr = sub.add_parser("track", help="live table of a reel queue, per reel and task, at localhost:8765")
@@ -217,6 +219,12 @@ def main(argv: list[str] | None = None) -> int:
             h, m = map(int, opts.since.split(":"))
             since = datetime.datetime.now().replace(hour=h, minute=m, second=0).timestamp()
         track(opts.stories, since)
+        return 0
+    if opts.command == "upload-text":
+        from .tools.story_tools import write_upload
+        for sid in opts.stories:
+            for path in write_upload(sid) or [f"{sid}: no upload block or no render"]:
+                print(path)
         return 0
     if opts.command == "live":
         from .tools.story_tools import live

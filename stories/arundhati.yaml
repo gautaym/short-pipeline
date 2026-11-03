@@ -122,3 +122,77 @@ beats:
 end:
   head: "ARUNDHATI"
   sub: "the faithful star"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - indianmythology
+  - saptarishi
+  - arundhati
+  - hinduwedding
+  - astronomy
+  - bigdipper
+  - sanatandharma
+  - mythvsscience
+  - storytime
+  - facts
+  - skystories
+  tags:
+  - arundhati star
+  - vasishtha arundhati
+  - saptarishi
+  - big dipper
+  - ursa major
+  - mizar and alcor
+  - arundhati darshan
+  - hindu wedding rituals
+  - vivah rituals
+  - double star
+  - stargazing
+  - myth vs science
+  - sky stories
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why do newlyweds look for a tiny star? Arundhati and the Saptarishi #shorts'
+    description: 'In many Hindu weddings the couple is shown Vasishtha and Arundhati, two stars in the Saptarishi,
+      as a promise to stay together. Science found something beautiful: Mizar and Alcor are most likely bound together
+      by gravity. Sky Stories, part 2.'
+  hi:
+    title: 'शादी के बाद जोड़े एक छोटा-सा तारा क्यों ढूँढते हैं? अरुंधती तारा #shorts'
+    description: कई हिंदू शादियों में नए जोड़े को सप्तऋषि के वशिष्ठ और अरुंधती दिखाए जाते हैं, साथ निभाने के वादे
+      के रूप में। और विज्ञान ने पाया कि ये दोनों तारे शायद सच में एक-दूसरे से बँधे हैं। आकाश की कहानियाँ, भाग 2।
+    hashtags:
+    - hindi
+    - shaadi
+    tags:
+    - अरुंधती तारा
+    - सप्तऋषि
+    - arundhati tara
+    - saptrishi tare
+    - shadi ki rasam
+    - vivah sanskar
+    - arundhati darshan kya hai
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi

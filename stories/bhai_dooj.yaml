@@ -158,3 +158,79 @@ beats:
 end:
   head: "BHAI DOOJ"
   sub: "the promise even Yama keeps"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - bhaidooj
+  - bhaiyadooj
+  - bhaubeej
+  - bhaiphonta
+  - festivalsofindia
+  - brothersister
+  - indianmythology
+  - hinduism
+  - sanatandharma
+  - festivalstories
+  - storytime
+  tags:
+  - why do we celebrate bhai dooj
+  - bhai dooj story
+  - bhai dooj katha
+  - yama and yamuna
+  - yama dwitiya
+  - bhaiya dooj
+  - bhau beej
+  - bhai phonta
+  - bhai tika
+  - brother sister festival
+  - tilak ceremony
+  - krishna and subhadra
+  - diwali fifth day
+  - indian festivals
+  - indian mythology
+  - hindu mythology
+  - sanatan dharma
+  - hinduism
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - mythology explained
+  - puppet animation
+  - shadow puppet
+  - story reel
+  - animated story
+  - explained
+  - shorts
+  - youtube shorts
+  - facts
+  - did you know
+  en:
+    title: 'Why do we celebrate Bhai Dooj? The promise even Yama keeps #shorts'
+    description: Yamuna waited years for her brother Yama, the god of death. When he finally came, two days after
+      Diwali, she welcomed him with aarti, a tilak and a feast, and he blessed every brother who receives a tilak
+      from his sister on this day. Festival Stories, part 2.
+  hi:
+    title: 'हम भाई दूज क्यों मनाते हैं? यमराज और यमुना की कथा #shorts'
+    description: यमुना ने अपने भाई यमराज का बरसों इंतज़ार किया। दिवाली के दो दिन बाद जब वे आए, तो यमुना ने आरती,
+      तिलक और भोजन से उनका स्वागत किया, और यमराज ने हर उस भाई को आशीर्वाद दिया जो इस दिन बहन से तिलक लगवाए। त्योहारों
+      की कहानियाँ, भाग 2।
+    hashtags:
+    - hindi
+    - bhaidooj2026
+    tags:
+    - भाई दूज
+    - यम द्वितीया
+    - bhai dooj kyu manate hai
+    - bhai dooj ki kahani
+    - yamraj yamuna katha
+    - भैया दूज
+    - tilak muhurat
+    - hindi story
+    - hindi kahani
+    - kahani
+    - पौराणिक कथा
+    - हिंदी कहानी
+    - pauranik kahani
+    - mythology in hindi
