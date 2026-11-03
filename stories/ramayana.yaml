@@ -140,10 +140,10 @@ beats:
     scene: sea
     stage:
       backdrop: sea
-      fx: [waves, spray]
+      fx: [rays]
       actors:
-        hanuman: {puppet: hanuman, x: 560, y: 1500, h: 900, face: right, motion: float, enter: left}
-        ravana: {puppet: ravana, x: 840, y: 1650, h: 900, motion: tremble, enter: fade, exit: fade}
+        hanuman: {puppet: hanuman, x: 300, y: 1560, h: 950, face: right, motion: float, enter: left}
+        ravana: {puppet: ravana, x: 800, y: 1700, h: 1000, motion: tremble, enter: fade}
   - en: "[excited] But for Hindus, the Ramayana is far more than a story. Lord Rama is worshipped as an avatar of Lord Vishnu, who came to earth to restore dharma."
     hi: "[excited] पर हिंदुओं के लिए रामायण सिर्फ़ एक कहानी नहीं है। प्रभु श्रीराम को भगवान विष्णु का अवतार माना जाता है, जो धरती पर धर्म की स्थापना के लिए आए।"
     caption: "AN *AVATAR* OF VISHNU."
