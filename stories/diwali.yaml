@@ -1,0 +1,158 @@
+# Festival Stories, part 1: why we celebrate Diwali.
+# Review notes. Diwali falls on the new moon (amavasya) of Kartik. Traditions the script names:
+# Rama's return to Ayodhya after fourteen years of exile and the defeat of Ravana, welcomed with
+# lamps (the popular North Indian telling); Krishna's victory over Narakasura (Naraka Chaturdashi,
+# central in South India; some tellings give the killing to Satyabhama, so the script says Krishna
+# "defeated" him); Lakshmi Puja on the amavasya night (Lakshmi rose from the churning of the ocean;
+# the script says "the stories say"); Mahavira's nirvana (Jain); Bandi Chhor Divas, Guru Hargobind's
+# release from Gwalior fort in 1619 and return to Amritsar (Sikh). The Guru is not shown as a
+# figure: the Golden Temple lit with lamps stands for the day. Five days as commonly listed in North
+# India; names and order vary by region. Sources: outlookindia.com, thefederal.com,
+# businessinsider.in; facts kept to what these agree on. Sita and Lakshmana are the pictures
+# drawn for lakshmana_rekha, copied here.
+id: diwali
+topic: mythology
+series_part: 1
+title:
+  en: "Why do we celebrate Diwali?"
+  hi: "हम दिवाली क्यों मनाते हैं?"
+series:
+  en: "Festival Stories"
+  hi: "त्योहारों की कहानियाँ"
+summary:
+  en: "Diwali is Rama's homecoming to Ayodhya, lit by rows of lamps, but it is also Krishna's victory over Narakasura, Lakshmi's night, Mahavira's nirvana and the Sikhs' Bandi Chhor Divas: five days of light that end with Bhai Dooj."
+  hi: "दिवाली राम के अयोध्या लौटने की ख़ुशी है, पर यह नरकासुर पर कृष्ण की जीत, लक्ष्मी पूजा की रात, महावीर का निर्वाण और सिखों का बंदी छोड़ दिवस भी है: रोशनी के पाँच दिन, जो भाई दूज पर ख़त्म होते हैं।"
+music: chill
+cast: {}
+# Opens on beat 3's frame (Ayodhya lit with lamps and fireworks), with Meera's question and the Sutradhar.
+segment: indian_myth
+opening:
+  beat: 3
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather cut-out of an object, not a person: no body, no face, no arms, no legs.
+    Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+    backdrop, nothing else in the frame, no text.
+  backdrop_style: >-
+    An empty scene painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    sita: >-
+      Sita, a young princess with golden skin and a long dark brown braid, dressed modestly in a full red and gold silk saree draped over both shoulders and covering her waist, a full-sleeved red blouse, her head uncovered, gold jewellery, exactly two arms with graceful hands, each with five fingers
+    lakshmana: >-
+      Lakshmana, Rama's younger brother, a young prince with golden skin, a gold crown, an orange silk dhoti, gold jewellery and a quiver of arrows on his back, exactly two arms
+    rama: >-
+      Lord Rama with blue skin, a tall gold crown, a yellow silk dhoti, gold jewellery and a quiver of arrows
+      on his back, exactly two arms
+    krishna: >-
+      Lord Krishna with blue skin, a gold crown with a peacock feather, a yellow silk dhoti, a garland of
+      flowers and gold jewellery, exactly two arms
+    narakasura: >-
+      Narakasura, a fierce demon king with green skin, only one head with two small curved horns and
+      fangs, a red and gold armour and a gold crown, exactly two arms
+    lakshmi: >-
+      Goddess Lakshmi with golden skin, a red and gold silk saree draped modestly over both shoulders, a
+      tall gold crown and gold jewellery, exactly four arms: two hands holding pink lotus flowers, one hand
+      raised in blessing and one hand pouring gold coins
+  puppets:
+    sita: "The puppet is {sita}, standing gracefully with her hands folded in front of her, side view facing right."
+    lakshmana_pray: "The puppet is {lakshmana}, standing with his palms joined in prayer, head bowed, side view facing right."
+    rama: "The puppet is {rama}, walking home with a calm smile, holding a long bow in one hand, side view facing right."
+    krishna: "The puppet is {krishna}, raising a golden spinning discus in one hand, the other hand on his hip, side view facing right."
+    narakasura: "The puppet is {narakasura}, swinging a heavy club, side view facing right."
+    lakshmi: "The puppet is {lakshmi}, standing on a large pink lotus flower, front view."
+  backdrops:
+    road: "A forest road at dusk leading towards a distant golden city on a hill, tall trees on both sides."
+    ayodhya: "The city of Ayodhya at night, rows of palaces and temples with arches and domes under a dark blue sky, no lights yet."
+    courtyard: "A decorated home courtyard at night with a colourful rangoli pattern on the floor, marigold garlands and an open doorway."
+    battle: "A rocky battlefield at dawn under a red sky, broken chariot wheels and distant hills."
+    temple: "A golden temple in the middle of a still lake at night, a causeway leading to it, its reflection in the water."
+  anchors: {}
+beats:
+  - en: "After fourteen years in exile, Rama was finally coming home. He had defeated Ravana and rescued Sita, and with Lakshmana at their side, they turned towards Ayodhya."
+    hi: "चौदह साल के वनवास के बाद, आख़िरकार राम घर लौट रहे थे। रावण को हराकर उन्होंने सीता को छुड़ा लिया था, और लक्ष्मण के साथ वे अयोध्या की ओर चल पड़े।"
+    caption: "RAMA COMES *HOME*."
+    scene: road
+    stage:
+      backdrop: road
+      actors:
+        lakshmana: {puppet: lakshmana_pray, x: 220, y: 1690, h: 960, face: right, motion: walk_in, enter: left}
+        sita: {puppet: sita, x: 470, y: 1670, h: 900, face: right, motion: walk_in, enter: left}
+        rama: {puppet: rama, x: 760, y: 1690, h: 1000, face: right, motion: walk_in, enter: left}
+  - en: "It was the darkest night of the month, the new moon of Kartik. So the people of Ayodhya lit rows and rows of clay lamps, to light their king's way home."
+    hi: "वह महीने की सबसे अंधेरी रात थी, कार्तिक की अमावस्या। तो अयोध्या के लोगों ने मिट्टी के दीयों की कतारें जला दीं, ताकि उनके राजा को घर का रास्ता दिखे।"
+    caption: "A CITY OF *LAMPS*."
+    scene: ayodhya
+    stage:
+      backdrop: ayodhya
+      fx: [{diyas: {y: 1700, rows: 2, n: 9, grow: 6.0}}]
+      actors: {}
+  - en: "That is why we light diyas on Diwali: light winning over darkness, and good winning over evil."
+    hi: "इसीलिए दिवाली पर हम दीये जलाते हैं: अंधेरे पर रोशनी की जीत, और बुराई पर अच्छाई की।"
+    caption: "LIGHT OVER *DARKNESS*."
+    scene: ayodhya
+    stage:
+      backdrop: ayodhya
+      fx: [{diyas: {y: 1700, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 4}}]
+      actors:
+        rama: {puppet: rama, x: 400, y: 1640, h: 960, face: right, motion: breathe, enter: fade}
+        sita: {puppet: sita, x: 680, y: 1630, h: 880, face: left, motion: sway, enter: fade}
+  - en: "[excited] But here is the surprise. Diwali is not just one story. Across India, it celebrates many."
+    hi: "[excited] पर मज़े की बात यह है कि दिवाली की कहानी एक नहीं, कई हैं।"
+    caption: "NOT JUST *ONE* STORY."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [{diyas: {y: 1660, rows: 3, n: 9, grow: 3.0}}]
+      actors: {}
+  - en: "In the South, it marks the day Krishna defeated the demon king Narakasura, and set free the people he had imprisoned."
+    hi: "दक्षिण भारत में, यह वह दिन है जब श्रीकृष्ण ने राक्षस राजा नरकासुर को हराया, और उसकी क़ैद में बंद लोगों को आज़ाद किया।"
+    caption: "KRISHNA *WINS*."
+    scene: battle
+    stage:
+      backdrop: battle
+      fx: [shake, lightning, {glow: {actor: krishna, colour: [255, 220, 120]}}]
+      actors:
+        krishna: {puppet: krishna, x: 320, y: 1690, h: 1000, face: right, motion: sway, enter: left}
+        narakasura: {puppet: narakasura, x: 780, y: 1700, h: 1080, face: left, motion: tremble, enter: right, exit: fade}
+  - en: "On the night of Diwali, families pray to Goddess Lakshmi, who, the stories say, rose from the churning of the ocean. Homes are cleaned and lit up to welcome her."
+    hi: "दिवाली की रात, परिवार माँ लक्ष्मी की पूजा करते हैं, जो कहानियों के मुताबिक़ समुद्र मंथन से प्रकट हुई थीं। उनके स्वागत के लिए घर साफ़ किए जाते हैं और रोशनी से सजाए जाते हैं।"
+    caption: "LAKSHMI'S *NIGHT*."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [rays, {glow: {actor: lakshmi, colour: [255, 215, 120]}}, {diyas: {y: 1760, rows: 1, n: 9, grow: 0.01}}]
+      actors:
+        lakshmi: {puppet: lakshmi, x: 540, y: 1600, h: 1050, motion: float, enter: fade}
+  - en: "For Jains, it is the night Lord Mahavira attained nirvana. And for Sikhs, it is Bandi Chhor Divas, when Guru Hargobind was freed from prison and returned to Amritsar, and the Golden Temple glowed with lamps."
+    hi: "जैनों के लिए, यह वह रात है जब भगवान महावीर को निर्वाण मिला। और सिखों के लिए यह बंदी छोड़ दिवस है, जब गुरु हरगोबिंद जी क़ैद से रिहा होकर अमृतसर लौटे, और हरमंदिर साहिब दीयों से जगमगा उठा।"
+    caption: "ONE NIGHT, *MANY* FAITHS."
+    scene: temple
+    stage:
+      backdrop: temple
+      fx: [{diyas: {y: 1700, rows: 2, n: 9, grow: 4.0}}, {fireworks: {n: 3}}]
+      actors: {}
+  - en: "And it is not one night but five days of light: Dhanteras, Choti Diwali, Lakshmi Puja, Govardhan Puja, and on the fifth day, Bhai Dooj."
+    hi: "और यह एक रात नहीं, रोशनी के पाँच दिन हैं: धनतेरस, छोटी दिवाली, लक्ष्मी पूजा, गोवर्धन पूजा, और पाँचवें दिन, भाई दूज।"
+    caption: "FIVE DAYS OF *LIGHT*."
+    scene: ayodhya
+    stage:
+      backdrop: ayodhya
+      fx: [{diyas: {y: 1560, rows: 1, n: 5, grow: 7.0}}]
+      actors: {}
+  - en: "Different stories, one idea. However dark the night, a single lamp can push it back. And the fifth day has a story of its own, which we will tell you next."
+    hi: "कहानियाँ अलग-अलग, पर बात एक। रात कितनी भी अंधेरी हो, एक छोटा-सा दीया उसे पीछे धकेल सकता है। और पाँचवें दिन की अपनी एक कहानी है, जो हम आपको अगली बार सुनाएँगे।"
+    caption: "ONE LAMP IS *ENOUGH*."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [{diyas: {y: 1720, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 5}}]
+      actors: {}
+end:
+  head: "DIWALI"
+  sub: "five days of light"

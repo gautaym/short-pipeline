@@ -1,0 +1,160 @@
+# Festival Stories, part 2: why we celebrate Bhai Dooj.
+# Review notes. Bhai Dooj falls on Kartik Shukla Dwitiya, the second day after Diwali's new moon,
+# and is also called Yama Dwitiya. Legend 1: Yamuna (Yami), twin sister of Yama and child of the Sun
+# god Surya, kept inviting her brother; he finally came on this day; she did his aarti, put a tilak
+# on his forehead and fed him; he granted a boon to brothers who receive a tilak from their sisters
+# on this day (wordings vary; the script says "protected from untimely death", the common one).
+# Legend 2: after defeating Narakasura, Krishna visited his sister Subhadra, who welcomed him with
+# lamps, sweets and a tilak. Regional names: Bhau Beej (Maharashtra), Bhai Phonta (Bengal),
+# Bhai Tika (Nepal). Sources: hindupedia.com/en/Bhaiya-Duj, festivalsofindia.in/bhai-dooj/legends.
+id: bhai_dooj
+topic: mythology
+series_part: 2
+title:
+  en: "Why do we celebrate Bhai Dooj?"
+  hi: "हम भाई दूज क्यों मनाते हैं?"
+series:
+  en: "Festival Stories"
+  hi: "त्योहारों की कहानियाँ"
+summary:
+  en: "Yamuna waited years for her brother Yama, the god of death, to visit. When he finally came on the second day after Diwali, she welcomed him with aarti, a tilak and a feast, and he blessed every brother who receives a tilak from his sister on this day."
+  hi: "यमुना ने अपने भाई, मृत्यु के देवता यमराज का बरसों इंतज़ार किया। दिवाली के दो दिन बाद जब वे आए, तो यमुना ने आरती, तिलक और भोजन से उनका स्वागत किया, और यमराज ने हर उस भाई को आशीर्वाद दिया जो इस दिन बहन से तिलक लगवाए।"
+music: chill
+cast: {}
+# Opens on beat 4's frame (Yamuna's aarti for Yama), with Meera's question and the Sutradhar.
+segment: indian_myth
+opening:
+  beat: 4
+art:
+  puppet_style: >-
+    A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
+    thin bamboo stick, bright flat colours with dark outlines, a pale cut edge and visible rivet joints,
+    full body from head to feet, studio photo against a plain pure black backdrop, nothing else in the frame.
+  prop_style: >-
+    A single flat painted leather cut-out of an object, not a person: no body, no face, no arms, no legs.
+    Bright flat colours with dark outlines and a pale cut edge, studio photo against a plain pure black
+    backdrop, nothing else in the frame, no text.
+  backdrop_style: >-
+    An empty scene painted in flat Indian Kalamkari folk art style, bright colours with dark outlines,
+    seen full frame with no border or frame. Uninhabited scenery only: nobody in it, no people, no figures,
+    no animals, no text. Vertical composition.
+  cast:
+    yama: >-
+      Yama, the Hindu god of death and justice, a strong kind-faced man with deep blue-grey skin, a
+      dark brown moustache, a tall gold crown, a red and gold silk dhoti and gold jewellery, exactly two
+      arms
+    yamuna: >-
+      Yamuna, the river goddess, a young woman with golden skin and a long dark brown braid, dressed
+      modestly in a full blue-green and silver silk saree draped over both shoulders and covering her
+      waist, a full-sleeved blouse, gold jewellery, exactly two arms with graceful hands
+    krishna: >-
+      Lord Krishna with blue skin, a gold crown with a peacock feather, a yellow silk dhoti, a garland of
+      flowers and gold jewellery, exactly two arms
+    subhadra: >-
+      Subhadra, Krishna's sister, a young princess with golden skin and a long dark brown braid, dressed
+      modestly in a full pink and gold silk saree draped over both shoulders and covering her waist, a
+      full-sleeved blouse, gold jewellery, exactly two arms with graceful hands
+  puppets:
+    yama: "The puppet is {yama}, standing tall and smiling, holding a golden mace in one hand, side view facing right."
+    yama_busy: "The puppet is {yama}, reading a long scroll held open in both hands, side view facing right."
+    yama_bless: "The puppet is {yama}, raising one hand in blessing with the palm open, side view facing right."
+    yamuna: "The puppet is {yamuna}, standing gracefully with her hands folded in front of her, side view facing right."
+    yamuna_wait: "The puppet is {yamuna}, shading her eyes with one hand as she looks into the distance, side view facing right."
+    yamuna_aarti: "The puppet is {yamuna}, holding a round brass aarti plate with a small lit lamp in both hands, side view facing right."
+    krishna: "The puppet is {krishna}, walking with a gentle smile, one hand raised in greeting, side view facing right."
+    subhadra: "The puppet is {subhadra}, holding a round brass plate with sweets and a small lit lamp in both hands, side view facing right."
+  backdrops:
+    river_home: "A small riverside home with a thatched roof beside a wide blue river at dusk, lotus flowers in the water."
+    yamaloka: "A vast dark hall of records with tall shelves full of scrolls, glowing lamps and purple shadows."
+    courtyard: "A decorated home courtyard at night with a colourful rangoli pattern on the floor, marigold garlands and an open doorway."
+    dwarka: "A white and gold palace by the sea at sunset, domes and arches, waves below."
+    village: "A village lane at night with small houses, marigold garlands strung between them and a starry sky."
+  anchors: {}
+beats:
+  - en: "Yama, the god of death, had a twin sister named Yamuna. They were children of the Sun god, they grew up side by side, and she loved her brother dearly."
+    hi: "मृत्यु के देवता यमराज की एक जुड़वाँ बहन थी, यमुना। दोनों सूर्यदेव की संतान थे, साथ-साथ बड़े हुए थे, और यमुना अपने भाई से बहुत प्यार करती थी।"
+    caption: "A BROTHER AND A *SISTER*."
+    scene: river_home
+    stage:
+      backdrop: river_home
+      fx: [rays]
+      actors:
+        yamuna: {puppet: yamuna, x: 330, y: 1670, h: 900, face: right, motion: sway, enter: left}
+        yama: {puppet: yama, x: 760, y: 1700, h: 1020, face: left, motion: breathe, enter: right}
+  - en: "But Yama was always busy, keeping the record of every life in the world. Again and again Yamuna invited him home, and again and again he could not come."
+    hi: "पर यमराज हमेशा व्यस्त रहते थे, दुनिया के हर जीव का हिसाब रखते हुए। यमुना बार-बार उन्हें घर बुलाती, और वे बार-बार नहीं आ पाते।"
+    caption: "ALWAYS *TOO BUSY*."
+    scene: yamaloka
+    stage:
+      backdrop: yamaloka
+      fx: [smoke_far]
+      actors:
+        yama: {puppet: yama_busy, x: 560, y: 1700, h: 1040, face: left, motion: breathe, enter: fade}
+  - en: "Then one year, on the second day after the new moon of Kartik, just after Diwali, Yama finally arrived at her door."
+    hi: "फिर एक साल, कार्तिक की अमावस्या के दो दिन बाद, दिवाली के ठीक बाद, आख़िरकार यमराज उसके दरवाज़े पर पहुँच गए।"
+    caption: "HE *FINALLY* CAME."
+    scene: river_home
+    stage:
+      backdrop: river_home
+      actors:
+        yamuna: {puppet: yamuna_wait, x: 320, y: 1670, h: 900, face: right, motion: sway, enter: fade}
+        yama: {puppet: yama, x: 770, y: 1700, h: 1020, face: left, motion: walk_in, enter: right}
+  - en: "Yamuna was overjoyed. She did his aarti, put a tilak on his forehead, and cooked him a feast with her own hands."
+    hi: "यमुना ख़ुशी से झूम उठी। उसने भाई की आरती उतारी, माथे पर तिलक लगाया, और अपने हाथों से उन्हें खाना खिलाया।"
+    caption: "AARTI AND *TILAK*."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [{glow: {actor: yamuna, colour: [255, 200, 110]}}, {diyas: {y: 1760, rows: 1, n: 9, grow: 3.0}}]
+      actors:
+        yamuna: {puppet: yamuna_aarti, x: 340, y: 1670, h: 900, face: right, motion: sway, enter: fade}
+        yama: {puppet: yama, x: 760, y: 1700, h: 1020, face: left, motion: breathe, enter: fade}
+  - en: "[excited] Moved, the god of death made her a promise. Any brother who receives a tilak from his sister on this day will be protected from untimely death."
+    hi: "[excited] भावुक होकर, मृत्यु के देवता ने बहन को वचन दिया। इस दिन जो भाई अपनी बहन से तिलक लगवाएगा, उसे अकाल मृत्यु का डर नहीं रहेगा।"
+    caption: "A *PROMISE* FROM YAMA."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [rays, {glow: {actor: yama, colour: [255, 230, 150]}}, {diyas: {y: 1760, rows: 1, n: 9, grow: 0.01}}]
+      actors:
+        yamuna: {puppet: yamuna_aarti, x: 340, y: 1670, h: 900, face: right, motion: breathe}
+        yama: {puppet: yama_bless, x: 760, y: 1700, h: 1020, face: left, motion: sway}
+  - en: "That is why Bhai Dooj is also called Yama Dwitiya, the second day of Yama."
+    hi: "इसीलिए भाई दूज को यम द्वितीया भी कहते हैं।"
+    caption: "YAMA *DWITIYA*."
+    scene: river_home
+    stage:
+      backdrop: river_home
+      fx: [rays]
+      actors:
+        yamuna: {puppet: yamuna, x: 330, y: 1670, h: 900, face: right, motion: sway, enter: fade}
+        yama: {puppet: yama, x: 760, y: 1700, h: 1020, face: left, motion: breathe, enter: fade}
+  - en: "Another story says that after defeating Narakasura, Krishna went to see his sister Subhadra, and she welcomed him with lamps, sweets and a tilak."
+    hi: "एक और कहानी कहती है कि नरकासुर को हराने के बाद श्रीकृष्ण अपनी बहन सुभद्रा से मिलने गए, और सुभद्रा ने दीयों, मिठाइयों और तिलक से उनका स्वागत किया।"
+    caption: "KRISHNA AND *SUBHADRA*."
+    scene: dwarka
+    stage:
+      backdrop: dwarka
+      fx: [{glow: {actor: subhadra, colour: [255, 200, 120]}}]
+      actors:
+        subhadra: {puppet: subhadra, x: 340, y: 1670, h: 900, face: right, motion: sway, enter: left}
+        krishna: {puppet: krishna, x: 770, y: 1700, h: 1000, face: left, motion: walk_in, enter: right}
+  - en: "Today it has many names across India: Bhau Beej in Maharashtra, Bhai Phonta in Bengal, and Bhai Tika in Nepal. But the ritual is the same everywhere."
+    hi: "आज इसके कई नाम हैं: महाराष्ट्र में भाऊ बीज, बंगाल में भाई फोंटा, और नेपाल में भाई टीका। पर रस्म हर जगह वही है।"
+    caption: "MANY NAMES, *ONE* RITUAL."
+    scene: village
+    stage:
+      backdrop: village
+      fx: [{diyas: {y: 1700, rows: 2, n: 9, grow: 5.0}}, {fireworks: {n: 3}}]
+      actors: {}
+  - en: "A sister prays for her brother's long life, and the brother promises to always stand by her. It is a promise that even the god of death keeps."
+    hi: "बहन भाई की लंबी उम्र की दुआ करती है, और भाई हमेशा उसका साथ निभाने का वादा करता है। एक ऐसा वादा, जिसे मृत्यु के देवता भी निभाते हैं।"
+    caption: "A PROMISE *KEPT*."
+    scene: courtyard
+    stage:
+      backdrop: courtyard
+      fx: [rays, {diyas: {y: 1740, rows: 2, n: 9, grow: 0.01}}]
+      actors: {}
+end:
+  head: "BHAI DOOJ"
+  sub: "the promise even Yama keeps"
