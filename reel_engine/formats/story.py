@@ -43,6 +43,7 @@ from . import EndCard, Format, Option, register
 
 STORIES = REPO_ROOT / "stories"
 GAP_S = 0.45                    # pause after each narrated line
+LEAD_S = 1.0                    # a beat of silence on the opening frame before the question
 REPLY_GAP_S = 0.3               # the narrator takes the question straight up, as in conversation
 MOVE_S = 0.9                    # puppets glide to their new marks over this long
 WORDS_PER_S = 2.4               # used to time lines when no voice model is installed
@@ -116,7 +117,7 @@ class Story(Format):
                 if tts.available(v):
                     tts.prepare([t for t, w in zip(self.lines, self.voices) if w == v], v)
         lengths = [self.spoken_length(text, v) for text, v in zip(self.lines, self.voices)]
-        self.open_times, t = [], 0.15
+        self.open_times, t = [], LEAD_S
         for n in lengths[:len(opening)]:
             self.open_times.append(t)
             t += n + REPLY_GAP_S

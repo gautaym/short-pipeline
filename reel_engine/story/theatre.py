@@ -26,6 +26,8 @@ link draws a shimmering thread between two actors). Sky effects: {star_trails: {
 {constellation: {stars: [[x, y, size], ...], lines: [[i, j], ...], grow: seconds, highlight: [i, ...]}}
 draws glowing stars joined by lines, drawn in one by one over `grow` seconds, with highlighted
 stars pulsing; {pointer: {from: [x, y], to: [x, y], grow: seconds}} shoots a dashed guide line.
+{diyas: {y, rows, n, grow: seconds}} lights rows of clay lamps one by one along the ground, flames
+flickering; {fireworks: {n}} bursts rockets of sparks across the sky.
 {rekha: {x1, x2, y, sag, grow: seconds}} draws a glowing line along the ground, left to right, in front
 of the actors' feet; with `fade: seconds` it is already there and fades away (the line that was never drawn).
 
@@ -495,6 +497,10 @@ class Theatre:
         if "glow" in fx:
             for g in fx["glow"] if isinstance(fx["glow"], list) else [fx["glow"]]:
                 self.draw_glow(screen, g, states, t, since, length)
+        if "diyas" in fx:
+            self.draw_diyas(screen, fx["diyas"], since if not opening else 99.0, t)
+        if "fireworks" in fx:
+            self.draw_fireworks(screen, fx["fireworks"], t)
         if "rekha" in fx:                                             # on the ground in front of the feet
             self.draw_rekha(screen, fx["rekha"], since if not opening else 99.0, t)
         if "bubbles" in fx:
@@ -706,6 +712,59 @@ class Theatre:
             if n in highlight:                                     # a ring round the stars we are talking about
                 r = int(46 * size * pulse)
                 self.pg.draw.circle(screen, (255, 214, 120), (int(x), int(y)), r, 3)
+
+    def draw_diyas(self, screen, g: dict, since: float, t: float) -> None:
+        """Rows of clay lamps along the ground, lit one by one from the middle outwards."""
+        pg = self.pg
+        y0, rows, n = float(g.get("y", 1760)), int(g.get("rows", 2)), int(g.get("n", 9))
+        grow = float(g.get("grow", 3.0))
+        glow = self.lights.setdefault(("diya",), light(pg, 70, (255, 170, 60), 1.2))
+        order = sorted(range(n), key=lambda i: abs(i - (n - 1) / 2))
+        for r in range(rows):
+            y = y0 + r * 95
+            scale = 1.0 + 0.25 * r                                   # nearer rows are bigger
+            for rank, i in enumerate(order):
+                lit = since >= grow * rank / n
+                x = W * (i + 0.5) / n + (W / n / 2 if r % 2 else 0)
+                bw, bh = 46 * scale, 18 * scale                       # the clay bowl
+                pg.draw.ellipse(screen, (150, 70, 30), (x - bw / 2, y - bh / 2, bw, bh))
+                pg.draw.ellipse(screen, (95, 40, 18), (x - bw / 2, y - bh / 2, bw, bh), 3)
+                if not lit:
+                    continue
+                f = 0.8 + 0.2 * math.sin(t * 13 + i * 1.7 + r)
+                fh, fw = 30 * scale * f, 13 * scale
+                pg.draw.ellipse(screen, (255, 150, 40), (x - fw / 2, y - bh / 2 - fh, fw, fh))
+                pg.draw.ellipse(screen, (255, 235, 150), (x - fw / 4, y - bh / 2 - fh * 0.7, fw / 2, fh * 0.6))
+                screen.blit(glow, (x - glow.get_width() / 2, y - bh / 2 - fh / 2 - glow.get_height() / 2),
+                            special_flags=pg.BLEND_RGB_ADD)
+
+    def draw_fireworks(self, screen, g: dict, t: float) -> None:
+        """Rockets bursting into rings of falling sparks, each on its own clock."""
+        pg = self.pg
+        n = int(g.get("n", 4))
+        colours = [(255, 120, 80), (255, 210, 90), (120, 200, 255), (200, 120, 255), (130, 255, 160)]
+        layer = pg.Surface((W, H))
+        for k in range(n):
+            period = 2.6 + 0.4 * k
+            age = (t + k * 1.3) % period
+            rnd = random.Random(f"fw{k}:{int((t + k * 1.3) // period)}")
+            cx, cy = rnd.uniform(160, W - 160), rnd.uniform(220, 760)
+            colour = rnd.choice(colours)
+            if age < 0.6:                                             # the rocket climbing
+                y = H * 0.75 - (H * 0.75 - cy) * (age / 0.6)
+                pg.draw.circle(layer, (255, 230, 180), (int(cx), int(y)), 5)
+                continue
+            a = age - 0.6
+            fade = max(0.0, 1 - a / (period - 0.6))
+            radius = 260 * ease(min(1.0, a / 0.9))
+            c = tuple(int(v * fade) for v in colour)
+            for j in range(28):
+                ang = 2 * math.pi * j / 28
+                px, py = cx + radius * math.cos(ang), cy + radius * math.sin(ang) + 60 * a * a
+                pg.draw.circle(layer, c, (int(px), int(py)), 5)
+                pg.draw.line(layer, tuple(v // 2 for v in c), (int(cx + 0.7 * radius * math.cos(ang)),
+                             int(cy + 0.7 * radius * math.sin(ang) + 60 * a * a)), (int(px), int(py)), 2)
+        screen.blit(layer, (0, 0), special_flags=pg.BLEND_RGB_ADD)
 
     def draw_rekha(self, screen, g: dict, since: float, t: float) -> None:
         """A glowing line along the ground: drawn in from the left over `grow` seconds, or there
