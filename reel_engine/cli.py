@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story", "track")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -77,6 +77,9 @@ def build_parser() -> argparse.ArgumentParser:
     mk = sub.add_parser("make", help="render a story in English and Hindi, with frame sheets and phone previews")
     mk.add_argument("story")
     mk.add_argument("--langs", default="en,hi")
+    tr = sub.add_parser("track", help="live table of a reel queue, per reel and task, at localhost:8765")
+    tr.add_argument("stories", nargs="+", help="story ids in queue order")
+    tr.add_argument("--since", default=None, help="count work done after this time today, e.g. 14:30")
     ns = sub.add_parser("new-story", help="start a story script from the template")
     ns.add_argument("story")
     ns.add_argument("--segment", required=True, choices=["indian_myth", "world_myth", "science"])
@@ -204,6 +207,15 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_ledger(opts)
     if opts.command == "story-art":
         return cmd_story_art(opts)
+    if opts.command == "track":
+        import datetime
+        from .tools.tracker import track
+        since = None
+        if opts.since:
+            h, m = map(int, opts.since.split(":"))
+            since = datetime.datetime.now().replace(hour=h, minute=m, second=0).timestamp()
+        track(opts.stories, since)
+        return 0
     if opts.command in ("review", "pick", "make", "new-story"):
         from .tools import story_tools as st
         if opts.command == "review":

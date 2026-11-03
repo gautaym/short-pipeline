@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reel Queue</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #f6f3ee; --card: #ffffff; --ink: #1f1b16; --muted: #7a7166; --line: #e6dfd4;
+          --done: #2f8f5b; --busy: #d07a12; --wait: #b9b0a4; --accent: #c2410c; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+          --bg: #15130f; --card: #1f1c17; --ink: #f2ece2; --muted: #a39a8c; --line: #332e26;
+          --done: #4cc386; --busy: #f0a53a; --wait: #5c564d; --accent: #fb923c; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: Poppins, system-ui, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-weight: 800; font-size: 26px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .bar { height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; margin: 6px 0 20px; }
+  .bar > div { height: 100%; background: var(--done); transition: width .6s; }
+  .wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+  th, td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  tr:last-child td { border-bottom: none; }
+  tr.current { background: color-mix(in srgb, var(--busy) 10%, transparent); }
+  .reel b { display: block; font-weight: 600; }
+  .reel span { color: var(--muted); font-size: 12px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .done { background: color-mix(in srgb, var(--done) 18%, transparent); color: var(--done); }
+  .busy { background: color-mix(in srgb, var(--busy) 18%, transparent); color: var(--busy); }
+  .wait { background: color-mix(in srgb, var(--wait) 22%, transparent); color: var(--muted); }
+  .bad  { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+  a.play { color: var(--accent); font-weight: 600; text-decoration: none; }
+  a.play:hover { text-decoration: underline; }
+  .path { display: block; color: var(--muted); font-size: 11px; word-break: break-all; margin-top: 3px; }
+  video { width: 100%; max-width: 360px; border-radius: 12px; margin-top: 16px; display: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reel queue</h1>
+  <div class="sub" id="sub">loading…</div>
+  <div class="bar"><div id="bar" style="width:0"></div></div>
+  <div class="wrap"><table>
+    <thead><tr><th>#</th><th>Reel</th><th>Art</th><th>Voices EN</th><th>Voices HI</th>
+      <th>Video EN</th><th>Video HI</th><th>Watch</th><th>Now</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <video id="player" controls></video>
+</main>
+<script>
+const pill = (cls, text) => `<span class="pill ${cls}">${text}</span>`;
+function voices([d, t]) { return t === 0 ? pill("wait", "—") : pill(d >= t ? "done" : d ? "busy" : "wait", `${d}/${t}`); }
+function video(task) { return task.video ? pill("done", "done") : task.rendering ? pill("busy", "rendering") : pill("wait", "waiting"); }
+function watch(row) {
+  return ["en", "hi"].map(l => {
+    const p = row.tasks[l].preview_path;
+    if (!p) return "";
+    const url = "/" + p.replaceAll("\\", "/");
+    return `<a class="play" href="${url}" data-src="${url}">▶ ${l.toUpperCase()}</a><span class="path">D:\\PROJECTS_G\\reels\\${p}</span>`;
+  }).join(" ");
+}
+async function refresh() {
+  try {
+    const s = await (await fetch("status.json?" + Date.now())).json();
+    document.getElementById("sub").textContent =
+      `${s.finished} of ${s.total} videos done · queue started ${s.since} · updated ${s.updated}`;
+    document.getElementById("bar").style.width = (100 * s.finished / s.total) + "%";
+    document.getElementById("rows").innerHTML = s.rows.map((r, i) => `
+      <tr class="${r.now === "rendering" || r.now === "voicing" ? "current" : ""}">
+        <td>${i + 1}</td>
+        <td class="reel"><b>${r.id}</b><span>${r.title}</span></td>
+        <td>${r.art ? pill("bad", r.art + " missing") : pill("done", "ready")}</td>
+        <td>${voices(r.tasks.en.voices)}</td><td>${voices(r.tasks.hi.voices)}</td>
+        <td>${video(r.tasks.en)}</td><td>${video(r.tasks.hi)}</td>
+        <td>${watch(r)}</td>
+        <td>${pill(r.now === "done" ? "done" : r.now === "waiting" ? "wait" : "busy", r.now)}</td>
+      </tr>`).join("");
+  } catch (e) {
+    document.getElementById("sub").textContent = "waiting for the tracker…";
+  }
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest("a.play");
+  if (!a) return;
+  e.preventDefault();
+  const v = document.getElementById("player");
+  v.src = a.dataset.src; v.style.display = "block"; v.play(); v.scrollIntoView({behavior: "smooth"});
+});
+refresh(); setInterval(refresh, 4000);
+</script>
+</body>
+</html>
