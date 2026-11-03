@@ -1,24 +1,31 @@
 # Shared characters: drawn once with `reel story-art _library`, approved once, used by any story
 # whose stage names them. Not a story itself (files starting with _ are skipped).
 #
-# Segments pair a narrator with an asker (a small girl who asks the opening question). A story
-# names its segment (`segment: indian_myth`) and the reel opens with the asker asking, the narrator
-# joining her, and ends with the narrator. Pairs are reused across topics that suit them.
+# Segments pair a narrator with an asker (a young adult who asks the opening question: the hook).
+# A story names its segment (`segment: indian_myth`) and the reel opens with the asker asking, the
+# narrator joining and answering "Let me tell you", and ends with the narrator. Pairs are reused
+# across topics that suit them.
 id: _library
 segments:
   indian_myth: {narrator: sutradhar, asker: meera}            # Indian mythology and legends
   world_myth: {narrator: storyteller, asker: lila}            # Greek, Egyptian, Norse and other world myths
-  science: {narrator: professor, asker: kiki}                 # science, maths, facts, sports, the news
-# Each character speaks with one voice in both languages, so the narrator sounds like the same
-# person in Hindi and English. "chatterbox:<lang>:<clip>" takes on the voice of models/voice_refs/<clip>.wav;
-# "@+N" raises it N semitones (the young askers).
+  science: {narrator: professor, asker: kabir}                # science, maths, facts, sports, the news
+# Each character speaks with one voice in both languages: "maya:<lang>:<name>" is one of Maya 2's
+# built-in voices (run in the maya-tts container), fluent in Hindi and English. Picked by ear
+# 2026-11-03: narrators Akshat, Nakul, Sreekar (male) and Charvi, Kayal, Nivedita, Vaidehi (female);
+# askers Shaunak (male), Nivedita and Vaidehi (female). Nakul and Kayal are spare for new segments.
 voices:
-  sutradhar: {en: "chatterbox:en:aman", hi: "chatterbox:hi:aman"}
-  storyteller: {en: "chatterbox:en:aman", hi: "chatterbox:hi:aman"}
-  professor: {en: "af_heart", hi: "chatterbox:hi:rani"}
-  meera: {en: "af_bella@+3~0.88", hi: "chatterbox:hi:rani@+3~0.88"}
-  lila: {en: "af_bella@+3~0.88", hi: "chatterbox:hi:rani@+3~0.88"}
-  kiki: {en: "af_bella@+3~0.88", hi: "chatterbox:hi:rani@+3~0.88"}
+  sutradhar: {en: "maya:en:Akshat", hi: "maya:hi:Akshat"}
+  storyteller: {en: "maya:en:Sreekar", hi: "maya:hi:Sreekar"}
+  professor: {en: "maya:en:Charvi", hi: "maya:hi:Charvi"}
+  meera: {en: "maya:en:Vaidehi", hi: "maya:hi:Vaidehi"}
+  lila: {en: "maya:en:Nivedita", hi: "maya:hi:Nivedita"}
+  kabir: {en: "maya:en:Shaunak", hi: "maya:hi:Shaunak"}
+# The narrator's answer to the question, before the story starts (Hindi follows the narrator's gender).
+replies:
+  sutradhar: {en: "Let me tell you.", hi: "मैं बताता हूँ।"}
+  storyteller: {en: "Let me tell you.", hi: "मैं बताता हूँ।"}
+  professor: {en: "Let me explain.", hi: "मैं बताती हूँ।"}
 art:
   puppet_style: >-
     A single flat painted leather shadow puppet, traditional Andhra Tholu Bommalata style, mounted on a
@@ -30,40 +37,43 @@ art:
     studio photo against a plain pure black backdrop, nothing else in the frame.
   cast:
     sutradhar: >-
-      the sutradhar, the cheerful old storyteller of the puppet show, with warm brown skin, a white beard and
-      moustache, a big red and yellow turban, gold earrings, a white kurta with a red and gold sash and a
-      white dhoti, exactly two arms
+      the sutradhar, the cheerful middle-aged storyteller of the puppet show, a man of about forty five with
+      warm brown skin, a thick dark brown moustache and no beard, a big red and yellow turban, gold earrings,
+      a white kurta with a red and gold sash and a white dhoti, exactly two arms
     meera: >-
-      Meera, a small Indian girl about seven years old with warm brown skin, two braided pigtails tied with
-      ribbons, a bright yellow and pink lehenga skirt and blouse, big curious eyes, exactly two arms
+      Meera, a young Indian woman of about twenty with warm brown skin, a long dark brown braid, a bright
+      yellow and pink kurta with a pink dupatta, curious eyes, exactly two arms
     storyteller: >-
-      a kind old storyteller with a short grey beard, wearing a plain long dark blue hooded cloak over a
-      simple brown tunic, no jewellery and no symbols of any culture, exactly two arms
+      a kind middle-aged storyteller, a man of about forty five with a short neat dark brown beard and dark
+      brown hair, wearing a plain long dark blue hooded cloak over a simple brown tunic, no jewellery and no
+      symbols of any culture, exactly two arms
     lila: >-
-      Lila, a small girl about seven years old with short curly brown hair, a plain green tunic dress and
-      simple sandals, big curious eyes, exactly two arms
+      Lila, a young woman of about twenty with shoulder-length curly brown hair, a plain green tunic dress
+      and simple sandals, curious eyes, exactly two arms
     professor: >-
       a friendly young woman scientist with dark hair in a bun, round glasses, a white lab coat over a teal
       top and dark trousers, exactly two arms
-    kiki: >-
-      Kiki, a small curious girl about seven years old with two puffy hair buns, a yellow jacket and a red
-      skirt, holding a small notebook, exactly two arms
+    kabir: >-
+      Kabir, a young Indian man of about twenty with warm brown skin and short dark brown hair, a yellow
+      hoodie, blue jeans and white trainers, holding a small notebook, exactly two arms
   puppets:
     sutradhar: "The puppet is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip, side view facing right."
-    meera: "The puppet is {meera}, one hand raised high as if asking a question, side view facing right."
+    meera: "The puppet is {meera}, one hand raised as if asking a question, side view facing right."
     storyteller: "The puppet is {storyteller}, one hand raised with the index finger up as if telling a story, the other hand at his side, side view facing right."
-    lila: "The puppet is {lila}, one hand raised high as if asking a question, side view facing right."
+    lila: "The puppet is {lila}, one hand raised as if asking a question, side view facing right."
     professor:
       style: >-
         A single full-body character cut-out made of layered coloured paper, flat paper-craft illustration
         with clean cut edges and subtle paper texture, bright colours, full body from head to feet, studio
         photo against a plain pure black backdrop, nothing else in the frame, no text.
       text: "The cut-out is {professor}, one hand raised with the index finger up as if explaining, side view facing right."
-    kiki:
+    kabir:
       style: >-
         A single full-body character cut-out made of layered coloured paper, flat paper-craft illustration
         with clean cut edges and subtle paper texture, bright colours, full body from head to feet, studio
         photo against a plain pure black backdrop, nothing else in the frame, no text.
-      text: "The cut-out is {kiki}, one hand raised high as if asking a question, side view facing right."
+      text: "The cut-out is {kabir}, one hand raised as if asking a question, seen in profile from the side, turned to the right, not facing the viewer."
+  # Which way each picture faces when the model did not draw the side it was asked for (default right).
+  facing: {}
   props:
     pole_star: "The prop is a single large golden eight-pointed star with long glowing rays and a bright white centre."

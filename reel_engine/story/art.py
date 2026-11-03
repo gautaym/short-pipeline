@@ -58,6 +58,16 @@ def cut_file(story_id: str, name: str) -> Path:
     return src.with_name(f"{src.stem}_cut.png")
 
 
+def facing(sc: dict, name: str) -> str:
+    """Which way the puppet's picture faces, "right" unless the art says otherwise (`facing: {name: left}`).
+    The model does not always draw the side it was asked for, so this is set after looking at the picture."""
+    own = sc.get("art", {}).get("facing", {})
+    if name in own:
+        return own[name]
+    from ..formats.story import load_story
+    return load_story(LIBRARY).get("art", {}).get("facing", {}).get(name, "right")
+
+
 def backdrop_file(story_id: str, name: str) -> Path:
     return folder(story_id) / f"backdrop_{name}.png"
 
@@ -72,15 +82,16 @@ def segment(sc: dict) -> dict | None:
 
 
 def cast_segment(sc: dict) -> None:
-    """Put the segment's pair on stage: in the cold open the asker walks in and asks the question
-    and the narrator joins her; in the last beat the narrator rises to close, the asker beside him."""
+    """Put the segment's pair on stage, facing each other: in the cold open the asker walks in and
+    asks the question and the narrator joins to answer; in the last beat the narrator closes, the asker
+    beside them."""
     pair = segment(sc)
     if not pair:
         return
     opening = sc.setdefault("opening", {})
     opening.setdefault("beat", 1)
     opening["actors"] = {
-        "asker": {"puppet": pair["asker"], "x": 330, "y": 1980, "h": 600, "z": 10, "face": "right",
+        "asker": {"puppet": pair["asker"], "x": 310, "y": 2000, "h": 720, "z": 10, "face": "right",
                   "motion": "talk", "enter": "left"},
         "narrator": {"puppet": pair["narrator"], "x": 770, "y": 2010, "h": 780, "z": 11, "face": "left",
                      "motion": "talk", "enter": "right", "delay": 1.2},
@@ -88,7 +99,7 @@ def cast_segment(sc: dict) -> None:
     last = sc["beats"][-1]["stage"].setdefault("actors", {})
     last.setdefault("narrator", {"puppet": pair["narrator"], "x": 600, "y": 2150, "h": 780, "z": 11,
                                  "face": "left", "motion": "talk", "enter": "right"})
-    last.setdefault("asker", {"puppet": pair["asker"], "x": 230, "y": 2130, "h": 600, "z": 10,
+    last.setdefault("asker", {"puppet": pair["asker"], "x": 230, "y": 2140, "h": 720, "z": 10,
                               "face": "right", "motion": "breathe", "enter": "left"})
 
 

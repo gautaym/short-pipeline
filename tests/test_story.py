@@ -29,7 +29,8 @@ def test_story_timeline_and_frames(pg, lang, tmp_path):
     game = formats.get("story")(pg, 1, Namespace(story=sid, lang=lang, config=str(cfg), title=None, max_play=None,
                                                   twist="none", min_length=0))
     assert game.starts == sorted(game.starts) and game.max_play > 20
-    assert len(game.narration()) == len(game.beats) + 1
+    assert len(game.narration()) == len(game.beats) + len(game.open_times)   # the question (and the reply)
+    assert len(game.open_times) == (2 if game.reply() else 1)
     screen = pg.Surface((1080, 1920))
     for f in range(0, int(game.max_play * 30), 90):             # every third second draws without error
         game.update(1 / 30, f / 30)

@@ -43,6 +43,7 @@ from . import EndCard, Format, Option, register
 
 STORIES = REPO_ROOT / "stories"
 GAP_S = 0.45                    # pause after each narrated line
+REPLY_GAP_S = 0.7               # the question hangs a moment before the narrator answers it
 MOVE_S = 0.9                    # puppets glide to their new marks over this long
 WORDS_PER_S = 2.4               # used to time lines when no voice model is installed
 CAPTION_Y = 470
@@ -102,15 +103,22 @@ class Story(Format):
         self.cast = {k: PRESETS[v["preset"]] for k, v in self.sc["cast"].items()}
         self.beats = self.sc["beats"]
         self.title_text = self.sc["title"][self.lang]
-        self.lines = [self.sc["title"][self.lang]] + [b[self.lang] for b in self.beats]
-        self.voices = [self.asker(self.settings)] + [self.narrator(self.settings)] * len(self.beats)
+        opening = [(self.title_text, self.asker(self.settings))]       # the hook: the asker's question
+        if self.reply():                                                # and the narrator taking it up
+            opening.append((self.reply(), self.narrator(self.settings)))
+        self.lines = [t for t, _ in opening] + [b[self.lang] for b in self.beats]
+        self.voices = [v for _, v in opening] + [self.narrator(self.settings)] * len(self.beats)
         if self.settings.voice:
             for v in dict.fromkeys(self.voices):
                 if tts.available(v):
                     tts.prepare([t for t, w in zip(self.lines, self.voices) if w == v], v)
         lengths = [self.spoken_length(text, v) for text, v in zip(self.lines, self.voices)]
-        self.starts, t = [], lengths[0] + GAP_S + 0.2
-        for n in lengths[1:]:
+        self.open_times, t = [], 0.15
+        for n in lengths[:len(opening)]:
+            self.open_times.append(t)
+            t += n + REPLY_GAP_S
+        self.starts, t = [], t - REPLY_GAP_S + GAP_S + 0.2
+        for n in lengths[len(opening):]:
             self.starts.append(t)
             t += n + GAP_S
         self.title_len = lengths[0]
@@ -130,8 +138,21 @@ class Story(Format):
             return None
         return load_story("_library").get("voices", {}).get(pair[role], {}).get(self.lang)
 
+    def reply(self) -> str | None:
+        """What the narrator says to the question before the story starts ("Let me tell you."), from
+        the story's `reply:` or the narrator's in the library; in Hindi it carries the narrator's
+        gender (बताता हूँ / बताती हूँ)."""
+        own = self.sc.get("reply")
+        if own:
+            return own[self.lang]
+        from ..story.art import segment
+        pair = segment(self.sc)
+        if not pair:
+            return None
+        return load_story("_library").get("replies", {}).get(pair["narrator"], {}).get(self.lang)
+
     def asker(self, settings) -> str:
-        """The question is asked by the segment's asker (a young girl's voice), else the narrator."""
+        """The question is asked by the segment's asker (a young adult), else the narrator."""
         if not self.sc.get("segment"):
             return self.narrator(settings)
         return self.character_voice("asker") or (settings.voice_name_asker_hi if self.lang == "hi"
@@ -145,7 +166,7 @@ class Story(Format):
 
     def narration(self) -> list[tuple]:
         """(start, text, voice) for every spoken line: the question, then each beat."""
-        times = [0.15] + [t + 0.1 for t in self.starts]
+        times = self.open_times + [t + 0.1 for t in self.starts]
         return [(t, text, v) for t, text, v in zip(times, self.lines, self.voices)]
 
     def title_hooks(self) -> list[str]:

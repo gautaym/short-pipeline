@@ -94,7 +94,7 @@ def _batch_spec(voice: str) -> dict:
     if kind == "indic":
         return {"speaker": args[0], "style": INDIC_STYLES[args[1] if len(args) > 1 else "warm"]}
     if kind == "maya":                        # maya:<lang>:<clip in voice_refs, cloned> or a built-in voice name
-        spec = {"language": args[0], "voice": args[1]}
+        spec = {"language": args[0], "voice": args[1], "check": True}
         ref, text = REFS / f"{args[1]}.wav", REFS / f"{args[1]}.txt"
         if ref.exists() and text.exists():
             spec.update(ref=_in_container(ref), ref_text=text.read_text(encoding="utf-8").strip(),

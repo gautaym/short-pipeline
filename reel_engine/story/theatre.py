@@ -106,6 +106,9 @@ class Theatre:
         self.beats = [b["stage"] for b in sc["beats"]]
         self.anchors = sc["art"].get("anchors", {})
         self.puppets = {p: art.cut(pg, sc["id"], p) for p in puppets}
+        for p in puppets:                                           # stage directions assume pictures face right
+            if art.facing(sc, p) == "left":
+                self.puppets[p] = pg.transform.flip(self.puppets[p], True, False)
         size = (int(W * BACKDROP_ROOM), int(H * BACKDROP_ROOM))
         crop = float(sc["art"].get("backdrop_crop", 0.0))          # trims a border the model drew round the scene
         self.backdrops = {}
