@@ -37,7 +37,10 @@ draw(..., extras={name: spec}, extras_since=t) slides them on while the rest sta
 Every reel also gets, without asking: a slow camera move in each beat (a push in, drifting
 left or right in turn), and ambient particles chosen from the backdrop's name: falling leaves in
 forests and meadows, snow in winter, rising sparks in
-underworlds and on lamp-lit stages. A beat sets `ambient: none` (or another kind) to change that.
+underworlds and on lamp-lit stages. A beat sets `ambient: none` (or another kind) to change that. Daytime outdoor backdrops also get
+birds: a flock crossing, one or two circling high up, and a burst flying off when the scene shakes
+or lightning strikes; `birds: none`, `birds: white` (for dark skies) or `birds: black` on a beat
+overrides the choice.
 
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
@@ -57,6 +60,10 @@ FADE_S = 0.8          # fading in or out
 TURN_S = 0.45         # flipping to face the other way
 CAMERA_ZOOM = 0.07    # each beat the camera pushes in this much over the beat
 CAMERA_PAN = 70       # and drifts this far sideways, alternating direction
+BIRD_WORDS = ("forest", "road", "meadow", "river", "panchavati", "dwarka", "shore", "kailash", "dawn",
+              "desert", "palace", "village", "battle", "garden", "home", "ocean")
+NO_BIRD_WORDS = ("night", "space", "void", "cosmos", "underworld", "duat", "yamaloka", "micro", "deep_sea",
+                 "lab", "ramlila", "poison", "courtyard")
 AMBIENT_WORDS = {     # backdrop name -> ambient particles
     "snow": ("winter", "snow"),
     # twinkling stars ("twinkle") are off by default: their glow read as square spots on screen
@@ -408,6 +415,50 @@ class Theatre:
                 return kind
         return None
 
+    def birds(self, beat: int) -> str | None:
+        """"black" or "white" birds for the beat, or None: its own `birds`, else from the backdrop's name."""
+        b = self.beats[beat]
+        if "birds" in b:
+            return None if b["birds"] in (None, "none") else b["birds"]
+        name = b["backdrop"].lower()
+        if any(w in name for w in NO_BIRD_WORDS) or not any(w in name for w in BIRD_WORDS):
+            return None
+        return "black"
+
+    def draw_bird(self, screen, x: float, y: float, size: float, flap: float, colour) -> None:
+        """A bird seen from afar: two curved wings whose tips rise and fall with `flap` (-1..1)."""
+        tip = -flap * size * 0.55
+        left = [(x - size, y + tip), (x - size * 0.5, y - size * 0.18 + tip * 0.4), (x, y)]
+        right = [(x, y), (x + size * 0.5, y - size * 0.18 + tip * 0.4), (x + size, y + tip)]
+        width = max(3, int(size / 5))
+        self.pg.draw.lines(screen, colour, False, left, width)
+        self.pg.draw.lines(screen, colour, False, right, width)
+
+    def draw_birds(self, screen, kind: str, beat: int, since: float, t: float, scatter: bool) -> None:
+        colour = (245, 245, 240) if kind == "white" else (28, 24, 22)
+        r = random.Random(f"birds:{self.seed}:{beat}")
+        direction = 1 if r.random() < 0.5 else -1
+        for i in range(r.randint(3, 6)):                              # a loose flock crossing the sky
+            size = r.uniform(22, 38)
+            speed = r.uniform(70, 120)
+            x0 = -200 - i * r.uniform(40, 90)
+            x = (x0 + speed * (t + beat * 7)) % (W + 600) - 300
+            x = x if direction > 0 else W - x
+            y = r.uniform(240, 620) + 22 * math.sin(t * 0.9 + i)
+            self.draw_bird(screen, x, y, size, math.sin(t * 9 + i * 1.3), colour)
+        for i in range(r.randint(1, 2)):                              # circling high up, gliding mostly
+            cx, cy, rx, ry = r.uniform(250, W - 250), r.uniform(200, 420), r.uniform(90, 180), r.uniform(25, 50)
+            a = t * r.uniform(0.35, 0.6) + i * 3
+            flap = math.sin(t * 7 + i) if math.sin(t * 0.8 + i) > 0.6 else 0.25
+            self.draw_bird(screen, cx + rx * math.cos(a), cy + ry * math.sin(a), r.uniform(26, 34), flap, colour)
+        if scatter and since < 4.0:                                   # startled up from the treeline
+            for i in range(9):
+                sx, size = r.uniform(80, W - 80), r.uniform(22, 34)
+                k = since / 4.0
+                x = sx + (sx - W / 2) * 0.6 * k + 40 * math.sin(i + since * 3)
+                y = r.uniform(900, 1150) - 1100 * k * (0.7 + 0.3 * math.sin(i))
+                self.draw_bird(screen, x, y, size, math.sin(since * 14 + i), colour)
+
     def draw_ambient(self, screen, kind: str, t: float) -> None:
         pg = self.pg
         if kind == "twinkle":
@@ -513,6 +564,9 @@ class Theatre:
             m = self.mote.copy()
             m.set_alpha(int(90 + 80 * math.sin(t * 1.7 + ph)))
             screen.blit(m, (x + 14 * math.sin(t * 0.6 + ph), (y - speed * t) % H))
+        birds = self.birds(beat)
+        if birds:
+            self.draw_birds(screen, birds, beat, since, t, scatter=("shake" in fx or "lightning" in fx) and not opening)
         ambient = "sparks" if "motes" in fx else self.ambient(beat)
         if ambient:
             self.draw_ambient(screen, ambient, t)
