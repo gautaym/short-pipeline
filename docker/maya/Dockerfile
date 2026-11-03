@@ -5,7 +5,9 @@
 FROM pytorch/pytorch:2.7.0-cuda12.8-cudnn9-runtime
 RUN apt-get update && apt-get install -y --no-install-recommends git ffmpeg && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir "maya3[server] @ git+https://github.com/MayaResearch/maya2-native" soundfile \
-        --extra-index-url https://download.pytorch.org/whl/cu128
+        --extra-index-url https://download.pytorch.org/whl/cu128 \
+    # maya3 upgrades torch, which leaves the base image's torchvision mismatched; nothing here needs it
+    && pip uninstall -y torchvision
 ENV HF_HOME=/work/models/hf
 WORKDIR /work
 CMD ["sleep", "infinity"]
