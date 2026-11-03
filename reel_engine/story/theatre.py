@@ -32,6 +32,11 @@ of the actors' feet; with `fade: seconds` it is already there and fades away (th
 A story's `opening` adds actors (the Sutradhar host) to a beat's frame for the cold open:
 draw(..., extras={name: spec}, extras_since=t) slides them on while the rest stays settled.
 
+Every reel also gets, without asking: a slow camera move in each beat (a push in, drifting
+left or right in turn), and ambient particles chosen from the backdrop's name: falling leaves in
+forests and meadows, twinkling stars in night skies and space, snow in winter, rising sparks in
+underworlds and on lamp-lit stages. A beat sets `ambient: none` (or another kind) to change that.
+
 Story-level `art.backdrop_crop` (a fraction) trims a border off every backdrop, and `art.anchors` mark points on a puppet picture as fractions of its width and height,
 e.g. {shiva_blue: {throat: [0.56, 0.17]}}; the throat glow and the poison that flows into the
 bowl use them.
@@ -48,6 +53,14 @@ MOVE_S = 1.0          # gliding to a new mark
 ENTER_S = 1.3         # sliding on stage
 FADE_S = 0.8          # fading in or out
 TURN_S = 0.45         # flipping to face the other way
+CAMERA_ZOOM = 0.07    # each beat the camera pushes in this much over the beat
+CAMERA_PAN = 70       # and drifts this far sideways, alternating direction
+AMBIENT_WORDS = {     # backdrop name -> ambient particles
+    "snow": ("winter", "snow"),
+    "twinkle": ("night", "space", "sky", "void", "cosmos", "star"),
+    "sparks": ("underworld", "duat", "ramlila", "fire", "poison", "volcano"),
+    "leaves": ("forest", "meadow", "panchavati", "garden", "kailash"),
+}
 BACKDROP_ROOM = 1.08  # backdrops are scaled past the frame so they can drift
 PIVOT = 0.62          # puppets rock about the hand that holds them, this far down from the top
 
@@ -132,6 +145,16 @@ class Theatre:
         self.motes = [(r.uniform(0, W), r.uniform(0, H), r.uniform(10, 34), r.uniform(0, 6.3)) for _ in range(40)]
         self.ember = soft_blob(pg, 11, (255, 170, 70, 230))
         self.embers = [(r.uniform(0, W), r.uniform(0, H), r.uniform(40, 120), r.uniform(0, 6.3)) for _ in range(70)]
+        self.twinkle_star = light(pg, 40, (255, 250, 230), 1.6)
+        self.twinkles = [(r.uniform(0, W), r.uniform(0, H * 0.6), r.uniform(0, 6.3), int(r.uniform(18, 46)))
+                         for _ in range(26)]
+        leaf_colours = [(206, 120, 40, 220), (232, 170, 60, 220), (170, 70, 40, 220), (120, 160, 60, 210)]
+        self.flakes = {
+            "leaves": [(r.uniform(0, W), r.uniform(0, H), r.uniform(50, 110), r.uniform(0, 6.3), int(r.uniform(14, 24)),
+                        r.choice(leaf_colours)) for _ in range(24)],
+            "snow": [(r.uniform(0, W), r.uniform(0, H), r.uniform(40, 120), r.uniform(0, 6.3), int(r.uniform(3, 8)),
+                      (245, 248, 255)) for _ in range(90)],
+        }
         self.rays = self.make_rays()
         self.lamp = light(pg, 900, (255, 200, 130), 0.16)
 
@@ -357,6 +380,60 @@ class Theatre:
 
     def draw(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False,
              extras: dict | None = None, extras_since: float = 0.0) -> None:
+        """Draw the beat's stage, then film it with the camera (a slow push in, drifting sideways)."""
+        if not hasattr(self, "canvas"):
+            self.canvas = self.pg.Surface((W, H))
+        self.draw_stage(self.canvas, beat, since, length, t, opening, extras, extras_since)
+        k = ease(min(1.0, since / max(length, 1.0))) if not opening else 0.5
+        zoom = 1.0 + CAMERA_ZOOM * k
+        side = 1 if beat % 2 == 0 else -1
+        cx = W / 2 + side * CAMERA_PAN * (k - 0.5)
+        cy = H * 0.52
+        w, h = W / zoom, H / zoom
+        x = min(max(0.0, cx - w / 2), W - w)
+        y = min(max(0.0, cy - h / 2), H - h)
+        view = self.canvas.subsurface((int(x), int(y), int(w), int(h)))
+        screen.blit(self.pg.transform.smoothscale(view, (W, H)), (0, 0))
+
+    def ambient(self, beat: int) -> str | None:
+        """The beat's ambient particles: its own `ambient`, else picked from the backdrop's name."""
+        b = self.beats[beat]
+        if "ambient" in b:
+            return None if b["ambient"] in (None, "none") else b["ambient"]
+        name = b["backdrop"].lower()
+        for kind, words in AMBIENT_WORDS.items():
+            if any(w in name for w in words):
+                return kind
+        return None
+
+    def draw_ambient(self, screen, kind: str, t: float) -> None:
+        pg = self.pg
+        if kind == "twinkle":
+            for x, y, ph, size in self.twinkles:
+                a = 0.5 + 0.5 * math.sin(t * 2.2 + ph)
+                if a > 0.6:
+                    star = self.twinkle_star.copy()
+                    star.set_alpha(int(255 * (a - 0.6) / 0.4))
+                    s = pg.transform.smoothscale(star, (size, size))
+                    screen.blit(s, (x - size / 2, y - size / 2))
+        elif kind in ("leaves", "snow"):
+            for x, y, speed, ph, size, colour in self.flakes[kind]:
+                yy = (y + speed * t) % (H + 80) - 40
+                xx = x + 40 * math.sin(t * 0.8 + ph) + 0.15 * speed * t % 60
+                if kind == "snow":
+                    pg.draw.circle(screen, colour, (int(xx), int(yy)), size)
+                else:
+                    leaf = pg.Surface((size * 2, size), pg.SRCALPHA)
+                    pg.draw.ellipse(leaf, colour, leaf.get_rect())
+                    screen.blit(pg.transform.rotate(leaf, (t * 60 + ph * 57) % 360), (xx, yy))
+        elif kind == "sparks":
+            for x, y, speed, ph in self.embers:
+                m = self.ember.copy()
+                m.set_alpha(int(120 + 110 * math.sin(t * 3.1 + ph)))
+                screen.blit(m, (x + 30 * math.sin(t * 0.9 + ph), H - (H - y + speed * t) % (H * 0.75)))
+
+    def draw_stage(self, screen, beat: int, since: float, length: float, t: float, opening: bool = False,
+                   extras: dict | None = None, extras_since: float = 0.0) -> None:
         pg = self.pg
         fx = self.fx(beat)
         shake = (0.0, 0.0)
@@ -430,11 +507,9 @@ class Theatre:
             m = self.mote.copy()
             m.set_alpha(int(90 + 80 * math.sin(t * 1.7 + ph)))
             screen.blit(m, (x + 14 * math.sin(t * 0.6 + ph), (y - speed * t) % H))
-        if "motes" in fx:                                             # sparks rising from lamps and fires
-            for x, y, speed, ph in self.embers:
-                m = self.ember.copy()
-                m.set_alpha(int(120 + 110 * math.sin(t * 3.1 + ph)))
-                screen.blit(m, (x + 30 * math.sin(t * 0.9 + ph), H - (H - y + speed * t) % (H * 0.75)))
+        ambient = "sparks" if "motes" in fx else self.ambient(beat)
+        if ambient:
+            self.draw_ambient(screen, ambient, t)
         if "lightning" in fx and not opening:
             self.draw_lightning(screen, t)
         dim = pg.Surface((W, H))

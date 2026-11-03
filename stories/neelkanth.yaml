@@ -185,7 +185,7 @@ beats:
       parvati: {x: 400, y: 1450, pose: namaste, face: 1, scale: 1.05}
     stage:
       backdrop: kailash
-      fx: [throat_glow, motes]
+      fx: [throat_glow]
       actors:
         shiva: {puppet: shiva_blue, x: 650, y: 1580, h: 1150, face: left, motion: breathe}
         parvati: {puppet: parvati, x: 360, y: 1580, h: 1020, face: right, motion: breathe}

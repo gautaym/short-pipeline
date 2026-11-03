@@ -90,7 +90,7 @@ beats:
     scene: cosmos
     stage:
       backdrop: winter
-      fx: [motes]
+      fx: []
       actors:
         demeter: {puppet: demeter_grief, x: 540, y: 1660, h: 1050, motion: tremble}
   - en: "In the underworld, Persephone ate a few pomegranate seeds. A small thing. But food of the dead binds you to them."

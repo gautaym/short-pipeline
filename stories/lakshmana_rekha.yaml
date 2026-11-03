@@ -144,7 +144,7 @@ beats:
     scene: panchavati
     stage:
       backdrop: panchavati
-      fx: [motes, {glow: {actor: lakshmana, colour: [255, 220, 160]}}]
+      fx: [{glow: {actor: lakshmana, colour: [255, 220, 160]}}]
       actors:
         sita: {puppet: sita_plead, x: 330, y: 1660, h: 900, face: right, motion: tremble}
         lakshmana: {puppet: lakshmana_pray, x: 760, y: 1680, h: 1000, face: left, motion: breathe, exit: right}

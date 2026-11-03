@@ -91,7 +91,7 @@ beats:
     scene: cosmos
     stage:
       backdrop: micro
-      fx: [motes]
+      fx: []
       actors:
         rna1: {puppet: rna, x: 330, y: 1350, h: 900, motion: float, enter: fade}
         rna2: {puppet: rna, x: 760, y: 1350, h: 900, motion: float, enter: {from: [330, 1350]}}
@@ -110,7 +110,7 @@ beats:
     scene: cosmos
     stage:
       backdrop: micro
-      fx: [{glow: {actor: cell, colour: [120, 220, 255]}}, motes]
+      fx: [{glow: {actor: cell, colour: [120, 220, 255]}}]
       actors:
         cell: {puppet: protocell, x: 540, y: 1460, h: 900, motion: breathe}
   - en: "It grew, split in two, and copied itself. Life had begun. Scientists are still piecing together how."
@@ -119,7 +119,7 @@ beats:
     scene: cosmos
     stage:
       backdrop: micro
-      fx: [bubbles, motes]
+      fx: [bubbles]
       actors:
         cell: {puppet: protocell, x: 285, y: 1330, h: 500, motion: breathe}
         cell2: {puppet: protocell, x: 795, y: 1330, h: 500, face: left, motion: breathe, enter: {from: [540, 1460]}}
