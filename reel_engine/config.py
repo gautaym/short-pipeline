@@ -22,7 +22,7 @@ class RenderSettings:
     voice_speed: float = 1.05
     voice_level: float = 1.8           # voice loudness relative to the background (music + effects)
     voice_name_hi: str = "chatterbox:hi:aman"  # Hindi narrator for story reels
-    voice_name_asker: str = "af_sky@+4"       # the girl who asks a story's question (English)
+    voice_name_asker: str = "af_bella@+3"      # the girl who asks a story's question (English)
     voice_name_asker_hi: str = "chatterbox:hi:rani@+3"  # and in Hindi
 
     def ledger_path(self) -> str:
