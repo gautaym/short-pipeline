@@ -60,6 +60,10 @@ from . import art
 MOVE_S = 1.0          # gliding to a new mark
 ENTER_S = 1.3         # sliding on stage
 FADE_S = 0.8          # fading in or out
+SLIDE_S = 0.55        # a scene sliding in (stories with `transition: slide`)
+STRIKE_AT = 0.3       # a thrown weapon (fx strike) leaves this far into the beat
+STRIKE_S = 0.8        # and takes this long to land
+CHAKRA_R = 56         # the thrown discus's radius
 TURN_S = 0.45         # flipping to face the other way
 LIVE_FPS = 30         # living-face loops (art.live) play at this rate
 CAMERA_ZOOM = 0.07    # each beat the camera pushes in this much over the beat
@@ -241,7 +245,7 @@ class Theatre:
         else:
             now, before = self.mark(beat, name), self.mark(beat - 1, name)
         if now is None:                                          # gone: fade out where it was
-            if before is None or before["exit"] or since > FADE_S:
+            if before is None or before["exit"] or before["motion"] == "fall" or since > FADE_S:   # the fallen stay down
                 return None
             return {**before, "alpha": 1 - since / FADE_S, "sx": float(before["face"]), "old": None, "mix": 1.0}
         s = dict(now, alpha=1.0, old=None, mix=1.0)
@@ -255,7 +259,8 @@ class Theatre:
             s["sx"] = before["face"] + (now["face"] - before["face"]) * turn
         else:                                                    # enter
             s["sx"] = float(now["face"])
-            k = ease(since / (ENTER_S if now["enter"] in ("left", "right", "bottom") or now["from"] else FADE_S))
+            k = 1.0 if now["enter"] == "none" else ease(       # `enter: none`: already there on the first frame
+                since / (ENTER_S if now["enter"] in ("left", "right", "bottom") or now["from"] else FADE_S))
             if now["from"]:                                      # slide out of a point, like a copy splitting off
                 s["x"] = now["from"][0] + (now["x"] - now["from"][0]) * k
                 s["y"] = now["from"][1] + (now["y"] - now["from"][1]) * k
@@ -328,6 +333,17 @@ class Theatre:
             rot += 6 * math.sin(t * 1.8 + ph)
             dx += 30 * math.sin(t * 0.9 + ph)
             dy -= 20 * abs(math.sin(t * 1.8 + ph))
+        elif m == "fall":                                        # struck: shudders, then topples backwards and fades
+            hit = length * STRIKE_AT + STRIKE_S
+            if since < hit:
+                rot += 1.5 * math.sin(t * 9 + ph)
+            else:
+                k = ease((since - hit) / 0.9)
+                rot += face * 34 * k                             # top tips away from where he faces
+                dx -= face * 90 * k
+                dy += 140 * k
+                dx += 14 * math.sin(t * 40) * max(0.0, 1 - (since - hit) / 0.4)
+                s["alpha"] *= 1 - ease((since - hit - 0.6) / 0.9)
         elif m == "flip":                                        # edge-on and back, over and over
             s["sx"] *= math.cos(t * 7 + ph)
             dy -= 30 * abs(math.sin(t * 3.5 + ph))
@@ -377,17 +393,23 @@ class Theatre:
         screen.blit(img, img.get_rect(center=(cx, cy)))
 
     def draw_backdrop(self, screen, beat: int, since: float, t: float, shake: tuple[float, float]) -> None:
-        def place(name, alpha):
+        def place(name, alpha, dx=0.0):
             img = self.backdrops[name]
-            ox = (img.get_width() - W) / 2 + 22 * math.sin(t * 0.11) + shake[0] * 0.5
+            ox = (img.get_width() - W) / 2 + 22 * math.sin(t * 0.11) + shake[0] * 0.5 - dx
             oy = (img.get_height() - H) / 2 + 14 * math.sin(t * 0.07) + shake[1] * 0.5
             if alpha < 0.99:
                 img = img.copy()
                 img.set_alpha(int(255 * alpha))
             screen.blit(img, (-ox, -oy))
         now = self.beats[beat]["backdrop"]
+        changed = beat > 0 and self.beats[beat - 1]["backdrop"] != now
+        if changed and self.sc.get("transition") == "slide" and since < SLIDE_S:   # the new scene pushes the old off
+            k = ease(since / SLIDE_S)
+            place(self.beats[beat - 1]["backdrop"], 1.0, -W * k)
+            place(now, 1.0, W * (1 - k))
+            return
         place(now, 1.0)
-        if beat > 0 and self.beats[beat - 1]["backdrop"] != now and since < 0.9:
+        if changed and since < 0.9:
             place(self.beats[beat - 1]["backdrop"], 1 - ease(since / 0.9))
 
     def fx(self, beat: int) -> dict[str, dict]:
@@ -566,6 +588,8 @@ class Theatre:
             self.draw_diyas(screen, fx["diyas"], since if not opening else 99.0, t)
         if "fireworks" in fx:
             self.draw_fireworks(screen, fx["fireworks"], t)
+        if "strike" in fx and not opening:
+            self.draw_strike(screen, fx["strike"], since, length, t)
         if "rekha" in fx:                                             # on the ground in front of the feet
             self.draw_rekha(screen, fx["rekha"], since if not opening else 99.0, t)
         if "bubbles" in fx:
@@ -833,6 +857,104 @@ class Theatre:
                 pg.draw.line(layer, tuple(v // 2 for v in c), (int(cx + 0.7 * radius * math.cos(ang)),
                              int(cy + 0.7 * radius * math.sin(ang) + 60 * a * a)), (int(px), int(py)), 2)
         screen.blit(layer, (0, 0), special_flags=pg.BLEND_RGB_ADD)
+
+    def draw_chakra(self, screen, x: float, y: float, r: float, t: float, alpha: float = 1.0) -> None:
+        """A spinning golden discus: a glow, a rim and eight spokes."""
+        pg = self.pg
+        size = int(r * 2 + 8)
+        disc = pg.Surface((size, size), pg.SRCALPHA)
+        c = size / 2
+        pg.draw.circle(disc, (250, 200, 60), (c, c), r)
+        pg.draw.circle(disc, (150, 80, 10), (c, c), r, max(2, int(r * 0.12)))
+        pg.draw.circle(disc, (255, 240, 170), (c, c), r * 0.35)
+        for j in range(8):
+            a = t * 22 + j * math.pi / 4
+            pg.draw.line(disc, (170, 100, 20), (c + r * 0.35 * math.cos(a), c + r * 0.35 * math.sin(a)),
+                         (c + r * 0.85 * math.cos(a), c + r * 0.85 * math.sin(a)), max(2, int(r * 0.08)))
+        disc.set_alpha(int(255 * alpha))
+        glow = dimmed(pg, self.chakra_glow, alpha)
+        screen.blit(glow, glow.get_rect(center=(x, y)), special_flags=pg.BLEND_RGB_ADD)
+        screen.blit(disc, disc.get_rect(center=(x, y)))
+
+    def draw_strike(self, screen, g: dict, since: float, length: float, t: float) -> None:
+        """A discus flies from one point to another along a low arc, trailing light, and bursts on impact
+        (`strike: {from: [x, y], to: [x, y]}`); an actor with motion `fall` topples as it lands."""
+        pg = self.pg
+        if not hasattr(self, "chakra_glow"):
+            self.chakra_glow = light(pg, 150, (255, 190, 70), 1.4)
+            self.burst = light(pg, 420, (255, 240, 200), 1.6)
+        (x0, y0), (x1, y1) = g.get("from", (300, 900)), g.get("to", (800, 900))
+        start = length * STRIKE_AT
+        k = (since - start) / STRIKE_S
+        def at(u):
+            return x0 + (x1 - x0) * u, y0 + (y1 - y0) * u - 160 * math.sin(math.pi * u)
+        if g.get("weapon") == "arrow":
+            self.draw_arrow_strike(screen, g, at, since - start, t)
+            return
+        if k < 0:                                                    # held ready, spinning on the finger
+            self.draw_chakra(screen, x0, y0, CHAKRA_R, t)
+        elif k < 1:
+            for j in range(1, 7):                                    # the trail
+                u = k - j * 0.05
+                if u > 0:
+                    px, py = at(u)
+                    self.draw_chakra(screen, px, py, CHAKRA_R - j * 4, t, 0.45 * (1 - j / 7))
+            px, py = at(k)
+            self.draw_chakra(screen, px, py, CHAKRA_R + 6, t)
+        a = since - start - STRIKE_S                                 # the burst where it lands
+        if 0 <= a < 0.8:
+            b = dimmed(pg, self.burst, 1 - a / 0.8)
+            size = int(840 * (0.5 + 0.8 * ease(a / 0.5)))
+            b = pg.transform.smoothscale(b, (size, size))
+            screen.blit(b, b.get_rect(center=(x1, y1)), special_flags=pg.BLEND_RGB_ADD)
+        if 0 <= a < 1.6:                                             # and returns to his hand
+            u = 1 - ease(a / 1.6)
+            px, py = at(u)
+            self.draw_chakra(screen, px, py, CHAKRA_R, t)
+        elif a >= 1.6:
+            self.draw_chakra(screen, x0, y0, CHAKRA_R, t)
+
+    def draw_arrow_strike(self, screen, g: dict, at, a: float, t: float) -> None:
+        """`strike: {weapon: arrow}`: a glowing arrow flies the arc and bursts on its mark; with `hover`
+        it then circles the mark instead of vanishing."""
+        pg = self.pg
+        if a < 0:
+            return
+        k = min(1.0, a / STRIKE_S)
+        layer = pg.Surface((W, H))
+        def shaft(u, alpha):
+            (px, py), (qx, qy) = at(max(0.0, u - 0.02)), at(u)
+            ang = math.atan2(qy - py, qx - px)
+            tip = (qx + 40 * math.cos(ang), qy + 40 * math.sin(ang))
+            tail = (qx - 150 * math.cos(ang), qy - 150 * math.sin(ang))
+            for width, colour in ((22, (60, 90, 160)), (10, (120, 190, 255)), (4, (235, 245, 255))):
+                pg.draw.line(layer, tuple(int(v * alpha) for v in colour), tail, tip, width)
+            for side in (2.5, -2.5):                                 # the head
+                pg.draw.line(layer, tuple(int(v * alpha) for v in (200, 230, 255)), tip,
+                             (tip[0] - 34 * math.cos(ang + side / 6), tip[1] - 34 * math.sin(ang + side / 6)), 6)
+        if k < 1:
+            for j in range(1, 6):                                    # the trail
+                if k - j * 0.06 > 0:
+                    shaft(k - j * 0.06, 0.4 * (1 - j / 6))
+            shaft(k, 1.0)
+        hit = a - STRIKE_S
+        x1, y1 = at(1.0)
+        if hit >= 0 and g.get("hover"):                              # it circles above the mark
+            r = 70
+            cx, cy = x1 + r * math.cos(t * 5), y1 - 60 + 22 * math.sin(t * 5)
+            nx, ny = x1 + r * math.cos(t * 5 + 0.15), y1 - 60 + 22 * math.sin(t * 5 + 0.15)
+            ang = math.atan2(ny - cy, nx - cx)
+            for width, colour in ((18, (60, 90, 160)), (8, (120, 190, 255)), (3, (235, 245, 255))):
+                pg.draw.line(layer, colour, (cx - 110 * math.cos(ang), cy - 110 * math.sin(ang)),
+                             (cx + 30 * math.cos(ang), cy + 30 * math.sin(ang)), width)
+        screen.blit(layer, (0, 0), special_flags=pg.BLEND_RGB_ADD)
+        if not hasattr(self, "arrow_burst"):
+            self.arrow_burst = light(pg, 420, (170, 210, 255), 1.6)
+        if 0 <= hit < 0.8:
+            b = dimmed(pg, self.arrow_burst, 1 - hit / 0.8)
+            size = int(840 * (0.5 + 0.8 * ease(hit / 0.5)))
+            b = pg.transform.smoothscale(b, (size, size))
+            screen.blit(b, b.get_rect(center=(x1, y1)), special_flags=pg.BLEND_RGB_ADD)
 
     def draw_rekha(self, screen, g: dict, since: float, t: float) -> None:
         """A glowing line along the ground: drawn in from the left over `grow` seconds, or there

@@ -31,6 +31,32 @@ def tone(freq: float, dur: float, decay: float, harm: float = 0.3, noise: float 
     return (w * env).astype(np.float32)
 
 
+def sample(name: str, level: float = 0.5) -> np.ndarray:
+    """A recorded effect from assets/sfx (mono wav at SR; the Kenney packs are CC0), peak-normalised to level."""
+    from ..config import REPO_ROOT
+    with wave.open(str(REPO_ROOT / "assets" / "sfx" / f"{name}.wav"), "rb") as w:
+        raw = w.readframes(w.getnframes())
+    s = np.frombuffer(raw, dtype="<i2").astype(np.float32) / 32768.0
+    return s * (level / (float(np.abs(s).max()) or 1.0))
+
+
+def whoosh(dur: float, lo: float, hi: float, level: float, seed: int = 7) -> np.ndarray:
+    """Air rushing past: noise through a low-pass filter whose cutoff sweeps from lo up to hi and back,
+    swelling to a peak a little past the middle."""
+    n = int(SR * dur)
+    noise = np.random.default_rng(seed).uniform(-1, 1, n)
+    k = np.arange(n) / n
+    a = 1 - np.exp(-2 * np.pi * (lo + (hi - lo) * np.sin(np.pi * k)) / SR)
+    out = np.empty(n)
+    y1 = y2 = 0.0
+    for i in range(n):                                  # two poles, so the hiss is soft
+        y1 += a[i] * (noise[i] - y1)
+        y2 += a[i] * (y1 - y2)
+        out[i] = y2
+    out *= np.sin(np.pi * k ** 0.8) ** 2
+    return (out * level / max(float(np.abs(out).max()), 1e-6)).astype(np.float32)
+
+
 def overlay(*parts: tuple[float, np.ndarray]) -> np.ndarray:
     """Sum sounds that start at the given offsets (seconds) into one sound."""
     n = max(int(SR * off) + len(s) for off, s in parts)

@@ -77,6 +77,7 @@ def build_parser() -> argparse.ArgumentParser:
     mk = sub.add_parser("make", help="render a story in English and Hindi, with frame sheets and phone previews")
     mk.add_argument("story")
     mk.add_argument("--langs", default="en,hi")
+    mk.add_argument("--captions", choices=["all", "few"], default="all", help="few: captions only on beats marked key")
     ut = sub.add_parser("upload-text", help="write upload.txt (title, description, hashtags, tags) beside a story's reels")
     ut.add_argument("stories", nargs="+")
     lv = sub.add_parser("live", help="make the living-face loops (blinks, head movement) a story lists")
@@ -238,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
         elif opts.command == "pick":
             out = st.pick(opts.story, opts.choices)
         elif opts.command == "make":
-            out = st.make(opts.story, tuple(opts.langs.split(",")))
+            out = st.make(opts.story, tuple(opts.langs.split(",")), captions=opts.captions)
         else:
             out = [st.new_story(opts.story, opts.segment)]
         for line in out:

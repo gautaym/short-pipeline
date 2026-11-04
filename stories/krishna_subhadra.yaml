@@ -1,0 +1,301 @@
+# Festival Stories, part 3: Shri Krishna and Subhadra, the other Bhai Dooj story.
+# Review notes. Narakasura of Pragjyotisha held 16,000 (16,100 in the Bhagavata) princesses captive;
+# Krishna flew there on Garuda with Satyabhama, who fought beside him, and his Sudarshana Chakra killed
+# Narakasura (Bhagavata Purana 10.59). The day is kept as Naraka Chaturdashi (Choti Diwali). That
+# Krishna then visited his sister Subhadra, who welcomed him with flowers, aarti, a tilak and sweets,
+# and that this began Bhai Dooj (Kartik Shukla Dwitiya), is folk tradition, told beside the Yama and
+# Yamuna legend; the script says "it is believed". Puri: Subhadra stands between Jagannath and
+# Balabhadra in the sanctum, and in the Rath Yatra her chariot (Darpadalana) rolls between
+# Balabhadra's (Taladhwaja, first) and Jagannath's (Nandighosha, last).
+# Sources: festivalsofindia.in/bhai-dooj/legends, incredibleindia.gov.in (Bhai Dooj), vedadhara.com.
+# Drawn in a flat cartoon style, not leather puppets; the hosts are drawn in the same style here.
+id: krishna_subhadra
+topic: mythology
+series_part: 3
+title:
+  en: "How did Krishna's sister start Bhai Dooj?"
+  hi: "श्रीकृष्ण और सुभद्रा का भाई दूज से क्या रिश्ता है?"
+series:
+  en: "Festival Stories"
+  hi: "त्योहारों की कहानियाँ"
+summary:
+  en: "After defeating Narakasura, Lord Krishna went home to his sister Subhadra, who welcomed him with aarti, a tilak and sweets. It is believed that this is how Bhai Dooj began, and in Puri the sister still stands between her two brothers."
+  hi: "नरकासुर को हराकर श्रीकृष्ण अपनी बहन सुभद्रा के पास पहुँचे, और सुभद्रा ने आरती, तिलक और मिठाई से उनका स्वागत किया। मान्यता है कि भाई दूज यहीं से शुरू हुई, और पुरी में आज भी बहन अपने दोनों भाइयों के बीच विराजती हैं।"
+music: festive
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 8
+  # smaller and lower than in beat 8, so the question at the top stays clear of the crowns
+  actors:
+    subhadra: {puppet: subhadra_tilak, x: 300, y: 1600, h: 700, face: right, motion: sway}
+    krishna: {puppet: krishna_home, x: 790, y: 1610, h: 740, face: left, motion: breathe}
+art:
+  puppet_style: >-
+    A single full-body cartoon character in flat 2D vector illustration style, like a modern Indian
+    mythology explainer animation: simple clean shapes, smooth dark outlines, flat bright colours with
+    soft simple shading, a friendly expressive face with clear eyes, full body from head to feet, three
+    quarter view turned to the right, against a plain pure black background, nothing else in the frame,
+    no text.
+  prop_style: >-
+    A single object in flat 2D vector illustration style, not a person: simple clean shapes, smooth dark
+    outlines, flat bright colours, against a plain pure black background, nothing else in the frame, no text.
+  backdrop_style: >-
+    A background scene in flat 2D vector cartoon illustration style, like a modern Indian mythology
+    explainer animation: simple clean shapes, smooth colour gradients, warm soft light, an open floor
+    across the lower third, seen full frame with no border or frame. Empty scenery only: nobody in it, no
+    people, no figures, no animals, no text. Vertical composition.
+  cast:
+    krishna: >-
+      Lord Krishna, a handsome young man with blue skin and dark curly hair, a gold crown with a peacock
+      feather, a yellow silk dhoti, a flower garland and gold jewellery, exactly two arms
+    subhadra: >-
+      Subhadra, Krishna's younger sister, a young princess with golden-brown skin and a long dark braid,
+      dressed modestly in a full pink and gold saree over both shoulders with a full-sleeved blouse, a small
+      gold crown and gold jewellery, exactly two arms with graceful hands
+    satyabhama: >-
+      Satyabhama, a brave young queen with golden-brown skin and dark hair in a bun, dressed modestly in
+      a full red and gold saree with a full-sleeved blouse, a gold crown, exactly two arms
+    narakasura: >-
+      Narakasura, a huge demon king with dark green skin, two small horns, fierce eyes, a black moustache,
+      a spiked gold crown, black and red armour, exactly two arms
+    balarama: >-
+      Balarama, Krishna's elder brother, a strong man with fair skin and dark hair, a gold crown, a blue
+      silk dhoti, a flower garland, exactly two arms
+    sutradhar: >-
+      the sutradhar, a cheerful middle-aged storyteller of about forty five with warm brown skin, a thick
+      dark brown moustache and no beard, a big red and yellow turban, a white kurta with a red and gold
+      sash and a white dhoti, exactly two arms
+    meera: >-
+      Meera, a young Indian woman of about twenty with warm brown skin, a long dark brown braid, a bright
+      yellow and pink kurta with a pink dupatta, curious eyes, exactly two arms
+  puppets:
+    narakasura: "The character is {narakasura}, standing tall and laughing cruelly, holding a big spiked club."
+    narakasura_angry: "The character is {narakasura}, snarling angrily with bared teeth, raising a big spiked club high to attack, side view facing right."
+    narakasura_fall: "The character is {narakasura}, defeated, staggering backwards with his arms thrown out, eyes shut in pain, his crown slipping off, side view facing right."
+    krishna: "The character is {krishna}, standing bravely, one hand raised with a glowing golden spinning discus above his finger."
+    krishna_throw: "The character is {krishna}, seen from the side in profile facing right, determined, one arm stretched forward pointing straight ahead, a glowing golden spinning discus on his raised finger."
+    krishna_hurl: "The character is {krishna}, seen from the side in profile facing right, determined, one arm stretched straight forward with the index finger pointing ahead, the other arm back, nothing in his hands."
+    satyabhama: "The character is {satyabhama}, drawing a golden bow with an arrow, aiming bravely."
+    subhadra_wait: "The character is {subhadra}, holding a round brass aarti plate with a small lit lamp, looking hopefully into the distance."
+    krishna_home: "The character is {krishna}, smiling warmly, one hand raised in greeting."
+    subhadra_tilak: "The character is {subhadra}, smiling, holding a small brass plate in one hand and reaching forward with the other hand to put a red tilak."
+    krishna_bless: "The character is {krishna}, smiling, raising one hand in blessing with the palm open."
+    balarama: "The character is {balarama}, standing proudly, a wooden plough resting on his shoulder."
+    subhadra: "The character is {subhadra}, standing gracefully with her hands folded in greeting."
+    sutradhar: "The character is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip."
+    meera: "The character is {meera}, one hand raised as if asking a question."
+  backdrops:
+    fortress: "A dark demon fortress on a rocky hill at night, tall black towers with red glowing windows, a stormy purple sky."
+    sky: "A wide sky above the clouds at golden sunrise, soft pink and gold clouds below."
+    freedom: "Wide open fortress gates at dawn, broken chains on the stone floor, golden light pouring in."
+    dwarka: "A white and gold palace beside the sea at sunset, domes and arches, small lamps on the steps."
+    courtyard: "A palace courtyard in the evening with a colourful rangoli on the floor, marigold garlands and small oil lamps along the walls."
+    puri: "The inside of a grand old Indian temple hall, carved stone pillars, warm lamp light, marigold garlands, an empty stone platform at the back."
+    rath: "A wide festival street in an Indian temple town, three tall empty wooden temple chariots with big wheels and colourful red, yellow and green cloth canopies in a row, flags and flowers."
+  anchors: {}
+  # Which way each picture faces when the model did not draw the side it was asked for (default right).
+  facing: {krishna_throw: left, narakasura_angry: left}
+  # Faces that come alive (blink, gentle head movement): [centre x, centre y, face width] as fractions.
+  live:
+    krishna_home: [0.5, 0.29, 0.27]
+    krishna_bless: [0.52, 0.29, 0.27]
+    subhadra_tilak: [0.49, 0.25, 0.2]
+    subhadra_wait: [0.5, 0.25, 0.2]
+    sutradhar: [0.55, 0.31, 0.3]
+    meera: [0.56, 0.27, 0.3]
+beats:
+  - en: "In the city of Pragjyotisha ruled a demon king named Narakasura. He held sixteen thousand princesses captive, and even the gods feared him."
+    hi: "प्राग्ज्योतिषपुर में नरकासुर नाम का एक असुर राजा राज करता था। उसने सोलह हज़ार राजकुमारियों को क़ैद कर रखा था, और देवता तक उससे डरते थे।"
+    caption: "A DEMON KING'S *PRISON*."
+    name: {head: "NARAKASURA", sub: "Demon king of Pragjyotisha"}
+    stage:
+      backdrop: fortress
+      fx: [smoke_far, lightning]
+      actors:
+        narakasura: {puppet: narakasura, x: 560, y: 1720, h: 1120, face: left, motion: breathe, enter: fade}
+  - en: "So Lord Krishna, with Satyabhama by his side, flew on Garuda to his fortress."
+    hi: "तब श्रीकृष्ण, देवी सत्यभामा को साथ लेकर, गरुड़ पर सवार होकर उसके क़िले की ओर चल पड़े।"
+    caption: "SHRI KRISHNA *RIDES OUT*."
+    name: {head: "SHRI KRISHNA", sub: "Lord of Dwarka"}
+    stage:
+      backdrop: sky
+      fx: [rays]
+      actors:
+        krishna: {puppet: krishna, x: 560, y: 1700, h: 1060, face: right, motion: sway, enter: right}
+  - en: "A fierce battle broke out. Narakasura charged with his club, and Satyabhama drew her bow."
+    hi: "घमासान युद्ध छिड़ गया। नरकासुर गदा लेकर टूट पड़ा, और देवी सत्यभामा ने धनुष तान लिया।"
+    caption: "SATYABHAMA *DRAWS HER BOW*."
+    name: {head: "SATYABHAMA", sub: "Queen of Shri Krishna", y: 600}
+    stage:
+      backdrop: fortress
+      fx: [lightning, motes]
+      actors:
+        krishna: {puppet: krishna_throw, x: 250, y: 1700, h: 900, z: -1, face: right, motion: breathe, enter: left}
+        satyabhama: {puppet: satyabhama, x: 480, y: 1720, h: 860, face: right, motion: sway, enter: left}
+        narakasura: {puppet: narakasura_angry, x: 900, y: 1730, h: 940, face: left, motion: tremble, enter: right}
+  - en: "[excited] Then Krishna let fly his Sudarshana Chakra, and Narakasura fell."
+    hi: "[excited] तभी श्रीकृष्ण ने सुदर्शन चक्र चलाया, और नरकासुर वहीं ढेर हो गया।"
+    caption: "THE *SUDARSHANA CHAKRA*."
+    key: true
+    stage:
+      backdrop: fortress
+      fx: [lightning, {strike: {from: [490, 1090], to: [880, 1150]}}]
+      actors:
+        satyabhama: {puppet: satyabhama, x: 120, y: 1700, h: 780, z: -1, face: right, motion: breathe}
+        krishna: {puppet: krishna_hurl, x: 270, y: 1710, h: 920, face: right, motion: breathe}
+        narakasura: {puppet: narakasura_fall, x: 900, y: 1730, h: 900, face: left, motion: fall}
+  - en: "[excited] Sixteen thousand princesses were free. It was the fourteenth day of the dark half of Kartik, the day we now call Naraka Chaturdashi, or Choti Diwali."
+    hi: "[excited] सोलह हज़ार राजकुमारियाँ आज़ाद हो गईं। वो कार्तिक की चतुर्दशी थी, जिसे आज हम नरक चतुर्दशी, यानी छोटी दिवाली कहते हैं।"
+    caption: "SIXTEEN THOUSAND, *FREE*."
+    title_card: "NARAKA CHATURDASHI"
+    stage:
+      backdrop: freedom
+      fx: [rays, {diyas: {y: 1760, rows: 1, n: 9, grow: 3.0}}]
+      actors:
+        krishna: {puppet: krishna_home, x: 560, y: 1720, h: 1040, face: right, motion: sway, enter: fade}
+  - en: "Back in Dwarka, his little sister Subhadra was counting the days. Her aarti plate was ready. She was only waiting for her brother to come home."
+    hi: "उधर द्वारका में, उनकी छोटी बहन सुभद्रा दिन गिन रही थी। आरती की थाली सजी थी, बस भाई के लौटने का इंतज़ार था।"
+    caption: "A SISTER *WAITS*."
+    name: {head: "SUBHADRA", sub: "Sister of Shri Krishna"}
+    stage:
+      backdrop: dwarka
+      fx: [{glow: {actor: subhadra, colour: [255, 200, 120]}}]
+      actors:
+        subhadra: {puppet: subhadra_wait, x: 540, y: 1700, h: 980, face: right, motion: sway, enter: fade}
+  - en: "Two days after Diwali, on the second day of the bright half of Kartik, Krishna finally reached her door."
+    hi: "दिवाली के दो दिन बाद, कार्तिक शुक्ल द्वितीया को, श्रीकृष्ण आख़िरकार उसके द्वार पर पहुँचे।"
+    caption: "HE *CAME HOME*."
+    title_card: "KARTIK SHUKLA DWITIYA"
+    stage:
+      backdrop: dwarka
+      actors:
+        subhadra: {puppet: subhadra_wait, x: 320, y: 1700, h: 960, face: right, motion: sway}
+        krishna: {puppet: krishna_home, x: 770, y: 1720, h: 1040, face: left, motion: walk_in, enter: right}
+  - en: "Subhadra welcomed him with flowers, did his aarti, put a tilak on his forehead, and fed him sweets with her own hands."
+    hi: "सुभद्रा ने फूलों से उनका स्वागत किया, आरती उतारी, माथे पर तिलक लगाया, और अपने हाथों से मिठाई खिलाई।"
+    caption: "AARTI AND *TILAK*."
+    key: true
+    stage:
+      backdrop: courtyard
+      fx: [{glow: {actor: subhadra, colour: [255, 200, 110]}}, {diyas: {y: 1770, rows: 1, n: 9, grow: 3.0}}]
+      actors:
+        subhadra: {puppet: subhadra_tilak, x: 330, y: 1700, h: 960, face: right, motion: sway, enter: fade}
+        krishna: {puppet: krishna_home, x: 760, y: 1720, h: 1040, face: left, motion: breathe, enter: fade}
+  - en: "[excited] Krishna was deeply moved, and he blessed her. Any brother who receives a tilak from his sister on this day will live a long and happy life. It is believed that this is how Bhai Dooj began."
+    hi: "[excited] श्रीकृष्ण का मन भर आया, और उन्होंने आशीर्वाद दिया। इस दिन जो भाई अपनी बहन से तिलक लगवाएगा, उसकी उम्र लंबी होगी। मान्यता है कि भाई दूज यहीं से शुरू हुई।"
+    caption: "A *BLESSING* FOR EVERY BROTHER."
+    title_card: "BHAI DOOJ"
+    stage:
+      backdrop: courtyard
+      fx: [rays, {glow: {actor: krishna, colour: [255, 230, 150]}}, {diyas: {y: 1770, rows: 1, n: 9, grow: 0.01}}]
+      actors:
+        subhadra: {puppet: subhadra_tilak, x: 330, y: 1700, h: 960, face: right, motion: breathe}
+        krishna: {puppet: krishna_bless, x: 760, y: 1720, h: 1040, face: left, motion: sway}
+  - en: "And you can still see this bond today. In the Jagannath temple at Puri, Subhadra stands between her two brothers, Jagannath and Balabhadra."
+    hi: "और ये रिश्ता आज भी दिखता है। पुरी के जगन्नाथ मंदिर में देवी सुभद्रा अपने दोनों भाइयों, जगन्नाथ और बलभद्र के बीच विराजती हैं।"
+    caption: "THE SISTER IN THE *MIDDLE*."
+    key: true
+    title_card: "JAGANNATH PURI"
+    stage:
+      backdrop: puri
+      fx: [rays]
+      actors:
+        balarama: {puppet: balarama, x: 210, y: 1720, h: 1000, face: right, motion: breathe, enter: left}
+        subhadra: {puppet: subhadra, x: 540, y: 1690, h: 900, face: right, motion: sway, enter: fade}
+        krishna: {puppet: krishna_home, x: 870, y: 1720, h: 1000, face: left, motion: breathe, enter: right}
+  - en: "Even in the Rath Yatra, her chariot rolls in the middle. Her elder brother Balabhadra leads, Jagannath follows, and their sister rides safely between them."
+    hi: "रथ यात्रा में भी उनका रथ बीच में चलता है। आगे बड़े भाई बलभद्र, पीछे जगन्नाथ, और बीच में बहन, दोनों भाइयों की हिफ़ाज़त में।"
+    caption: "SAFE *BETWEEN* HER BROTHERS."
+    title_card: "RATH YATRA"
+    name: {head: "BALABHADRA", sub: "Elder brother, also called Balarama"}
+    stage:
+      backdrop: rath
+      fx: [{diyas: {y: 1780, rows: 1, n: 9, grow: 4.0}}]
+      actors: {}
+  - en: "So this Bhai Dooj, when a sister puts a tilak on her brother, remember that it is a bond the Lord himself honoured."
+    hi: "तो इस भाई दूज, जब बहन भाई को तिलक लगाए, तो याद रखिए, ये वही रिश्ता है जिसे स्वयं भगवान ने निभाया।"
+    caption: "A BOND THE LORD *HONOURED*."
+    stage:
+      backdrop: courtyard
+      fx: [rays, {diyas: {y: 1740, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 3}}]
+      actors: {}
+end:
+  head: "BHAI DOOJ"
+  sub: "Shri Krishna and Subhadra"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - bhaidooj
+  - krishna
+  - subhadra
+  - shrikrishna
+  - jagannath
+  - festivalsofindia
+  - brothersister
+  - indianmythology
+  - sanatandharma
+  - festivalstories
+  - storytime
+  tags:
+  - krishna and subhadra
+  - bhai dooj story
+  - krishna subhadra bhai dooj
+  - narakasura vadh
+  - naraka chaturdashi story
+  - satyabhama
+  - sudarshana chakra
+  - jagannath puri
+  - rath yatra
+  - subhadra devi
+  - balabhadra
+  - why do we celebrate bhai dooj
+  - bhai dooj katha
+  - bhaiya dooj
+  - brother sister festival
+  - tilak ceremony
+  - choti diwali
+  - indian festivals
+  - indian mythology
+  - hindu mythology
+  - krishna stories
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - animated story
+  - story reel
+  - shorts
+  - youtube shorts
+  - did you know
+  en:
+    title: 'Krishna and Subhadra: the other Bhai Dooj story #shorts'
+    description: After defeating Narakasura, Lord Krishna went home to his sister Subhadra, who welcomed him with
+      flowers, aarti, a tilak and sweets. It is believed that this is how Bhai Dooj began, and in Puri the sister
+      still stands between her two brothers. Festival Stories, part 3.
+  hi:
+    title: 'श्रीकृष्ण और सुभद्रा की भाई दूज कथा #shorts'
+    description: नरकासुर को हराकर श्रीकृष्ण अपनी बहन सुभद्रा के पास पहुँचे, और सुभद्रा ने फूलों, आरती, तिलक और
+      मिठाई से उनका स्वागत किया। मान्यता है कि भाई दूज यहीं से शुरू हुई, और पुरी में आज भी देवी सुभद्रा अपने दोनों
+      भाइयों के बीच विराजती हैं। त्योहारों की कहानियाँ, भाग 3।
+    hashtags:
+    - hindi
+    - bhaidooj2026
+    tags:
+    - श्रीकृष्ण और सुभद्रा
+    - भाई दूज की कथा
+    - भाई दूज
+    - नरकासुर वध
+    - नरक चतुर्दशी
+    - जगन्नाथ पुरी
+    - रथ यात्रा
+    - krishna subhadra katha
+    - bhai dooj kyu manate hai
+    - bhai dooj ki kahani
+    - pauranik katha hindi
+    - hindi kahani
+    - पौराणिक कथा
+    - कृष्ण कथा

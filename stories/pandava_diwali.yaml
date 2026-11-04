@@ -1,0 +1,241 @@
+# Festival Stories, part 4: Diwali in the Ramayana and in the Mahabharata.
+# Review notes. Rama's return to Ayodhya is the best-known Diwali story. A popular tradition (mainly
+# North Indian) holds that the Pandavas came home to Hastinapur on Kartik Amavasya after twelve years
+# in the forest and a thirteenth in hiding, and the people lit clay lamps; the epic itself does not say
+# so, hence "it is believed". In the epic, the exile followed the rigged dice game (Sabha Parva), and
+# after it Duryodhana refused to return the kingdom, even the five villages Krishna asked for as envoy,
+# not even land the size of a needle's point (Udyoga Parva), which led to the war at Kurukshetra.
+# Sources: outlookindia.com (myths and hidden tales of Diwali), sanskritimagazine.com, mythgyaan.com.
+# Told straight by the narrator (no asker), few captions: render with --captions few.
+id: pandava_diwali
+topic: mythology
+series_part: 4
+ask: false
+title:
+  en: "Ramayana or Mahabharata: whose Diwali?"
+  hi: "दिवाली रामायण की है, या महाभारत की?"
+series:
+  en: "Festival Stories"
+  hi: "त्योहारों की कहानियाँ"
+summary:
+  en: "Everyone knows Lord Rama came home to Ayodhya on Diwali. But it is also believed that the Pandavas returned to Hastinapur on the same night after thirteen years of exile, and the people lit clay lamps for them. Then Duryodhana refused to give back even five villages."
+  hi: "सब जानते हैं कि दिवाली पर श्रीराम अयोध्या लौटे थे। पर मान्यता है कि इसी रात तेरह साल के वनवास के बाद पांडव भी हस्तिनापुर लौटे थे, और प्रजा ने उनके लिए मिट्टी के दीये जलाए। फिर दुर्योधन ने पाँच गाँव तक लौटाने से मना कर दिया।"
+music: festive
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 9                      # the lamp-lit city with fireworks and nobody on stage: the question stays clear
+art:
+  puppet_style: >-
+    A single full-body figure in traditional Madhubani folk art style, bold black double outlines filled
+    with fine line patterns, bright flat red, yellow, green and blue, three quarter view turned to the
+    right, full body from head to feet, against a plain pure black background, nothing else in the frame,
+    no text.
+  prop_style: >-
+    A single object in traditional Madhubani folk art style, not a person, bold black double outlines
+    filled with fine line patterns, bright flat colours, against a plain pure black background, nothing
+    else in the frame, no text.
+  backdrop_style: >-
+    A background scene in traditional Indian Madhubani folk painting style, bold outlines, bright flat
+    red, yellow, green and blue with decorative patterns, an open floor across the lower third, seen full
+    frame with no border or frame. Empty scenery only: nobody in it, no people, no figures, no animals, no
+    text. Vertical composition.
+  cast:
+    rama: >-
+      Lord Rama, a handsome young prince with blue skin, a tall gold crown, a yellow silk dhoti, a flower
+      garland and gold jewellery, a bow on his shoulder, exactly two arms
+    yudhishthira: >-
+      Yudhishthira, the eldest Pandava prince, a calm man with a short black beard, a gold crown, a white
+      and gold silk dhoti and a red shawl, exactly two arms
+    shakuni: >-
+      Shakuni, a thin sly old man with a pointed grey beard, narrow eyes, a dark purple turban and a green
+      and purple robe, exactly two arms
+    duryodhana: >-
+      Duryodhana, a proud strong prince with a black moustache, a tall spiked gold crown, a red and black
+      silk dhoti and gold armour on his chest, exactly two arms
+    sutradhar: >-
+      the sutradhar, a cheerful middle-aged storyteller of about forty five with warm brown skin, a thick
+      dark brown moustache and no beard, a big red and yellow turban, a white kurta with a red and gold
+      sash and a white dhoti, exactly two arms
+  puppets:
+    rama: "The figure is {rama}, smiling, one hand raised in blessing."
+    shakuni: "The figure is {shakuni}, smirking slyly, holding two long ivory dice up in one raised hand."
+    yudhishthira: "The figure is {yudhishthira}, standing with his head bowed in sorrow and both hands open in front of him, empty-handed."
+    pandavas:
+      style: "A group of figures in traditional Madhubani folk art style, bold black double outlines filled with fine line patterns, bright flat red, yellow, green and blue, full bodies from head to feet, against a plain pure black background, nothing else in the frame, no text."
+      text: "The figures are exactly five young princes walking one behind the other in a single line, each with a gold crown, simple dhotis and shawls, bows and a mace on their shoulders."
+    pandavas_home:
+      style: "A group of figures in traditional Madhubani folk art style, bold black double outlines filled with fine line patterns, bright flat red, yellow, green and blue, full bodies from head to feet, against a plain pure black background, nothing else in the frame, no text."
+      text: "The figures are exactly five young princes standing side by side, smiling, each with a gold crown, silk dhotis and garlands, hands folded in greeting."
+    duryodhana: "The figure is {duryodhana}, arrogant, his chin raised, one hand held out flat in refusal, a heavy gold mace resting on his other shoulder."
+    sutradhar: "The figure is {sutradhar}, one hand raised with the index finger up as if telling a story, the other hand on his hip."
+  backdrops:
+    ayodhya: "A royal city at night with palaces and temples, rows of small glowing oil lamps along every wall and roof, a dark blue sky."
+    hastinapur: "A grand royal palace with tall towers and flags under a bright blue sky, plain bare yellow ground in front with no carpet, no rug and no pictures on it."
+    dice_hall: "A grand royal assembly hall with carved pillars, red curtains and an empty throne, a dice board with squares painted on the floor."
+    forest: "A deep green forest with tall trees, winding paths and a small stream, soft morning light."
+    hastinapur_night: "A royal palace city on a moonless night, thousands of small glowing clay lamps on every wall, step and roof, a dark starry sky."
+    throne_room: "A dark royal throne room with a high golden throne, heavy red curtains and burning torches."
+    battlefield: "A vast empty battlefield at dawn, the whole lower half is bare cracked brown earth and dust, tall war flags on poles in the distance, a red sky. Nothing lies on the ground: no carpet, no rug, no mat."
+  backdrop_crop: 0.04         # trims the painted borders the model drew round some scenes
+  facing: {sutradhar: right}
+  anchors: {}
+  live:
+    sutradhar: [0.53, 0.19, 0.13]
+    rama: [0.47, 0.17, 0.12]
+    duryodhana: [0.5, 0.2, 0.14]
+    shakuni: [0.49, 0.18, 0.13]
+    yudhishthira: [0.5, 0.15, 0.12]
+beats:
+  - en: "We all know the story. On Diwali, Lord Rama came home to Ayodhya after fourteen years of exile, and the whole city lit lamps to welcome him."
+    hi: "ये कहानी तो हम सब जानते हैं। दिवाली पर श्रीराम चौदह साल का वनवास काटकर अयोध्या लौटे, और पूरी अयोध्या ने दीये जलाकर उनका स्वागत किया।"
+    caption: "LORD RAMA COMES *HOME*."
+    title_card: "AYODHYA"
+    stage:
+      backdrop: ayodhya
+      fx: [{diyas: {y: 1760, rows: 1, n: 9, grow: 3.0}}]
+      actors:
+        rama: {puppet: rama, x: 540, y: 1720, h: 1040, face: right, motion: sway, enter: fade}
+  - en: "But Diwali has a Mahabharata story too. It begins in the royal palace of Hastinapur."
+    hi: "पर दिवाली की एक कहानी महाभारत में भी है। और वो शुरू होती है हस्तिनापुर के राजमहल से।"
+    caption: "A *MAHABHARATA* STORY."
+    title_card: "HASTINAPUR"
+    stage:
+      backdrop: hastinapur
+      actors: {}
+  - en: "In a game of dice, Shakuni threw his crooked dice again and again, until Yudhishthira had lost everything: his kingdom, his brothers, even himself."
+    hi: "जुए के खेल में शकुनि ने बार-बार अपने छल वाले पासे फेंके, और युधिष्ठिर सब कुछ हार गए। राज्य, भाई, यहाँ तक कि ख़ुद को भी।"
+    caption: "THE *CROOKED* DICE."
+    key: true
+    name: {head: "SHAKUNI", sub: "Master of the crooked dice"}
+    stage:
+      backdrop: dice_hall
+      fx: [smoke_far]
+      actors:
+        yudhishthira: {puppet: yudhishthira, x: 300, y: 1720, h: 980, face: right, motion: breathe, enter: fade}
+        shakuni: {puppet: shakuni, x: 790, y: 1720, h: 960, face: left, motion: sway, enter: right}
+  - en: "The price was harsh. Twelve years in the forest, and a thirteenth year in hiding, where no one must recognise them."
+    hi: "सज़ा कड़ी थी। बारह साल वनवास, और तेरहवाँ साल अज्ञातवास, जिसमें कोई उन्हें पहचान न पाए।"
+    caption: "THIRTEEN YEARS AWAY."
+    title_card: "12 YEARS + 1 IN HIDING"
+    name: {head: "THE PANDAVAS", sub: "The five sons of Pandu"}
+    stage:
+      backdrop: forest
+      actors:
+        pandavas: {puppet: pandavas, x: 540, y: 1720, h: 820, face: right, motion: walk_in, enter: left}
+  - en: "It is believed that when the thirteen years were over, the Pandavas came home to Hastinapur on the darkest night of the year, the new moon of Kartik."
+    hi: "मान्यता है कि तेरह साल पूरे होने पर, पांडव साल की सबसे अँधेरी रात, कार्तिक अमावस्या को हस्तिनापुर लौटे।"
+    caption: "THE DARKEST *NIGHT*."
+    title_card: "KARTIK AMAVASYA"
+    stage:
+      backdrop: hastinapur_night
+      actors:
+        pandavas: {puppet: pandavas_home, x: 540, y: 1720, h: 800, face: right, motion: breathe, enter: fade}
+  - en: "[excited] Overjoyed to see their beloved princes again, the people lit clay lamps on every wall and every rooftop, until the dark night was full of light."
+    hi: "[excited] अपने प्यारे राजकुमारों को फिर से देखकर प्रजा ख़ुशी से झूम उठी। हर दीवार, हर छत पर मिट्टी के दीये जल उठे, और अमावस की काली रात जगमगा उठी।"
+    caption: "A CITY OF *LAMPS*."
+    key: true
+    stage:
+      backdrop: hastinapur_night
+      fx: [rays, {diyas: {y: 1720, rows: 2, n: 9, grow: 4.0}}, {fireworks: {n: 3}}]
+      actors:
+        pandavas: {puppet: pandavas_home, x: 540, y: 1600, h: 760, face: right, motion: sway}
+  - en: "But the Mahabharata does not end there. Duryodhana refused to give back their kingdom. He would not give them even five villages."
+    hi: "पर महाभारत की कथा यहीं नहीं थमती। दुर्योधन ने उनका राज्य लौटाने से साफ़ मना कर दिया। पाँच गाँव तक देने को तैयार नहीं हुआ।"
+    caption: "NOT EVEN *FIVE VILLAGES*."
+    name: {head: "DURYODHANA", sub: "Eldest of the Kauravas"}
+    stage:
+      backdrop: throne_room
+      fx: [smoke_far]
+      actors:
+        duryodhana: {puppet: duryodhana, x: 540, y: 1720, h: 1060, face: right, motion: breathe, enter: fade}
+  - en: "And that refusal led to the great war of Kurukshetra."
+    hi: "और इसी इनकार से छिड़ा, कुरुक्षेत्र का महायुद्ध।"
+    caption: "THE ROAD TO *WAR*."
+    title_card: "KURUKSHETRA"
+    stage:
+      backdrop: battlefield
+      fx: [shake, smoke_far]
+      actors: {}
+  - en: "So Diwali night does not remember one homecoming, but two. Lord Rama's in Ayodhya, and the Pandavas' in Hastinapur. Both times, it was clay lamps that lit up the darkest night."
+    hi: "तो दिवाली की रात एक नहीं, दो वापसियों की याद है। अयोध्या में श्रीराम की, और हस्तिनापुर में पांडवों की। और दोनों बार, अमावस की अँधेरी रात को मिट्टी के दीयों ने ही रोशन किया।"
+    caption: "TWO HOMECOMINGS, *ONE* NIGHT."
+    key: true
+    stage:
+      backdrop: hastinapur_night
+      fx: [rays, {diyas: {y: 1740, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 3}}]
+      actors: {}
+end:
+  head: "DIWALI"
+  sub: "two homecomings, one night"
+# Upload text: reel make writes it as upload.txt beside each reel.
+upload:
+  hashtags:
+  - shorts
+  - diwali
+  - mahabharata
+  - ramayana
+  - pandavas
+  - diwalistory
+  - festivalsofindia
+  - indianmythology
+  - sanatandharma
+  - festivalstories
+  - storytime
+  tags:
+  - diwali and mahabharata
+  - pandavas return diwali
+  - why do we celebrate diwali
+  - diwali story
+  - pandavas exile
+  - pandavas return to hastinapur
+  - kartik amavasya
+  - shakuni dice game
+  - yudhishthira
+  - duryodhana five villages
+  - kurukshetra war
+  - lord rama return ayodhya
+  - ramayana and mahabharata
+  - diwali legends
+  - deepavali
+  - indian festivals
+  - indian mythology
+  - hindu mythology
+  - mythology stories
+  - hindu stories
+  - pauranik katha
+  - indian culture
+  - animated story
+  - story reel
+  - shorts
+  - youtube shorts
+  - did you know
+  en:
+    title: 'Ramayana or Mahabharata: whose Diwali is it? #shorts'
+    description: Everyone knows Lord Rama came home to Ayodhya on Diwali. But it is also believed that the
+      Pandavas returned to Hastinapur on the same night, after thirteen years of exile, and the people lit clay
+      lamps for them. Then Duryodhana refused to give back even five villages. Festival Stories, part 4.
+  hi:
+    title: 'दिवाली रामायण की है या महाभारत की? पांडवों की वापसी #shorts'
+    description: सब जानते हैं कि दिवाली पर श्रीराम अयोध्या लौटे थे। पर मान्यता है कि इसी रात तेरह साल के वनवास
+      के बाद पांडव भी हस्तिनापुर लौटे, और प्रजा ने मिट्टी के दीये जलाए। फिर दुर्योधन ने पाँच गाँव तक लौटाने
+      से मना कर दिया। त्योहारों की कहानियाँ, भाग 4।
+    hashtags:
+    - hindi
+    - diwali2026
+    tags:
+    - दिवाली की कहानी
+    - पांडवों की वापसी
+    - महाभारत और दिवाली
+    - दिवाली क्यों मनाते हैं
+    - कार्तिक अमावस्या
+    - शकुनि के पासे
+    - दुर्योधन
+    - कुरुक्षेत्र
+    - diwali kyu manate hai
+    - pandav vanvas
+    - mahabharat katha
+    - hindi kahani
+    - पौराणिक कथा

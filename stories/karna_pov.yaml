@@ -1,0 +1,342 @@
+# POV, part 1: You are Karna. A Gen-Z, Hinglish retelling from the user's own idea (2026-11-04).
+# Review notes. Karna was born to Kunti before her marriage, with divine armour and earrings (kavach and
+# kundal) from Surya; the unmarried young Kunti set him afloat in a basket on the river, and the
+# charioteer Adhiratha and Radha raised him, hence "suta-putra". At the tournament in Hastinapur he matched
+# Arjuna, Kripa demanded his lineage, and Duryodhana made him king of Anga on the spot (Adi Parva).
+# Before the war Shri Krishna told him he was Kunti's eldest son and offered him the throne if he joined
+# the Pandavas; separately Kunti came to him at the river where he worshipped the sun and asked him to
+# join his brothers. He refused both, out of loyalty to Duryodhana, but promised Kunti he would not kill
+# any of her sons except Arjuna, so she would always have five sons (Udyoga Parva). The Gen-Z jokes are
+# aimed at the system, never at the people: Kunti is "a frightened young mother", Shri Krishna keeps his
+# honorific. Sources: Adi Parva and Udyoga Parva summaries (wikipedia.org: Karna; Kunti).
+# Hinglish narration in a young, casual voice (not our storytelling narrators); full meme captions:
+# render with --captions all.
+id: karna_pov
+topic: mythology
+series_part: 1
+ask: false
+pace: fast
+host: false
+hook_at: bottom_left            # the question low on the left, Karna's face clear
+edit: {grade: film, captions: kinetic}   # punch zooms, glitches, speed lines, word-by-word captions
+voice: {hi: "maya:hi:Shaunak", en: "maya:en:Shaunak"}   # the user's pick after an audition (2026-11-04)
+title:
+  en: "POV: You are Karna."
+  hi: "पीओवी: तुम कर्ण हो।"
+series:
+  en: "POV"
+  hi: "पीओवी"
+summary:
+  en: "Born with divine armour, abandoned on day one, rejected for his surname, raised up by Duryodhana, and then told he was the eldest Pandava. If you were Karna, would you choose dharma, or the friend who never made you feel unwanted?"
+  hi: "जन्म से दिव्य कवच, पहले ही दिन नदी में, surname की वजह से reject, दुर्योधन ने राजा बनाया, और फिर पता चला कि वो सबसे बड़ा पांडव है। अगर तुम कर्ण होते, तो धर्म चुनते, या वो दोस्त जिसने कभी unwanted feel नहीं कराया?"
+music: tense
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 6
+  actors:
+    karna: {puppet: karna, x: 640, y: 1760, h: 1080, face: right, motion: breathe, enter: none}
+art:
+  puppet_style: >-
+    A single full-body character in Japanese anime illustration style, clean line art, cel shading,
+    large expressive eyes, vivid colours, three quarter view turned to the right, full body from head to
+    feet, against a plain flat pure bright green background, no green on the character, nothing else in
+    the frame, no text.
+  prop_style: >-
+    A single object in Japanese anime illustration style, not a person, clean line art, cel shading,
+    vivid colours, against a plain flat pure bright green background, no green on the object, nothing else
+    in the frame, no text.
+  backdrop_style: >-
+    A background scene in Japanese anime film style, painterly detailed background art, dramatic light,
+    vivid colours, an open ground across the lower third, seen full frame with no border or frame. Empty
+    scenery only: nobody in it, no people, no figures, no animals, no text. Vertical composition.
+  cast:
+    karna: >-
+      Karna, a handsome proud young warrior of about twenty five with warm brown skin, long black hair,
+      intense eyes, shining golden armour fused to his chest with a sun emblem, large gold sun earrings, a
+      red and gold dhoti, exactly two arms
+    duryodhana: >-
+      Duryodhana, a bold confident young prince with brown skin, a black moustache, a tall gold crown, a
+      purple and gold silk dhoti, gold armbands, exactly two arms
+    krishna: >-
+      Lord Krishna, a handsome grown man with blue skin and long dark curly hair, a gold crown with a
+      peacock feather, a yellow silk dhoti, a flower garland and gold jewellery, exactly two arms
+    kunti: >-
+      Queen Kunti, a dignified older woman of about fifty five with brown skin, a lined motherly face, grey hair in a bun, a
+      plain white silk sari with a thin gold border, very little jewellery, exactly two arms
+  puppets:
+    karna: "The character is {karna}, standing tall and confident, holding a great bow at his side."
+    karna_down: "The character is {karna}, his head turned down and away in hurt, fists clenched, his bow hanging low."
+    karna_smirk: "The character is {karna}, now a king, wearing a tall shining golden crown and a royal red cape over his golden armour, arms folded across his chest, a confident smirk, chin raised."
+    karna_promise: "The character is {karna}, one hand pressed over his heart, eyes closed, calm and sad."
+    duryodhana: "The character is {duryodhana}, smiling warmly, one hand stretched out in an open offer of friendship."
+    krishna: "The character is {krishna}, calm and serious, one hand raised as if telling a secret."
+    kunti: "The character is {kunti}, her hands folded together at her chest, eyes full of tears, pleading."
+    kunti_young: "The character is young Kunti, a frightened teenage princess of about sixteen with brown skin, long black hair and a pale blue sari, tears on her cheeks, holding a small reed basket with a baby wrapped in white cloth inside it, looking down at it sadly."
+    boy_sad:
+      style: "A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the whole head and hair inside the picture with a wide empty band of green above the top of the hair, the face in the upper middle, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The character is little Karna, a boy of about eight with warm brown skin, messy long black hair, big expressive eyes, small golden sun earrings and a small golden chest plate with a sun emblem, exactly two arms, looking up with tears in his eyes and a trembling lip, heartbroken."
+    boy_wrong:
+      style: "A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the whole head and hair inside the picture with a wide empty band of green above the top of the hair, the face in the upper middle, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The character is little Karna, a boy of about eight with warm brown skin, messy long black hair, big expressive eyes, small golden sun earrings and a small golden chest plate with a sun emblem, exactly two arms, confused and hurt, eyebrows raised, a tear on his cheek, one small hand on his chest as if asking what did I do wrong."
+    karna_shock:
+      style: "A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the whole head and hair inside the picture with a wide empty band of green above the top of the hair, the face in the upper middle, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The character is {karna}, shocked, eyes wide open, mouth open in disbelief."
+    karna_torn:
+      style: "A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the whole head and hair inside the picture with a wide empty band of green above the top of the hair, the face in the upper middle, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The character is {karna}, torn and troubled, eyebrows knitted, looking down to one side, jaw tight."
+    karna_ask:
+      style: "A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the whole head and hair inside the picture with a wide empty band of green above the top of the hair, the face in the upper middle, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The character is {karna}, looking straight at the viewer, calm and serious, a faint sad smile."
+  props:
+    basket: "The prop is a small woven reed basket with a soft white cloth inside and a tiny golden glow, floating, seen from the side."
+  backdrops:
+    river: "A wide calm river at dawn, golden mist on the water, reeds along the bank, a pale orange sky."
+    arena: "A grand ancient Indian royal tournament arena with stone galleries, colourful canopies and flags, a sandy open ground, bright midday sun."
+    court: "A rich royal Indian court hall with tall carved pillars, a golden throne under a red canopy, sunbeams through high windows."
+    camp: "An ancient war camp on a wide plain at dusk, rows of cloth tents and tall banners, a dark orange sky."
+    ghat: "Stone steps leading down into a holy river at sunrise, a huge glowing sun low over the water."
+    void: "A dark dramatic sky of slow golden and crimson clouds with a huge dim sun behind them, bare dark ground."
+  backdrop_crop: 0.03
+  facing: {krishna: left}        # drawn looking to the left
+  anchors: {}
+  live:
+    karna: [0.5, 0.14, 0.12]
+    karna_smirk: [0.5, 0.14, 0.12]
+    duryodhana: [0.5, 0.15, 0.12]
+    krishna: [0.5, 0.15, 0.12]
+    kunti: [0.5, 0.15, 0.12]
+    boy_sad: [0.5, 0.38, 0.36]
+    karna_shock: [0.5, 0.3, 0.28]
+    karna_torn: [0.5, 0.32, 0.28]
+beats:
+  - en: "Born with premium features, but life never gave you the subscription."
+    hi: "Born with premium features, पर life ने subscription ही नहीं दिया।"
+    caption: "PREMIUM FEATURES. *NO SUBSCRIPTION*."
+    cut: [punch, speedlines]
+    stage:
+      backdrop: void
+      fx: [rays, {glow: {actor: karna, colour: [255, 210, 120]}}]
+      actors:
+        karna: {puppet: karna, x: 540, y: 1720, h: 1060, face: right, motion: breathe}
+  - en: "Divine armour and earrings from birth. And on that same day, a frightened young mother set you afloat on the river."
+    hi: "पैदा होते ही divine कवच और कुंडल। और उसी दिन, एक डरी हुई young माँ ने तुम्हें नदी में बहा दिया।"
+    caption: "DAY ONE: *GHOSTED*."
+    cut: [scratch]
+    title_card: "THE RIVER"
+    stage:
+      backdrop: river
+      fx: [{glow: {actor: kunti, colour: [255, 220, 140]}}]
+      actors:
+        kunti: {puppet: kunti_young, x: 540, y: 1720, h: 1040, face: right, motion: tremble, enter: fade}
+  - en: "Imagine. Your first villain arc is your own birth story."
+    hi: "सोचो। तुम्हारा पहला villain arc, तुम्हारी अपनी birth story है।"
+    caption: "VILLAIN ARC: *DAY ONE*."
+    caption_y: 470
+    cut: [glitch]
+    stage:
+      backdrop: river
+      actors:
+        boy: {puppet: boy_sad, x: 540, y: 1960, h: 1300, face: right, motion: breathe, enter: bottom}
+  - en: "And your very first question in life: what did I do wrong?"
+    hi: "और ज़िंदगी का पहला सवाल: मैंने गलत क्या किया था?"
+    caption: "WHAT DID I DO *WRONG*?"
+    caption_y: 470
+    stage:
+      backdrop: river
+      actors:
+        boy: {puppet: boy_wrong, x: 540, y: 1960, h: 1300, face: right, motion: breathe}
+  - en: "Talent. Skills. Confidence. Just the wrong surname."
+    hi: "Talent है। Skills हैं। Confidence है। बस surname गलत है।"
+    caption: "JUST THE *WRONG SURNAME*."
+    cut: [punch]
+    title_card: "HASTINAPUR ARENA"
+    stage:
+      backdrop: arena
+      actors:
+        karna: {puppet: karna, x: 540, y: 1720, h: 1040, face: right, motion: breathe, enter: bottom}
+  - en: "You want to be the best archer in the world, but society's HR says: sorry bro, you're not from the right background."
+    hi: "तुम दुनिया के best archer बनना चाहते हो, पर society का HR बोलता है, sorry bro, you're not from the right background।"
+    caption: "\"NOT FROM THE RIGHT *BACKGROUND*.\""
+    cut: [buzz]
+    stage:
+      backdrop: arena
+      fx: [smoke_far]
+      actors:
+        karna: {puppet: karna_down, x: 540, y: 1720, h: 1040, face: right, motion: tremble}
+  - en: "Bro, it was never a skill issue. It was a system issue."
+    hi: "Bro, skill issue नहीं था। System issue था।"
+    caption: "NOT A SKILL ISSUE. A *SYSTEM ISSUE*."
+    cut: [glitch, drop, speedlines]
+    stage:
+      backdrop: void
+      fx: [shake, lightning]
+      actors:
+        karna: {puppet: karna, x: 540, y: 1720, h: 1080, face: right, motion: breathe}
+  - en: "And then enter Duryodhana. The first guy who says: bro, I see your potential."
+    hi: "और फिर entry होती है दुर्योधन की। पहला बंदा जो बोलता है, bro, I see your potential।"
+    caption: "\"I SEE YOUR *POTENTIAL*.\""
+    cut: [flash, speedlines]
+    name: {head: "DURYODHANA", sub: "Prince of Hastinapur", y: 560}
+    stage:
+      backdrop: arena
+      actors:
+        karna: {puppet: karna_down, x: 290, y: 1720, h: 980, face: right, motion: breathe}
+        duryodhana: {puppet: duryodhana, x: 790, y: 1720, h: 1000, face: left, motion: sway, enter: right}
+  - en: "He makes you king of Anga, on the spot. Respect, a kingdom, an identity."
+    hi: "वहीं के वहीं अंग देश का राजा बना देता है। Respect, kingdom, identity, सब।"
+    caption: "KING OF *ANGA*."
+    cut: [punch]
+    title_card: "ANGA"
+    stage:
+      backdrop: court
+      fx: [rays]
+      actors:
+        karna: {puppet: karna_smirk, x: 300, y: 1720, h: 1000, face: right, motion: breathe}
+        duryodhana: {puppet: duryodhana, x: 790, y: 1720, h: 1000, face: left, motion: sway}
+  - en: "So tell me. The man who took you from zero to hero, how do you leave him when times get tough?"
+    hi: "अब बताओ। जिस बंदे ने तुम्हें zero से hero बनाया, उसे tough times में कैसे छोड़ दोगे?"
+    caption: "ZERO TO *HERO*."
+    stage:
+      backdrop: court
+      actors:
+        karna: {puppet: karna_smirk, x: 540, y: 1720, h: 1060, face: right, motion: breathe}
+  - en: "[excited] Then, plot twist. Before the war, Shri Krishna himself comes to you. You are Kunti's eldest son. Join the Pandavas, and you will be king."
+    hi: "[excited] और फिर, plot twist। युद्ध से पहले श्रीकृष्ण खुद आते हैं। तुम कुंती के सबसे बड़े बेटे हो। पांडवों की तरफ़ आ जाओ, राजा तुम बनोगे।"
+    caption: "PLOT TWIST: *ELDEST PANDAVA*."
+    cut: [glitch, drop]
+    name: {head: "SHRI KRISHNA", sub: "Before the war", y: 560}
+    stage:
+      backdrop: camp
+      actors:
+        karna: {puppet: karna, x: 290, y: 1720, h: 980, face: right, motion: tremble}
+        krishna: {puppet: krishna, x: 790, y: 1720, h: 1000, face: left, motion: sway, enter: right}
+  - en: "Wait. What?"
+    hi: "रुको... क्या?"
+    caption: "WAIT. *WHAT*?"
+    cut: [scratch, punch]
+    stage:
+      backdrop: camp
+      actors:
+        karna: {puppet: karna_shock, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+  - en: "And then your mother comes herself. After all those years. A family reunion, just a little late."
+    hi: "और फिर माँ खुद आती हैं। इतने सालों बाद। Family reunion, बस थोड़ा late।"
+    caption: "FAMILY REUNION. *SLIGHTLY LATE*."
+    cut: [scratch]
+    name: {head: "KUNTI", sub: "Mother of the Pandavas", y: 560}
+    stage:
+      backdrop: ghat
+      fx: [rays]
+      actors:
+        karna: {puppet: karna, x: 290, y: 1720, h: 980, face: right, motion: breathe}
+        kunti: {puppet: kunti, x: 790, y: 1720, h: 940, face: left, motion: sway, enter: fade}
+  - en: "But what about the friend who stood by you when nobody else did?"
+    hi: "पर उस दोस्त का क्या, जो तब साथ खड़ा था, जब कोई नहीं था?"
+    caption: "BUT WHAT ABOUT *THE FRIEND*?"
+    stage:
+      backdrop: court
+      actors:
+        duryodhana: {puppet: duryodhana, x: 540, y: 1720, h: 1060, face: right, motion: breathe, enter: fade}
+  - en: "Karna says no. But he gives his mother one promise. I will kill none of your sons but Arjuna. Either way, you will still have five sons."
+    hi: "कर्ण मना कर देता है। पर माँ को एक वचन देता है। अर्जुन के सिवा, किसी बेटे को नहीं मारूँगा। हर हाल में, तुम्हारे पाँच बेटे रहेंगे।"
+    caption: "YOU WILL STILL HAVE *FIVE SONS*."
+    key: true
+    stage:
+      backdrop: ghat
+      fx: [rays, {glow: {actor: karna, colour: [255, 200, 120]}}]
+      actors:
+        karna: {puppet: karna_promise, x: 300, y: 1720, h: 1000, face: right, motion: breathe}
+        kunti: {puppet: kunti, x: 790, y: 1720, h: 940, face: left, motion: breathe}
+  - en: "And this is where Karna gets complicated. Was his loyalty his greatest strength, or the very thing that destroyed him?"
+    hi: "और यहीं कर्ण complicated हो जाता है। क्या उसकी loyalty उसकी सबसे बड़ी ताकत थी? या वही उसे ले डूबी?"
+    caption: "STRENGTH, OR *DOWNFALL*?"
+    cut: [glitch]
+    stage:
+      backdrop: void
+      fx: [smoke_far]
+      actors:
+        karna: {puppet: karna_down, x: 540, y: 1720, h: 1060, face: right, motion: breathe}
+  - en: "Sometimes we owe someone so much that we mortgage our own conscience for them."
+    hi: "कभी-कभी हम किसी के इतने एहसानमंद हो जाते हैं, कि उसके लिए अपना ज़मीर भी गिरवी रख देते हैं।"
+    caption: "CONSCIENCE: *MORTGAGED*."
+    stage:
+      backdrop: void
+      actors:
+        karna: {puppet: karna_torn, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: fade}
+  - en: "So tell me. If you were Karna, would you choose dharma? Or the one person who never made you feel unwanted?"
+    hi: "तो बताओ। अगर तुम कर्ण होते, तो धर्म चुनते? या उस इंसान को, जिसने तुम्हें कभी unwanted feel नहीं कराया?"
+    caption: "DHARMA, OR *THE FRIEND*?"
+    key: true
+    stage:
+      backdrop: void
+      fx: [rays]
+      actors:
+        karna: {puppet: karna_ask, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: fade}
+  - en: "And remember. Being grateful to someone doesn't make everything they do right."
+    hi: "और याद रखना। किसी का एहसानमंद होने से, उसका हर काम सही नहीं हो जाता।"
+    caption: "GRATITUDE IS NOT *AGREEMENT*."
+    stage:
+      backdrop: void
+      actors:
+        karna: {puppet: karna, x: 540, y: 1720, h: 1080, face: right, motion: breathe}
+end:
+  head: "KARNA"
+  sub: "dharma, or the friend?"
+upload:
+  hashtags:
+  - shorts
+  - karna
+  - mahabharata
+  - pov
+  - duryodhana
+  - krishna
+  - indianmythology
+  - sanatandharma
+  - genz
+  tags:
+  - karna
+  - pov you are karna
+  - karna story
+  - karna and duryodhana friendship
+  - karna loyalty
+  - karna kunti
+  - kunti karna promise
+  - karna eldest pandava
+  - suryaputra karna
+  - karna kavach kundal
+  - king of anga
+  - mahabharata pov
+  - mahabharata gen z
+  - mahabharata explained
+  - dharma vs loyalty
+  - mahabharata facts
+  - indian mythology
+  - hindu mythology
+  - anime mythology
+  - youtube shorts
+  en:
+    title: 'POV: You are Karna 💀 #shorts'
+    description: Born with divine armour, abandoned on day one, rejected for his surname, made a king by
+      Duryodhana, then told he was the eldest Pandava. If you were Karna, would you choose dharma, or the
+      friend who never made you feel unwanted? POV, part 1.
+  hi:
+    title: 'POV: तुम कर्ण हो 💀 धर्म या दोस्ती? #shorts'
+    description: जन्म से दिव्य कवच, पहले ही दिन नदी में, surname की वजह से reject, दुर्योधन ने राजा बनाया, और
+      फिर पता चला कि वो सबसे बड़ा पांडव है। अगर तुम कर्ण होते, तो धर्म चुनते, या वो दोस्त? Comment में बताओ।
+      POV, भाग 1।
+    hashtags:
+    - hindi
+    - कर्ण
+    tags:
+    - कर्ण
+    - कर्ण की कहानी
+    - कर्ण और दुर्योधन की दोस्ती
+    - कर्ण और कुंती
+    - सूर्यपुत्र कर्ण
+    - महाभारत
+    - धर्म या दोस्ती
+    - karna ki kahani
+    - mahabharat pov
+    - hindi kahani

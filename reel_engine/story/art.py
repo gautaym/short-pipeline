@@ -40,6 +40,7 @@ MODEL = "Tongyi-MAI/Z-Image-Turbo"           # Apache 2.0; weights held in 8-bit
 PUPPET_SIZE = (832, 1216)
 BACKDROP_SIZE = (864, 1536)                  # 9:16, scaled up to the reel's 1080 x 1920
 BLACK = 34                                   # background pixels are darker than this on every channel
+GREEN_KEY = 0.5                              # on a green backing, pixels at least this share as green as its edges
 
 
 def folder(story_id: str) -> Path:
@@ -90,6 +91,8 @@ def cast_segment(sc: dict) -> None:
         return
     opening = sc.setdefault("opening", {})
     opening.setdefault("beat", 1)
+    if sc.get("host") is False:                          # the narrator is heard but never seen
+        return
     if sc.get("ask", True) is False:                     # told straight: the narrator opens and closes alone
         opening["actors"] = {"narrator": {"puppet": pair["narrator"], "x": 540, "y": 2010, "h": 780, "z": 11,
                                           "face": "left", "motion": "talk", "enter": "right"},
@@ -161,6 +164,28 @@ def generate(sc: dict, takes: int = 2, only: list[str] | None = None, redo: bool
     return [Path(j["out"]) for j in jobs]
 
 
+def greenness(rgb: np.ndarray) -> np.ndarray:
+    """How much greener than red and blue each pixel is."""
+    c = rgb.astype(np.int16)
+    return c[..., 1] - np.maximum(c[..., 0], c[..., 2])
+
+
+def backing_green(rgb: np.ndarray) -> float:
+    """How green the picture's edges are: high for one drawn on a flat green backing."""
+    g = greenness(rgb)
+    return float(np.median(np.concatenate([g[:6].ravel(), g[-6:].ravel(), g[:, :6].ravel(), g[:, -6:].ravel()])))
+
+
+def green_backed(rgb: np.ndarray) -> bool:
+    """A picture drawn on a flat green backing (`plain pure green background` in the style) rather than black."""
+    return backing_green(rgb) > 45
+
+
+def green_key(rgb: np.ndarray) -> np.ndarray:
+    """The backing's pixels: at least half as green as its edges (the model's green varies from take to take)."""
+    return greenness(rgb) > GREEN_KEY * backing_green(rgb)
+
+
 def cut_out(rgb: np.ndarray) -> np.ndarray:
     """Alpha (0-255) for a puppet photographed on black: the background is the near-black region
     reachable from the picture's edges, so dark paint inside the puppet stays solid."""
@@ -168,6 +193,8 @@ def cut_out(rgb: np.ndarray) -> np.ndarray:
     border = np.concatenate([level[:6].ravel(), level[-6:].ravel(), level[:, :6].ravel(), level[:, -6:].ravel()])
     dark = level < max(BLACK, float(np.percentile(border, 80)) + 14)    # some "black" backdrops are textured grey;
                                                                         # a stick touching the edge is a few percent
+    if green_backed(rgb):                                        # drawn on green (styles with black hair):
+        dark = green_key(rgb)                                     # the background is the green, not the dark
     bg = np.zeros_like(dark)
     bg[0, :], bg[-1, :], bg[:, 0], bg[:, -1] = dark[0, :], dark[-1, :], dark[:, 0], dark[:, -1]
     while True:                                                  # grow from the edges through dark pixels
@@ -192,7 +219,8 @@ def outline(pg, rgb: np.ndarray) -> tuple[np.ndarray, tuple[int, int, int, int] 
     alpha = cut_out(rgb)
     size = rgb.shape[:2]
     pocket = pg.Surface(size, pg.SRCALPHA)                            # background trapped inside the outline,
-    pg.surfarray.pixels_alpha(pocket)[:] = np.where((rgb.max(axis=2) < BLACK) & (alpha > 0), 255, 0)  # e.g.
+    backing = green_key(rgb) if green_backed(rgb) else rgb.max(axis=2) < BLACK
+    pg.surfarray.pixels_alpha(pocket)[:] = np.where(backing & (alpha > 0), 255, 0)  # e.g.
     for p in pg.mask.from_surface(pocket, 127).connected_components():  # between an arm and the body
         if p.count() >= 0.002 * rgb.shape[0] * rgb.shape[1]:          # big enough not to be paint or outline
             hole = pg.surfarray.array_alpha(p.to_surface(setcolor=(255, 255, 255, 255), unsetcolor=(0, 0, 0, 0)))
@@ -214,6 +242,21 @@ def outline(pg, rgb: np.ndarray) -> tuple[np.ndarray, tuple[int, int, int, int] 
     return alpha, (cols[0], rows[0], cols[-1] - cols[0] + 1, rows[-1] - rows[0] + 1)
 
 
+def despill(rgb: np.ndarray, alpha: np.ndarray) -> np.ndarray:
+    """On a green backing, take the green spill off the few pixels round the outline."""
+    if not green_backed(rgb):
+        return rgb
+    near = alpha < 255
+    for _ in range(3):
+        near[1:] |= near[:-1]
+        near[:-1] |= near[1:]
+        near[:, 1:] |= near[:, :-1]
+        near[:, :-1] |= near[:, 1:]
+    out = rgb.copy()
+    out[..., 1] = np.where(near, np.minimum(rgb[..., 1], np.maximum(rgb[..., 0], rgb[..., 2])), rgb[..., 1])
+    return out
+
+
 def cut_with(pg, rgb: np.ndarray, alpha: np.ndarray, rect):
     surf = pg.Surface(rgb.shape[:2], pg.SRCALPHA)
     pg.surfarray.pixels3d(surf)[:] = rgb
@@ -228,7 +271,7 @@ def cut(pg, story_id: str, name: str):
         return pg.image.load(str(dst))
     rgb = pg.surfarray.array3d(pg.image.load(str(src)))             # (w, h, 3)
     alpha, rect = outline(pg, rgb)
-    surf = cut_with(pg, rgb, alpha, rect)
+    surf = cut_with(pg, despill(rgb, alpha), alpha, rect)
     pg.image.save(surf, str(dst))
     return surf
 
@@ -262,7 +305,8 @@ def live_frames(pg, story_id: str, name: str) -> list:
     alpha, rect = outline(pg, pg.surfarray.array3d(pg.image.load(str(puppet_file(story_id, name)))))
     frames = []
     for f, c in zip(raw, cuts):
-        surf = cut_with(pg, pg.surfarray.array3d(pg.image.load(str(f))), alpha, rect)
+        rgb = pg.surfarray.array3d(pg.image.load(str(f)))
+        surf = cut_with(pg, despill(rgb, alpha), alpha, rect)
         pg.image.save(surf, str(c))
         frames.append(surf)
     return frames

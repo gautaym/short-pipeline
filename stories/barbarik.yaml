@@ -1,0 +1,252 @@
+# Mahabharata Secrets, part 1: Barbarik, the warrior who could end the war in one minute.
+# Review notes. Barbarik (Barbarika) is not in Vyasa's critical Mahabharata; his story comes from the
+# Skanda Purana (Kaumarika Khanda) and from folk tradition in Rajasthan, where he is worshipped as Khatu
+# Shyam Ji, "haare ka sahara" (the support of those who are losing). Hence "the folk tale says" in beat 1.
+# He is the son of Ghatotkacha, so Bhima's grandson. His three infallible arrows were a divine boon (the
+# Purana credits the goddesses; popular tellings say Lord Shiva), so the script just says a boon. In the
+# folk telling Krishna asks the warriors how many days they need: Bhishma 20, Drona 25, Karna 24,
+# Arjuna 28, Barbarik one minute (Vyasa's Udyoga Parva has a different exchange, with Duryodhana
+# asking). Krishna, disguised as a Brahmin, tests him on a peepal tree with one leaf hidden under his
+# foot; Barbarik's vow to his mother to fight for the losing side means he would keep switching sides
+# until only he was left; Krishna asks for his head as a gift, Barbarik gives it and watches the whole
+# war from a hilltop. The head is never shown: he watches as a glowing figure on the hill.
+# Sources: Skanda Purana summaries on wikipedia.org (Barbarika), khatushyam temple trust pages,
+# timesofindia.com (Khatu Shyam story).
+# Made for a fast feed: pace fast, narrator only, few captions. Render with --captions few.
+id: barbarik
+topic: mythology
+series_part: 1
+ask: false
+pace: fast
+host: false                    # the narrator is only heard: the anime frame stays clean
+title:
+  en: "He could end the Mahabharata in one minute."
+  hi: "ये योद्धा महाभारत का पूरा युद्ध, सिर्फ़ एक मिनट में ख़त्म कर सकता था।"
+series:
+  en: "Mahabharata Secrets"
+  hi: "महाभारत के रहस्य"
+summary:
+  en: "Bhishma needed twenty days to end the war, Arjuna twenty eight. Barbarik needed one minute and three arrows. So why did Shri Krishna ask for his head before the war began?"
+  hi: "भीष्म को युद्ध ख़त्म करने में बीस दिन चाहिए थे, अर्जुन को अट्ठाईस। बर्बरीक को बस एक मिनट और तीन तीर। तो फिर श्रीकृष्ण ने युद्ध से पहले उनका शीश क्यों माँग लिया?"
+music: tense
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 3
+  actors:
+    barbarik: {puppet: barbarik, x: 540, y: 1780, h: 900, face: right, motion: breathe, enter: none}
+art:
+  puppet_style: >-
+    A single full-body character in Japanese anime illustration style, clean line art, cel shading,
+    large expressive eyes, vivid colours, three quarter view turned to the right, full body from head to
+    feet, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text.
+  prop_style: >-
+    A single object in Japanese anime illustration style, not a person, clean line art, cel shading,
+    vivid colours, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text.
+  backdrop_style: >-
+    A background scene in Japanese anime film style, painterly detailed background art, dramatic light,
+    vivid colours, an open ground across the lower third, seen full frame with no border or frame. Empty
+    scenery only: nobody in it, no people, no figures, no animals, no text. Vertical composition.
+  cast:
+    barbarik: >-
+      Barbarik, a fearless young warrior of about twenty with dark skin, long black hair tied up high,
+      sharp determined eyes, a simple gold armband and a blue and gold dhoti, a bow in one hand and a
+      quiver holding exactly three glowing blue arrows on his back, exactly two arms
+    krishna: >-
+      Lord Krishna, a handsome young man with blue skin and dark curly hair, a gold crown with a peacock
+      feather, a yellow silk dhoti, a flower garland and gold jewellery, exactly two arms
+    brahmin: >-
+      an old Brahmin sage with a long white beard, a saffron shawl over one shoulder, a white dhoti, a
+      tilak on his forehead and a wooden staff, exactly two arms
+  puppets:
+    krishna: "The character is {krishna}, calm and curious, one hand raised as if asking a question."
+    warriors:
+      style: "A group of characters in Japanese anime illustration style, clean line art, cel shading, vivid colours, full bodies from head to feet, against a plain flat pure bright green background, no green on the character, nothing else in the frame, no text."
+      text: "The characters are exactly four ancient Indian warriors with brown skin standing side by side, proud and serious, all in Indian silk dhotis, gold armbands and crowns, no western armour: an old warrior with a long white beard and a white dhoti, a stern teacher with a grey beard, a sacred thread and a bow, a young warrior with black hair wearing a golden breastplate and gold earrings, and a young archer with black hair in a blue and gold dhoti with a bow. Each has exactly two arms."
+    barbarik: "The character is {barbarik}, standing tall and confident, chin raised, holding his bow at his side."
+    barbarik_aim: "The character is {barbarik}, seen from the side in profile facing right, drawing his bow with a glowing blue arrow aimed straight ahead."
+    barbarik_bow: "The character is {barbarik}, bowing his head with his palms pressed together, a gentle peaceful smile, his bow on the ground beside him."
+    brahmin: "The character is {brahmin}, one bare foot planted forward, a sly knowing smile, leaning on his staff."
+  backdrops:
+    camp: "An ancient war camp on a wide plain at sunset, rows of cloth tents, tall war flags and banners, an orange and purple sky."
+    battlefield: "A vast empty battlefield at dawn, bare brown earth and dust across the lower half, tall war flags on poles in the distance, a blood red sky."
+    peepal: "A single enormous old peepal tree with thousands of heart-shaped green leaves, standing alone in an open green meadow, golden afternoon light."
+    storm: "A dark stormy plain at night, heavy purple clouds, flashes of lightning in the distance, bare ground."
+    hilltop: "The top of a rocky hill at night overlooking a wide battlefield far below with tiny campfires, a huge full moon and stars."
+    temple: "A white marble Hindu temple with a tall carved spire and saffron flags, steps leading up to it, festive marigold garlands, a bright blue sky."
+  backdrop_crop: 0.03
+  facing: {}
+  anchors: {}
+  live:
+    barbarik: [0.5, 0.15, 0.12]
+    krishna: [0.5, 0.15, 0.12]
+    brahmin: [0.5, 0.15, 0.12]
+beats:
+  - en: "The folk tale says that before the war, Shri Krishna asked every great warrior: alone, how many days would you need to end this war?"
+    hi: "लोककथा कहती है, युद्ध से पहले श्रीकृष्ण ने हर महायोद्धा से पूछा, अकेले ये युद्ध कितने दिन में ख़त्म करोगे?"
+    title_card: "KURUKSHETRA"
+    stage:
+      backdrop: camp
+      actors:
+        krishna: {puppet: krishna, x: 540, y: 1720, h: 1040, face: right, motion: sway, enter: fade}
+  - en: "Bhishma said twenty days. Drona, twenty five. Karna, twenty four. And Arjuna, twenty eight."
+    hi: "भीष्म बोले, बीस दिन। द्रोणाचार्य, पच्चीस। कर्ण, चौबीस। और अर्जुन, अट्ठाईस।"
+    title_card: "20 · 25 · 24 · 28 DAYS"
+    stage:
+      backdrop: battlefield
+      fx: [smoke_far]
+      actors:
+        warriors: {puppet: warriors, x: 540, y: 1720, h: 820, face: right, motion: breathe, enter: fade}
+  - en: "[excited] Then a young warrior stepped forward, with only three arrows, and said: one minute."
+    hi: "[excited] तभी एक युवा योद्धा आगे आया, तरकश में सिर्फ़ तीन तीर, और बोला, बस एक मिनट!"
+    caption: "ONE *MINUTE*."
+    key: true
+    name: {head: "BARBARIK", sub: "Grandson of Bhima"}
+    stage:
+      backdrop: battlefield
+      fx: [shake, {glow: {actor: barbarik, colour: [120, 180, 255]}}]
+      actors:
+        barbarik: {puppet: barbarik, x: 540, y: 1720, h: 1060, face: right, motion: breathe, enter: bottom}
+  - en: "His arrows were a divine boon. One arrow marks every target, and the next destroys them all and flies back to him."
+    hi: "उसके तीर दिव्य वरदान थे। एक तीर हर निशाने पर चिह्न लगाता, और दूसरा सबको मिटाकर तरकश में लौट आता।"
+    stage:
+      backdrop: storm
+      fx: [lightning, {strike: {weapon: arrow, from: [560, 1000], to: [1000, 760]}}]
+      actors:
+        barbarik: {puppet: barbarik_aim, x: 330, y: 1720, h: 1000, face: right, motion: breathe, enter: left}
+  - en: "Krishna came to test him, disguised as an old Brahmin. Pierce every leaf of this peepal tree, he said, and hid one leaf under his foot."
+    hi: "श्रीकृष्ण बूढ़े ब्राह्मण बनकर परीक्षा लेने आए। बोले, इस पीपल का हर पत्ता भेदकर दिखाओ। और चुपके से एक पत्ता पैर के नीचे दबा लिया।"
+    name: {head: "SHRI KRISHNA", sub: "In disguise", y: 700}
+    stage:
+      backdrop: peepal
+      actors:
+        brahmin: {puppet: brahmin, x: 760, y: 1730, h: 960, face: left, motion: sway, enter: right}
+        barbarik: {puppet: barbarik_aim, x: 250, y: 1720, h: 900, face: right, motion: breathe, enter: left}
+  - en: "[excited] One arrow pierced every leaf on the tree. Then it came down and circled over Krishna's foot!"
+    hi: "[excited] एक ही तीर ने पेड़ का हर पत्ता भेद दिया। और फिर नीचे आकर, श्रीकृष्ण के पैर के ऊपर मँडराने लगा!"
+    caption: "NOTHING *ESCAPES* IT."
+    key: true
+    stage:
+      backdrop: peepal
+      fx: [{strike: {weapon: arrow, from: [420, 1020], to: [760, 1660], hover: true}}]
+      actors:
+        brahmin: {puppet: brahmin, x: 760, y: 1730, h: 960, face: left, motion: tremble}
+        barbarik: {puppet: barbarik_aim, x: 250, y: 1720, h: 900, face: right, motion: breathe}
+  - en: "But Barbarik had made his mother a promise. He would always fight for the side that was losing."
+    hi: "पर बर्बरीक ने अपनी माँ को वचन दिया था। वो हमेशा हारने वाले पक्ष की ओर से लड़ेंगे।"
+    title_card: "THE VOW"
+    stage:
+      backdrop: camp
+      fx: [smoke_far]
+      actors:
+        barbarik: {puppet: barbarik, x: 540, y: 1720, h: 1040, face: right, motion: breathe, enter: fade}
+  - en: "Krishna saw the danger. Whichever side he joined would start winning, so he would switch again and again, until no one was left on either side."
+    hi: "श्रीकृष्ण ख़तरा समझ गए। बर्बरीक जिस तरफ़ लड़ते, वही जीतने लगता, तो उन्हें पाला बदलना पड़ता। बार-बार। जब तक दोनों सेनाओं में कोई न बचता।"
+    caption: "NO ONE *LEFT*."
+    key: true
+    stage:
+      backdrop: battlefield
+      fx: [shake, lightning, smoke_far]
+      actors: {}
+  - en: "So Krishna asked him for his head as a gift. Barbarik gave it with a smile, and asked for just one thing: to watch the whole war."
+    hi: "तब श्रीकृष्ण ने दान में उनका शीश माँगा। और बर्बरीक ने मुस्कुराकर दे दिया। बस एक इच्छा रखी, पूरा युद्ध देखने की।"
+    stage:
+      backdrop: peepal
+      fx: [rays, {glow: {actor: barbarik, colour: [255, 220, 150]}}]
+      actors:
+        krishna: {puppet: krishna, x: 790, y: 1720, h: 1000, face: left, motion: sway, enter: fade}
+        barbarik: {puppet: barbarik_bow, x: 290, y: 1720, h: 960, face: right, motion: breathe, enter: fade}
+  - en: "From a hilltop, he watched all eighteen days of the Mahabharata."
+    hi: "और एक पहाड़ी की चोटी से, उन्होंने महाभारत के पूरे अठारह दिन देखे।"
+    title_card: "18 DAYS"
+    stage:
+      backdrop: hilltop
+      fx: [{glow: {actor: barbarik, colour: [140, 190, 255]}}]
+      actors:
+        barbarik: {puppet: barbarik, x: 540, y: 1560, h: 620, face: right, motion: float, enter: fade}
+  - en: "Today he is worshipped as Khatu Shyam Ji. Haare ka sahara, the friend of everyone who is losing."
+    hi: "आज वही बर्बरीक, खाटू श्याम जी के नाम से पूजे जाते हैं। हारे का सहारा।"
+    caption: "*HAARE KA SAHARA*."
+    key: true
+    name: {head: "KHATU SHYAM JI", sub: "Haare ka sahara"}
+    stage:
+      backdrop: temple
+      fx: [rays, {diyas: {y: 1770, rows: 1, n: 9, grow: 2.0}}]
+      actors:
+        barbarik: {puppet: barbarik_bow, x: 540, y: 1720, h: 1000, face: right, motion: sway, enter: fade}
+  - en: "So tell me. If Barbarik had fought, would there have been a Mahabharata at all?"
+    hi: "अब आप बताइए। अगर बर्बरीक लड़ते, तो क्या महाभारत होता भी?"
+    stage:
+      backdrop: battlefield
+      fx: [smoke_far]
+      actors:
+        barbarik: {puppet: barbarik, x: 540, y: 1720, h: 1060, face: right, motion: breathe, enter: fade}
+end:
+  head: "BARBARIK"
+  sub: "three arrows, one minute"
+upload:
+  hashtags:
+  - shorts
+  - mahabharata
+  - barbarik
+  - khatushyam
+  - krishna
+  - indianmythology
+  - sanatandharma
+  - mahabharatasecrets
+  - storytime
+  tags:
+  - barbarik
+  - barbarika
+  - khatu shyam
+  - khatu shyam ji story
+  - haare ka sahara
+  - barbarik story
+  - who could end mahabharata in one minute
+  - mahabharata in one minute
+  - barbarik three arrows
+  - krishna asked for barbarik's head
+  - ghatotkacha son
+  - bhima grandson
+  - strongest warrior in mahabharata
+  - mahabharata secrets
+  - mahabharata facts
+  - unknown mahabharata stories
+  - kurukshetra war
+  - shri krishna
+  - indian mythology
+  - hindu mythology
+  - mythology stories
+  - pauranik katha
+  - animated story
+  - anime mythology
+  - youtube shorts
+  - did you know
+  en:
+    title: 'He could end the Mahabharata in ONE minute: Barbarik #shorts'
+    description: Bhishma needed twenty days to end the war, Arjuna twenty eight. Barbarik needed one minute and
+      three arrows. So why did Shri Krishna ask for his head before the war began? The folk tale of Khatu Shyam
+      Ji. Mahabharata Secrets, part 1.
+  hi:
+    title: 'महाभारत 1 मिनट में ख़त्म कर देता ये योद्धा: बर्बरीक की कथा #shorts'
+    description: भीष्म को युद्ध ख़त्म करने में बीस दिन चाहिए थे, अर्जुन को अट्ठाईस। बर्बरीक को बस एक मिनट और तीन
+      तीर। तो फिर श्रीकृष्ण ने युद्ध से पहले उनका शीश क्यों माँग लिया? खाटू श्याम जी की लोककथा। महाभारत के रहस्य, भाग 1।
+    hashtags:
+    - hindi
+    - खाटूश्याम
+    tags:
+    - बर्बरीक
+    - खाटू श्याम
+    - खाटू श्याम जी की कहानी
+    - हारे का सहारा
+    - बर्बरीक की कथा
+    - महाभारत के रहस्य
+    - महाभारत की कहानी
+    - तीन बाण धारी
+    - barbarik ki kahani
+    - khatu shyam ki kahani
+    - mahabharat katha
+    - hindi kahani
+    - पौराणिक कथा

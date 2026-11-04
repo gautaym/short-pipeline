@@ -79,7 +79,7 @@ def live(story_id: str) -> list[str]:
     return make_live(load_story(story_id))
 
 
-def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1) -> list[Path]:
+def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1, captions: str = "all") -> list[Path]:
     """Render the story in each language, then a frame sheet and a phone-size preview beside each reel.
     Living faces the story lists (art.live) are made first if missing."""
     import re
@@ -88,7 +88,7 @@ def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1) ->
     made = []
     for lang in langs:
         run = subprocess.run([sys.executable, "-m", "reel_engine", "render", "--mode", "story", "--story", story_id,
-                              "--lang", lang, "--seed", str(seed), "--no-ledger"],
+                              "--lang", lang, "--seed", str(seed), "--captions", captions, "--no-ledger"],
                              capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=REPO_ROOT)
         found = re.search(r"-> (.+\.mp4) \(([\d.]+)s\)", run.stdout)
         if run.returncode or not found:

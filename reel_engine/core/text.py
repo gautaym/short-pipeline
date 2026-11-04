@@ -96,6 +96,29 @@ def outlined(pg, font, text: str, colour, outline: int = 5, outline_colour=(0, 0
     return surf
 
 
+GOLD = ((255, 236, 140), (236, 150, 30))     # top and bottom of the gold lettering
+MAROON = (86, 18, 16)
+
+
+def gold_text(pg, font, text: str, top=GOLD[0], bottom=GOLD[1], outline: int = 7, edge=MAROON, shadow: int = 8):
+    """Festive lettering: a top-to-bottom gradient fill, a thick dark border and a drop shadow."""
+    import numpy as np
+    base = font.render(text, True, (255, 255, 255))
+    w, h = base.get_size()
+    k = np.linspace(0, 1, h)[None, :, None]
+    fill = (np.array(top) * (1 - k) + np.array(bottom) * k).astype(np.uint8)
+    pg.surfarray.pixels3d(base)[:] = np.broadcast_to(fill, (w, h, 3))
+    rim = outlined(pg, font, text, top, outline, edge)
+    surf = pg.Surface((rim.get_width() + shadow, rim.get_height() + shadow), pg.SRCALPHA)
+    dark = rim.copy()
+    dark.fill((0, 0, 0, 255), special_flags=pg.BLEND_RGBA_MIN)
+    dark.fill((255, 255, 255, 110), special_flags=pg.BLEND_RGBA_MULT)
+    surf.blit(dark, (shadow, shadow))
+    surf.blit(rim, (0, 0))
+    surf.blit(base, (outline, outline))
+    return surf
+
+
 def text_block(pg, font, text: str, colour, max_w: int, max_lines: int = 4, outline: int = 5,
                line_gap: int = 6):
     """Wrapped, outlined, centred lines stacked into one transparent surface."""
