@@ -1,0 +1,318 @@
+# POV-style Festival Stories: Dhanteras, the night a wife kept Yamraj at the door. From the user's idea (2026-11-04).
+# Review notes. A folk tale told for Dhanteras (Dhanatrayodashi): King Hima's sixteen-year-old son was fated to
+# die of a snakebite on the fourth day of his marriage. His young wife heaped gold and silver ornaments at the
+# chamber door, lit lamps everywhere, and kept him awake all night with stories and songs. Yama came as a
+# serpent, was dazzled by the light, climbed onto the heap and sat listening until dawn, then left quietly.
+# This is linked to Yamadeepdaan, the lamp lit for Yama on Dhanteras evening. Dhanteras is also Dhanvantari
+# Jayanti: Bhagwan Dhanvantari, the god of Ayurveda, rose from the churning of the ocean with the pot of amrit.
+# Folk tale, so "lok-katha hai"; jokes are on the situation, never on Yamraj (Dharmaraj).
+# Sources: timesofindia.com and drikpanchang.com (Dhanteras story, Yamadeepdaan), wikipedia.org (Dhanteras,
+# Dhanvantari). Hinglish, Shaunak's voice, candlelit anime look, full kinetic captions: --captions all.
+id: dhanteras
+topic: mythology
+series_part: 5
+ask: false
+pace: fast
+host: false
+hook_at: bottom_left
+voice: {hi: "maya:hi:Shaunak", en: "maya:en:Shaunak"}
+edit: {grade: film, captions: kinetic}
+title:
+  en: "Dhanteras pe gold khareedne ja rahe ho?"
+  hi: "धनतेरस पे gold खरीदने जा रहे हो?"
+series:
+  en: "Festival Stories"
+  hi: "त्योहारों की कहानियाँ"
+summary:
+  en: "A prince was fated to die on the fourth night of his marriage. His wife heaped gold at the door, lit lamps everywhere and told him stories all night, and Yamraj, who came as a serpent, sat listening until dawn. The Dhanteras story, and why the real wealth is health."
+  hi: "एक राजकुमार की कुंडली में शादी के चौथे दिन मौत लिखी थी। उसकी पत्नी ने दरवाज़े पर सोने का ढेर लगाया, हर तरफ़ दीये जलाए और पूरी रात कहानियाँ सुनाईं, और साँप बनकर आए यमराज सुबह तक सुनते रहे। धनतेरस की कहानी, और क्यों असली धन health है।"
+music: tense
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 1
+  actors:
+    necklace: {puppet: necklace, x: 540, y: 1040, h: 760, face: right, motion: breathe, enter: none}
+art:
+  puppet_style: >-
+    A single full-body character in Japanese anime illustration style, clean line art, cel shading,
+    large expressive eyes, vivid colours, warm golden lamplight on the character, three quarter view turned
+    to the right, full body from head to feet, against a plain flat pure bright green background, no green
+    on the character, nothing else in the frame, no text.
+  prop_style: >-
+    A single object in Japanese anime illustration style, not a person, clean line art, cel shading, vivid
+    colours, warm glints of light, against a plain flat pure bright green background, no green on the
+    object, nothing else in the frame, no text.
+  backdrop_style: >-
+    A background scene in Japanese anime film style, painterly detailed background art, dramatic cinematic
+    light, rich colours, an open floor across the lower third, seen full frame with no border or frame.
+    Empty scenery only: nobody in it, no people, no figures, no animals, no text. Vertical composition.
+  cast:
+    prince: >-
+      a handsome young prince of about eighteen with brown skin, short black hair, a small gold crown, a
+      cream and gold silk dhoti and shawl, gold armbands, a marigold wedding garland, exactly two arms
+    princess: >-
+      a beautiful clever young princess of about eighteen with brown skin, long black hair in a braid, a
+      red and gold bridal sari, gold necklaces and bangles, a small red bindi, exactly two arms
+    pandit: >-
+      an old royal astrologer with a long white beard, a saffron shawl, a white dhoti and a tilak, exactly
+      two arms
+    dhanvantari: >-
+      Bhagwan Dhanvantari, a radiant divine young god with blue skin, a tall gold crown, a yellow silk dhoti,
+      a flower garland and gold jewellery, a soft golden halo, exactly two arms
+  puppets:
+    prince: "The character is {prince}, smiling happily, one hand raised in greeting."
+    prince_shock: "The character is {prince}, shocked and scared, eyes wide, both hands raised to his face."
+    prince_sleepy: "The character is {prince}, yawning sleepily but smiling, rubbing one eye with his hand."
+    pandit: "The character is {pandit}, worried, holding an open scroll of a horoscope chart in both hands."
+    princess: "The character is {princess}, a confident clever smirk, hands on her hips, ready for anything."
+    princess_story: "The character is {princess}, smiling warmly, one hand raised with a graceful gesture as if telling a story."
+    couple:
+      style: "A group of two characters in Japanese anime illustration style, clean line art, cel shading, large expressive eyes, vivid colours, soft morning light, full bodies from head to feet, against a plain flat pure bright green background, no green on the characters, nothing else in the frame, no text."
+      text: "The characters are exactly two: {prince} and {princess}, standing side by side, smiling with relief and joy, holding hands."
+    dhanvantari: "The character is {dhanvantari}, rising calmly, holding a shining golden pot of nectar in both hands in front of his chest."
+  props:
+    necklace: "The prop is an ornate heavy gold necklace with red rubies and pearls, glittering with sparkles, seen from the front."
+    jewels: "The prop is a large heap of gold coins, gold necklaces, bangles, crowns and silver pots, glittering, seen from the side."
+    serpent: "The prop is a large mysterious glowing serpent with deep blue scales and glowing golden eyes, coiled with its head raised, calm and majestic, not scary."
+  backdrops:
+    velvet: "A dark red velvet cloth background with soft golden bokeh lights, luxurious."
+    palace: "A grand ancient Indian palace courtyard decorated for a wedding with marigold garlands, banners and flowers, bright warm daylight."
+    corridor: "A long dark ancient Indian palace corridor at night with carved stone pillars, cold blue moonlight, deep shadows."
+    doorway: "The grand carved entrance of an ancient Indian palace bedroom at night, warm golden light glowing from inside, an open stone floor in front."
+    chamber: "A royal ancient Indian bedroom chamber at night lit by dozens of oil lamps, warm amber light, silk curtains, rich gold decorations."
+    dawn: "An ancient Indian palace terrace at sunrise, a soft pink and gold sky, distant hills."
+    ocean: "A vast glowing ocean of milk under a starry purple sky, the waves swirling and shining."
+    dark: "A dark night sky over a quiet ancient Indian palace rooftop, almost black, a faint warm glow at the bottom."
+  backdrop_crop: 0.03
+  facing: {}
+  anchors: {}
+  live:
+    prince: [0.5, 0.14, 0.12]
+    princess: [0.5, 0.14, 0.12]
+    pandit: [0.5, 0.15, 0.12]
+beats:
+  - en: "One second."
+    hi: "एक second।"
+    caption: "ONE *SECOND*."
+    cut: [scratch, punch]
+    stage:
+      backdrop: velvet
+      actors:
+        necklace: {puppet: necklace, x: 540, y: 1300, h: 860, face: right, motion: breathe, enter: none}
+  - en: "Did you know, in one Dhanteras story, Death himself came to the door and could not get in?"
+    hi: "तुम्हें पता है, धनतेरस की एक कहानी में, खुद मौत दरवाज़े तक आई, और अंदर नहीं जा पाई?"
+    caption: "*MAUT*. NO ENTRY."
+    cut: [glitch, drop]
+    stage:
+      backdrop: corridor
+      fx: [smoke_far]
+      actors: {}
+  - en: "It's a folk tale, about the son of King Hima."
+    hi: "लोक-कथा है, राजा हिम के बेटे की।"
+    caption: "KING HIMA'S *SON*."
+    name: {head: "THE PRINCE", sub: "Son of King Hima"}
+    stage:
+      backdrop: palace
+      actors:
+        prince: {puppet: prince, x: 540, y: 1720, h: 1060, face: right, motion: sway, enter: fade}
+  - en: "His horoscope said that on the fourth day of his marriage, a snakebite would kill him."
+    hi: "कुंडली में लिखा था, शादी के चौथे दिन, साँप के काटने से उसकी मौत होगी।"
+    caption: "DAY 4. *SNAKEBITE*."
+    cut: [drop]
+    stage:
+      backdrop: palace
+      fx: [smoke_far]
+      actors:
+        pandit: {puppet: pandit, x: 300, y: 1720, h: 980, face: right, motion: breathe, enter: left}
+        prince: {puppet: prince_shock, x: 790, y: 1720, h: 1020, face: left, motion: tremble}
+  - en: "Basically, his horoscope came with an expiry date."
+    hi: "मतलब कुंडली पे literally expiry date छपी थी।"
+    caption: "KUNDALI WITH AN *EXPIRY DATE*."
+    cut: [scratch]
+    stage:
+      backdrop: palace
+      actors:
+        prince: {puppet: prince_shock, x: 540, y: 1760, h: 1180, face: right, motion: tremble}
+  - en: "But his wife was not one to give up."
+    hi: "पर उसकी wife भी कम नहीं थी।"
+    caption: "BUT THE WIFE *HAD A PLAN*."
+    cut: [punch, speedlines]
+    name: {head: "THE PRINCESS", sub: "Married four days", y: 560}
+    stage:
+      backdrop: chamber
+      actors:
+        princess: {puppet: princess, x: 540, y: 1720, h: 1080, face: right, motion: breathe, enter: bottom}
+  - en: "She decided that tonight, Yamraj was not getting in."
+    hi: "उसने decide किया, आज यमराज की entry block करनी है।"
+    caption: "YAMRAJ: *ENTRY BLOCKED*."
+    cut: [buzz]
+    stage:
+      backdrop: chamber
+      actors:
+        princess: {puppet: princess, x: 540, y: 1720, h: 1080, face: right, motion: breathe}
+  - en: "At the door she heaped gold, silver, and every piece of jewellery she owned."
+    hi: "दरवाज़े पर सोना, चाँदी, गहनों का पूरा ढेर लगा दिया।"
+    caption: "GOLD AT THE *DOOR*."
+    cut: [punch]
+    stage:
+      backdrop: doorway
+      fx: [motes, {glow: {actor: jewels, colour: [255, 210, 110]}}]
+      actors:
+        jewels: {puppet: jewels, x: 540, y: 1760, h: 620, face: right, motion: breathe, enter: bottom}
+  - en: "And she lit so many lamps in the palace that the lighting department would have resigned."
+    hi: "और महल में इतने दीये जलाए, कि lighting department भी resign कर दे।"
+    caption: "LIGHTING DEPT: *RESIGNED*."
+    cut: [flash]
+    stage:
+      backdrop: doorway
+      fx: [rays, {diyas: {y: 1820, rows: 2, n: 9, grow: 2.5}}, {glow: {actor: jewels, colour: [255, 210, 110]}}]
+      actors:
+        jewels: {puppet: jewels, x: 540, y: 1700, h: 600, face: right, motion: breathe}
+  - en: "And herself? All night she told her husband stories and sang him songs, and never let him fall asleep."
+    hi: "और खुद? पूरी रात पति को कहानियाँ सुनाती रही, गाने गाती रही, उसे सोने ही नहीं दिया।"
+    caption: "SLEEP? *NOT TONIGHT*."
+    stage:
+      backdrop: chamber
+      fx: [{diyas: {y: 1830, rows: 1, n: 9, grow: 0.01}}]
+      actors:
+        princess: {puppet: princess_story, x: 300, y: 1720, h: 1000, face: right, motion: sway, enter: fade}
+        prince: {puppet: prince_sleepy, x: 790, y: 1720, h: 1020, face: left, motion: breathe, enter: fade}
+  - en: "At midnight, Yamraj came, in the form of a serpent."
+    hi: "आधी रात को, यमराज साँप बनकर आए।"
+    caption: "MIDNIGHT. *YAMRAJ ARRIVES*."
+    cut: [glitch, drop]
+    stage:
+      backdrop: corridor
+      fx: [smoke_far, {glow: {actor: serpent, colour: [110, 150, 255]}}]
+      actors:
+        serpent: {puppet: serpent, x: 540, y: 1760, h: 760, face: right, motion: slither, enter: left}
+  - en: "But the light of the lamps and the shine of the gold dazzled him. He climbed onto the heap of jewels, and began to listen to her stories."
+    hi: "पर दीयों की रोशनी और गहनों की चमक से उनकी आँखें चौंधिया गईं। वो गहनों के ढेर पर बैठ गए, और उसकी कहानियाँ सुनने लगे।"
+    caption: "DEATH. *LISTENING*."
+    stage:
+      backdrop: doorway
+      fx: [motes, {diyas: {y: 1830, rows: 1, n: 9, grow: 0.01}}, {glow: {actor: serpent, colour: [110, 150, 255]}}]
+      actors:
+        jewels: {puppet: jewels, x: 540, y: 1780, h: 560, face: right, motion: breathe, enter: none}
+        serpent: {puppet: serpent, x: 560, y: 1420, h: 600, z: 1, face: right, motion: slither}
+  - en: "[excited] Listening and listening, Death forgot why he had come."
+    hi: "[excited] कहानियाँ सुनते-सुनते, मौत भी भूल गई कि वो आई क्यों थी।"
+    caption: "DEATH *FORGOT* WHY IT CAME."
+    key: true
+    stage:
+      backdrop: doorway
+      fx: [rays, {diyas: {y: 1830, rows: 1, n: 9, grow: 0.01}}, {glow: {actor: serpent, colour: [255, 220, 150]}}]
+      actors:
+        jewels: {puppet: jewels, x: 540, y: 1780, h: 560, face: right, motion: breathe}
+        serpent: {puppet: serpent, x: 560, y: 1420, h: 600, z: 1, face: right, motion: breathe}
+  - en: "Morning came. Yamraj quietly went back. And the prince lived."
+    hi: "सुबह हुई। यमराज चुपचाप लौट गए। और राजकुमार बच गया।"
+    caption: "MORNING. *HE LIVED*."
+    cut: [flash]
+    stage:
+      backdrop: dawn
+      fx: [rays]
+      actors:
+        couple: {puppet: couple, x: 540, y: 1720, h: 1000, face: right, motion: sway, enter: fade}
+  - en: "That's why on Dhanteras evening, a lamp is lit in Yamraj's name. Yamadeep daan."
+    hi: "इसीलिए धनतेरस की शाम, यमराज के नाम का दीया जलाया जाता है। यमदीप दान।"
+    caption: "*YAMADEEP* DAAN."
+    title_card: "YAMADEEP DAAN"
+    stage:
+      backdrop: dark
+      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 1.5, size: 4.5}}]
+      actors: {}
+  - en: "And Dhanteras isn't only about wealth. It's also the day of Bhagwan Dhanvantari, who rose from the churning ocean with the pot of amrit. The god of health."
+    hi: "और धनतेरस सिर्फ़ धन का दिन नहीं है। ये भगवान धन्वंतरि का भी दिन है, जो समुद्र मंथन से अमृत कलश लेकर निकले। Health के देवता।"
+    caption: "THE GOD OF *HEALTH*."
+    name: {head: "BHAGWAN DHANVANTARI", sub: "God of Ayurveda", y: 560}
+    stage:
+      backdrop: ocean
+      fx: [waves, rays, {glow: {actor: dhanvantari, colour: [255, 225, 150]}}]
+      actors:
+        dhanvantari: {puppet: dhanvantari, x: 540, y: 1700, h: 1040, face: right, motion: float, enter: bottom}
+  - en: "So the real flex isn't gold. It's health. It's life."
+    hi: "तो असली flex gold नहीं है। Health है। Life है।"
+    caption: "REAL FLEX: *HEALTH*."
+    key: true
+    cut: [punch]
+    stage:
+      backdrop: dawn
+      fx: [rays]
+      actors:
+        couple: {puppet: couple, x: 540, y: 1720, h: 1000, face: right, motion: breathe, enter: fade}
+  - en: "A bank balance can recover. Health has no backup plan."
+    hi: "Bank balance तो recover हो सकता है। Health का कोई backup plan नहीं होता।"
+    caption: "HEALTH HAS *NO BACKUP*."
+    stage:
+      backdrop: dark
+      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 0.01, size: 4.5}}]
+      actors: {}
+  - en: "Happy Dhanteras! And tell me in the comments, what are you buying this year?"
+    hi: "Happy Dhanteras! और comment में बताओ, इस बार क्या खरीद रहे हो?"
+    caption: "WHAT ARE *YOU* BUYING?"
+    key: true
+    stage:
+      backdrop: dark
+      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 0.01, size: 4.5}}, {fireworks: {n: 2}}]
+      actors: {}
+thumbnail:                     # the clever wife and death at the door
+  title: "DHANTERAS: YAMRAJ KO NO ENTRY?"
+  backdrop: doorway
+  left: {puppet: princess, label: "GOLD + DIYE", colour: [255, 200, 90]}
+  right: {puppet: serpent, label: YAMRAJ, colour: [110, 150, 255]}
+  join: "vs"
+end:
+  head: "HAPPY DHANTERAS"
+  sub: "health is the real wealth"
+upload:
+  hashtags:
+  - shorts
+  - dhanteras
+  - dhanteras2026
+  - diwali
+  - yamraj
+  - dhanvantari
+  - indianmythology
+  - festivalstories
+  tags:
+  - dhanteras story
+  - dhanteras ki kahani
+  - why we buy gold on dhanteras
+  - yamadeep daan
+  - king hima son story
+  - yamraj and the princess
+  - dhanvantari jayanti
+  - samudra manthan dhanvantari
+  - dhanteras 2026
+  - diwali 2026
+  - health is wealth
+  - indian festivals
+  - hindu mythology
+  - anime mythology
+  - youtube shorts
+  en:
+    title: 'Dhanteras pe gold le rahe ho? Pehle yeh kahani suno 💀 #shorts'
+    description: A prince was fated to die on the fourth night of his marriage. His wife heaped gold at the
+      door, lit lamps everywhere and told him stories all night, and Yamraj, who came as a serpent, sat
+      listening until dawn. The Dhanteras folk tale, Yamadeep daan, and Bhagwan Dhanvantari. Happy Dhanteras!
+  hi:
+    title: 'धनतेरस पे gold खरीदने से पहले यह कहानी सुनो 💀 #shorts'
+    description: राजकुमार की कुंडली में शादी के चौथे दिन मौत लिखी थी। उसकी पत्नी ने दरवाज़े पर सोने का ढेर
+      लगाया, दीये जलाए और पूरी रात कहानियाँ सुनाईं, और साँप बनकर आए यमराज सुबह तक सुनते रहे। धनतेरस की
+      लोक-कथा, यमदीप दान और भगवान धन्वंतरि। Happy Dhanteras! Comment में बताओ, इस बार क्या खरीद रहे हो?
+    hashtags:
+    - hindi
+    - धनतेरस
+    tags:
+    - धनतेरस की कहानी
+    - धनतेरस क्यों मनाते हैं
+    - यमदीप दान
+    - यमराज की कहानी
+    - धन्वंतरि जयंती
+    - dhanteras kyu manate hai
+    - dhanteras ki katha
+    - hindi kahani

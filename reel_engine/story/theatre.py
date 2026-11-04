@@ -809,12 +809,12 @@ class Theatre:
         """Rows of clay lamps along the ground, lit one by one from the middle outwards."""
         pg = self.pg
         y0, rows, n = float(g.get("y", 1760)), int(g.get("rows", 2)), int(g.get("n", 9))
-        grow = float(g.get("grow", 3.0))
-        glow = self.lights.setdefault(("diya",), light(pg, 70, (255, 170, 60), 1.2))
+        grow, size = float(g.get("grow", 3.0)), float(g.get("size", 1.0))   # size: one big lamp for a close shot
+        glow = self.lights.setdefault(("diya", size), light(pg, int(70 * size), (255, 170, 60), 1.2))
         order = sorted(range(n), key=lambda i: abs(i - (n - 1) / 2))
         for r in range(rows):
             y = y0 + r * 95
-            scale = 1.0 + 0.25 * r                                   # nearer rows are bigger
+            scale = size * (1.0 + 0.25 * r)                          # nearer rows are bigger
             for rank, i in enumerate(order):
                 lit = since >= grow * rank / n
                 x = W * (i + 0.5) / n + (W / n / 2 if r % 2 else 0)

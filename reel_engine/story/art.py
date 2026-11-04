@@ -225,6 +225,8 @@ def outline(pg, rgb: np.ndarray) -> tuple[np.ndarray, tuple[int, int, int, int] 
         if p.count() >= 0.002 * rgb.shape[0] * rgb.shape[1]:          # big enough not to be paint or outline
             hole = pg.surfarray.array_alpha(p.to_surface(setcolor=(255, 255, 255, 255), unsetcolor=(0, 0, 0, 0)))
             alpha = np.where(hole > 0, 0, alpha)
+    if green_backed(rgb):                                             # nothing drawn is that green: every last
+        alpha = np.where(backing, 0, alpha)                           # speck of backing goes, however small
     surf = pg.Surface(size, pg.SRCALPHA)
     pg.surfarray.pixels_alpha(surf)[:] = alpha
     pieces = pg.mask.from_surface(surf, 127).connected_components()   # drop specks of textured background
