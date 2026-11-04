@@ -167,6 +167,12 @@ beats:
       backdrop: hastinapur_night
       fx: [rays, {diyas: {y: 1740, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 3}}]
       actors: {}
+thumbnail:                     # two homecomings, one night
+  title: "DIWALI: RAMAYANA YA MAHABHARATA?"
+  backdrop: hastinapur_night
+  left: {puppet: rama, label: RAMAYANA, colour: [90, 170, 255]}
+  right: {puppet: yudhishthira, label: MAHABHARATA, colour: [255, 190, 80]}
+  join: "ya"
 end:
   head: "DIWALI"
   sub: "two homecomings, one night"

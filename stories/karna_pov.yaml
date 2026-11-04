@@ -281,6 +281,15 @@ beats:
       backdrop: void
       actors:
         karna: {puppet: karna, x: 540, y: 1720, h: 1080, face: right, motion: breathe}
+thumbnail:                     # Karna's shock between his friend and his mother
+  title: "POV: TUM KARNA HO"
+  backdrop: void
+  hero: karna_shock
+  hero_crop: 1.0
+  mark: "?"
+  left: {puppet: duryodhana, label: DOSTI, colour: [170, 90, 255]}
+  right: {puppet: kunti, label: DHARMA, colour: [255, 210, 120], flip: true}
+  join: "ya"
 end:
   head: "KARNA"
   sub: "dharma, or the friend?"

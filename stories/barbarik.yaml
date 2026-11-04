@@ -183,6 +183,12 @@ beats:
       fx: [smoke_far]
       actors:
         barbarik: {puppet: barbarik, x: 540, y: 1720, h: 1060, face: right, motion: breathe, enter: fade}
+thumbnail:                     # the hero and the bold claim
+  title: "1 MINUTE MEIN MAHABHARATA KHATAM?"
+  backdrop: battlefield
+  hero: barbarik_aim
+  hero_crop: 0.75
+  mark: "?"
 end:
   head: "BARBARIK"
   sub: "three arrows, one minute"

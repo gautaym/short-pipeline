@@ -10,7 +10,7 @@ import sys
 from . import formats
 from .config import load_settings
 
-COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story", "track", "live", "upload-text")
+COMMANDS = ("render", "contact-sheet", "ledger", "organise", "story-art", "review", "pick", "make", "new-story", "track", "live", "upload-text", "thumb")
 
 
 def _add_format_options(parser: argparse.ArgumentParser) -> None:
@@ -80,6 +80,8 @@ def build_parser() -> argparse.ArgumentParser:
     mk.add_argument("--captions", choices=["all", "few"], default="all", help="few: captions only on beats marked key")
     ut = sub.add_parser("upload-text", help="write upload.txt (title, description, hashtags, tags) beside a story's reels")
     ut.add_argument("stories", nargs="+")
+    th = sub.add_parser("thumb", help="draw thumbnail.png (9:16) and thumbnail_16x9.png beside a story's newest reels")
+    th.add_argument("stories", nargs="+")
     lv = sub.add_parser("live", help="make the living-face loops (blinks, head movement) a story lists")
     lv.add_argument("story")
     tr = sub.add_parser("track", help="live table of a reel queue, per reel and task, at localhost:8765")
@@ -225,6 +227,12 @@ def main(argv: list[str] | None = None) -> int:
         from .tools.story_tools import write_upload
         for sid in opts.stories:
             for path in write_upload(sid) or [f"{sid}: no upload block or no render"]:
+                print(path)
+        return 0
+    if opts.command == "thumb":
+        from .tools.story_tools import thumbnails
+        for sid in opts.stories:
+            for path in thumbnails(sid) or [f"{sid}: no render yet"]:
                 print(path)
         return 0
     if opts.command == "live":

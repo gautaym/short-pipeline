@@ -107,7 +107,24 @@ def make(story_id: str, langs: tuple[str, ...] = ("en", "hi"), seed: int = 1, ca
         text = upload_text(story_id, lang)
         if text:
             (video.parent / "upload.txt").write_text(text, encoding="utf-8")
+        made += thumbnails(story_id, video.parent)
     return made
+
+
+def thumbnails(story_id: str, folder: Path | None = None) -> list[Path]:
+    """thumbnail.png (9:16) and thumbnail_16x9.png beside a reel: in `folder`, or beside the newest
+    render of the story in each language and caption mode."""
+    from ..config import REPO_ROOT as root
+    from ..formats.story import load_story
+    from ..story.thumbnail import make as draw
+    sc = load_story(story_id)
+    if folder is not None:
+        return draw(sc, folder)
+    newest: dict[str, Path] = {}
+    for video in sorted((root / "out").glob(f"*/story_{story_id}_*_1/story_{story_id}_*_1.mp4"),
+                        key=lambda q: q.stat().st_mtime):
+        newest[video.parent.name.split("_", 2)[-1]] = video.parent      # "<lang>[_few]_1" -> newest folder
+    return [p for f in newest.values() for p in draw(sc, f)]
 
 
 TAGS_LIMIT = 500          # characters of tags, as YouTube's Tags box allows

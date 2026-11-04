@@ -222,6 +222,11 @@ beats:
       backdrop: courtyard
       fx: [rays, {diyas: {y: 1740, rows: 2, n: 9, grow: 0.01}}, {fireworks: {n: 3}}]
       actors: {}
+thumbnail:                     # brother and sister, the festival in the title
+  title: "BHAI DOOJ KI ASLI KAHANI"
+  backdrop: courtyard
+  left: {puppet: subhadra_tilak, label: SUBHADRA, colour: [255, 120, 160]}
+  right: {puppet: krishna_home, label: SHRI KRISHNA, colour: [90, 170, 255]}
 end:
   head: "BHAI DOOJ"
   sub: "Shri Krishna and Subhadra"
