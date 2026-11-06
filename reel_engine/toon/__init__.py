@@ -16,6 +16,8 @@ patches, a vignette and light grain.
                       the style-test sheet.
     chibi_demo.py     a short chibi test clip in a garden, with camera close-ups.
     positive_bhai_chibi.py  Positive Bhai part 1 redrawn in chibi, flashbacks in framed panels.
+    branding.py       channel art for "Bhess ki Eyes" (the dark-comedy channel): banner, profile picture
+                      and watermark, with the sly chibi bhains mascot.
 
 Each skit is a module with LINES, VOICES, Skit and friends; voices, timing, captions, music and the mix
 come from the shared skit renderer, reel_engine.stick.pressure_cooker.render.
