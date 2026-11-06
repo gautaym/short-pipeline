@@ -23,35 +23,39 @@ SERIES, END_SUB, TAGLINE = "POSITIVE BHAI", "Follow for Part 2", ""
 VOICES = {
     "p1": "maya:hi:Ritvik@+2~1.2",          # goofy
     "p2": "maya:hi:Shaunak@+1~1.18",        # warm, encouraging
+    "intro": "maya:hi:Abhay@-2~1.25",       # the deep, echoing voice used for Bhagwan Vishnu in Sheru (voice only)
 }
-SAD, SOB, PERKY = "maya:hi:Ritvik@+2~1.05", "maya:hi:Ritvik@+2~1.0", "maya:hi:Ritvik@+2~1.2"   # same pitch: one person
-LINES = [   # (speaker, spoken line, on-screen caption: punchlines only)
+SAD, SOB, PERKY = "maya:hi:Ritvik@+2~1.12", "maya:hi:Ritvik@+2~1.0", "maya:hi:Ritvik@+2~1.2"   # same pitch: one person
+STORY = [   # (speaker, spoken line, on-screen caption: the last punchline only)
     ("p1", "[sighs] भाई यार... वो कल मैंने पड़ोस वाली आंटी की साड़ी में पटाखे छोड़ दिए।", ""),
     ("p2", "अरे, कोई बात नहीं! तुमने अपनी गलती accept की, accountability ली। Positive होकर सोचो, आज तुम्हारे एक नेक काम की वजह से, आंटी को नई साड़ी मिली होगी!", ""),
     ("p1", "[sighs] अच्छा... वैसे वो सत्तर साल की आंटी थीं।", ""),
-    ("p2", "और क्या! सत्तर की उम्र में ज़िंदगी slow और boring हो जाती है। तुम्हारी वजह से उनकी life में excitement और fun आया होगा। बिना Diwali के, Diwali हो गई!", ""),
+    ("p2", "तुम्हारी वजह से उनकी slow life में fun और excitement आया होगा। बिना Diwali के, Diwali हो गई!", ""),
     ("p1", "[sighs] वो heart attack से मर गई।", ""),
     ("p2", "इसमें तुम क्या कर सकते हो? जिसको जाना है, वो तो चला ही जाएगा। तुमने तो बस, process fast कर दिया।", ""),
     ("p1", "और फिर अंकल मुझे मारने आए, तो मैंने उन्हें गाड़ी से उड़ा दिया।", ""),
     ("p1", "भाई यार... मैं खराब हूँ क्या?", ""),
     ("p2", "बिल्कुल नहीं! Constructive सोचो। दोनों पचहत्तर-पचहत्तर साल के थे। तुमने तो उनका reunion करवा दिया! नहीं तो वो अंकल, पूरी ज़िंदगी अकेले रोते रहते।",
-     "TUMNE UNKA *REUNION* KARWA DIYA!"),
+     ""),
     ("p1", "[excited] अच्छा! तो सोच रहा हूँ, माहौल देखकर, और अंकल-आंटियों को ठोक दूँ!", ""),
-    ("p2", "[excited] Great idea! चलो, मैं तुम्हें step by step बताता हूँ। पहले, एक vision board बनाते हैं!", ""),
+    ("p2", "[excited] Great idea! चलो, इसके लिए एक vision board बनाते हैं!", ""),
     ("p1", "[excited] Thank you भाई! मैं पटाखे लेकर आता हूँ!", ""),
     ("p2", "ठीक है भाई! All the best!", ""),
     ("p1", "[excited] अरे हाँ भाई, तुम्हारे दादाजी भी तो दादी के जाने के बाद अकेले हैं ना? Reunion वहीं से शुरू करता हूँ!", ""),
-    ("p2", "...भाई, positivity की भी एक limit होती है!", "POSITIVITY KI BHI EK *LIMIT* HOTI HAI!"),
+    ("p2", "...भाई, positivity की भी एक limit होती है!", ""),
     ("p2", "[whispers] तू तो criminal है भाई... Hello, police?", "TU TOH *CRIMINAL* HAI BHAI... HELLO, *POLICE*?"),
 ]
-LINE_VOICE = {0: SAD, 2: SAD, 4: SAD, 6: SAD, 7: SOB, 9: PERKY, 11: PERKY, 13: PERKY}
-LINE_FX = {7: "sob"}
-VOICE_FX = {}
-HOOK = "TALKING TO A REALLY POSITIVE FRIEND"
-COMMENT = {5: "COMMENT: TUMHARA DOST BHI AISA HAI?", 15: "TAG KARO APNE SABSE POSITIVE DOST KO"}
-CUTS = (2, 4, 6, 8, 9, 13, 15)
-LABELS = {"p1": "DOST", "p2": "POSITIVE BHAI"}
-SPEAKER_COLOUR = {"p1": (255, 226, 120), "p2": (170, 220, 255)}
+INTRO = ("intro", "Talking to an ultra positive दोस्त।", "")   # the title, spoken by the echoing voice
+LINES = [INTRO] + STORY                                          # the renderer's line numbers: STORY's + 1
+LINE_VOICE = {n + 1: v for n, v in {0: SAD, 2: SAD, 4: SAD, 6: SAD, 7: SOB, 9: PERKY, 11: PERKY, 13: PERKY}.items()}
+LINE_FX = {8: "sob"}
+VOICE_FX = {"intro": "divine"}
+HOOK = "TALKING TO AN ULTRA POSITIVE DOST"
+COMMENT = {6: "COMMENT: TUMHARA DOST BHI AISA HAI?", 16: "TAG KARO APNE SABSE POSITIVE DOST KO"}
+CUTS = (1, 3, 5, 7, 9, 10, 14, 16)
+LABELS = {"p1": "DOST", "p2": "POSITIVE BHAI", "intro": ""}
+SPEAKER_COLOUR = {"p1": (255, 226, 120), "p2": (170, 220, 255), "intro": (255, 220, 120)}
+QUIET = {"NAYI SAREE!", "FUN!", "DIWALI!", "FAST-TRACK!", "RUK JA!", "DADAJI (AKELE)"}   # pop-words cut for a cleaner frame
 
 FEET = 1300
 X1, X2 = 260, 820
@@ -79,8 +83,13 @@ class Skit(sheru_toon.Skit):
         self.layer = pg.Surface((W * S, H * S), pg.SRCALPHA)
         self.frame_no = 0
 
+    def pop_text(self, surf, font, s, *a, **k):
+        if s in QUIET:
+            return
+        return super().pop_text(surf, font, s, *a, **k)
+
     def talk(self, i, who, since, length, t):
-        if LINES[i][0] != who or since > length - 0.3:
+        if STORY[i][0] != who or since > length - 0.3:
             return 0.0
         return abs(math.sin(t * 13)) * (0.65 + 0.35 * math.sin(t * 4.1))
 
@@ -319,6 +328,27 @@ class Skit(sheru_toon.Skit):
 
     # ------------------------------------------------------------ the scenes
     def scene(self, surf, i, since, length, t):
+        """Line 0 is the spoken title; the story's own lines follow it."""
+        if i == 0:
+            return self.intro(surf, since, length, t)
+        return self.story(surf, i - 1, since, length, t)
+
+    def intro(self, surf, since, length, t):
+        """Both friends in the courtyard while the title is spoken (only the voice; no god on screen)."""
+        pg = self.pg
+        big = self.big
+        big.blit(self.big_room, (0, 0))
+        self.hens(big, t)
+        bean(pg, big, X1, FEET, GOOFY, "worried", 0.0, (t % 3.3) < 0.12, t=t, look=0.6)
+        p2 = bean(pg, big, X2, FEET, POSITIVE, "happy", 0.0, (t % 3.7) < 0.12, t=t + 1, look=-0.6, extras=("specs",),
+                  reach=((X2 - 175, FEET - 560), None))
+        surf.blit(pg.transform.smoothscale(big, (W, H)), (0, 0))
+        self.frame_no += 1
+        finish(pg, surf, self.grains[self.frame_no % 4], self.vignette)
+        self.thumb(surf, p2["hands"][0])
+        return (1.0, W / 2, H / 2)
+
+    def story(self, surf, i, since, length, t):
         pg = self.pg
         self._t = t
         cam = (1.0, W / 2, H / 2)
