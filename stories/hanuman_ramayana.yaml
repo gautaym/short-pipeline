@@ -1,0 +1,262 @@
+# Ramayana Secrets, part 1: Hanuman Ji also wrote a Ramayana, and threw it into the sea. User's hook (2026-11-05).
+# Review notes. A popular legend (the "Hanumad Ramayana"), not in Valmiki's text: after Lord Rama's return to
+# Ayodhya, Hanuman Ji retired to the Himalayas and carved the story of Rama on rocks with his nails. Maharishi
+# Valmiki saw it and was saddened that his own Ramayana would be overshadowed; Hanuman Ji threw the rocks into
+# the sea so that Valmiki's would be the one the world read. Told as "kehte hain". The jokes land on the
+# viewer (the momos), never on Hanuman Ji or Valmiki Ji. A modern "bhai" narrator (an original character)
+# appears in beat 2 and the last beat. Sources: wikipedia.org (Hanuman: the "Hanumad Ramayana" legend) and
+# popular retellings of the legend.
+# Hinglish, Shaunak's voice, anime, full kinetic captions: render with --captions all.
+id: hanuman_ramayana
+topic: mythology
+series_part: 1
+ask: false
+pace: fast
+host: false
+hook_at: bottom_left
+voice: {hi: "maya:hi:Shaunak", en: "maya:en:Shaunak"}
+edit: {grade: film, captions: kinetic}
+title:
+  en: "Hanuman Ji ne bhi Ramayana likhi thi?"
+  hi: "तुम्हें पता है, Hanuman Ji ने भी एक Ramayana लिखी थी?"
+series:
+  en: "Ramayana Secrets"
+  hi: "रामायण के रहस्य"
+summary:
+  en: "After Lord Rama came home, Hanuman Ji carved his own Ramayana on the rocks of the Himalayas. Then Maharishi Valmiki read it, and Hanuman Ji threw it into the sea."
+  hi: "Lord Rama के लौटने के बाद, Hanuman Ji ने हिमालय की चट्टानों पर अपनी Ramayana लिखी। फिर Maharishi Valmiki ने उसे पढ़ा, और Hanuman Ji ने उसे समुद्र में फेंक दिया।"
+music: tense
+transition: slide
+lettering: gold
+cast: {}
+segment: indian_myth
+opening:
+  beat: 1
+  actors:
+    hanuman: {puppet: hanuman_calm, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+art:
+  puppet_style: >-
+    A single full-body character in Japanese anime illustration style, clean line art, cel shading,
+    large expressive eyes, vivid colours, three quarter view turned to the right, full body from head to
+    feet, against a plain flat pure bright green background, no green on the character, nothing else in
+    the frame, no text.
+  prop_style: >-
+    A single object in Japanese anime illustration style, not a person, clean line art, cel shading, vivid
+    colours, against a plain flat pure bright green background, no green on the object, nothing else in the
+    frame, no text.
+  backdrop_style: >-
+    A background scene in Japanese anime film style, painterly detailed background art, dramatic cinematic
+    light, rich colours, an open ground across the lower third, seen full frame with no border or frame.
+    Empty scenery only: nobody in it, no people, no figures, no animals, no text. Vertical composition.
+  closeup: &closeup >-
+    A waist-up close-up portrait of a single character in Japanese anime illustration style, clean line art,
+    cel shading, large expressive eyes, vivid colours, head and shoulders and chest down to the waist, the
+    whole head and hair inside the picture with a wide empty band of green above the top of the hair, the
+    face in the upper middle, against a plain flat pure bright green background, no green on the character,
+    nothing else in the frame, no text.
+  cast:
+    hanuman: >-
+      Hanuman Ji, a mighty and kind divine vanara with a gentle wise monkey face, warm golden orange fur, a
+      tall gold crown, gold earrings, a red and gold silk dhoti, a saffron sash, gold armbands, exactly two
+      arms and exactly one long tail
+    rama: >-
+      Lord Rama, a noble young king with blue skin, calm kind eyes, a tall gold crown, a yellow silk dhoti, a
+      flower garland, gold jewellery and a bow on his shoulder, exactly two arms
+    valmiki: >-
+      Maharishi Valmiki, a wise old sage with a long white beard and white hair tied in a top knot, a saffron
+      dhoti and shawl, rudraksha beads, exactly two arms
+    bhai: >-
+      a cool confident young Indian guy of about twenty two with brown skin, wavy black hair, light stubble,
+      an oversized mustard yellow hoodie and a thin silver chain, exactly two arms
+  puppets:
+    hanuman_calm:
+      style: *closeup
+      text: "The character is {hanuman}, looking straight at the viewer with a calm, mysterious knowing smile."
+    hanuman_write: "The character is {hanuman}, kneeling beside a large flat rock and carving glowing golden marks into it with one fingertip, deeply focused."
+    hanuman_throw: "The character is {hanuman}, lifting a huge flat stone slab high above his head with both hands, powerful and joyful."
+    hanuman_smile:
+      style: *closeup
+      text: "The character is {hanuman}, eyes gently closed, a peaceful happy smile, hands folded together at his chest in prayer."
+    rama: "The character is {rama}, standing tall and calm, one hand raised in blessing."
+    valmiki: "The character is {valmiki}, walking with a wooden staff in one hand and a bundle of palm leaf manuscripts in the other."
+    valmiki_tears:
+      style: *closeup
+      text: "The character is {valmiki}, holding a palm leaf manuscript, eyes full of tears, sad and deeply moved."
+    bhai_point:
+      style: *closeup
+      text: "The character is {bhai}, grinning confidently and pointing one finger straight at the viewer."
+    bhai_lol:
+      style: *closeup
+      text: "The character is {bhai}, laughing teasingly with one eyebrow raised, holding up a small paper takeaway box of leftover dumplings in one hand."
+  props: {}
+  backdrops:
+    himalaya: "Snowy Himalayan peaks at dawn, a quiet rocky ledge with flat stones, cold blue light and soft golden sunrise on the summits."
+    court: "The grand royal court of ancient Ayodhya, tall carved golden pillars, a jewelled throne under a red canopy, flower garlands, warm sunbeams."
+    sea: "A vast deep blue sea seen from a high rocky cliff at sunrise, huge waves, golden light on the water."
+    room: "A cosy modern Indian bedroom at night with warm fairy lights on the wall, a messy desk and a window with city lights."
+    void: "A dark dramatic sky of slow golden and saffron clouds with soft light rays, bare dark ground."
+  backdrop_crop: 0.03
+  facing: {}
+  anchors: {}
+  live:
+    rama: [0.5, 0.15, 0.12]
+    valmiki: [0.5, 0.15, 0.12]
+beats:
+  - en: "And then, he threw it into the sea himself."
+    hi: "और फिर... खुद ही उसे समुद्र में फेंक दिया।"
+    caption: "THEN HE *THREW IT* IN THE SEA."
+    cut: [punch]
+    stage:
+      backdrop: sea
+      fx: [rays, motes]
+      actors:
+        hanuman: {puppet: hanuman_throw, x: 540, y: 1760, h: 1240, face: right, motion: breathe, enter: none}
+  - en: "Bro is here, and he's going to tell you everything."
+    hi: "भाई आया है, सब कुछ बताकर जाएगा।"
+    caption: "BHAI AAYA HAI. *SAB BATAYEGA*."
+    cut: [scratch, speedlines]
+    stage:
+      backdrop: room
+      actors:
+        bhai: {puppet: bhai_point, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+  - en: "So, this is from the time when Lord Rama had become the king of Ayodhya."
+    hi: "तो बात उस समय की है, जब Lord Rama अयोध्या के राजा बन चुके थे।"
+    caption: "AYODHYA. *KING RAMA*."
+    cut: [flash]
+    stage:
+      backdrop: court
+      fx: [rays, {glow: {actor: rama, colour: [255, 220, 140]}}]
+      actors:
+        rama: {puppet: rama, x: 540, y: 1720, h: 1080, face: right, motion: breathe, enter: none}
+  - en: "Then Hanuman Ji went to the Himalayas, and began to write the story of Rama on the rocks, with his own nails."
+    hi: "तब Hanuman Ji हिमालय चले गए, और अपने नाखूनों से, पत्थरों पर Ram-katha लिखने लगे।"
+    caption: "WRITTEN WITH *NAILS*. ON *ROCKS*."
+    cut: [drop]
+    stage:
+      backdrop: himalaya
+      fx: [motes, {glow: {actor: hanuman, colour: [255, 200, 110]}}]
+      actors:
+        hanuman: {puppet: hanuman_write, x: 540, y: 1740, h: 1000, face: right, motion: breathe, enter: none}
+  - en: "They say it was so beautiful that every word was full of devotion."
+    hi: "कहते हैं, वो इतनी सुंदर थी, कि हर शब्द में भक्ति थी।"
+    caption: "EVERY WORD: *BHAKTI*."
+    cut: [punch]
+    stage:
+      backdrop: himalaya
+      fx: [motes, rays, {glow: {actor: hanuman, colour: [255, 210, 110]}}]
+      actors:
+        hanuman: {puppet: hanuman_write, x: 620, y: 1820, h: 1300, face: right, motion: breathe}
+  - en: "Then one day, Maharishi Valmiki came there, to show his own Ramayana."
+    hi: "फिर एक दिन, Maharishi Valmiki वहाँ आए, अपनी Ramayana दिखाने।"
+    caption: "ENTER: *VALMIKI JI*."
+    cut: [punch]
+    name: {head: "MAHARISHI VALMIKI", sub: "Author of the Ramayana", y: 560}
+    stage:
+      backdrop: himalaya
+      actors:
+        valmiki: {puppet: valmiki, x: 540, y: 1720, h: 1060, face: right, motion: sway, enter: left}
+  - en: "He read Hanuman Ji's Ramayana, and tears filled his eyes."
+    hi: "Hanuman Ji की Ramayana पढ़ी, और उनकी आँखों में आँसू आ गए।"
+    caption: "*TEARS*."
+    comment: "GUESS KARO: HANUMAN JI NE KYA KIYA?"
+    stage:
+      backdrop: himalaya
+      fx: [motes]
+      actors:
+        valmiki: {puppet: valmiki_tears, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+  - en: "He thought, next to this, who will ever read my Ramayana?"
+    hi: "उन्हें लगा, इसके आगे मेरी Ramayana कौन पढ़ेगा?"
+    caption: "WHO WILL READ *MINE*?"
+    comment: "GUESS KARO: HANUMAN JI NE KYA KIYA?"
+    stage:
+      backdrop: himalaya
+      actors:
+        valmiki: {puppet: valmiki_tears, x: 540, y: 1960, h: 1320, face: right, motion: breathe}
+  - en: "[excited] Hanuman Ji didn't think for a second. He lifted the rocks, and threw them into the sea!"
+    hi: "[excited] Hanuman Ji ने एक पल नहीं सोचा। शिलाएँ उठाईं, और समुद्र में फेंक दीं!"
+    caption: "STRAIGHT INTO *THE SEA*."
+    cut: [flash, punch]
+    stage:
+      backdrop: sea
+      fx: [rays, motes]
+      actors:
+        hanuman: {puppet: hanuman_throw, x: 540, y: 1760, h: 1240, face: right, motion: breathe, enter: none}
+  - en: "And he said, let the world read Valmiki Ji's Ramayana. For me, Rama's name is enough."
+    hi: "और बोले, दुनिया Valmiki Ji की Ramayana पढ़े। मेरे लिए Ram-naam ही काफ़ी है।"
+    caption: "RAM-NAAM IS *ENOUGH*."
+    key: true
+    stage:
+      backdrop: void
+      fx: [rays, {glow: {actor: hanuman, colour: [255, 200, 110]}}]
+      actors:
+        hanuman: {puppet: hanuman_smile, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+  - en: "So much talent, and zero ego. The real GOAT."
+    hi: "इतना बड़ा talent, और ego ज़ीरो। Real GOAT।"
+    caption: "EGO: ZERO. *REAL GOAT*."
+    cut: [punch, speedlines]
+    stage:
+      backdrop: void
+      fx: [rays, {glow: {actor: hanuman, colour: [255, 200, 110]}}]
+      actors:
+        hanuman: {puppet: hanuman_smile, x: 540, y: 1960, h: 1320, face: right, motion: breathe}
+  - en: "And you can't even throw away last night's leftover momos."
+    hi: "और तुमसे कल रात के बचे momos भी नहीं फेंके जाते।"
+    caption: "AND YOU CAN'T THROW *LEFTOVER MOMOS*."
+    cut: [scratch, punch]
+    key: true
+    comment: "COMMENT: TUM FEK PAATE?"
+    stage:
+      backdrop: room
+      actors:
+        bhai: {puppet: bhai_lol, x: 540, y: 1960, h: 1320, face: right, motion: breathe, enter: none}
+thumbnail:
+  title: "HANUMAN JI KI RAMAYANA?"
+  backdrop: himalaya
+  hero: hanuman_calm
+  hero_crop: 1.0
+  mark: "?"
+end:
+  head: "RAM-NAAM"
+  sub: "talent 100, ego zero"
+upload:
+  hashtags:
+  - shorts
+  - hanuman
+  - ramayana
+  - hanumanji
+  - valmiki
+  - jaishreeram
+  - indianmythology
+  - sanatandharma
+  tags:
+  - hanuman ramayana
+  - hanumad ramayana
+  - hanuman ji ki ramayana
+  - hanuman and valmiki
+  - hanuman threw ramayana in sea
+  - ramayana secrets
+  - hanuman ji story
+  - valmiki ramayana
+  - ramayana facts
+  - hindu mythology
+  - indian mythology
+  - anime mythology
+  - youtube shorts
+  en:
+    title: 'Hanuman Ji ne bhi Ramayana likhi thi? 🤯 #shorts'
+    description: After Lord Rama came home, Hanuman Ji carved his own Ramayana on the rocks of the Himalayas.
+      Then Maharishi Valmiki read it, and Hanuman Ji threw it into the sea. A popular legend. Ramayana
+      Secrets, part 1.
+  hi:
+    title: 'Hanuman Ji ने भी Ramayana लिखी थी? 🤯 फिर समुद्र में फेंक दी #shorts'
+    description: Lord Rama के लौटने के बाद, Hanuman Ji ने हिमालय की चट्टानों पर अपनी Ramayana लिखी। फिर
+      Maharishi Valmiki ने उसे पढ़ा, और Hanuman Ji ने उसे समुद्र में फेंक दिया। एक प्रचलित कथा। Comment
+      में बताओ, तुम फेंक पाते?
+    hashtags:
+    - hindi
+    - हनुमान
+    tags:
+    - हनुमान जी की रामायण
+    - हनुमान जी की कहानी
+    - रामायण के रहस्य
+    - hanuman ji ki kahani

@@ -33,8 +33,9 @@ cast: {}
 segment: indian_myth
 opening:
   beat: 1
-  actors:
-    necklace: {puppet: necklace, x: 540, y: 1040, h: 760, face: right, motion: breathe, enter: none}
+  actors:                      # a face from frame 0: the bride, with the gold glinting beside her
+    princess: {puppet: princess, x: 760, y: 1760, h: 1240, face: left, motion: breathe, enter: none}
+    necklace: {puppet: necklace, x: 300, y: 820, h: 460, face: right, motion: breathe, enter: none}
 art:
   puppet_style: >-
     A single full-body character in Japanese anime illustration style, clean line art, cel shading,
@@ -99,35 +100,31 @@ beats:
     caption: "ONE *SECOND*."
     cut: [scratch, punch]
     stage:
-      backdrop: velvet
+      backdrop: chamber
+      fx: [motes, {glow: {actor: necklace, colour: [255, 200, 110]}}]
       actors:
-        necklace: {puppet: necklace, x: 540, y: 1300, h: 860, face: right, motion: breathe, enter: none}
+        princess: {puppet: princess, x: 700, y: 1760, h: 1300, face: left, motion: breathe, enter: none}
+        necklace: {puppet: necklace, x: 280, y: 820, h: 460, face: right, motion: breathe, enter: none}
   - en: "Did you know, in one Dhanteras story, Death himself came to the door and could not get in?"
     hi: "तुम्हें पता है, धनतेरस की एक कहानी में, खुद मौत दरवाज़े तक आई, और अंदर नहीं जा पाई?"
     caption: "*MAUT*. NO ENTRY."
     cut: [glitch, drop]
     stage:
       backdrop: corridor
-      fx: [smoke_far]
-      actors: {}
-  - en: "It's a folk tale, about the son of King Hima."
-    hi: "लोक-कथा है, राजा हिम के बेटे की।"
-    caption: "KING HIMA'S *SON*."
-    name: {head: "THE PRINCE", sub: "Son of King Hima"}
-    stage:
-      backdrop: palace
+      fx: [smoke_far, {glow: {actor: serpent, colour: [110, 150, 255]}}]
       actors:
-        prince: {puppet: prince, x: 540, y: 1720, h: 1060, face: right, motion: sway, enter: fade}
-  - en: "His horoscope said that on the fourth day of his marriage, a snakebite would kill him."
-    hi: "कुंडली में लिखा था, शादी के चौथे दिन, साँप के काटने से उसकी मौत होगी।"
+        serpent: {puppet: serpent, x: 540, y: 1760, h: 900, face: right, motion: slither, enter: none}
+  - en: "King Hima's son had it written in his horoscope: on the fourth day of his marriage, a snakebite would kill him."
+    hi: "राजा हिम के बेटे की कुंडली में लिखा था, शादी के चौथे दिन, साँप के काटने से मौत।"
     caption: "DAY 4. *SNAKEBITE*."
     cut: [drop]
+    name: {head: "THE PRINCE", sub: "Son of King Hima", y: 560}
     stage:
       backdrop: palace
       fx: [smoke_far]
       actors:
-        pandit: {puppet: pandit, x: 300, y: 1720, h: 980, face: right, motion: breathe, enter: left}
-        prince: {puppet: prince_shock, x: 790, y: 1720, h: 1020, face: left, motion: tremble}
+        pandit: {puppet: pandit, x: 300, y: 1720, h: 980, face: right, motion: breathe, enter: none}
+        prince: {puppet: prince_shock, x: 790, y: 1720, h: 1020, face: left, motion: tremble, enter: none}
   - en: "Basically, his horoscope came with an expiry date."
     hi: "मतलब कुंडली पे literally expiry date छपी थी।"
     caption: "KUNDALI WITH AN *EXPIRY DATE*."
@@ -140,39 +137,21 @@ beats:
     hi: "पर उसकी wife भी कम नहीं थी।"
     caption: "BUT THE WIFE *HAD A PLAN*."
     cut: [punch, speedlines]
-    name: {head: "THE PRINCESS", sub: "Married four days", y: 560}
     stage:
       backdrop: chamber
       actors:
         princess: {puppet: princess, x: 540, y: 1720, h: 1080, face: right, motion: breathe, enter: bottom}
-  - en: "She decided that tonight, Yamraj was not getting in."
-    hi: "उसने decide किया, आज यमराज की entry block करनी है।"
-    caption: "YAMRAJ: *ENTRY BLOCKED*."
-    cut: [buzz]
-    stage:
-      backdrop: chamber
-      actors:
-        princess: {puppet: princess, x: 540, y: 1720, h: 1080, face: right, motion: breathe}
-  - en: "At the door she heaped gold, silver, and every piece of jewellery she owned."
-    hi: "दरवाज़े पर सोना, चाँदी, गहनों का पूरा ढेर लगा दिया।"
-    caption: "GOLD AT THE *DOOR*."
-    cut: [punch]
-    stage:
-      backdrop: doorway
-      fx: [motes, {glow: {actor: jewels, colour: [255, 210, 110]}}]
-      actors:
-        jewels: {puppet: jewels, x: 540, y: 1760, h: 620, face: right, motion: breathe, enter: bottom}
-  - en: "And she lit so many lamps in the palace that the lighting department would have resigned."
-    hi: "और महल में इतने दीये जलाए, कि lighting department भी resign कर दे।"
-    caption: "LIGHTING DEPT: *RESIGNED*."
+  - en: "At the door she heaped all her gold and jewellery, and lit lamps everywhere."
+    hi: "दरवाज़े पर सोने-चाँदी का ढेर लगा दिया, और हर तरफ़ दीये जला दिए।"
+    caption: "GOLD AT THE DOOR. *DIYE EVERYWHERE*."
     cut: [flash]
     stage:
       backdrop: doorway
       fx: [rays, {diyas: {y: 1820, rows: 2, n: 9, grow: 2.5}}, {glow: {actor: jewels, colour: [255, 210, 110]}}]
       actors:
-        jewels: {puppet: jewels, x: 540, y: 1700, h: 600, face: right, motion: breathe}
-  - en: "And herself? All night she told her husband stories and sang him songs, and never let him fall asleep."
-    hi: "और खुद? पूरी रात पति को कहानियाँ सुनाती रही, गाने गाती रही, उसे सोने ही नहीं दिया।"
+        jewels: {puppet: jewels, x: 540, y: 1700, h: 600, face: right, motion: breathe, enter: bottom}
+  - en: "And all night she told him stories, and never let him sleep."
+    hi: "और पूरी रात पति को कहानियाँ सुनाती रही, सोने ही नहीं दिया।"
     caption: "SLEEP? *NOT TONIGHT*."
     stage:
       backdrop: chamber
@@ -184,13 +163,14 @@ beats:
     hi: "आधी रात को, यमराज साँप बनकर आए।"
     caption: "MIDNIGHT. *YAMRAJ ARRIVES*."
     cut: [glitch, drop]
+    comment: "GUESS KARO: AAGE KYA HUA?"
     stage:
       backdrop: corridor
       fx: [smoke_far, {glow: {actor: serpent, colour: [110, 150, 255]}}]
       actors:
         serpent: {puppet: serpent, x: 540, y: 1760, h: 760, face: right, motion: slither, enter: left}
-  - en: "But the light of the lamps and the shine of the gold dazzled him. He climbed onto the heap of jewels, and began to listen to her stories."
-    hi: "पर दीयों की रोशनी और गहनों की चमक से उनकी आँखें चौंधिया गईं। वो गहनों के ढेर पर बैठ गए, और उसकी कहानियाँ सुनने लगे।"
+  - en: "But the lamps and the gold dazzled him. He sat on the heap of jewels, and started listening to her stories."
+    hi: "पर दीयों और सोने की चमक से उनकी आँखें चौंधिया गईं। वो गहनों के ढेर पर बैठकर, कहानियाँ सुनने लगे।"
     caption: "DEATH. *LISTENING*."
     stage:
       backdrop: doorway
@@ -217,48 +197,16 @@ beats:
       fx: [rays]
       actors:
         couple: {puppet: couple, x: 540, y: 1720, h: 1000, face: right, motion: sway, enter: fade}
-  - en: "That's why on Dhanteras evening, a lamp is lit in Yamraj's name. Yamadeep daan."
-    hi: "इसीलिए धनतेरस की शाम, यमराज के नाम का दीया जलाया जाता है। यमदीप दान।"
-    caption: "*YAMADEEP* DAAN."
-    title_card: "YAMADEEP DAAN"
-    stage:
-      backdrop: dark
-      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 1.5, size: 4.5}}]
-      actors: {}
-  - en: "And Dhanteras isn't only about wealth. It's also the day of Bhagwan Dhanvantari, who rose from the churning ocean with the pot of amrit. The god of health."
-    hi: "और धनतेरस सिर्फ़ धन का दिन नहीं है। ये भगवान धन्वंतरि का भी दिन है, जो समुद्र मंथन से अमृत कलश लेकर निकले। Health के देवता।"
-    caption: "THE GOD OF *HEALTH*."
-    name: {head: "BHAGWAN DHANVANTARI", sub: "God of Ayurveda", y: 560}
-    stage:
-      backdrop: ocean
-      fx: [waves, rays, {glow: {actor: dhanvantari, colour: [255, 225, 150]}}]
-      actors:
-        dhanvantari: {puppet: dhanvantari, x: 540, y: 1700, h: 1040, face: right, motion: float, enter: bottom}
-  - en: "So the real flex isn't gold. It's health. It's life."
-    hi: "तो असली flex gold नहीं है। Health है। Life है।"
-    caption: "REAL FLEX: *HEALTH*."
-    key: true
-    cut: [punch]
-    stage:
-      backdrop: dawn
-      fx: [rays]
-      actors:
-        couple: {puppet: couple, x: 540, y: 1720, h: 1000, face: right, motion: breathe, enter: fade}
-  - en: "A bank balance can recover. Health has no backup plan."
-    hi: "Bank balance तो recover हो सकता है। Health का कोई backup plan नहीं होता।"
-    caption: "HEALTH HAS *NO BACKUP*."
-    stage:
-      backdrop: dark
-      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 0.01, size: 4.5}}]
-      actors: {}
-  - en: "Happy Dhanteras! And tell me in the comments, what are you buying this year?"
-    hi: "Happy Dhanteras! और comment में बताओ, इस बार क्या खरीद रहे हो?"
+  - en: "That's why on Dhanteras evening, a lamp is lit for Yamraj, and gold is bought. Happy Dhanteras! What are you buying this year? Tell me in the comments."
+    hi: "इसीलिए धनतेरस की शाम, यमराज के नाम का दीया जलता है, और सोना खरीदा जाता है। Happy Dhanteras! इस बार क्या खरीद रहे हो? Comment में बताओ।"
     caption: "WHAT ARE *YOU* BUYING?"
     key: true
+    comment: "COMMENT: IS BAAR KYA KHAREEDA?"
     stage:
-      backdrop: dark
-      fx: [{diyas: {y: 1020, rows: 1, n: 1, grow: 0.01, size: 4.5}}, {fireworks: {n: 2}}]
-      actors: {}
+      backdrop: chamber
+      fx: [motes, {diyas: {y: 1830, rows: 1, n: 9, grow: 0.01}}, {fireworks: {n: 2}}]
+      actors:
+        couple: {puppet: couple, x: 540, y: 1720, h: 1000, face: right, motion: breathe, enter: fade}
 thumbnail:                     # the clever wife and death at the door
   title: "DHANTERAS: YAMRAJ KO NO ENTRY?"
   backdrop: doorway
@@ -267,7 +215,7 @@ thumbnail:                     # the clever wife and death at the door
   join: "vs"
 end:
   head: "HAPPY DHANTERAS"
-  sub: "health is the real wealth"
+  sub: "diya for Yamraj, gold for luck"
 upload:
   hashtags:
   - shorts

@@ -73,6 +73,8 @@ FLASH_S = 0.3                   # cut flash: a white flash
 CUT_SOUNDS = {"punch": "punch", "glitch": "glitch", "flash": "bell", "drop": "drop", "buzz": "buzz",
               "scratch": "scratch"}
 WORD_POP_S = 0.16               # kinetic captions: each word pops in over this long
+COMMENT_Y = 250                 # a beat's `comment: "..."` prompt: a pill near the top, clear of the faces
+COMMENT_IN_S = 0.6              # it pops in this far into the beat and stays to the beat's end
 
 
 def story_ids() -> list[str]:
@@ -323,6 +325,31 @@ class Story(Format):
                 y = self.beats[i]["name"].get("y", NAME_Y)                 # a beat may raise it off a face
                 screen.blit(name, (50 - (1 - e) * (name.get_width() + 60), y))
 
+    def draw_comment(self, screen, i: int, since: float) -> None:
+        """A beat's `comment:` prompt (a question for the comments) in a dark pill at the top, popping in
+        and pulsing gently, so viewers have a reason to open the comments while still watching."""
+        text = self.beats[i].get("comment")
+        if not text:
+            return
+        key = ("comment", i)
+        if key not in self.cards:
+            from ..core.text import fit_width, font_file, gold_text
+            word = gold_text(self.pg, self.pg.font.Font(font_file("Poppins-ExtraBold"), 64), text.upper())
+            word = fit_width(self.pg, word, W - 140)
+            pill = self.pg.Surface((word.get_width() + 60, word.get_height() + 10), self.pg.SRCALPHA)
+            self.pg.draw.rect(pill, (20, 8, 4, 210), pill.get_rect(), border_radius=pill.get_height() // 2)
+            self.pg.draw.rect(pill, (255, 196, 90, 255), pill.get_rect(), 4, border_radius=pill.get_height() // 2)
+            pill.blit(word, word.get_rect(center=pill.get_rect().center))
+            self.cards[key] = pill
+        pill = self.cards[key]
+        k = max(0.0, min(1.0, (since - COMMENT_IN_S) / 0.25, (self.beat_len(i) - since) / 0.25))
+        if k <= 0:
+            return
+        pop = 1 + 0.25 * (1 - k) + 0.03 * math.sin(since * 6)
+        s = self.pg.transform.smoothscale(pill, (int(pill.get_width() * pop), int(pill.get_height() * pop)))
+        s.set_alpha(int(255 * k))
+        screen.blit(s, s.get_rect(center=(W / 2, COMMENT_Y)))
+
     def end_sound(self, why: str) -> str:
         return "clear"
 
@@ -384,6 +411,7 @@ class Story(Format):
         if self.sc.get("edit"):
             self.draw_cuts(screen, i, since, t)
         self.draw_cards(screen, i, since)
+        self.draw_comment(screen, i, since)
         if self.kinetic():
             self.draw_kinetic(screen, i, since)
             return
