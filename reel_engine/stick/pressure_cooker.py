@@ -508,6 +508,44 @@ def end_card(sk, frame, t, e):
     sk.steam(frame, pts["head"], t, 3, 1.0)
 
 
+def say_part(part: str, voice: str):
+    """Voice one piece of a line. A piece may start with "~0.9" to say it at its own pace (slower for a sad
+    word), in the same voice and pitch."""
+    import re
+    part = part.strip()
+    m = re.match(r"~([0-9.]+)\s*", part)
+    if m:
+        voice = re.sub(r"~[0-9.]+$", "", voice) + "~" + m.group(1)
+        part = part[m.end():]
+    return tts.say(part, voice), part, voice
+
+
+def voice_track(ep):
+    """Voice every line of an episode and lay them out in time: (clips, starts, story_end, total).
+    An episode's optional PAUSE {line: seconds} holds a beat after that line, and a "|" inside a line is a
+    spoken pause (the parts are voiced separately, with a short silence between them)."""
+    LINES, VOICES = ep.LINES, ep.VOICES
+    line_voice, line_fx = getattr(ep, "LINE_VOICE", {}), getattr(ep, "LINE_FX", {})
+    pause = getattr(ep, "PAUSE", {})
+    voice_of = [line_voice.get(n, VOICES[who]) for n, (who, _, _) in enumerate(LINES)]
+    for v in dict.fromkeys(x.partition("@")[0] for x in voice_of):
+        tts.prepare([p.strip() for (_, l, _), x in zip(LINES, voice_of) if x.partition("@")[0] == v for p in l.split("|")
+                     if not p.strip().startswith("~")], v)
+    clips = []
+    gap = np.zeros(int(SR * 0.45), np.float32)
+    for n, (who, line, _) in enumerate(LINES):
+        parts = [say_part(p, voice_of[n])[0] for p in line.split("|")]
+        c = np.concatenate([x for k, p in enumerate(parts) for x in ((gap, p) if k else (p,))]).astype(np.float32)
+        fx = line_fx.get(n, ep.VOICE_FX.get(who))
+        clips.append(phone_line(c) if fx == "phone" else divine(c) if fx == "divine" else sob(c) if fx == "sob" else c)
+    starts, t = [], LEAD
+    for n, ((who, _, _), c) in enumerate(zip(LINES, clips)):
+        starts.append(t)
+        t += (len(c) - (int(SR * 0.5) if ep.VOICE_FX.get(who) == "divine" else 0)) / SR + GAP + pause.get(n, 0.0)
+    story_end = t + TAIL
+    return clips, starts, story_end, story_end + END_S
+
+
 def render(out_dir: Path, ep=None) -> Path:
     """Voice, draw and mix a skit. `ep` is the episode's module (this one by default): its LINES, VOICES,
     Skit, HOOK, COMMENT, EPISODE, NAME, CUTS, LABELS, SPEAKER_COLOUR, VOICE_FX, MUSIC_SEED and end_card."""
@@ -518,21 +556,7 @@ def render(out_dir: Path, ep=None) -> Path:
     os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
     import pygame as pg
     pg.init()
-    line_voice, line_fx = getattr(ep, "LINE_VOICE", {}), getattr(ep, "LINE_FX", {})
-    voice_of = [line_voice.get(n, VOICES[who]) for n, (who, _, _) in enumerate(LINES)]
-    for v in dict.fromkeys(x.partition("@")[0] for x in voice_of):
-        tts.prepare([l for (_, l, _), x in zip(LINES, voice_of) if x.partition("@")[0] == v], v)
-    clips = []
-    for n, (who, line, _) in enumerate(LINES):
-        c = tts.say(line, voice_of[n])
-        fx = line_fx.get(n, ep.VOICE_FX.get(who))
-        clips.append(phone_line(c) if fx == "phone" else divine(c) if fx == "divine" else sob(c) if fx == "sob" else c)
-    starts, t = [], LEAD
-    for (who, _, _), c in zip(LINES, clips):
-        starts.append(t)
-        t += (len(c) - (int(SR * 0.5) if ep.VOICE_FX.get(who) == "divine" else 0)) / SR + GAP
-    story_end = t + TAIL
-    total = story_end + END_S
+    clips, starts, story_end, total = voice_track(ep)
     sk = ep.Skit(pg)
     out_dir.mkdir(parents=True, exist_ok=True)
     silent = out_dir / "_video.mp4"
@@ -565,7 +589,7 @@ def render(out_dir: Path, ep=None) -> Path:
                 label = sk.text(sk.f_small, ep.LABELS[who], ep.SPEAKER_COLOUR[who], 5)
                 frame.blit(label, label.get_rect(center=(W / 2, 1262)))
                 sk.caption(frame, LINES[i][2], since, length, True)
-            if i == 0:                                                     # the hook, on the first frame
+            if i == 0 and HOOK:                                            # the hook, on the first frame
                 y = 150
                 for line in wrap(sk.f_hook, HOOK, W - 120)[:3]:
                     img = fit_width(pg, sk.text(sk.f_hook, line, (255, 220, 90), 9), W - 80)

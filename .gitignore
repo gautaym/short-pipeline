@@ -43,3 +43,6 @@ lpenv/
 # Effects sounds (Kenney, CC0): the chosen few are kept; the downloaded packs are not
 !assets/sfx/*.wav
 assets/sfx/_src/
+
+# Raw downloaded sound files (the trimmed copies live in assets/sfx)
+SOUNDS/

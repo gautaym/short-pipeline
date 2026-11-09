@@ -4,7 +4,7 @@
     {
       "name": "reel-tracker",
       "runtimeExecutable": "D:\\PROJECTS_G\\reels\\venv\\Scripts\\reel.exe",
-      "runtimeArgs": ["track", "persephone", "dhruva", "arundhati", "ra", "neelkanth", "abiogenesis", "entanglement", "lakshmana_rekha", "--since", "14:30"],
+      "runtimeArgs": ["track", "ramayana", "--since", "17:03"],
       "port": 8765
     }
   ]

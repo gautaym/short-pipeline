@@ -1,0 +1,7 @@
+From Pixabay (pixabay.com/sound-effects), Pixabay Content License (free for commercial use, no attribution required).
+Supplied by the user in SOUNDS/ on 2026-11-07, converted to mono 44.1 kHz wav here:
+  thud_dragon.wav        <- dragon-studio-thud-sound-effect-405470.mp3
+  laugh_woman.wav        <- scottishperson-sound-effect-woman-laughing-164684.mp3 (first 8 s)
+  surprise_phoenix.wav   <- phoenix_connection_brazil-surprise-sound-effect-99300.mp3
+clock_tick.wav: freesound_community-grandfather-clockdown-72643 (Pixabay, Pixabay Content Licence)
+psst.wav: mrstokes302-psst-whisper-sfx-mrstokes302-418603, first whisper only (Pixabay, Pixabay Content Licence)
